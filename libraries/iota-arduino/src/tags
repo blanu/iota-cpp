@@ -1,0 +1,673 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+API_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/api.h	/^#define API_H_$/;"	d
+BAD_INDEX_TYPE	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_INDEX_TYPE /;"	d
+BAD_INITIALIZATION	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_INITIALIZATION /;"	d
+BAD_OPERATION	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_OPERATION /;"	d
+BAD_STORAGE	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_STORAGE /;"	d
+BUILTIN_DYAD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int BUILTIN_DYAD = 8;$/;"	m	class:NounType
+BUILTIN_MONAD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int BUILTIN_MONAD = 7;$/;"	m	class:NounType
+BUILTIN_SYMBOL	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int BUILTIN_SYMBOL = 6;$/;"	m	class:NounType
+BUILTIN_TRIAD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int BUILTIN_TRIAD = 9;$/;"	m	class:NounType
+CHARACTER	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int CHARACTER = 2;$/;"	m	class:NounType
+CONDITIONAL	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int CONDITIONAL = 19;$/;"	m	class:NounType
+Character	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Character$/;"	c
+Conditional	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Conditional$/;"	c
+Connection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/Connection.h	/^class EXPORT Connection$/;"	c
+DICTIONARY	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int DICTIONARY = 5;$/;"	m	class:NounType
+DIVISION_BY_ZERO	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define DIVISION_BY_ZERO /;"	d
+DYADIC_ADVERB	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int DYADIC_ADVERB = 11;$/;"	m	class:NounType
+Dictionary	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Dictionary$/;"	c
+DyadicAdverbs	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class DyadicAdverbs$/;"	c
+Dyads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class Dyads$/;"	c
+EMPTY	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define EMPTY /;"	d
+ERROR	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int ERROR = 16;$/;"	m	class:NounType
+ERROR_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define ERROR_H_$/;"	d
+EXPORT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/Connection.h	/^#define EXPORT$/;"	d
+EXPORT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^#define EXPORT$/;"	d
+EXPRESSION	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int EXPRESSION = 17;$/;"	m	class:NounType
+EvalRegister	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.h	/^    EvalRegister() : i(Word::make(0, NounType::INTEGER)), r(std::nullopt) {}$/;"	f	class:EvalRegister
+EvalRegister	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.h	/^    explicit EvalRegister(Storage i) : i(i), r(std::nullopt) {}$/;"	f	class:EvalRegister
+EvalRegister	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.h	/^class EvalRegister$/;"	c
+Expression	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Expression$/;"	c
+FLOAT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int FLOAT = 1;$/;"	m	class:StorageType
+FLOAT_ARRAY	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int FLOAT_ARRAY = 3; \/\/ all floats$/;"	m	class:StorageType
+Float	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class Float$/;"	c
+FloatArray	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class FloatArray$/;"	c
+INTEGER	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int INTEGER = 0;$/;"	m	class:NounType
+INVALID_ADVERB_ARGUMENT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define INVALID_ADVERB_ARGUMENT /;"	d
+INVALID_ARGUMENT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define INVALID_ARGUMENT /;"	d
+Integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Integer$/;"	c
+IntsHash	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/types.h	/^struct IntsHash$/;"	s
+IotaString	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class IotaString$/;"	c
+LIST	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int LIST = 4;$/;"	m	class:NounType
+List	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class List$/;"	c
+MAXIMUM_ITERATIONS	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define MAXIMUM_ITERATIONS /;"	d
+MIXED_ARRAY	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int MIXED_ARRAY = 4; \/\/ array of storage types$/;"	m	class:StorageType
+MONADIC_ADVERB	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int MONADIC_ADVERB = 10;$/;"	m	class:NounType
+MixedArray	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class MixedArray$/;"	c
+MonadicAdverbs	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class MonadicAdverbs$/;"	c
+Monads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class Monads$/;"	c
+NOUN_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^#define NOUN_H_$/;"	d
+Noun	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Noun$/;"	c
+NounType	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class NounType$/;"	c
+OUT_OF_BOUNDS	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define OUT_OF_BOUNDS /;"	d
+QUOTED_SYMBOL	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int QUOTED_SYMBOL = 20;$/;"	m	class:NounType
+QuotedSymbol	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class QuotedSymbol$/;"	c
+REAL	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int REAL = 1;$/;"	m	class:NounType
+REGISTER_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.h	/^#define REGISTER_H_$/;"	d
+RELIABLE_CONNECTION_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/Connection.h	/^#define RELIABLE_CONNECTION_H_$/;"	d
+Real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Real$/;"	c
+ReliableConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.h	/^    ReliableConnection(SerialUSB serial) : serial(serial) {}$/;"	f	class:ReliableConnection
+ReliableConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.h	/^class ReliableConnection : public Connection$/;"	c
+SERIAL_CONNECTION_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^#define SERIAL_CONNECTION_H_$/;"	d
+SHAPE_MISMATCH	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define SHAPE_MISMATCH /;"	d
+SQUEEZE_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.h	/^#define SQUEEZE_H_$/;"	d
+STORAGE_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^#define STORAGE_H_$/;"	d
+STRING	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int STRING = 3;$/;"	m	class:NounType
+SYMBOLS_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^#define SYMBOLS_H_$/;"	d
+SerialConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.h	/^    explicit SerialConnection(const ReliableConnection &reliable) : reliable(reliable) {}$/;"	f	class:SerialConnection
+SerialConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.h	/^class SerialConnection : public StorageConnection$/;"	c
+Storage	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    Storage(int o, int t, I i) : o(o), t(t), i(std::move(i)) {}$/;"	f	class:Storage
+Storage	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class Storage$/;"	c
+StorageConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^class EXPORT StorageConnection$/;"	c
+StorageType	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class StorageType$/;"	c
+Symbol	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^class Symbol$/;"	c
+SymbolType	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class SymbolType$/;"	c
+TEST_ERROR	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define TEST_ERROR /;"	d
+TYPE	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int TYPE = 18;$/;"	m	class:NounType
+TYPES_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/types.h	/^#define TYPES_H_$/;"	d
+Triads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class Triads$/;"	c
+UNEQUAL_ARRAY_LENGTHS	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNEQUAL_ARRAY_LENGTHS /;"	d
+UNKNOWN_KEY	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNKNOWN_KEY /;"	d
+UNSUPPORTED_OBJECT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNSUPPORTED_OBJECT /;"	d
+UNSUPPORTED_SUBJECT	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNSUPPORTED_SUBJECT /;"	d
+USER_DYAD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int USER_DYAD = 14;$/;"	m	class:NounType
+USER_MONAD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int USER_MONAD = 13;$/;"	m	class:NounType
+USER_SYMBOL	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int USER_SYMBOL = 12;$/;"	m	class:NounType
+USER_TRIAD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int USER_TRIAD = 15;$/;"	m	class:NounType
+WORD	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int WORD = 0;$/;"	m	class:StorageType
+WORD_ARRAY	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int WORD_ARRAY = 2;  \/\/ all integers$/;"	m	class:StorageType
+Word	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class Word$/;"	c
+WordArray	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^class WordArray$/;"	c
+_DEBUG_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/debug.h	/^#define _DEBUG_H_$/;"	d
+_RELIABLE_CONNECTION_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.h	/^#define _RELIABLE_CONNECTION_H_$/;"	d
+_SERIAL_CONNECTION_H_	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.h	/^#define _SERIAL_CONNECTION_H_$/;"	d
+amend	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage amend(const Storage& i, const Storage& x) \/\/ a:_b$/;"	f
+amend	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int amend = 22;$/;"	m	class:Dyads
+append	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::append(const Storage& i, const Storage& x)$/;"	f	class:Noun
+append_character	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::append_character(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+append_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::append_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+append_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::append_real(const Storage& i, const Storage& x)$/;"	f	class:List
+applyDyad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int applyDyad = 51;$/;"	m	class:Triads
+applyMonad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int applyMonad = 49;$/;"	m	class:Dyads
+asciiToUTF32	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^ints Symbol::asciiToUTF32(const std::string& ascii)$/;"	f	class:Symbol
+atom	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage atom(const Storage& i)  \/\/ @a$/;"	f
+atom	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int atom = 0;$/;"	m	class:Monads
+atom_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::atom_impl(const Storage& i)$/;"	f	class:IotaString
+atom_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::atom_impl(const Storage& i) {$/;"	f	class:List
+c	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage c()$/;"	f
+char_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::char_impl(const Storage& i) {$/;"	f	class:Integer
+char_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::char_impl(const Storage& i) {$/;"	f	class:List
+converge	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage converge(const Storage& i, const Storage& f) \/\/ f:~a$/;"	f
+converge	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int converge = 52;$/;"	m	class:MonadicAdverbs
+converge_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::converge_impl(const Storage& i, const Storage& f)$/;"	f	class:Noun
+count	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int count = 18;$/;"	m	class:Monads
+cut	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage cut(const Storage& i, const Storage& x) \/\/ a:_b$/;"	f
+cut	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int cut = 23;$/;"	m	class:Dyads
+cut_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::cut_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+cut_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::cut_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
+cut_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::cut_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+cut_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::cut_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
+cut_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::cut_reals(const Storage& i, const Storage& x)$/;"	f	class:Integer
+d	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/debug.cpp	/^void d(char b)$/;"	f
+dispatchDyad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x) {$/;"	f	class:Noun
+dispatchDyadicAdverb	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Storage& g, const Storage& x)$/;"	f	class:Noun
+dispatchMonad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::dispatchMonad(const Storage& i, const Storage& f) {$/;"	f	class:Noun
+dispatchMonadicAdverb	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun
+dispatchTriad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)$/;"	f	class:Noun
+divide	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage divide(const Storage& i, const Storage& x) \/\/ a%b$/;"	f
+divide	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int divide = 24;$/;"	m	class:Dyads
+divide_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::divide_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+divide_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::divide_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+divide_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::divide_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+divide_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::divide_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
+divide_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::divide_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+divide_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::divide_integers(const Storage& i, const Storage& x)$/;"	f	class:Real
+divide_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::divide_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
+divide_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::divide_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+divide_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::divide_mixed(const Storage& i, const Storage& x)$/;"	f	class:Real
+divide_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::divide_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+divide_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::divide_real(const Storage& i, const Storage& x)$/;"	f	class:List
+divide_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::divide_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+divide_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:Integer
+divide_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+divide_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:Real
+drop	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage drop(const Storage& i, const Storage& x) \/\/ a_b$/;"	f
+drop	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int drop = 25;$/;"	m	class:Dyads
+drop_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::drop_impl(const Storage& i, const Storage& x)$/;"	f	class:List
+dyadicAdverbs	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::map<Specialization5, DyadicAdverb> Noun::dyadicAdverbs;$/;"	m	class:Noun	file:
+dyadicAdverbs	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^      static std::map<Specialization5, DyadicAdverb> dyadicAdverbs;$/;"	m	class:Noun
+dyads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::map<Specialization5, Dyad> Noun::dyads;$/;"	m	class:Noun	file:
+dyads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^      static std::map<Specialization5, Dyad> dyads;$/;"	m	class:Noun
+e	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage e()$/;"	f
+each	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage each(const Storage& i, const Storage& f) \/\/ f'a$/;"	f
+each	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int each = 53;$/;"	m	class:MonadicAdverbs
+each2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage each2(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
+each2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int each2 = 58;$/;"	m	class:DyadicAdverbs
+each2_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::each2_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+eachLeft	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage eachLeft(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
+eachLeft	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int eachLeft = 59;$/;"	m	class:DyadicAdverbs
+eachLeft_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::eachLeft_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+eachPair	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage eachPair(const Storage& i, const Storage& f) \/\/ f:'a$/;"	f
+eachPair	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int eachPair = 54;$/;"	m	class:MonadicAdverbs
+eachPair_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::eachPair_integers(const Storage& i, const Storage& f)$/;"	f	class:List
+eachPair_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::eachPair_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
+eachPair_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::eachPair_reals(const Storage& i, const Storage& f)$/;"	f	class:List
+eachRight	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage eachRight(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
+eachRight	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int eachRight = 60;$/;"	m	class:DyadicAdverbs
+eachRight_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::eachRight_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+each_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::each_impl(const Storage& i, const Storage& f)$/;"	f	class:IotaString
+each_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::each_integers(const Storage& i, const Storage& f)$/;"	f	class:List
+each_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::each_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
+each_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::each_reals(const Storage& i, const Storage& f)$/;"	f	class:List
+enclose	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage enclose(const Storage& i)  \/\/ ,a$/;"	f
+enclose	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int enclose = 3;$/;"	m	class:Monads
+enclose2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::enclose2(const Storage& i, const Storage& x)$/;"	f	class:Noun
+enclose_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::enclose_impl(const Storage& i) {$/;"	f	class:Character
+enclose_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::enclose_impl(const Storage& i) {$/;"	f	class:Integer
+enclose_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::enclose_impl(const Storage& i) {$/;"	f	class:Noun
+enclose_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::enclose_impl(const Storage& i)$/;"	f	class:Real
+enumerate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage enumerate(const Storage& i)  \/\/ !a$/;"	f
+enumerate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int enumerate = 4;$/;"	m	class:Monads
+enumerate_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::enumerate_impl(const Storage& i) {$/;"	f	class:Integer
+equal	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage equal(const Storage& i, const Storage& x) \/\/ a=b$/;"	f
+equal	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int equal = 26;$/;"	m	class:Dyads
+equal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:Character
+equal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
+equal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+equal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:List
+erase	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage erase(const Storage& i)$/;"	f
+erase	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int erase = 20;$/;"	m	class:Monads
+error_to_string	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/api.cpp	/^const char *error_to_string(const Storage &e)$/;"	f
+eval	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^void EvalRegister::eval()$/;"	f	class:EvalRegister
+evaluate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage evaluate(const Storage& i)$/;"	f
+evaluate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int evaluate = 19;$/;"	m	class:Monads
+evaluate_expression	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::evaluate_expression(const Storage& e)$/;"	f	class:Noun
+evaluate_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Conditional::evaluate_impl(const Storage& e)$/;"	f	class:Conditional
+evaluate_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Symbol::evaluate_impl(const Storage& i)$/;"	f	class:Symbol
+expand	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage expand(const Storage& i, const Storage& x) \/\/ &b$/;"	f
+expand	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int expand = 27;$/;"	m	class:Monads
+expand_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^varint expand_conn(const Connection& conn)$/;"	f
+expand_conn_floating	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_conn_floating(const Connection& conn)$/;"	f
+expand_floating	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_floating(bytes value)$/;"	f
+expand_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::expand_impl(const Storage& i)$/;"	f	class:Integer
+expand_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::expand_impl(const Storage& i)$/;"	f	class:List
+expand_int	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^std::tuple<varint, bytes> expand_int(bytes data)$/;"	f
+expand_int_from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^varint expand_int_from_bytes(const bytes &bytes)$/;"	f
+expand_ints	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^std::tuple<ints, bytes> expand_ints(const bytes& data)$/;"	f
+f	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int f = 4;$/;"	m	class:SymbolType
+false0	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::false0() {$/;"	f	class:Noun
+false1	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::false1(const Storage& i) {$/;"	f	class:Noun
+false2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::false2(const Storage& i, const Storage& x) {$/;"	f	class:Noun
+fetch_i	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^Storage EvalRegister::fetch_i()$/;"	f	class:EvalRegister
+fetch_r	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^maybe<Storage> EvalRegister::fetch_r()$/;"	f	class:EvalRegister
+find	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage find(const Storage& i, const Storage& x) \/\/ a?b$/;"	f
+find	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int find = 28;$/;"	m	class:Dyads
+find_character	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::find_character(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+find_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Dictionary::find_impl(const Storage& i, const Storage& x)$/;"	f	class:Dictionary
+find_integers_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::find_integers_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+find_integers_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::find_integers_real(const Storage& i, const Storage& x)$/;"	f	class:List
+find_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::find_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+find_reals_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::find_reals_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+find_reals_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::find_reals_real(const Storage& i, const Storage& x)$/;"	f	class:List
+find_string	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::find_string(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+first	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage first(const Storage& i)  \/\/ *a$/;"	f
+first	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int first = 5;$/;"	m	class:Monads
+first_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::first_impl(const Storage& i)$/;"	f	class:IotaString
+first_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::first_impl(const Storage& i)$/;"	f	class:List
+floor	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage floor(const Storage& i)  \/\/ _a$/;"	f
+floor	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int floor = 6;$/;"	m	class:Monads
+floor_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::floor_impl(const Storage& i)$/;"	f	class:List
+floor_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::floor_impl(const Storage& i)$/;"	f	class:Real
+form	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage form(const Storage& i, const Storage& x) \/\/ a:$b$/;"	f
+form	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int form = 29;$/;"	m	class:Dyads
+form_character	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::form_character(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+form_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::form_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+form_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::form_list(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+form_quoted_symbol	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::form_quoted_symbol(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+form_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::form_real(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+format	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage format(const Storage& i)  \/\/ $a$/;"	f
+format	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int format = 7;$/;"	m	class:Monads
+format2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage format2(const Storage& i, const Storage& x) \/\/ a$b$/;"	f
+format2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int format2 = 30;$/;"	m	class:Dyads
+format2_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::format2_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
+format2_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::format2_impl(const Storage& i, const Storage& x)$/;"	f	class:List
+format2_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::format2_impl(const Storage& i, const Storage& x)$/;"	f	class:Real
+format_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::format_impl(const Storage& i)$/;"	f	class:Integer
+format_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::format_impl(const Storage& i)$/;"	f	class:List
+format_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage QuotedSymbol::format_impl(const Storage& i)$/;"	f	class:QuotedSymbol
+format_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::format_impl(const Storage& i)$/;"	f	class:Real
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Character::from_bytes(bytes bs, int t) {$/;"	f	class:Character
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Dictionary::from_bytes(bytes bs, int t)$/;"	f	class:Dictionary
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Integer::from_bytes(bytes bs, int t) {$/;"	f	class:Integer
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> IotaString::from_bytes(const bytes& bs, int t) {$/;"	f	class:IotaString
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> List::from_bytes(const bytes &bs, int t) {$/;"	f	class:List
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> MixedArray::from_bytes(bytes x, int o)$/;"	f	class:MixedArray
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Noun::from_bytes(bytes x) {$/;"	f	class:Noun
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Real::from_bytes(bytes bs, int t) {$/;"	f	class:Real
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> Float::from_bytes(bytes x, int o)$/;"	f	class:Float
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> FloatArray::from_bytes(const bytes& x, int o)$/;"	f	class:FloatArray
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> Word::from_bytes(bytes x, int o)$/;"	f	class:Word
+from_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> WordArray::from_bytes(const bytes& x, int o)$/;"	f	class:WordArray
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Character::from_conn(const Connection& conn, int t) {$/;"	f	class:Character
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Dictionary::from_conn(const Connection& conn, int t)$/;"	f	class:Dictionary
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Integer::from_conn(const Connection& conn, int t) {$/;"	f	class:Integer
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> IotaString::from_conn(const Connection& conn, int t) {$/;"	f	class:IotaString
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> List::from_conn(const Connection& conn, int t) {$/;"	f	class:List
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> MixedArray::from_conn(const Connection& conn, int o) {$/;"	f	class:MixedArray
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Noun::from_conn(const Connection& conn) {$/;"	f	class:Noun
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<Storage> Real::from_conn(const Connection& conn, int t) {$/;"	f	class:Real
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> Float::from_conn(const Connection& conn, int o)$/;"	f	class:Float
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> FloatArray::from_conn(const Connection& conn, int o)$/;"	f	class:FloatArray
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> Word::from_conn(const Connection& conn, int o)$/;"	f	class:Word
+from_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<Storage> WordArray::from_conn(const Connection& conn, int o)$/;"	f	class:WordArray
+getInteger	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^int getInteger(const Storage& i)$/;"	f
+getIntegers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^ints getIntegers(const Storage& i)$/;"	f
+getMixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^mixed getMixed(const Storage& i)$/;"	f
+getReal	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^float getReal(const Storage& i)$/;"	f
+getReals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^floats getReals(const Storage& i)$/;"	f
+getSize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^int getSize(const Storage& i)$/;"	f
+gradeDown	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage gradeDown(const Storage& i)  \/\/ >a$/;"	f
+gradeDown	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int gradeDown = 8;$/;"	m	class:Monads
+gradeDown_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::gradeDown_impl(const Storage& i)$/;"	f	class:IotaString
+gradeDown_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::gradeDown_impl(const Storage& i)$/;"	f	class:List
+gradeUp	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage gradeUp(const Storage& i)  \/\/ <a$/;"	f
+gradeUp	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int gradeUp = 9;$/;"	m	class:Monads
+gradeUp_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::gradeUp_impl(const Storage& i)$/;"	f	class:IotaString
+gradeUp_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::gradeUp_impl(const Storage& i)$/;"	f	class:List
+group	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage group(const Storage& i)  \/\/ =a$/;"	f
+group	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int group = 10;$/;"	m	class:Monads
+group_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::group_impl(const Storage& i)$/;"	f	class:IotaString
+group_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::group_impl(const Storage& i)$/;"	f	class:List
+hash	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^struct std::hash<Storage>$/;"	s	class:std
+i	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.h	/^    Storage i;$/;"	m	class:EvalRegister
+i	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    I i;$/;"	m	class:Storage
+i	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int i = 0;$/;"	m	class:SymbolType
+ichar	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage ichar(const Storage& i)  \/\/ :#a$/;"	f
+ichar	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int ichar = 1;$/;"	m	class:Monads
+identity	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage Storage::identity(const Storage& i)$/;"	f	class:Storage
+identity1	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::identity1(const Storage& i)$/;"	f	class:Noun
+identity2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::identity2(const Storage& i, const Storage& x)$/;"	f	class:Noun
+index	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage index(const Storage& i, const Storage& x) \/\/ a@b$/;"	f
+index	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int index = 31;$/;"	m	class:Dyads
+indexInDepth	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int indexInDepth = 32;$/;"	m	class:Dyads
+index_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::index_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+index_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::index_impl(const Storage& i, const Storage& x)$/;"	f	class:List
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Character::initialize() {$/;"	f	class:Character
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Conditional::initialize()$/;"	f	class:Conditional
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Dictionary::initialize()$/;"	f	class:Dictionary
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Expression::initialize() {$/;"	f	class:Expression
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Integer::initialize()$/;"	f	class:Integer
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void IotaString::initialize() {$/;"	f	class:IotaString
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void List::initialize() {$/;"	f	class:List
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::initialize() {$/;"	f	class:Noun
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void QuotedSymbol::initialize()$/;"	f	class:QuotedSymbol
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Real::initialize() {$/;"	f	class:Real
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Symbol::initialize()$/;"	f	class:Symbol
+initialize	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^void EvalRegister::initialize()$/;"	f	class:EvalRegister
+inot	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage inot(const Storage& i)  \/\/ ~a$/;"	f
+inot	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int inot = 2;$/;"	m	class:Monads
+integerDivide	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage integerDivide(const Storage& i, const Storage& x) \/\/ a%b$/;"	f
+integerDivide	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int integerDivide = 33;$/;"	m	class:Dyads
+integerDivide_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::integerDivide_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
+integerToString	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::unordered_map<int, ints> Symbol::integerToString;$/;"	m	class:Symbol	file:
+integerToString	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^    static std::unordered_map<int, ints> integerToString;$/;"	m	class:Symbol
+isAtom	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^int isAtom(const Storage& i)$/;"	f
+isLittleEndian	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bool isLittleEndian()$/;"	f
+isNil	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^int isNil(const Storage& i)$/;"	f
+iterate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage iterate(const Storage& i, const Storage& f, const Storage& x) \/\/ a f:*b$/;"	f
+iterate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int iterate = 63;$/;"	m	class:DyadicAdverbs
+iterate_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+join	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage join(const Storage& i, const Storage& x) \/\/ a,b$/;"	f
+join	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int join = 34;$/;"	m	class:Dyads
+join_character	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::join_character(const Storage& i, const Storage& x)$/;"	f	class:Character
+join_enclose_mix	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::join_enclose_mix(const Storage& i, const Storage& x)$/;"	f	class:Noun
+join_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::join_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+join_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::join_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+join_integers_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::join_integers_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+join_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::join_list(const Storage& i, const Storage& x)$/;"	f	class:Character
+join_mix_enclose	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::join_mix_enclose(const Storage& i, const Storage& x)$/;"	f	class:Noun
+join_mix_left	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::join_mix_left(const Storage& i, const Storage& x)$/;"	f	class:Noun
+join_mix_right	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::join_mix_right(const Storage& i, const Storage& x)$/;"	f	class:Noun
+join_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::join_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+join_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::join_mixed(const Storage& i, const Storage& x)$/;"	f	class:Noun
+join_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::join_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+join_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::join_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+join_reals_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::join_reals_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+join_scalar	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::join_scalar(const Storage& i, const Storage& x)$/;"	f	class:Character
+join_scalar	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::join_scalar(const Storage& i, const Storage& x)$/;"	f	class:Noun
+join_string	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::join_string(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+less	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage less(const Storage& i, const Storage& x) \/\/ a<b$/;"	f
+less	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int less = 35;$/;"	m	class:Dyads
+less_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::less_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+less_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::less_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+less_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::less_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+less_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::less_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+less_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::less_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+less_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::less_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+less_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::less_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+less_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::less_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+less_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::less_real(const Storage& i, const Storage& x)$/;"	f	class:List
+less_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::less_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+less_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::less_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+load_i	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^void EvalRegister::load_i(bytes data)$/;"	f	class:EvalRegister
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.cpp	/^SerialConnection SerialConnection::make()$/;"	f	class:SerialConnection
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::make(int i)$/;"	f	class:Character
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Conditional::make(const mixed &i)$/;"	f	class:Conditional
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Dictionary::make(const mixed &i)$/;"	f	class:Dictionary
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::make(int i)$/;"	f	class:Integer
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::make(ints i)$/;"	f	class:IotaString
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage MixedArray::make(mixed x, int o) {$/;"	f	class:MixedArray
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage QuotedSymbol::make(const ints &i)$/;"	f	class:QuotedSymbol
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::make(float i)$/;"	f	class:Real
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage Float::make(float x, int o)$/;"	f	class:Float
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage FloatArray::make(floats x, int o)$/;"	f	class:FloatArray
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage Word::make(int x, int o)$/;"	f	class:Word
+make	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage WordArray::make(ints x, int o)$/;"	f	class:WordArray
+makeEmpty	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Dictionary::makeEmpty()$/;"	f	class:Dictionary
+makeEmpty	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::makeEmpty()$/;"	f	class:IotaString
+match	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage match(const Storage& i, const Storage& x) \/\/ a~b$/;"	f
+match	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int match = 36;$/;"	m	class:Dyads
+match_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Character
+match_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Dictionary::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Dictionary
+match_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
+match_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::match_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+match_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::match_impl(const Storage& i, const Storage& x)$/;"	f	class:List
+match_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Real
+max	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage max(const Storage& i, const Storage& x) \/\/ a|b$/;"	f
+max	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int max = 37;$/;"	m	class:Dyads
+max_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::max_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+max_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::max_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+max_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::max_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+max_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::max_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+max_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::max_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+max_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::max_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+max_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::max_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+max_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::max_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+max_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::max_real(const Storage& i, const Storage& x)$/;"	f	class:List
+max_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::max_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+max_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::max_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+maximumConvergeIterations	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^    static constexpr int maximumConvergeIterations = 1000;$/;"	m	class:Noun
+min	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage min(const Storage& i, const Storage& x) \/\/ a&b$/;"	f
+min	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int min = 38;$/;"	m	class:Dyads
+min_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::min_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+min_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::min_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+min_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::min_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+min_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::min_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+min_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::min_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+min_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::min_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+min_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::min_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+min_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::min_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+min_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::min_real(const Storage& i, const Storage& x)$/;"	f	class:List
+min_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::min_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+min_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::min_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+minus	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage minus(const Storage& i, const Storage& x) \/\/ a-b$/;"	f
+minus	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int minus = 39;$/;"	m	class:Dyads
+minus_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::minus_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+minus_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::minus_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+minus_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::minus_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+minus_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::minus_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+minus_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::minus_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+minus_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::minus_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+minus_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::minus_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+minus_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::minus_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+minus_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::minus_real(const Storage& i, const Storage& x)$/;"	f	class:List
+minus_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::minus_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+minus_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::minus_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+mix	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::mix(const Storage& i)$/;"	f	class:Noun
+monadicAdverbs	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::map<Specialization3, MonadicAdverb> Noun::monadicAdverbs;$/;"	m	class:Noun	file:
+monadicAdverbs	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^      static std::map<Specialization3, MonadicAdverb> monadicAdverbs;$/;"	m	class:Noun
+monads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::map<Specialization3, Monad> Noun::monads;$/;"	m	class:Noun	file:
+monads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^      static std::map<Specialization3, Monad> monads;$/;"	m	class:Noun
+more	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage more(const Storage& i, const Storage& x) \/\/ a>b$/;"	f
+more	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int more = 40;$/;"	m	class:Dyads
+more_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::more_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+more_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::more_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+more_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::more_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+more_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::more_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+more_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::more_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+more_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::more_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+more_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::more_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+more_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::more_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+more_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::more_real(const Storage& i, const Storage& x)$/;"	f	class:List
+more_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::more_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+more_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::more_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+negate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage negate(const Storage& i) \/\/ -a$/;"	f
+negate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int negate = 11;$/;"	m	class:Monads
+negate_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::negate_impl(const Storage& i) {$/;"	f	class:Integer
+negate_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::negate_impl(const Storage& i)$/;"	f	class:List
+negate_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::negate_impl(const Storage& i) {$/;"	f	class:Real
+nil	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage WordArray::nil()$/;"	f	class:WordArray
+nil1	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage WordArray::nil1(const Storage& i)$/;"	f	class:WordArray
+nil2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^Storage WordArray::nil2(const Storage& i, const Storage& x)$/;"	f	class:WordArray
+not_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::not_impl(const Storage& i)$/;"	f	class:Integer
+not_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::not_impl(const Storage& i)$/;"	f	class:IotaString
+not_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::not_impl(const Storage& i)$/;"	f	class:List
+not_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::not_impl(const Storage& i)$/;"	f	class:Real
+o	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    int o;$/;"	m	class:Storage
+one	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::one()$/;"	f	class:Integer
+one	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::one()$/;"	f	class:Real
+operator ()	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/types.h	/^  std::size_t operator()(const std::vector<int>& integers) const$/;"	f	struct:IntsHash
+operator ==	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^bool Storage::operator==(const Storage& other) const$/;"	f	class:Storage
+over	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage over(const Storage& i, const Storage& f) \/\/ f\/a$/;"	f
+over	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int over = 55;$/;"	m	class:MonadicAdverbs
+overNeutral	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage overNeutral(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
+overNeutral	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int overNeutral = 61;$/;"	m	class:DyadicAdverbs
+overNeutral_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::overNeutral_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+over_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::over_integers(const Storage& i, const Storage& f)$/;"	f	class:List
+over_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::over_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
+over_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::over_reals(const Storage& i, const Storage& f)$/;"	f	class:List
+plus	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage plus(const Storage& i, const Storage& x) \/\/ a+b$/;"	f
+plus	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int plus = 41;$/;"	m	class:Dyads
+plus_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::plus_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+plus_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::plus_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+plus_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::plus_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+plus_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::plus_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+plus_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::plus_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+plus_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::plus_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+plus_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::plus_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+plus_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::plus_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+plus_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::plus_real(const Storage& i, const Storage& x)$/;"	f	class:List
+plus_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::plus_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+plus_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::plus_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+power	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage power(const Storage& i, const Storage& x) \/\/ a^b$/;"	f
+power	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int power = 42;$/;"	m	class:Dyads
+power_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::power_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+power_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::power_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+power_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::power_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+power_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::power_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+power_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::power_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+power_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::power_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+power_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::power_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+power_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::power_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+power_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::power_real(const Storage& i, const Storage& x)$/;"	f	class:List
+power_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::power_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+power_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::power_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+precision	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr float precision = 6; \/\/ for format$/;"	m	class:Float
+prepend	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::prepend(const Storage& i, const Storage& x)$/;"	f	class:Noun
+prepend_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::prepend_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+prepend_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::prepend_real(const Storage& i, const Storage& x)$/;"	f	class:List
+prepend_string	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::prepend_string(const Storage& i, const Storage& x)$/;"	f	class:Character
+prepend_to_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::prepend_to_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
+prepend_to_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::prepend_to_reals(const Storage& i, const Storage& x)$/;"	f	class:Real
+r	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.h	/^    maybe<Storage> r;$/;"	m	class:EvalRegister
+read	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.cpp	/^bytes ReliableConnection::read(int size) const$/;"	f	class:ReliableConnection
+readOne	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.cpp	/^char ReliableConnection::readOne() const$/;"	f	class:ReliableConnection
+read_storage	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.cpp	/^maybe<Storage> SerialConnection::read_storage()$/;"	f	class:SerialConnection
+reciprocal	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage reciprocal(const Storage& i) \/\/ %a$/;"	f
+reciprocal	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reciprocal = 12;$/;"	m	class:Monads
+reciprocal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::reciprocal_impl(const Storage& i) {$/;"	f	class:Integer
+reciprocal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::reciprocal_impl(const Storage& i)$/;"	f	class:List
+reciprocal_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::reciprocal_impl(const Storage& i) {$/;"	f	class:Real
+registerDyad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::registerDyad(Type it, Type io, Type f, Type xt, Type xo, Storage (*d)(const Storage&, const Storage&)) {$/;"	f	class:Noun
+registerDyadicAdverb	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::registerDyadicAdverb(Type it, Type io, Type f, Type xt, Type xo, Storage (*a)(const Storage&, const Storage&, const Storage&)) {$/;"	f	class:Noun
+registerMonad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::registerMonad(Type it, Type io, Type f, Storage (*m)(const Storage&))$/;"	f	class:Noun
+registerMonadicAdverb	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&)) {$/;"	f	class:Noun
+registerTriad	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::registerTriad(Type it, Type io, Type f, Type xt, Type xo, Storage (*t)(const Storage&, const Storage&, const Storage&)) {$/;"	f	class:Noun
+reliable	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.h	/^    ReliableConnection reliable;$/;"	m	class:SerialConnection
+remainder	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage remainder(const Storage& i, const Storage& x) \/\/ a!b$/;"	f
+remainder	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int remainder = 43;$/;"	m	class:Dyads
+remainder_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::remainder_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+remainder_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::remainder_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+remainder_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::remainder_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
+remainder_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::remainder_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+remainder_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::remainder_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
+remainder_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::remainder_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+reshape	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage reshape(const Storage& i, const Storage& x) \/\/ a:^b$/;"	f
+reshape	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reshape = 44;$/;"	m	class:Dyads
+reshape_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::reshape_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+reshape_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::reshape_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+reshape_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::reshape_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
+reshape_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::reshape_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+reshape_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::reshape_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
+reshape_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::reshape_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+retrieve_r	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^maybe<bytes> EvalRegister::retrieve_r() const$/;"	f	class:EvalRegister
+retype	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int retype = 50;$/;"	m	class:Dyads
+reverse	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage reverse(const Storage& i) \/\/ |a$/;"	f
+reverse	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reverse = 13;$/;"	m	class:Monads
+reverse_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::reverse_impl(const Storage& i)$/;"	f	class:IotaString
+reverse_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::reverse_impl(const Storage& i)$/;"	f	class:List
+rotate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage rotate(const Storage& i, const Storage& x) \/\/ a:+b$/;"	f
+rotate	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int rotate = 45;$/;"	m	class:Dyads
+rotate_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::rotate_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+rotate_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::rotate_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+scanConverging	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage scanConverging(const Storage& i, const Storage& f) \/\/ f:~a$/;"	f
+scanConverging	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanConverging = 56;$/;"	m	class:MonadicAdverbs
+scanConverging_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)$/;"	f	class:Noun
+scanIterating	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage scanIterating(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\*b$/;"	f
+scanIterating	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanIterating = 66;$/;"	m	class:DyadicAdverbs
+scanIterating_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+scanOver	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage scanOver(const Storage& i, const Storage& f) \/\/ f\\a$/;"	f
+scanOver	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanOver = 57;$/;"	m	class:MonadicAdverbs
+scanOverNeutral	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage scanOverNeutral(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\b $/;"	f
+scanOverNeutral	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanOverNeutral = 64;$/;"	m	class:DyadicAdverbs
+scanOverNeutral_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::scanOverNeutral_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+scanOver_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::scanOver_integers(const Storage& i, const Storage& f)$/;"	f	class:List
+scanOver_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::scanOver_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
+scanOver_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::scanOver_reals(const Storage& i, const Storage& f)$/;"	f	class:List
+scanWhileOne	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage scanWhileOne(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\b$/;"	f
+scanWhileOne	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanWhileOne = 65;$/;"	m	class:DyadicAdverbs
+scanWhileOne_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::scanWhileOne_impl(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun
+serial	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.h	/^    SerialUSB serial;$/;"	m	class:ReliableConnection
+shape	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage shape(const Storage& i) \/\/ ^a$/;"	f
+shape	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int shape = 14;$/;"	m	class:Monads
+shape_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::shape_impl(const Storage& i)$/;"	f	class:List
+shape_scalar	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::shape_scalar(const Storage& i)$/;"	f	class:Noun
+simplify	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::simplify(const Storage& i)$/;"	f	class:Noun
+size	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage size(const Storage& i) \/\/ #a$/;"	f
+size	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int size = 15;$/;"	m	class:Monads
+size_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Character::size_impl(const Storage& i) {$/;"	f	class:Character
+size_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::size_impl(const Storage& i) {$/;"	f	class:Integer
+size_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::size_impl(const Storage& i)$/;"	f	class:IotaString
+size_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::size_impl(const Storage& i)$/;"	f	class:List
+size_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::size_impl(const Storage& i) {$/;"	f	class:Real
+split	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage split(const Storage& i, const Storage& x) \/\/ a:#b$/;"	f
+split	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int split = 46;$/;"	m	class:Dyads
+split_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::split_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+split_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::split_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+split_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::split_integers(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+split_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::split_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+squeeze_bigint	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_bigint(ints integers)$/;"	f
+squeeze_floating	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_floating(std::variant<float, double> value)$/;"	f
+squeeze_floats	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_floats(const floats& values)$/;"	f
+squeeze_int	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_int(int integer)$/;"	f
+squeeze_ints	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_ints(const ints &values)$/;"	f
+squeeze_varint	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_varint(const varint &i)$/;"	f
+store_i	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/register.cpp	/^void EvalRegister::store_i(Storage newI)$/;"	f	class:EvalRegister
+stringToInteger	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::unordered_map<ints, int, IntsHash> Symbol::stringToInteger;$/;"	m	class:Symbol	file:
+stringToInteger	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^    static std::unordered_map<ints, int, IntsHash> stringToInteger;$/;"	m	class:Symbol
+t	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    int t;$/;"	m	class:Storage
+take	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage take(const Storage& i, const Storage& x) \/\/ a#b$/;"	f
+take	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int take = 47;$/;"	m	class:Dyads
+take_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage IotaString::take_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
+take_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::take_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+test_error	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage test_error()$/;"	f
+times	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage times(const Storage& i, const Storage& x) \/\/ a*b$/;"	f
+times	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int times = 48;$/;"	m	class:Dyads
+times_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::times_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
+times_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::times_integer(const Storage& i, const Storage& x)$/;"	f	class:List
+times_integer	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::times_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
+times_integers	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::times_integers(const Storage& i, const Storage& x)$/;"	f	class:List
+times_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::times_list(const Storage& i, const Storage& x)$/;"	f	class:Integer
+times_list	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::times_list(const Storage& i, const Storage& x)$/;"	f	class:Real
+times_mixed	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::times_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+times_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::times_real(const Storage& i, const Storage& x)$/;"	f	class:Integer
+times_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::times_real(const Storage& i, const Storage& x)$/;"	f	class:List
+times_real	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::times_real(const Storage& i, const Storage& x)$/;"	f	class:Real
+times_reals	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::times_reals(const Storage& i, const Storage& x)$/;"	f	class:List
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^bytes Noun::to_bytes(const Storage& x) {$/;"	f	class:Noun
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> Character::to_bytes(const Storage& i) {$/;"	f	class:Character
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> Dictionary::to_bytes(const Storage& i)$/;"	f	class:Dictionary
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> Integer::to_bytes(const Storage& i) {$/;"	f	class:Integer
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> IotaString::to_bytes(const Storage& i) {$/;"	f	class:IotaString
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> List::to_bytes(const Storage& i) {$/;"	f	class:List
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> MixedArray::to_bytes(const Storage& i) {$/;"	f	class:MixedArray
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^maybe<bytes> Real::to_bytes(const Storage& i) {$/;"	f	class:Real
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^bytes FloatArray::to_bytes(const Storage& i)$/;"	f	class:FloatArray
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^bytes Word::to_bytes(const Storage& i)$/;"	f	class:Word
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^bytes WordArray::to_bytes(const Storage &x)$/;"	f	class:WordArray
+to_bytes	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^maybe<bytes> Float::to_bytes(const Storage& i)$/;"	f	class:Float
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Character::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Character
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Dictionary::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Dictionary
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Integer::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Integer
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void IotaString::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:IotaString
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void List::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:List
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void MixedArray::to_conn(const Connection& conn, const Storage& x) {$/;"	f	class:MixedArray
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Noun::to_conn(const Connection& conn, const Storage& x) {$/;"	f	class:Noun
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^void Real::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Real
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^void Float::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Float
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^void FloatArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:FloatArray
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^void Word::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Word
+to_conn	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^void WordArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:WordArray
+tolerance	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr float tolerance = 1e-14f; \/\/ for match$/;"	m	class:Float
+transpose	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage transpose(const Storage& i) \/\/ +a$/;"	f
+transpose	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int transpose = 16;$/;"	m	class:Monads
+transpose_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::transpose_impl(const Storage& i)$/;"	f	class:List
+triads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::map<Specialization5, Triad> Noun::triads;$/;"	m	class:Noun	file:
+triads	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^      static std::map<Specialization5, Triad> triads;$/;"	m	class:Noun
+true0	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::true0() {$/;"	f	class:Noun
+true1	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::true1(const Storage& i) {$/;"	f	class:Noun
+true2	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::true2(const Storage& i, const Storage& x) {$/;"	f	class:Noun
+truth	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Expression::truth(const Storage& i) {$/;"	f	class:Expression
+truth	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage truth(const Storage& i)$/;"	f
+truth	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.cpp	/^int Storage::truth() const$/;"	f	class:Storage
+truth	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int truth = 21;$/;"	m	class:Monads
+truth_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Conditional::truth_impl(const Storage& i)$/;"	f	class:Conditional
+truth_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Symbol::truth_impl(const Storage& i)$/;"	f	class:Symbol
+undefined	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage QuotedSymbol::undefined()$/;"	f	class:QuotedSymbol
+undefined	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage undefined(const Storage& i) \/\/ ?a$/;"	f
+undefined	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int undefined = 5; \/\/ If adding new symbols, undefined must also be the last symbol as it marks the end of the list of builtin symbols.$/;"	m	class:SymbolType
+undefined	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int undefined = 67;$/;"	m	class:Monads
+undefined_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage QuotedSymbol::undefined_impl(const Storage& i)$/;"	f	class:QuotedSymbol
+unique	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage unique(const Storage& i) \/\/ ?a$/;"	f
+unique	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int unique = 17;$/;"	m	class:Monads
+unique_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage List::unique_impl(const Storage& i)$/;"	f	class:List
+values	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^std::unordered_map<int, Storage> Symbol::values;$/;"	m	class:Symbol	file:
+values	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.h	/^    static std::unordered_map<int, Storage> values;$/;"	m	class:Symbol
+whileOne	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage whileOne(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\b $/;"	f
+whileOne	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int whileOne = 62;$/;"	m	class:DyadicAdverbs
+whileOne_impl	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Noun::whileOne_impl(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun
+write	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.cpp	/^void ReliableConnection::write(bytes bs) const$/;"	f	class:ReliableConnection
+write_storage	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.cpp	/^void SerialConnection::write_storage(Storage x)$/;"	f	class:SerialConnection
+x	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int x = 1;$/;"	m	class:SymbolType
+y	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int y = 2;$/;"	m	class:SymbolType
+z	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/storage.h	/^    static constexpr int z = 3;$/;"	m	class:SymbolType
+zero	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Integer::zero()$/;"	f	class:Integer
+zero	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-cpp/src/noun.cpp	/^Storage Real::zero()$/;"	f	class:Real
+~ReliableConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/ReliableConnection.h	/^    ~ReliableConnection() {}$/;"	f	class:ReliableConnection
+~SerialConnection	/Users/dr.brandonwiley/Documents/Arduino/libraries/iota-cpp/libraries/iota-arduino/src/SerialConnection.h	/^    ~SerialConnection() {}$/;"	f	class:SerialConnection
