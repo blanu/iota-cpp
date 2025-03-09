@@ -2,6 +2,7 @@
 // Created by Dr. Brandon Wiley on 3/9/25.
 //
 
+#include <cmath>
 #include <vector>
 #include <variant>
 
@@ -112,7 +113,7 @@ Storage Character::enclose_impl(const Storage& i) {
 Storage Character::size_impl(const Storage& i) {
   if (std::holds_alternative<int>(i.i)) {
     int integer = std::get<int>(i.i);
-    return Word::make(abs(integer), NounType::INTEGER);
+    return Word::make(std::abs(integer), NounType::INTEGER);
   } else {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }

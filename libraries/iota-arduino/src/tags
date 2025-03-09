@@ -41,8 +41,8 @@ Expression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expressi
 FLOAT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int FLOAT = 1;$/;"	m	class:StorageType
 FLOAT_ARRAY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int FLOAT_ARRAY = 3; \/\/ all floats$/;"	m	class:StorageType
 FLOAT_ARRAY_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.h	/^#define FLOAT_ARRAY_H$/;"	d
-FLOAT_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.h	/^#define FLOAT_H$/;"	d
-Float	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.h	/^class Float$/;"	c
+FLOAT_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.h	/^#define FLOAT_H$/;"	d
+Float	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.h	/^class Float$/;"	c
 FloatArray	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.h	/^class FloatArray$/;"	c
 INTEGER	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int INTEGER = 0;$/;"	m	class:NounType
 INTEGER_ARRAY_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.h	/^#define INTEGER_ARRAY_H$/;"	d
@@ -276,10 +276,10 @@ from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_str
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^maybe<Storage> List::from_bytes(const bytes &bs, int t) {$/;"	f	class:List
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^maybe<Storage> Noun::from_bytes(bytes x) {$/;"	f	class:Noun
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^maybe<Storage> Real::from_bytes(bytes bs, int t) {$/;"	f	class:Real
-from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.cpp	/^maybe<Storage> Float::from_bytes(bytes x, int o)$/;"	f	class:Float
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^maybe<Storage> FloatArray::from_bytes(const bytes& x, int o)$/;"	f	class:FloatArray
-from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_bytes(bytes x, int o)$/;"	f	class:MixedArray
-from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_bytes(bytes x, int o)$/;"	f	class:Word
+from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^maybe<Storage> Float::from_bytes(bytes x, int o)$/;"	f	class:Float
+from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_bytes(const bytes& x, int o)$/;"	f	class:MixedArray
+from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_bytes(const bytes& x, int o)$/;"	f	class:Word
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^maybe<Storage> WordArray::from_bytes(const bytes& x, int o)$/;"	f	class:WordArray
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^maybe<Storage> Character::from_conn(const Connection& conn, int t) {$/;"	f	class:Character
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^maybe<Storage> Dictionary::from_conn(const Connection& conn, int t)$/;"	f	class:Dictionary
@@ -288,9 +288,9 @@ from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_stri
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^maybe<Storage> List::from_conn(const Connection& conn, int t) {$/;"	f	class:List
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^maybe<Storage> Noun::from_conn(const Connection& conn) {$/;"	f	class:Noun
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^maybe<Storage> Real::from_conn(const Connection& conn, int t) {$/;"	f	class:Real
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.cpp	/^maybe<Storage> Float::from_conn(const Connection& conn, int o)$/;"	f	class:Float
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^maybe<Storage> FloatArray::from_conn(const Connection& conn, int o)$/;"	f	class:FloatArray
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_conn(const Connection& conn, int o) {$/;"	f	class:MixedArray
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^maybe<Storage> Float::from_conn(const Connection& conn, int o)$/;"	f	class:Float
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_conn(const Connection& conn, int o)$/;"	f	class:MixedArray
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_conn(const Connection& conn, int o)$/;"	f	class:Word
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^maybe<Storage> WordArray::from_conn(const Connection& conn, int o)$/;"	f	class:WordArray
 getInteger	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^int getInteger(const Storage& i)$/;"	f
@@ -391,9 +391,9 @@ make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::make(ints i)$/;"	f	class:IotaString
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::make(const ints &i)$/;"	f	class:QuotedSymbol
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::make(float i)$/;"	f	class:Real
-make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.cpp	/^Storage Float::make(float x, int o)$/;"	f	class:Float
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^Storage FloatArray::make(floats x, int o)$/;"	f	class:FloatArray
-make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^Storage MixedArray::make(mixed x, int o) {$/;"	f	class:MixedArray
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^Storage Float::make(float x, int o)$/;"	f	class:Float
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^Storage MixedArray::make(mixed x, int o)$/;"	f	class:MixedArray
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^Storage Word::make(int x, int o)$/;"	f	class:Word
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::make(ints x, int o)$/;"	f	class:WordArray
 makeEmpty	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^Storage Dictionary::makeEmpty()$/;"	f	class:Dictionary
@@ -515,7 +515,7 @@ power_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.
 power_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::power_real(const Storage& i, const Storage& x)$/;"	f	class:List
 power_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::power_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 power_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::power_reals(const Storage& i, const Storage& x)$/;"	f	class:List
-precision	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.h	/^    static constexpr float precision = 6; \/\/ for format$/;"	m	class:Float
+precision	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.h	/^    static constexpr float precision = 6; \/\/ for format$/;"	m	class:Float
 prepend	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::prepend(const Storage& i, const Storage& x)$/;"	f	class:Noun
 prepend_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::prepend_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 prepend_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::prepend_real(const Storage& i, const Storage& x)$/;"	f	class:List
@@ -634,8 +634,8 @@ to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_strin
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^maybe<bytes> List::to_bytes(const Storage& i) {$/;"	f	class:List
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^bytes Noun::to_bytes(const Storage& x) {$/;"	f	class:Noun
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^maybe<bytes> Real::to_bytes(const Storage& i) {$/;"	f	class:Real
-to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.cpp	/^maybe<bytes> Float::to_bytes(const Storage& i)$/;"	f	class:Float
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^bytes FloatArray::to_bytes(const Storage& i)$/;"	f	class:FloatArray
+to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^maybe<bytes> Float::to_bytes(const Storage& i)$/;"	f	class:Float
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<bytes> MixedArray::to_bytes(const Storage& i) {$/;"	f	class:MixedArray
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^bytes Word::to_bytes(const Storage& i)$/;"	f	class:Word
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^bytes WordArray::to_bytes(const Storage &x)$/;"	f	class:WordArray
@@ -646,12 +646,12 @@ to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^void List::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:List
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::to_conn(const Connection& conn, const Storage& x) {$/;"	f	class:Noun
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^void Real::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Real
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.cpp	/^void Float::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Float
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^void FloatArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:FloatArray
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^void MixedArray::to_conn(const Connection& conn, const Storage& x) {$/;"	f	class:MixedArray
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^void Float::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Float
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^void MixedArray::to_conn(const Connection& conn, const Storage& x)$/;"	f	class:MixedArray
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^void Word::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Word
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^void WordArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:WordArray
-tolerance	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float.h	/^    static constexpr float tolerance = 1e-14f; \/\/ for match$/;"	m	class:Float
+tolerance	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.h	/^    static constexpr float tolerance = 1e-14f; \/\/ for match$/;"	m	class:Float
 transpose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int transpose = 16;$/;"	m	class:Monads
 transpose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage transpose(const Storage& i) \/\/ +a$/;"	f
 transpose_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::transpose_impl(const Storage& i)$/;"	f	class:List

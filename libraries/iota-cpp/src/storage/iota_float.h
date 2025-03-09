@@ -6,6 +6,7 @@
 #define FLOAT_H
 
 #include "../types.h"
+#include "../Connection.h"
 
 #include "../storage/storage.h"
 

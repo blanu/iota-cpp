@@ -15,7 +15,7 @@
 
 #include "../storage/storage.h"
 #include "../storage/word.h"
-#include "../storage/float.h"
+#include "../storage/iota_float.h"
 #include "../storage/word_array.h"
 #include "../storage/float_array.h"
 #include "../storage/mixed_array.h"

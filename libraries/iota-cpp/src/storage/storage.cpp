@@ -5,7 +5,6 @@
 
 #include "../types.h"
 #include "storage.h"
-#include "../squeeze.h"
 
 bool Storage::operator==(const Storage& other) const
 {

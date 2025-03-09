@@ -9,11 +9,12 @@
 #include "storage.h"
 
 #include "../types.h"
+#include "../Connection.h"
 
 class Word
 {
   public:
-    static maybe<Storage> from_bytes(bytes data, int o);
+    static maybe<Storage> from_bytes(const bytes& data, int o);
     static bytes to_bytes(const Storage& i);
 
     static maybe<Storage> from_conn(const Connection& conn, int objectType);

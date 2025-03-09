@@ -10,8 +10,8 @@ class EXPORT Connection
     public:
         virtual ~Connection() = default;
 
-        virtual char readOne() const = 0;
-        virtual bytes read(int size) const = 0;
+        [[nodiscard]] virtual char readOne() const = 0;
+        [[nodiscard]] virtual bytes read(int size) const = 0;
         virtual void write(bytes bs) const = 0;
 };
 

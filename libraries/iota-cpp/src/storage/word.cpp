@@ -18,10 +18,9 @@
 
 // Word
 // Storage::from_bytes decodes a byte array into a Word object
-// Be careful with this function, it moves x.
-maybe<Storage> Word::from_bytes(bytes x, int o)
+maybe<Storage> Word::from_bytes(const bytes& x, int o)
 {
-  varint varinteger = expand_int_from_bytes(std::move(x));
+  varint varinteger = expand_int_from_bytes(x);
   if(std::holds_alternative<int>(varinteger))
   {
     int integer = std::get<int>(varinteger);

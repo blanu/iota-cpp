@@ -5,10 +5,7 @@
 #ifndef INTEGER_ARRAY_H
 #define INTEGER_ARRAY_H
 
-#include <tuple>
-#include <utility>
 #include <vector>
-#include <variant>
 #include <optional>
 
 #include "word_array.h"

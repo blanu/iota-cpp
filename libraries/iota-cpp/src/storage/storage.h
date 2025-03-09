@@ -7,7 +7,6 @@
 #include <variant>
 #include <optional>
 
-#include "../Connection.h"
 #include "../types.h"
 
 // StorageType
