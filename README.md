@@ -10,6 +10,12 @@ The iota-cpp project is an implementation of the iota programming language in C+
 Arduino-compatible microcontrollers and Linux-compatible microprocessors. It contains both a cross-platform core and
 platform-specific extensions for Arduino and Linux.
 
+## Dependencies:
+- cmake, ninja
+- arduino-cli (for iota-arduino and iota-arduino-protocol-server)
+- A c++ compiler on your host system (for iota-stdio)
+- If you want to test it on an Arduino, you need an Adafruit RP2350 Feather with HSTX at the moment.
+
 The whole project and all build targets are built from the top-level project using cmake, using the usual invocation:
 ```aiignore
 mkdir build
