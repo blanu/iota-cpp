@@ -1,7 +1,11 @@
 #include "api.h"
 #include "error.h"
-#include "storage.h"
-#include "noun.h"
+
+#include "storage/storage.h"
+
+#include "storage/word.h"
+
+#include "nouns/noun.h"
 
 Storage e()
 {

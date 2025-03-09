@@ -1,7 +1,11 @@
 #include "SerialConnection.h"
 
-#include <squeeze.h>
-#include <noun.h>
+#include "squeeze.h"
+#include "types.h"
+
+#include "storage/storage.h"
+
+#include "nouns/noun.h"
 
 #include "ReliableConnection.h"
 

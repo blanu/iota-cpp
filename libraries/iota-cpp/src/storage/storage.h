@@ -7,8 +7,8 @@
 #include <variant>
 #include <optional>
 
-#include "Connection.h"
-#include "types.h"
+#include "../Connection.h"
+#include "../types.h"
 
 // StorageType
 class StorageType
@@ -129,62 +129,5 @@ struct std::hash<Storage>
     return ht ^ (ho << 1) ^ (hi << 2);
   }
 };
-
-class Word
-{
-  public:
-    static maybe<Storage> from_bytes(bytes data, int o);
-    static bytes to_bytes(const Storage& i);
-
-    static maybe<Storage> from_conn(const Connection& conn, int objectType);
-    static void to_conn(const Connection& conn, const Storage& i);
-
-    static Storage make(int x, int o = NounType::INTEGER);
-};
-
-class Float
-{
-  public:
-    static constexpr float tolerance = 1e-14f; // for match
-    static constexpr float precision = 6; // for format
-
-    static maybe<Storage> from_bytes(bytes x, int o);
-    static maybe<bytes> to_bytes(const Storage& i);
-
-    static maybe<Storage> from_conn(const Connection& conn, int objectType);
-    static void to_conn(const Connection& conn, const Storage& i);
-
-    static Storage make(float x, int o = NounType::REAL);
-};
-
-class WordArray
-{
-  public:
-    static Storage nil();
-    static Storage nil1(const Storage& i);
-    static Storage nil2(const Storage& i, const Storage& x);
-
-    static maybe<Storage> from_bytes(const bytes& data, int o);
-    static bytes to_bytes(const Storage &storage);
-
-    static maybe<Storage> from_conn(const Connection& conn, int objectType);
-    static void to_conn(const Connection& conn, const Storage& i);
-
-    static Storage make(ints x, int o = NounType::LIST);
-};
-
-class FloatArray
-{
-  public:
-    static maybe<Storage> from_bytes(const bytes& data, int o);
-    static bytes to_bytes(const Storage& i);
-
-    static maybe<Storage> from_conn(const Connection& conn, int objectType);
-    static void to_conn(const Connection& conn, const Storage& i);
-
-    static Storage make(floats x, int o = NounType::LIST);
-};
-
-// Note: MixedArray is defined in noun.h because it needs access to the Noun serialization API
 
 #endif

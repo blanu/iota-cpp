@@ -3,8 +3,8 @@
 
 #include <Arduino.h>
 
-#include <storage.h>
-#include <StorageConnection.h>
+#include "storage/storage.h"
+#include "StorageConnection.h"
 
 #include "ReliableConnection.h"
 

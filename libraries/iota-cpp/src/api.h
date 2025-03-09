@@ -1,7 +1,7 @@
 #ifndef API_H_
 #define API_H_
 
-#include "storage.h"
+#include "storage/storage.h"
 #include "types.h"
 
 // const int i = SymbolType::i;

@@ -1,9 +1,9 @@
 #include <optional>
 #include <utility>
 #include "register.h"
-#include "storage.h"
+#include "storage/storage.h"
 #include "symbols.h"
-#include "noun.h"
+#include "nouns/noun.h"
 
 void EvalRegister::initialize()
 {
