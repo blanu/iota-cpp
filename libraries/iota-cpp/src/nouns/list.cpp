@@ -4834,20 +4834,20 @@ Storage List::match_impl(const Storage& i, const Storage& x)
   }
   else if(std::holds_alternative<floats>(i.i))
   {
-    floats iis = std::get<floats>(i.i);
+    floats fs = std::get<floats>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
       ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(fs.size() != xis.size())
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < fs.size(); index++)
       {
-        Storage si = Real::make(iis[index]);
+        Storage si = Real::make(fs[index]);
         Storage sx = Integer::make(xis[index]);
         Storage matched = match(si, sx);
         if(matched.o == NounType::ERROR)
@@ -4867,14 +4867,14 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(iis.size() != xis.size())
+      if(fs.size() != xis.size())
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < fs.size(); index++)
       {
-        Storage si = Integer::make(iis[index]);
+        Storage si = Real::make(fs[index]);
         Storage sx = Real::make(xis[index]);
         Storage matched = match(si, sx);
         if(matched.o == NounType::ERROR)
@@ -4894,14 +4894,14 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(fs.size() != xis.size())
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < fs.size(); index++)
       {
-        Storage si = Integer::make(iis[index]);
+        Storage si = Real::make(fs[index]);
         const Storage& sx = xis[index];
         Storage matched = match(si, sx);
         if(matched.o == NounType::ERROR)
@@ -5255,9 +5255,7 @@ Storage List::max_integers(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5369,9 +5367,7 @@ Storage List::max_reals(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5425,9 +5421,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5511,9 +5505,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5782,9 +5774,7 @@ Storage List::min_integers(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5896,9 +5886,7 @@ Storage List::min_reals(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5952,9 +5940,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -5987,7 +5973,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
         float ii = iis[index];
         Storage si = Float::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = more(si, sx);
         if(result.o == NounType::ERROR)
@@ -5997,9 +5983,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -6029,8 +6013,8 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = more(si, sx);
         if(result.o == NounType::ERROR)
@@ -6040,9 +6024,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
         if(std::holds_alternative<int>(result.i))
         {
-          int ri = std::get<int>(result.i);
-
-          if(ri)
+          if(std::get<int>(result.i))
           {
             results.push_back(sx);
           }
@@ -6085,12 +6067,12 @@ Storage List::minus_integer(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(i.i))
     {
-      floats iis = std::get<floats>(i.i);
-      float fx = static_cast<float>(xi);
+      floats fs = std::get<floats>(i.i);
+      auto fx = static_cast<float>(xi);
 
       floats results = floats();
 
-      for(int fy : iis)
+      for(float fy : fs)
       {
         results.push_back(fy - fx);
       }
@@ -6103,7 +6085,7 @@ Storage List::minus_integer(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = minus(sy, x);
         if(result.o == NounType::ERROR)
@@ -6135,7 +6117,7 @@ Storage List::minus_real(const Storage& i, const Storage& x)
 
       for(int y : iis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         results.push_back(fy - fx);
       }
@@ -6161,7 +6143,7 @@ Storage List::minus_real(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = minus(sy, x);
         if(result.o == NounType::ERROR)
@@ -6220,7 +6202,7 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int xi = xis[index];
-        float fx = static_cast<float>(xi);
+        auto fx = static_cast<float>(xi);
 
         float fi = iis[index];
 
@@ -6245,7 +6227,7 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
         int xi = xis[index];
         Storage sx = Word::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = minus(sy, sx);
         if(result.o == NounType::ERROR)
@@ -6283,7 +6265,7 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int ii = iis[index];
-        float fi = static_cast<float>(ii);
+        auto fi = static_cast<float>(ii);
 
         float fx = xis[index];
 
@@ -6329,7 +6311,7 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
         float xi = xis[index];
         Storage sx = Float::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = more(sy, sx);
         if(result.o == NounType::ERROR)
@@ -6369,7 +6351,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
         int ii = iis[index];
         Storage si = Word::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = minus(si, sx);
         if(result.o == NounType::ERROR)
@@ -6398,7 +6380,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
         float ii = iis[index];
         Storage si = Float::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = minus(si, sx);
         if(result.o == NounType::ERROR)
@@ -6424,8 +6406,8 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = minus(si, sx);
         if(result.o == NounType::ERROR)
@@ -6464,12 +6446,12 @@ Storage List::plus_integer(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(i.i))
     {
-      floats iis = std::get<floats>(i.i);
-      float fx = static_cast<float>(xi);
+      floats fs = std::get<floats>(i.i);
+      auto fx = static_cast<float>(xi);
 
       floats results = floats();
 
-      for(int fy : iis)
+      for(float fy : fs)
       {
         results.push_back(fy + fx);
       }
@@ -6482,7 +6464,7 @@ Storage List::plus_integer(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = plus(sy, x);
         if(result.o == NounType::ERROR)
@@ -6514,7 +6496,7 @@ Storage List::plus_real(const Storage& i, const Storage& x)
 
       for(int y : iis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         results.push_back(fy + fx);
       }
@@ -6540,7 +6522,7 @@ Storage List::plus_real(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = plus(sy, x);
         if(result.o == NounType::ERROR)
@@ -6599,7 +6581,7 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int xi = xis[index];
-        float fx = static_cast<float>(xi);
+        auto fx = static_cast<float>(xi);
 
         float fi = iis[index];
 
@@ -6624,7 +6606,7 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
         int xi = xis[index];
         Storage sx = Word::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = plus(sy, sx);
         if(result.o == NounType::ERROR)
@@ -6662,7 +6644,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int ii = iis[index];
-        float fi = static_cast<float>(ii);
+        auto fi = static_cast<float>(ii);
 
         float fx = xis[index];
 
@@ -6708,7 +6690,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
         float xi = xis[index];
         Storage sx = Float::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = more(sy, sx);
         if(result.o == NounType::ERROR)
@@ -6748,7 +6730,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
         int ii = iis[index];
         Storage si = Word::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = plus(si, sx);
         if(result.o == NounType::ERROR)
@@ -6777,7 +6759,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
         float ii = iis[index];
         Storage si = Float::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = plus(si, sx);
         if(result.o == NounType::ERROR)
@@ -6803,8 +6785,8 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = plus(si, sx);
         if(result.o == NounType::ERROR)
@@ -6827,7 +6809,7 @@ Storage List::power_integer(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
-    float fx = static_cast<float>(xi);
+    auto fx = static_cast<float>(xi);
 
     if(std::holds_alternative<ints>(i.i))
     {
@@ -6837,7 +6819,7 @@ Storage List::power_integer(const Storage& i, const Storage& x)
 
       for(int y : iis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         results.push_back(powf(fy, fx));
       }
@@ -6846,12 +6828,11 @@ Storage List::power_integer(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(i.i))
     {
-      floats iis = std::get<floats>(i.i);
-      float fx = static_cast<float>(xi);
+      floats fs = std::get<floats>(i.i);
 
       floats results = floats();
 
-      for(int fy : iis)
+      for(float fy : fs)
       {
         results.push_back(powf(fy, fx));
       }
@@ -6864,7 +6845,7 @@ Storage List::power_integer(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = power(sy, x);
         if(result.o == NounType::ERROR)
@@ -6896,7 +6877,7 @@ Storage List::power_real(const Storage& i, const Storage& x)
 
       for(int y : iis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         results.push_back(powf(fy, fx));
       }
@@ -6922,7 +6903,7 @@ Storage List::power_real(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = power(sy, x);
         if(result.o == NounType::ERROR)
@@ -6962,8 +6943,8 @@ Storage List::power_integers(const Storage& i, const Storage& x)
         int ii = iis[index];
         int xi = xis[index];
 
-        float fi = static_cast<float>(ii);
-        float fx = static_cast<float>(xi);
+        auto fi = static_cast<float>(ii);
+        auto fx = static_cast<float>(xi);
 
         results.push_back(powf(fi, fx));
       }
@@ -6986,7 +6967,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
         float fi = iis[index];
 
         int xi = xis[index];
-        float fx = static_cast<float>(xi);
+        auto fx = static_cast<float>(xi);
 
         results.push_back(powf(fi, fx));
       }
@@ -7009,7 +6990,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
         int xi = xis[index];
         Storage sx = Word::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = power(sy, sx);
         if(result.o == NounType::ERROR)
@@ -7047,7 +7028,7 @@ Storage List::power_reals(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int ii = iis[index];
-        float fi = static_cast<float>(ii);
+        auto fi = static_cast<float>(ii);
 
         float fx = xis[index];
 
@@ -7093,7 +7074,7 @@ Storage List::power_reals(const Storage& i, const Storage& x)
         float xi = xis[index];
         Storage sx = Float::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = power(sy, sx);
         if(result.o == NounType::ERROR)
@@ -7133,7 +7114,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
         int ii = iis[index];
         Storage si = Word::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = power(si, sx);
         if(result.o == NounType::ERROR)
@@ -7162,7 +7143,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
         float ii = iis[index];
         Storage si = Float::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = power(si, sx);
         if(result.o == NounType::ERROR)
@@ -7188,8 +7169,8 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = power(si, sx);
         if(result.o == NounType::ERROR)
@@ -7232,7 +7213,7 @@ Storage List::remainder_integer(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = remainder(sy, x);
         if(result.o == NounType::ERROR)
@@ -7293,7 +7274,7 @@ Storage List::remainder_integers(const Storage& i, const Storage& x)
         int xi = xis[index];
         Storage sx = Word::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = remainder(sy, sx);
         if(result.o == NounType::ERROR)
@@ -7333,7 +7314,7 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
         int ii = iis[index];
         Storage si = Word::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = remainder(si, sx);
         if(result.o == NounType::ERROR)
@@ -7359,8 +7340,8 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = remainder(si, sx);
         if(result.o == NounType::ERROR)
@@ -7407,7 +7388,7 @@ Storage List::reshape_integer(const Storage& i, const Storage& x)
 
       for(int index = 0; index < xi; index++)
       {
-        int cyclingIndex = index % iis.size();
+        int cyclingIndex = index % static_cast<int>(iis.size());
         results.push_back(iis[cyclingIndex]);
       }
 
@@ -7421,7 +7402,7 @@ Storage List::reshape_integer(const Storage& i, const Storage& x)
 
       for(int index = 0; index < xi; index++)
       {
-        int cyclingIndex = index % iis.size();
+        int cyclingIndex = index % static_cast<int>(iis.size());
         results.push_back(iis[cyclingIndex]);
       }
 
@@ -7435,7 +7416,7 @@ Storage List::reshape_integer(const Storage& i, const Storage& x)
 
       for(int index = 0; index < xi; index++)
       {
-        int cyclingIndex = index % iis.size();
+        int cyclingIndex = index % static_cast<int>(iis.size());
         results.push_back(iis[cyclingIndex]);
       }
 
@@ -7519,7 +7500,7 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
         int ii = iis[index];
         Storage si = Word::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = reshape(si, sx);
         if(result.o == NounType::ERROR)
@@ -7545,8 +7526,8 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = reshape(si, sx);
         if(result.o == NounType::ERROR)
@@ -7586,7 +7567,7 @@ Storage List::rotate_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        int offset = iis.size() - (xi % iis.size());
+        int offset = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         ints results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -7596,7 +7577,7 @@ Storage List::rotate_integer(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        int offset = xi % iis.size();
+        int offset = xi % static_cast<int>(iis.size());
 
         ints results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -7624,7 +7605,7 @@ Storage List::rotate_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        int offset = iis.size() - (xi % iis.size());
+        int offset = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         floats results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -7634,7 +7615,7 @@ Storage List::rotate_integer(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        int offset = xi % iis.size();
+        int offset = xi % static_cast<int>(iis.size());
 
         floats results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -7662,7 +7643,7 @@ Storage List::rotate_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        int offset = iis.size() - (xi % iis.size());
+        int offset = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         mixed results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -7672,7 +7653,7 @@ Storage List::rotate_integer(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        int offset = xi % iis.size();
+        int offset = xi % static_cast<int>(iis.size());
 
         mixed results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -7707,9 +7688,9 @@ Storage List::split_integer(const Storage& i, const Storage& x)
         mixed results = mixed();
 
         ints result = ints();
-        for(int index = 0; index < iis.size(); index++)
+        for(int ii : iis)
         {
-          result.push_back(iis[index]);
+          result.push_back(ii);
 
           if(result.size() == xi)
           {
@@ -7718,7 +7699,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
           }
         }
 
-        if(result.size() > 0)
+        if(!result.empty())
         {
           results.push_back(WordArray::make(result));
         }
@@ -7743,9 +7724,9 @@ Storage List::split_integer(const Storage& i, const Storage& x)
         mixed results = mixed();
 
         floats result = floats();
-        for(int index = 0; index < iis.size(); index++)
+        for(float ii : iis)
         {
-          result.push_back(iis[index]);
+          result.push_back(ii);
 
           if(result.size() == xi)
           {
@@ -7754,7 +7735,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
           }
         }
 
-        if(result.size() > 0)
+        if(!result.empty())
         {
           results.push_back(FloatArray::make(result));
         }
@@ -7779,9 +7760,9 @@ Storage List::split_integer(const Storage& i, const Storage& x)
         mixed results = mixed();
 
         mixed result = mixed();
-        for(int index = 0; index < iis.size(); index++)
+        for(const auto & ii : iis)
         {
-          result.push_back(iis[index]);
+          result.push_back(ii);
 
           if(result.size() == xi)
           {
@@ -7790,7 +7771,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
           }
         }
 
-        if(result.size() > 0)
+        if(!result.empty())
         {
           results.push_back(MixedArray::make(result));
         }
@@ -7949,12 +7930,12 @@ Storage List::take_integer(const Storage& i, const Storage& x)
       else if(xi < 0)
       {
         xi = -xi;
-        int start = iis.size() - (xi % iis.size());
+        int start = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         ints results = ints();
         for(int offset = 0; offset < xi; offset++)
         {
-          int index = (start + offset) % iis.size();
+          int index = (start + offset) % static_cast<int>(iis.size());
           results.push_back(iis[index]);
         }
 
@@ -7988,12 +7969,12 @@ Storage List::take_integer(const Storage& i, const Storage& x)
       else if(xi < 0)
       {
         xi = -xi;
-        int start = iis.size() - (xi % iis.size());
+        int start = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         floats results = floats();
         for(int offset = 0; offset < xi; offset++)
         {
-          int index = (start + offset) % iis.size();
+          int index = (start + offset) % static_cast<int>(iis.size());
           results.push_back(iis[index]);
         }
 
@@ -8027,12 +8008,12 @@ Storage List::take_integer(const Storage& i, const Storage& x)
       else if(xi < 0)
       {
         xi = -xi;
-        int start = iis.size() - (xi % iis.size());
+        int start = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         mixed results = mixed();
         for(int offset = 0; offset < xi; offset++)
         {
-          int index = (start + offset) % iis.size();
+          int index = (start + offset) % static_cast<int>(iis.size());
           results.push_back(iis[index]);
         }
 
@@ -8066,7 +8047,7 @@ Storage List::times_integer(const Storage& i, const Storage& x)
     else if(std::holds_alternative<floats>(i.i))
     {
       floats fs = std::get<floats>(i.i);
-      float fx = static_cast<float>(xi);
+      auto fx = static_cast<float>(xi);
 
       floats results = floats();
 
@@ -8083,7 +8064,7 @@ Storage List::times_integer(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = times(sy, x);
         if(result.o == NounType::ERROR)
@@ -8115,7 +8096,7 @@ Storage List::times_real(const Storage& i, const Storage& x)
 
       for(int y : iis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         results.push_back(fy * fx);
       }
@@ -8141,7 +8122,7 @@ Storage List::times_real(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage sy : iis)
+      for(const Storage& sy : iis)
       {
         Storage result = times(sy, x);
         if(result.o == NounType::ERROR)
@@ -8200,7 +8181,7 @@ Storage List::times_integers(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int xi = xis[index];
-        float fx = static_cast<float>(xi);
+        auto fx = static_cast<float>(xi);
 
         float fi = iis[index];
 
@@ -8225,7 +8206,7 @@ Storage List::times_integers(const Storage& i, const Storage& x)
         int xi = xis[index];
         Storage sx = Word::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = times(sy, sx);
         if(result.o == NounType::ERROR)
@@ -8263,7 +8244,7 @@ Storage List::times_reals(const Storage& i, const Storage& x)
       for(int index = 0; index < iis.size(); index++)
       {
         int ii = iis[index];
-        float fi = static_cast<float>(ii);
+        auto fi = static_cast<float>(ii);
 
         float fx = xis[index];
 
@@ -8309,7 +8290,7 @@ Storage List::times_reals(const Storage& i, const Storage& x)
         float xi = xis[index];
         Storage sx = Float::make(xi);
 
-        Storage sy = iis[index];
+        const Storage& sy = iis[index];
 
         Storage result = times(sy, sx);
         if(result.o == NounType::ERROR)
@@ -8349,7 +8330,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
         int ii = iis[index];
         Storage si = Word::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = times(si, sx);
         if(result.o == NounType::ERROR)
@@ -8378,7 +8359,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
         float ii = iis[index];
         Storage si = Float::make(ii);
 
-        Storage sx = xis[index];
+        const Storage& sx = xis[index];
 
         Storage result = times(si, sx);
         if(result.o == NounType::ERROR)
@@ -8404,8 +8385,8 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage si = iis[index];
-        Storage sx = xis[index];
+        const Storage& si = iis[index];
+        const Storage& sx = xis[index];
 
         Storage result = times(si, sx);
         if(result.o == NounType::ERROR)
@@ -8481,7 +8462,7 @@ Storage List::each_mixed(const Storage& i, const Storage& f)
     mixed iis = std::get<mixed>(i.i);
 
     mixed results = mixed();
-    for(Storage y : iis)
+    for(const Storage& y : iis)
     {
       Storage result = Noun::dispatchMonad(y, f);
 
@@ -8562,8 +8543,8 @@ Storage List::eachPair_mixed(const Storage& i, const Storage& f)
     mixed results = mixed();
     for(int index = 0; index < iis.size() - 1; index++)
     {
-      Storage y = iis[index];
-      Storage z = iis[index+1];
+      const Storage& y = iis[index];
+      const Storage& z = iis[index+1];
       Storage result = Noun::dispatchDyad(y, f, z);
 
       if(result.o == NounType::ERROR)
@@ -8684,7 +8665,7 @@ Storage List::over_mixed(const Storage& i, const Storage& f)
 
     for(int index = 1; index < iis.size(); index++)
     {
-      Storage z = iis[index];
+      const Storage& z = iis[index];
 
       Storage result = Noun::dispatchDyad(y, f, z);
 
@@ -8811,7 +8792,7 @@ Storage List::scanOver_mixed(const Storage& i, const Storage& f)
 
     for(int index = 1; index < iis.size(); index++)
     {
-      Storage z = iis[index];
+      const Storage& z = iis[index];
 
       Storage result = Noun::dispatchDyad(y, f, z);
 
