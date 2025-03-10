@@ -2,21 +2,21 @@
 // Created by Dr. Brandon Wiley on 3/9/25.
 //
 
-#include <cmath>
-#include <vector>
+#include <cmath> // This is needed for std::abs, even if the compiler doesn't realize it.
 #include <variant>
+#include <vector>
 
 #include "character.h"
-#include "noun.h"
 #include "integer.h"
+#include "noun.h"
 
+#include "../error.h"
 #include "../squeeze.h"
 #include "../symbols.h"
-#include "../error.h"
 
+#include "../storage/mixed_array.h"
 #include "../storage/word.h"
 #include "../storage/word_array.h"
-#include "../storage/mixed_array.h"
 
 // Character
 void Character::initialize() {
@@ -110,11 +110,15 @@ Storage Character::enclose_impl(const Storage& i) {
   }
 }
 
-Storage Character::size_impl(const Storage& i) {
-  if (std::holds_alternative<int>(i.i)) {
+Storage Character::size_impl(const Storage& i)
+{
+  if (std::holds_alternative<int>(i.i))
+  {
     int integer = std::get<int>(i.i);
     return Word::make(std::abs(integer), NounType::INTEGER);
-  } else {
+  }
+  else
+  {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 }

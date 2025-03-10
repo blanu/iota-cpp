@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "../storage/storage.h"
-#include "Connection.h"
+#include "../Connection.h"
 
 class Character
 {

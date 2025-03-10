@@ -74,8 +74,8 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
 
     if(ms.size() == 2)
     {
-      Storage keys = ms[0];
-      Storage values = ms[1];
+      const Storage& keys = ms[0];
+      const Storage& values = ms[1];
 
       Storage indices = find(keys, x);
 
@@ -83,7 +83,7 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
       {
         ints integerIndices = std::get<ints>(indices.i);
 
-        if(integerIndices.size() == 0)
+        if(integerIndices.empty())
         {
           return QuotedSymbol::undefined();
         }
@@ -142,15 +142,15 @@ Storage Dictionary::match_impl(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-maybe<Storage> Dictionary::from_bytes(bytes bs, int t)
+maybe<Storage> Dictionary::from_bytes(const bytes& bs, int t)
 {
-  switch (t)
+  if(t == StorageType::MIXED_ARRAY)
   {
-    case StorageType::MIXED_ARRAY:
-      return MixedArray::from_bytes(bs, NounType::DICTIONARY);
-
-    default:
-      return std::nullopt;
+    return MixedArray::from_bytes(bs, NounType::DICTIONARY);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 
@@ -179,13 +179,13 @@ maybe<bytes> Dictionary::to_bytes(const Storage& i)
 
 maybe<Storage> Dictionary::from_conn(const Connection& conn, int t)
 {
-  switch (t)
+  if(t == StorageType::MIXED_ARRAY)
   {
-    case StorageType::MIXED_ARRAY:
-      return MixedArray::from_conn(conn, NounType::DICTIONARY);
-
-    default:
-      return std::nullopt;
+    return MixedArray::from_conn(conn, NounType::DICTIONARY);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 

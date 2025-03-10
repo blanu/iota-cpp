@@ -5,7 +5,6 @@
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 
-#include "Connection.h"
 #include "../storage/storage.h"
 
 class Expression

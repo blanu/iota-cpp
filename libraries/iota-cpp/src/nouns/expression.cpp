@@ -2,14 +2,16 @@
 // Created by Dr. Brandon Wiley on 3/9/25.
 //
 
-#include "noun.h"
-#include "symbols.h"
-#include "verbs.h"
-
 #include "expression.h"
+#include "noun.h"
+
+#include "../symbols.h"
+#include "../verbs.h"
+
 
 // Expression
-void Expression::initialize() {
+void Expression::initialize()
+{
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, Monads::evaluate, Noun::evaluate_expression);
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, Monads::truth, Expression::truth);
 
@@ -26,6 +28,8 @@ void Expression::initialize() {
   */
 }
 
-Storage Expression::truth(const Storage& i) {
+// FIXME - infinite recursion
+Storage Expression::truth(const Storage& i)
+{
   return truth(evaluate(i));
 }

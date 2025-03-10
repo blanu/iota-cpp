@@ -2,6 +2,7 @@
 // Created by Dr. Brandon Wiley on 3/9/25.
 //
 
+#include <utility>
 #include <vector>
 #include <variant>
 #include <algorithm>
@@ -108,9 +109,10 @@ void IotaString::initialize() {
   Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::STRING, DyadicAdverbs::whileOne, StorageType::WORD, NounType::USER_MONAD, Noun::whileOne_impl);
 }
 
+// Be careful with this function, it moves i.
 Storage IotaString::make(ints i)
 {
-  return WordArray::make(i, NounType::STRING);
+  return WordArray::make(std::move(i), NounType::STRING);
 }
 
 Storage IotaString::makeEmpty()
@@ -182,9 +184,9 @@ Storage IotaString::gradeDown_impl(const Storage& i)
       return integers[x] > integers[y];
     });
 
-    for (int index = 0; index < results.size(); ++index)
+    for (int & result : results)
     {
-        results[index] = results[index] + 1;
+        result = result + 1;
     }
 
     return WordArray::make(results, NounType::LIST);
@@ -217,9 +219,9 @@ Storage IotaString::gradeUp_impl(const Storage& i)
       return integers[x] > integers[y];
     });
 
-    for (int index = 0; index < results.size(); ++index)
+    for (int & result : results)
     {
-        results[index] = results[index] + 1;
+        result = result + 1;
     }
 
     return WordArray::make(results, NounType::LIST);
@@ -342,9 +344,9 @@ Storage IotaString::group_impl(const Storage& i)
     }
 
     mixed results = mixed();
-    for (auto pair = groups.begin(); pair != groups.end(); ++pair)
+    for (auto &[fst, snd] : groups)
     {
-      ints group = pair->second;
+      const ints group = snd;
       results.push_back(WordArray::make(group));
     }
 
@@ -428,7 +430,7 @@ Storage IotaString::find_string(const Storage& i, const Storage& x)
 
       if(xis.empty())
       {
-        return enumerate(Integer::make(iis.size() + 1));
+        return enumerate(Integer::make(1 + static_cast<int>(iis.size())));
       }
 
       ints results = ints();
@@ -573,7 +575,7 @@ Storage IotaString::form_real(const Storage& i, const Storage& x)
           fractionalPart = fractionalPart * 10;
           fractionalPart = fractionalPart + digit;
 
-          fractionalPower = fractionalPower * 10.0;
+          fractionalPower = fractionalPower * 10.0f;
         }
         else
         {
@@ -587,8 +589,8 @@ Storage IotaString::form_real(const Storage& i, const Storage& x)
       }
     }
 
-    float integerFloat = static_cast<float>(integerPart);
-    float fractionalFloat = static_cast<float>(fractionalPart);
+    auto integerFloat = static_cast<float>(integerPart);
+    auto fractionalFloat = static_cast<float>(fractionalPart);
     float result = integerFloat + (fractionalFloat / fractionalPower);
 
     if(negative)
@@ -784,7 +786,7 @@ Storage IotaString::rotate_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        int offset = iis.size() - (xi % iis.size());
+        int offset = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         ints results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -794,7 +796,7 @@ Storage IotaString::rotate_integer(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        int offset = xi % iis.size();
+        int offset = xi % static_cast<int>(iis.size());
 
         ints results(iis.begin() + offset, iis.end());
         results.insert(results.end(), iis.begin(), iis.begin() + offset);
@@ -829,9 +831,9 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
         mixed results = mixed();
 
         ints result = ints();
-        for(int index = 0; index < iis.size(); index++)
+        for(int ii : iis)
         {
-          result.push_back(iis[index]);
+          result.push_back(ii);
 
           if(result.size() == xi)
           {
@@ -840,7 +842,7 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
           }
         }
 
-        if(result.size() > 0)
+        if(!result.empty())
         {
           results.push_back(IotaString::make(result));
         }
@@ -929,15 +931,15 @@ Storage IotaString::take_integer(const Storage& i, const Storage& x)
 
         return IotaString::make(results);
       }
-      else if(xi < 0)
+      else // xi < 0
       {
         xi = -xi;
-        int start = iis.size() - (xi % iis.size());
+        int start = static_cast<int>(iis.size()) - (xi % static_cast<int>(iis.size()));
 
         ints results = ints();
         for(int offset = 0; offset < xi; offset++)
         {
-          int index = (start + offset) % iis.size();
+          int index = (start + offset) % static_cast<int>(iis.size());
           results.push_back(iis[index]);
         }
 
@@ -977,12 +979,13 @@ Storage IotaString::each_impl(const Storage& i, const Storage& f)
 
 // Serialization
 maybe<Storage> IotaString::from_bytes(const bytes& bs, int t) {
-  switch (t) {
-    case StorageType::WORD_ARRAY:
-      return WordArray::from_bytes(bs, NounType::STRING);
-
-    default:
-      return std::nullopt;
+  if(t == StorageType::WORD_ARRAY)
+  {
+    return WordArray::from_bytes(bs, NounType::STRING);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 
@@ -1001,13 +1004,13 @@ maybe<bytes> IotaString::to_bytes(const Storage& i) {
 }
 
 maybe<Storage> IotaString::from_conn(const Connection& conn, int t) {
-  switch (t)
+  if(t == StorageType::WORD_ARRAY)
   {
-    case StorageType::WORD_ARRAY:
-      return WordArray::from_conn(conn, NounType::STRING);
-
-    default:
-      return std::nullopt;
+    return WordArray::from_conn(conn, NounType::STRING);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 

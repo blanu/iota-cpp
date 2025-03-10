@@ -358,11 +358,7 @@ Storage Noun::mix(const Storage& i)
 
 Storage Noun::simplify(const Storage& i)
 {
-  if(std::holds_alternative<ints>(i.i))
-  {
-    return i;
-  }
-  else if(std::holds_alternative<floats>(i.i))
+  if(std::holds_alternative<ints>(i.i) || std::holds_alternative<floats>(i.i))
   {
     return i;
   }
@@ -378,7 +374,7 @@ Storage Noun::simplify(const Storage& i)
     int all_integers = 1;
     int all_reals = 1;
     int all_characters = 1;
-    for(Storage y : iis)
+    for(const Storage& y : iis)
     {
       if((y.t == StorageType::WORD) && (y.o == NounType::INTEGER))
       {
@@ -494,7 +490,7 @@ ints getIntegers(const Storage& i)
     return integers;
   }
 
-  return ints();
+  return {};
 }
 
 floats getReals(const Storage& i)
@@ -505,7 +501,7 @@ floats getReals(const Storage& i)
     return fs;
   }
 
-  return floats();
+  return {};
 }
 
 mixed getMixed(const Storage& i)
@@ -516,7 +512,7 @@ mixed getMixed(const Storage& i)
     return ms;
   }
 
-  return mixed();
+  return {};
 }
 
 int isNil(const Storage& i)
@@ -599,7 +595,7 @@ Storage Noun::converge_impl(const Storage& i, const Storage& f)
       return next;
     }
 
-    Storage equivalence = match(next, previous);
+    equivalence = match(next, previous);
     previous = next;
 
     if(equivalence.truth())
@@ -626,7 +622,7 @@ Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)
       return next;
     }
 
-    Storage equivalence = match(next, previous);
+    equivalence = match(next, previous);
     previous = next;
 
     if(equivalence.truth())
@@ -759,7 +755,10 @@ Storage Noun::overNeutral_impl(const Storage& i, const Storage& f, const Storage
     return dispatchDyad(i, f, x);
   }
 
-  return over(prepend(x, i), f);
+  // The next two lines are to dispel the perception that we accidentally swapped the order of the arguments i and x.
+  const Storage& swapX = i;
+  const Storage& swapI = x;
+  return over(prepend(swapI, swapX), f);
 }
 
 Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage& x)
@@ -835,6 +834,7 @@ Storage Noun::scanOverNeutral_impl(const Storage& i, const Storage& f, const Sto
   return scanOver(prepend(x, i), f);
 }
 
+// FIXME - address leak
 Storage Noun::scanWhileOne_impl(const Storage& i, const Storage& f, const Storage& g)
 {
   mixed results = mixed();
@@ -900,8 +900,8 @@ Storage Noun::whileOne_impl(const Storage& i, const Storage& f, const Storage& g
 // Serialization
 // Noun::from_bytes decodes a byte array into a Storage object by delegating to each Storage subclass's decoder
 maybe<Storage> Noun::from_bytes(bytes x) {
-  int t = (int)x.at(0);
-  int o = (int)x.at(1);
+  int t = static_cast<unsigned char>(x.at(0));
+  int o = static_cast<unsigned char>(x.at(1));
   bytes untypedData(x.begin() + 2, x.end());
 
   switch (o) {
@@ -929,6 +929,7 @@ maybe<Storage> Noun::from_bytes(bytes x) {
       {
         return maybe<Storage>(IotaString::from_bytes(untypedData, t));
       }
+
     default:
       switch (t) {
         case StorageType::WORD:
@@ -955,9 +956,10 @@ maybe<Storage> Noun::from_bytes(bytes x) {
           {
             return maybe<Storage>(MixedArray::from_bytes(untypedData, o));
           }
-      }
 
-      return std::nullopt;
+        default:
+          return std::nullopt;
+      }
   }
 }
 
@@ -965,67 +967,62 @@ maybe<Storage> Noun::from_bytes(bytes x) {
 // Format: byte:t byte:o [byte]:subclass.from_bytes(i)
 bytes Noun::to_bytes(const Storage& x) {
   // Noun::to_bytes includes type, never include type in any other to_bytes
-  bytes typeBytes = { (char)x.t, (char)x.o };
+  bytes typeBytes = { static_cast<char>(x.t), static_cast<char>(x.o) };
 
   bytes valueBytes = bytes();
   switch (x.o) {
     case NounType::INTEGER:
       {
-        maybe<bytes> maybeValueBytes = Integer::to_bytes(x);
-        if (maybeValueBytes) {
+        if (maybe<bytes> maybeValueBytes = Integer::to_bytes(x)) {
           valueBytes = *maybeValueBytes;
           break;
         } else {
-          return bytes();
+          return {};
         }
       }
 
     case NounType::REAL:
       {
-        maybe<bytes> maybeValueBytes = Real::to_bytes(x);
-        if (maybeValueBytes) {
+        if (maybe<bytes> maybeValueBytes = Real::to_bytes(x)) {
           valueBytes = *maybeValueBytes;
           break;
         } else {
-          return bytes();
+          return {};
         }
       }
 
     case NounType::LIST:
       {
-        maybe<bytes> maybeValueBytes = List::to_bytes(x);
-        if (maybeValueBytes) {
+        if (maybe<bytes> maybeValueBytes = List::to_bytes(x)) {
           valueBytes = *maybeValueBytes;
           break;
         } else {
-          return bytes();
+          return {};
         }
       }
 
     case NounType::CHARACTER:
       {
-        maybe<bytes> maybeValueBytes = Character::to_bytes(x);
-        if (maybeValueBytes) {
+        if (maybe<bytes> maybeValueBytes = Character::to_bytes(x)) {
           valueBytes = *maybeValueBytes;
           break;
         } else {
-          return bytes();
+          return {};
         }
       }
 
     case NounType::STRING:
       {
-        maybe<bytes> maybeValueBytes = IotaString::to_bytes(x);
-        if (maybeValueBytes) {
+        if (maybe<bytes> maybeValueBytes = IotaString::to_bytes(x)) {
           valueBytes = *maybeValueBytes;
           break;
         } else {
-          return bytes();
+          return {};
         }
       }
 
     default:
-      return bytes();
+      return {};
   }
 
   bytes result(typeBytes.begin(), typeBytes.end());
@@ -1034,10 +1031,9 @@ bytes Noun::to_bytes(const Storage& x) {
 }
 
 maybe<Storage> Noun::from_conn(const Connection& conn) {
-  int storageType = (int)conn.readOne();
-  int objectType = (int)conn.readOne();
+  int storageType = static_cast<unsigned char>(conn.readOne());
 
-  switch (objectType) {
+  switch (int objectType = static_cast<unsigned char>(conn.readOne())) {
     case NounType::INTEGER:
       return maybe<Storage>(Integer::from_conn(conn, storageType));
 

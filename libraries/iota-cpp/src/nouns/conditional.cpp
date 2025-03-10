@@ -52,9 +52,9 @@ Storage Conditional::evaluate_impl(const Storage& e)
       return Word::make(SHAPE_MISMATCH, NounType::ERROR);
     }
 
-    Storage a = mis[0];
-    Storage b = mis[1];
-    Storage c = mis[2];
+    const Storage& a = mis[0];
+    const Storage& b = mis[1];
+    const Storage& c = mis[2];
 
     if(a.truth())
     {

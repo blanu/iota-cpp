@@ -1,3 +1,8 @@
 .idea
 cmake-build*
-**/tags
+iota-stdio/tags
+libraries/iota-cpp/src/tags
+libraries/iota-arduino/tags
+libraries/iota-arduino/src/tags
+libraries/iota-arduino/examples/iota-arduino-protocol-server/tags
+

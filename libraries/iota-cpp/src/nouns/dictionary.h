@@ -5,14 +5,10 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
-#include <map>
-#include <functional>
 #include <vector>
-#include <tuple>
-#include <string>
 
 #include "../storage/storage.h"
-#include "Connection.h"
+#include "../Connection.h"
 
 class Dictionary
 {
@@ -39,7 +35,7 @@ class Dictionary
 
     // // Serialization
     static maybe<bytes> to_bytes(const Storage& i);
-    static maybe<Storage> from_bytes(bytes bs, int t);
+    static maybe<Storage> from_bytes(const bytes& bs, int t);
     static void to_conn(const Connection& conn, const Storage& i);
     static maybe<Storage> from_conn(const Connection& conn, int t);
 };

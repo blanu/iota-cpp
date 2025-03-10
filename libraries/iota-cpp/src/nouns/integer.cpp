@@ -2,30 +2,30 @@
 // Created by Dr. Brandon Wiley on 3/9/25.
 //
 
-#include <vector>
-#include <tuple>
+#include <cmath> // This is necessary for std::abs, even if the compiler doesn't realize it.
 #include <numeric>
-#include <cmath>
+#include <tuple>
+#include <vector>
 
-#include "../squeeze.h"
 #include "../Connection.h"
-#include "../symbols.h"
 #include "../error.h"
+#include "../squeeze.h"
+#include "../symbols.h"
 #include "../verbs.h"
 
+#include "../storage/float_array.h"
+#include "../storage/iota_float.h"
+#include "../storage/mixed_array.h"
 #include "../storage/storage.h"
 #include "../storage/word.h"
-#include "../storage/iota_float.h"
 #include "../storage/word_array.h"
-#include "../storage/float_array.h"
-#include "../storage/mixed_array.h"
 
 #include "integer.h"
-#include "noun.h"
-#include "real.h"
-#include "list.h"
 #include "iota_string.h"
+#include "list.h"
+#include "noun.h"
 #include "quoted_symbol.h"
+#include "real.h"
 
 // Integer
 void Integer::initialize()
@@ -343,11 +343,15 @@ Storage Integer::not_impl(const Storage& i)
   }
 }
 
-Storage Integer::reciprocal_impl(const Storage& i) {
-  if (std::holds_alternative<int>(i.i)) {
+Storage Integer::reciprocal_impl(const Storage& i)
+{
+  if (std::holds_alternative<int>(i.i))
+  {
     int integer = std::get<int>(i.i);
-    return Float::make(1.0 / static_cast<float>(integer), NounType::REAL);
-  } else {
+    return Real::make(1.0f / static_cast<float>(integer));
+  }
+  else
+  {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 }
@@ -500,7 +504,7 @@ Storage Integer::divide_integer(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<int>(x.i))
     {
@@ -511,7 +515,7 @@ Storage Integer::divide_integer(const Storage& i, const Storage& x)
         return QuotedSymbol::undefined();
       }
 
-      float fx = static_cast<float>(xi);
+      auto fx = static_cast<float>(xi);
 
       return Float::make(fi / fx, NounType::REAL);
     }
@@ -526,7 +530,7 @@ Storage Integer::divide_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -549,7 +553,7 @@ Storage Integer::divide_integers(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<ints>(x.i))
     {
@@ -558,7 +562,7 @@ Storage Integer::divide_integers(const Storage& i, const Storage& x)
       floats results = floats();
       for(int y : xis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         if(y == 0)
         {
@@ -580,7 +584,7 @@ Storage Integer::divide_reals(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<floats>(x.i))
     {
@@ -622,7 +626,7 @@ Storage Integer::divide_mixed(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<mixed>(x.i))
     {
@@ -631,7 +635,7 @@ Storage Integer::divide_mixed(const Storage& i, const Storage& x)
       floats results = floats();
       mixed mixedResults = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = divide(Float::make(fi, NounType::REAL), y);
 
@@ -725,7 +729,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
       }
       else
       {
-        int difference = xi - characters.size();
+        int difference = xi - static_cast<int>(characters.size());
         for(int index = 0; index < difference; index++)
         {
           characters.push_back(static_cast<int>(' '));
@@ -735,7 +739,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
       }
     }
   }
-  else if(xi < 0)
+  else // xi < 0
   {
     xi = -xi;
 
@@ -749,7 +753,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
       }
       else
       {
-        int difference = xi - characters.size();
+        int difference = xi - static_cast<int>(characters.size());
         for(int index = 0; index < difference; index++)
         {
           characters.insert(characters.begin(), static_cast<int>(' '));
@@ -854,7 +858,7 @@ Storage Integer::less_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -902,7 +906,7 @@ Storage Integer::less_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       ints results = ints();
@@ -928,7 +932,7 @@ Storage Integer::less_list(const Storage& i, const Storage& x)
 
       ints results = ints();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = less(si, y);
         if(result.o == NounType::ERROR)
@@ -975,7 +979,7 @@ Storage Integer::match_impl(const Storage& i, const Storage& x)
     else if(std::holds_alternative<float>(x.i))
     {
       float fx = std::get<float>(x.i);
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
 
       if(abs(fi - fx) < Float::tolerance)
       {
@@ -1020,7 +1024,7 @@ Storage Integer::max_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1068,7 +1072,7 @@ Storage Integer::max_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       mixed results = mixed();
@@ -1094,7 +1098,7 @@ Storage Integer::max_list(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = less(si, y);
         if(result.o == NounType::ERROR)
@@ -1148,7 +1152,7 @@ Storage Integer::min_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1196,7 +1200,7 @@ Storage Integer::min_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       mixed results = mixed();
@@ -1222,7 +1226,7 @@ Storage Integer::min_list(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = more(si, y);
         if(result.o == NounType::ERROR)
@@ -1270,7 +1274,7 @@ Storage Integer::minus_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1305,7 +1309,7 @@ Storage Integer::minus_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       floats results = floats();
@@ -1324,7 +1328,7 @@ Storage Integer::minus_list(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = minus(si, y);
         if(result.o == NounType::ERROR)
@@ -1371,7 +1375,7 @@ Storage Integer::more_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1419,7 +1423,7 @@ Storage Integer::more_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       ints results = ints();
@@ -1445,7 +1449,7 @@ Storage Integer::more_list(const Storage& i, const Storage& x)
 
       ints results = ints();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = more(si, y);
         if(result.o == NounType::ERROR)
@@ -1493,7 +1497,7 @@ Storage Integer::plus_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1528,7 +1532,7 @@ Storage Integer::plus_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       floats results = floats();
@@ -1547,7 +1551,7 @@ Storage Integer::plus_list(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = plus(si, y);
         if(result.o == NounType::ERROR)
@@ -1575,8 +1579,8 @@ Storage Integer::power_integer(const Storage& i, const Storage& x)
     {
       int xi = std::get<int>(x.i);
 
-      float fi = static_cast<float>(ii);
-      float fx = static_cast<float>(xi);
+      auto fi = static_cast<float>(ii);
+      auto fx = static_cast<float>(xi);
 
       float result = powf(fi, fx);
       return Float::make(result);
@@ -1591,7 +1595,7 @@ Storage Integer::power_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1617,11 +1621,11 @@ Storage Integer::power_list(const Storage& i, const Storage& x)
 
       floats results = floats();
 
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
 
       for(int y : xis)
       {
-        float fy = static_cast<float>(y);
+        auto fy = static_cast<float>(y);
 
         results.push_back(powf(fi, fy));
       }
@@ -1630,7 +1634,7 @@ Storage Integer::power_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       floats results = floats();
@@ -1649,7 +1653,7 @@ Storage Integer::power_list(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = power(si, y);
         if(result.o == NounType::ERROR)
@@ -1721,7 +1725,7 @@ Storage Integer::remainder_mixed(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = remainder(si, y);
         if(result.o == NounType::ERROR)
@@ -1780,8 +1784,6 @@ Storage Integer::reshape_integers(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
-
     int halfSize = getInteger(integerDivide(size(i), Word::make(2)));
 
     if(std::holds_alternative<ints>(x.i))
@@ -1824,7 +1826,7 @@ Storage Integer::reshape_integers(const Storage& i, const Storage& x)
 
         Storage working = reshape(i, total);
 
-        for(int index = rest.size() - 1; index >= 0; index--)
+        for(int index = static_cast<int>(rest.size()) - 1; index >= 0; index--)
         {
           int y = rest[index];
           working = split(working, Word::make(y));
@@ -1851,11 +1853,11 @@ Storage Integer::reshape_mixed(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      if(xis.size() > 0)
+      if(!xis.empty())
       {
         if(xis.size() == 1)
         {
-          Storage xi = xis[0];
+          const Storage& xi = xis[0];
 
           return reshape(i, xi);
         }
@@ -1897,7 +1899,7 @@ Storage Integer::times_real(const Storage& i, const Storage& x)
   if(std::holds_alternative<int>(i.i))
   {
     int ii = std::get<int>(i.i);
-    float fi = static_cast<float>(ii);
+    auto fi = static_cast<float>(ii);
 
     if(std::holds_alternative<float>(x.i))
     {
@@ -1932,7 +1934,7 @@ Storage Integer::times_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      float fi = static_cast<float>(ii);
+      auto fi = static_cast<float>(ii);
       floats xis = std::get<floats>(x.i);
 
       floats results = floats();
@@ -1951,7 +1953,7 @@ Storage Integer::times_list(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
-      for(Storage y : xis)
+      for(const Storage& y : xis)
       {
         Storage result = times(si, y);
         if(result.o == NounType::ERROR)
@@ -1970,13 +1972,14 @@ Storage Integer::times_list(const Storage& i, const Storage& x)
 }
 
 // Serialization
-maybe<Storage> Integer::from_bytes(bytes bs, int t) {
-  switch (t) {
-    case StorageType::WORD:
-      return Word::from_bytes(bs, NounType::INTEGER);
-
-    default:
-      return std::nullopt;
+maybe<Storage> Integer::from_bytes(const bytes& bs, int t) {
+  if(t == StorageType::WORD)
+  {
+    return Word::from_bytes(bs, NounType::INTEGER);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 
@@ -2003,12 +2006,13 @@ maybe<bytes> Integer::to_bytes(const Storage& i) {
 }
 
 maybe<Storage> Integer::from_conn(const Connection& conn, int t) {
-  switch (t) {
-    case NounType::INTEGER:
-      return Word::from_conn(conn, NounType::INTEGER);
-
-    default:
-      return std::nullopt;
+  if(t == NounType::INTEGER)
+  {
+    return Word::from_conn(conn, NounType::INTEGER);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 
@@ -2031,7 +2035,7 @@ void Integer::to_conn(const Connection& conn, const Storage& i) {
           bytes intBytes = squeeze_bigint(integers);
 
           // Note that we always send NounType::INTEGER and StorageType::WORD, even if we internally represent them as StorageType::WORD_ARRAYs.
-          conn.write({ (char)StorageType::WORD, (char)i.o });
+          conn.write({ static_cast<char>(StorageType::WORD), static_cast<char>(i.o) });
           conn.write(intBytes);
         } else {
           return;

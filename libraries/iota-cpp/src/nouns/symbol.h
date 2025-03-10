@@ -5,14 +5,11 @@
 #ifndef SYMBOL_H
 #define SYMBOL_H
 
-#include <map>
 #include <functional>
 #include <vector>
-#include <tuple>
 #include <string>
 
 #include "../storage/storage.h"
-#include "Connection.h"
 
 class Symbol
 {
