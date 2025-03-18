@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
-#include <register.h>
+#include <eval_register.h>
+#include <effects/effects_register.h>
 #include <types.h>
 
 #include "debug.h"
@@ -8,6 +9,7 @@
 
 SerialConnection conn = SerialConnection::make();
 EvalRegister eval_register = EvalRegister();
+EffectsRegister effects_register = EffectsRegister();
 
 void setup()
 {
@@ -18,6 +20,10 @@ void setup()
   }
 
   EvalRegister::initialize();
+  EffectsRegister::initialize();
+
+  eval_register.setEffectsRegister(&effects_register);
+  effects_register.setEvalRegister(&eval_register);
 }
 
 void loop()

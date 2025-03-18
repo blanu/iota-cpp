@@ -328,3 +328,27 @@ Storage scanWhileOne(const Storage& i, const Storage& f, const Storage& x) // a 
 {
   return Noun::dispatchDyadicAdverb(i, Word::make(DyadicAdverbs::scanWhileOne, NounType::MONADIC_ADVERB), f, x);
 }
+
+// Effects
+// Effect: Relation
+// Effect: Relations: Monads
+static Storage makeTable(const Storage& i)
+{
+  // FIXME
+  return i;
+}
+
+static Storage copyTable(const Storage& i);
+static Storage free(const Storage& i);
+static Storage flatten(const Storage& i);
+
+// Effect: Relations: Dyads
+static Storage insert(const Storage& i, const Storage& x);
+static Storage remove(const Storage& i, const Storage& x);
+static Storage iunion(const Storage& i, const Storage& x); // ∪
+static Storage project(const Storage& i, const Storage& x);
+static Storage difference(const Storage& i, const Storage& x);
+static Storage rename(const Storage& i, const Storage& x);
+static Storage crossProduct(const Storage& i, const Storage& x);
+static Storage restrict(const Storage& i, const Storage& x);
+static Storage intersection(const Storage& i, const Storage& x);

@@ -44,6 +44,7 @@ class NounType
     static constexpr int TYPE = 18;
     static constexpr int CONDITIONAL = 19;
     static constexpr int QUOTED_SYMBOL = 20;
+    static constexpr int TABLE_REFERENCE = 21;
 };
 
 class SymbolType
@@ -73,6 +74,10 @@ class Storage
 
     // Be careful with this constructor, it moves the i value, so only use it as the final use of the i.
     Storage(int o, int t, I i) : o(o), t(t), i(std::move(i)) {}
+
+    // Copy constructor
+    // Be careful with this constructor, it moves the x.i value, so only use it as the final use of the x.
+    Storage(const Storage& x) : o(x.o), t(x.t), i(x.i) {}
 
     [[nodiscard]] int truth() const;
 

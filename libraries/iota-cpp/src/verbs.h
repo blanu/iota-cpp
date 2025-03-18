@@ -83,4 +83,23 @@ Storage scanOverNeutral(const Storage& i, const Storage& f, const Storage& x);
 Storage scanWhileOne(const Storage& i, const Storage& f, const Storage& x);
 Storage whileOne(const Storage& i, const Storage& f, const Storage& x);
 
+// Effects
+// Effect: Relations
+// Effect: Relations: Monads
+static Storage makeTable(const Storage& i);
+static Storage copyTable(const Storage& i);
+static Storage free(const Storage& i);
+static Storage flatten(const Storage& i);
+
+// Effect: Relations: Dyads
+static Storage insert(const Storage& i, const Storage& x);
+static Storage remove(const Storage& i, const Storage& x);
+static Storage iunion(const Storage& i, const Storage& x);
+static Storage project(const Storage& i, const Storage& x);
+static Storage difference(const Storage& i, const Storage& x);
+static Storage rename(const Storage& i, const Storage& x);
+static Storage crossProduct(const Storage& i, const Storage& x);
+static Storage restrict(const Storage& i, const Storage& x);
+static Storage intersection(const Storage& i, const Storage& x);
+
 #endif //VERBS_H

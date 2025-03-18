@@ -1,8 +1,10 @@
 #include <optional>
 #include <utility>
-#include "register.h"
-#include "storage/storage.h"
+
+#include "eval_register.h"
+
 #include "symbols.h"
+#include "storage/storage.h"
 #include "nouns/noun.h"
 
 void EvalRegister::initialize()
@@ -10,10 +12,15 @@ void EvalRegister::initialize()
   Noun::initialize();
 }
 
-// Be careful with this function, it moves newI.
-void EvalRegister::store_i(Storage newI)
+void EvalRegister::setEffectsRegister(EffectsRegister* newEffectsRegister)
 {
-  i = std::move(newI);
+  effects = newEffectsRegister;
+}
+
+// Be careful with this function, it moves newI.
+void EvalRegister::store_i(const Storage& newI)
+{
+  i = newI;
 }
 
 Storage EvalRegister::fetch_i()

@@ -21,7 +21,8 @@ std::map<Specialization5, Triad> Noun::triads;
 std::map<Specialization3, MonadicAdverb> Noun::monadicAdverbs;
 std::map<Specialization5, DyadicAdverb> Noun::dyadicAdverbs;
 
-void Noun::initialize() {
+void Noun::initialize()
+{
   Integer::initialize();
   Real::initialize();
   List::initialize();
@@ -856,7 +857,6 @@ Storage Noun::scanWhileOne_impl(const Storage& i, const Storage& f, const Storag
     {
       return t;
     }
-
 
     t = dispatchMonad(current, f);
     if(t.o == NounType::ERROR)
