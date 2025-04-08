@@ -18,6 +18,8 @@
 #include "../symbols.h"
 #include "../error.h"
 #include "../verbs.h"
+#include "../api.h"
+#include "../adverbs.h"
 
 #include "../storage/word.h"
 #include "../storage/iota_float.h"
@@ -391,6 +393,8 @@ Storage IotaString::equal_impl(const Storage& i, const Storage& x)
 
 Storage IotaString::find_character(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -400,7 +404,7 @@ Storage IotaString::find_character(const Storage& i, const Storage& x)
     for(int index = 0; index < iis.size(); index++)
     {
       Storage si = Character::make(iis[index]);
-      Storage matched = match(si, x);
+      Storage matched = eval({si, match, x});
       if(matched.o == NounType::ERROR)
       {
         return matched;
@@ -420,6 +424,8 @@ Storage IotaString::find_character(const Storage& i, const Storage& x)
 
 Storage IotaString::find_string(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -430,7 +436,8 @@ Storage IotaString::find_string(const Storage& i, const Storage& x)
 
       if(xis.empty())
       {
-        return enumerate(Integer::make(1 + static_cast<int>(iis.size())));
+        Storage si = Integer::make(1 + static_cast<int>(iis.size()));
+        return eval({si, enumerate});
       }
 
       ints results = ints();
@@ -449,7 +456,7 @@ Storage IotaString::find_string(const Storage& i, const Storage& x)
 
           Storage si = Character::make(iis[offset]);
           Storage sx = Character::make(xis[xindex]);
-          Storage matched = match(si, sx);
+          Storage matched = eval({si, match, sx});
           if(matched.o == NounType::ERROR)
           {
             return matched;
@@ -607,7 +614,9 @@ Storage IotaString::form_real(const Storage& i, const Storage& x)
 
 Storage IotaString::form_list(const Storage& i, const Storage& x)
 {
-  return eachRight(Noun::mix(x), Word::make(Dyads::form, NounType::BUILTIN_DYAD), i);
+  using namespace iota;
+
+  return eval({Noun::mix(x), eachRight, form, i});
 }
 
 Storage IotaString::form_character(const Storage& i, const Storage& x)

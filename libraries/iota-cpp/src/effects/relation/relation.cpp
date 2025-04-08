@@ -4,8 +4,11 @@
 
 #include "relation.h"
 
+#include "../effects.h"
+
 #include "../../verbs.h"
 #include "../../error.h"
+#include "../../api.h"
 
 #include "../../storage/word.h"
 #include "../../storage/word_array.h"
@@ -59,7 +62,7 @@ Storage Relation::Table::nextIdStorage()
 
 Storage Relation::Table::makeReference(int id)
 {
-  return Word::make(id, NounType::TABLE_REFERENCE);
+  return Word::make(id, NounType::RESOURCE);
 }
 
 Relation::Table *Relation::findTable(Storage i)
@@ -80,7 +83,7 @@ Relation::Table *Relation::findTable(Storage i)
 
 void Relation::initialize()
 {
-
+  // Effects::registerMonadicEffect();
 }
 
 // Monads
@@ -117,7 +120,7 @@ Storage Relation::copyTable(const Storage& i)
   return Table::makeReference(newId);
 }
 
-Storage Relation::free(const Storage& i)
+Storage Relation::freeTable(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
@@ -263,6 +266,8 @@ Storage Relation::iunion(const Storage& i, const Storage& x)
 
 Storage Relation::project(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   Table *iTable = findTable(i);
   if(iTable == nullptr)
   {
@@ -276,7 +281,7 @@ Storage Relation::project(const Storage& i, const Storage& x)
     ints columnIndices = ints();
     for(int columnIndex = 0; columnIndex < columnIndices.size(); columnIndex++)
     {
-      if(match(iTable->nameOrder[columnIndex], mis[columnIndex]).truth())
+      if(eval({iTable->nameOrder[columnIndex], match, mis[columnIndex]}).truth())
       {
         columnIndices.push_back(columnIndex);
       }
@@ -438,6 +443,8 @@ Storage Relation::crossProduct(const Storage& i, const Storage& x)
 
 Storage Relation::restrict(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   Table *iTable = findTable(i);
   if(iTable == nullptr)
   {
@@ -473,7 +480,7 @@ Storage Relation::restrict(const Storage& i, const Storage& x)
         mixed column = iTable->columns[columnIndex];
         for(auto pair : iTable->rows)
         {
-          if(match(pair.first[columnIndex], matchValue).truth())
+          if(eval({pair.first[columnIndex], match, matchValue}).truth())
           {
             insert(newTableReference, MixedArray::make(pair.first));
           }

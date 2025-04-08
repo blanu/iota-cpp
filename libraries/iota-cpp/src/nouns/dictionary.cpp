@@ -14,6 +14,7 @@
 #include "../symbols.h"
 #include "../error.h"
 #include "../verbs.h"
+#include "../api.h"
 
 #include "../storage/storage.h"
 #include "../storage/word.h"
@@ -68,6 +69,8 @@ Storage Dictionary::makeEmpty()
 
 Storage Dictionary::find_impl(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(i.i))
   {
     mixed ms = std::get<mixed>(i.i);
@@ -77,7 +80,7 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
       const Storage& keys = ms[0];
       const Storage& values = ms[1];
 
-      Storage indices = find(keys, x);
+      Storage indices = eval({keys, find, x});
 
       if(std::holds_alternative<ints>(indices.i))
       {
@@ -91,7 +94,7 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
         {
           int valueIndex = integerIndices.front();
 
-          Storage result = index(values, Integer::make(valueIndex));
+          Storage result = eval({values, iota::index, Integer::make(valueIndex)});
 
           if(result.o == NounType::ERROR)
           {
@@ -109,6 +112,8 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
 
 Storage Dictionary::match_impl(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(i.i))
   {
     mixed iis = std::get<mixed>(i.i);
@@ -124,7 +129,7 @@ Storage Dictionary::match_impl(const Storage& i, const Storage& x)
 
       for(int index = 0; index < iis.size(); index++)
       {
-        Storage matched = match(iis[index], xis[index]);
+        Storage matched = eval({iis[index], match, xis[index]});
         if(matched.truth())
         {
           continue;

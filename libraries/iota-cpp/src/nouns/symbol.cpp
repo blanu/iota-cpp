@@ -8,13 +8,14 @@
 #include "../symbols.h"
 #include "../error.h"
 #include "../verbs.h"
+#include "../api.h"
 
 #include "../storage/storage.h"
 #include "../storage/word.h"
 
 // Symbol
 std::unordered_map<int, ints> Symbol::integerToString;
-std::unordered_map<ints, int, IntsHash> Symbol::stringToInteger;
+std::unordered_map<ints, int> Symbol::stringToInteger;
 std::unordered_map<int, Storage> Symbol::values;
 
 void Symbol::initialize()
@@ -86,7 +87,9 @@ Storage Symbol::evaluate_impl(const Storage& i)
 
 Storage Symbol::truth_impl(const Storage& i)
 {
-  return truth(evaluate(i));
+  using namespace iota;
+
+  return eval({i, evaluate, truth});
 }
 
 ints Symbol::asciiToUTF32(const std::string& ascii)

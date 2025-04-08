@@ -6,16 +6,33 @@
 
 #include "relation/relation.h"
 
+#include "../symbols.h"
 #include "../error.h"
+
+#include "../nouns/noun.h"
 
 #include "../storage/storage.h"
 #include "../storage/word.h"
 
-std::map<Specialization3, Monad> Effects::monads;
-std::map<Specialization5, Dyad> Effects::dyads;
-
-static void initialize()
+Storage MonadicEffect::make(int i)
 {
+  return Word::make(i, NounType::EFFECT_TYPE);
+}
+
+Storage DyadicEffect::make(int i)
+{
+  return Word::make(i, NounType::EFFECT_TYPE);
+}
+
+std::map<Specialization3, MonadicFunction> Effects::monads;
+std::map<Specialization5, DyadicFunction> Effects::dyads;
+
+void Effects::initialize()
+{
+  // Install support for effects in the function dispatch table
+  Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::cause, StorageType::MIXED_ARRAY, NounType::EFFECT_TYPE, Effects::cause_impl);
+
+  // Initialize system effects
   Relation::initialize();
 }
 
@@ -46,7 +63,7 @@ Storage Effects::dispatchMonadicEffect(const Storage& i, const Storage& f)
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  Monad verb = monads[specialization];
+  MonadicFunction verb = monads[specialization];
   return verb(i);
 }
 
@@ -71,11 +88,48 @@ Storage Effects::dispatchDyadicEffect(const Storage& i, const Storage& f, const 
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  Dyad verb = dyads[specialization];
+  DyadicFunction verb = dyads[specialization];
   return verb(i, x);
 }
 
 void Effects::processEffects()
 {
 
+}
+
+Storage Effects::cause_impl(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<mixed>(x.i))
+  {
+    mixed ms = std::get<mixed>(x.i);
+
+    if(ms.empty())
+    {
+      return Word::make(EMPTY, NounType::ERROR);
+    }
+
+    switch(ms.size())
+    {
+      case 2:
+      {
+        // FIXME
+        Storage mods = ms[0];
+        Storage es = ms[1];
+        break;
+      }
+
+      case 3:
+      {
+        Storage mods = ms[0];
+        Storage es = ms[1];
+        Storage xs = ms[2];
+        break;
+      }
+
+      default:
+        return Word::make(INVALID_ARGUMENT, NounType::ERROR);
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }

@@ -7,7 +7,6 @@ class Monads
   public:
     static constexpr int atom = 0;
     static constexpr int ichar = 1;
-    static constexpr int inot = 2;
     static constexpr int enclose = 3;
     static constexpr int enumerate = 4;
     static constexpr int expand = 27;
@@ -18,6 +17,7 @@ class Monads
     static constexpr int gradeUp = 9;
     static constexpr int group = 10;
     static constexpr int negate = 11;
+    static constexpr int inot = 2;
     static constexpr int reciprocal = 12;
     static constexpr int reverse = 13;
     static constexpr int shape = 14;
@@ -65,6 +65,8 @@ class Dyads
 
     static constexpr int applyMonad = 49;
     static constexpr int retype = 50;
+
+    static constexpr int cause = 67; // FIXME - renumber sequentially
 };
 
 // Triads

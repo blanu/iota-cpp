@@ -11,7 +11,8 @@ add_executable(iota-stdio
         IotaMain.cpp
         IostreamConnection.cpp
         IostreamStorageConnection.cpp
-        main.cpp)
+        main.cpp
+  ../tests/main.cpp)
 target_link_libraries(iota-stdio iota-cpp-lib)
 
 # Generate ctags for vim

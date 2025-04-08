@@ -8,6 +8,8 @@
 #include "../squeeze.h"
 #include "../verbs.h"
 #include "../error.h"
+#include "../api.h"
+#include "../adverbs.h"
 
 #include "../storage/word.h"
 #include "../storage/word_array.h"
@@ -15,11 +17,11 @@
 #include "../storage/float_array.h"
 #include "../storage/mixed_array.h"
 
-std::map<Specialization3, Monad> Noun::monads;
-std::map<Specialization5, Dyad> Noun::dyads;
-std::map<Specialization5, Triad> Noun::triads;
-std::map<Specialization3, MonadicAdverb> Noun::monadicAdverbs;
-std::map<Specialization5, DyadicAdverb> Noun::dyadicAdverbs;
+std::map<Specialization3, MonadicFunction> Noun::monads;
+std::map<Specialization5, DyadicFunction> Noun::dyads;
+std::map<Specialization5, TriadicFunction> Noun::triads;
+std::map<Specialization3, MonadicAdverbFunction> Noun::monadicAdverbs;
+std::map<Specialization5, DyadicAdverbFunction> Noun::dyadicAdverbs;
 
 void Noun::initialize()
 {
@@ -52,7 +54,7 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f) {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  Monad verb = monads[specialization];
+  MonadicFunction verb = monads[specialization];
   return verb(i);
 }
 
@@ -76,7 +78,7 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  Dyad verb = dyads[specialization];
+  DyadicFunction verb = dyads[specialization];
   return verb(i, x);
 }
 
@@ -102,7 +104,7 @@ Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  Triad verb = triads[specialization];
+  TriadicFunction verb = triads[specialization];
   return verb(i, x, y);
 }
 
@@ -126,7 +128,7 @@ Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const St
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  MonadicAdverb adverb = monadicAdverbs[specialization];
+  MonadicAdverbFunction adverb = monadicAdverbs[specialization];
   return adverb(i, g);
 }
 
@@ -151,7 +153,7 @@ Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Sto
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  DyadicAdverb adverb = dyadicAdverbs[specialization];
+  DyadicAdverbFunction adverb = dyadicAdverbs[specialization];
   return adverb(i, g, x);
 }
 
@@ -518,58 +520,80 @@ mixed getMixed(const Storage& i)
 
 int isNil(const Storage& i)
 {
-  return getInteger(match(i, WordArray::nil()));
+  using namespace iota;
+
+  return getInteger(eval({i, match, WordArray::nil()}));
 }
 
 int isAtom(const Storage& i)
 {
-  return getInteger(atom(i));
+  using namespace iota;
+
+  return getInteger(eval({i, atom}));
 }
 
 int getSize(const Storage& i)
 {
-  return getInteger(size(i));
+  using namespace iota;
+
+  return getInteger(eval({i, size}));
 }
 
 // Extension Dyads - Implementations
 Storage Noun::join_scalar(const Storage& i, const Storage& x)
 {
-  return join(enclose(i), enclose(x));
+  using namespace iota;
+
+  return eval({eval({i, enclose}), join, eval({x, enclose})});
 }
 
 Storage Noun::prepend(const Storage& i, const Storage& x)
 {
-  return join(enclose(i), x);
+  using namespace iota;
+
+  return eval({eval({i, enclose}), join, x});
 }
 
 Storage Noun::append(const Storage& i, const Storage& x)
 {
-  return join(i, enclose(x));
+  using namespace iota;
+
+  return eval({i, join, eval({x, enclose})});
 }
 
 Storage Noun::join_mixed(const Storage& i, const Storage& x)
 {
-  return join(Noun::mix(i), Noun::mix(x));
+  using namespace iota;
+
+  return eval({Noun::mix(i), join, Noun::mix(x)});
 }
 
 Storage Noun::join_mix_left(const Storage& i, const Storage& x)
 {
-  return join(Noun::mix(i), x);
+  using namespace iota;
+
+  return eval({Noun::mix(i), join, x});
 }
 
 Storage Noun::join_mix_right(const Storage& i, const Storage& x)
 {
-  return join(i, Noun::mix(x));
+  using namespace iota;
+
+  return eval({i, join, Noun::mix(x)});
 }
 
 Storage Noun::join_enclose_mix(const Storage& i, const Storage& x)
 {
-  return join(enclose(i), mix(x));
+  using namespace iota;
+
+  return eval({eval({i, enclose}), join, Noun::mix(x)});
 }
 
 Storage Noun::join_mix_enclose(const Storage& i, const Storage& x)
 {
-  return join(mix(i), enclose(x));
+  using namespace iota;
+
+  return eval({Noun::mix(i), join, eval({x, enclose})});
 }
 
 Storage Noun::identity2(const Storage& i, const Storage& x)
@@ -579,12 +603,17 @@ Storage Noun::identity2(const Storage& i, const Storage& x)
 
 Storage Noun::enclose2(const Storage& i, const Storage& x)
 {
-  return enclose(i);
+  using namespace iota;
+
+  return eval({i, enclose});
 }
 
 // Monadic Adverbs
+// FIXME - previous may escape
 Storage Noun::converge_impl(const Storage& i, const Storage& f)
 {
+  using namespace iota;
+
   Storage previous = i;
   Storage equivalence = Noun::false0();
 
@@ -596,7 +625,7 @@ Storage Noun::converge_impl(const Storage& i, const Storage& f)
       return next;
     }
 
-    equivalence = match(next, previous);
+    equivalence = eval({next, match, previous});
     previous = next;
 
     if(equivalence.truth())
@@ -610,6 +639,8 @@ Storage Noun::converge_impl(const Storage& i, const Storage& f)
 
 Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)
 {
+  using namespace iota;
+
   Storage previous = i;
   Storage equivalence = Noun::false0();
 
@@ -623,7 +654,7 @@ Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)
       return next;
     }
 
-    equivalence = match(next, previous);
+    equivalence = eval({next, match, previous});
     previous = next;
 
     if(equivalence.truth())
@@ -642,6 +673,8 @@ Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)
 // Dyadic Adverbs
 Storage Noun::each2_impl(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(isNil(i))
   {
     return i;
@@ -665,8 +698,8 @@ Storage Noun::each2_impl(const Storage& i, const Storage& f, const Storage& x)
   mixed results = mixed();
   for(int offset = 1; offset <= max; offset++)
   {
-    Storage y = index(i, Word::make(offset));
-    Storage z = index(x, Word::make(offset));
+    Storage y = eval({i, iota::index, Word::make(offset)});
+    Storage z = eval({x, iota::index, Word::make(offset)});
     Storage result = Noun::dispatchDyad(y, f, z);
 
     if(result.o == NounType::ERROR)
@@ -682,6 +715,8 @@ Storage Noun::each2_impl(const Storage& i, const Storage& f, const Storage& x)
 
 Storage Noun::eachLeft_impl(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(isNil(i))
   {
     return i;
@@ -697,7 +732,7 @@ Storage Noun::eachLeft_impl(const Storage& i, const Storage& f, const Storage& x
   mixed results = mixed();
   for(int offset = 1; offset <= is; offset++)
   {
-    Storage y = index(i, Word::make(offset));
+    Storage y = eval({i, iota::index, Word::make(offset)});
 
     Storage result = Noun::dispatchDyad(y, f, x);
 
@@ -714,6 +749,8 @@ Storage Noun::eachLeft_impl(const Storage& i, const Storage& f, const Storage& x
 
 Storage Noun::eachRight_impl(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(isNil(i))
   {
     return i;
@@ -729,7 +766,7 @@ Storage Noun::eachRight_impl(const Storage& i, const Storage& f, const Storage& 
   mixed results = mixed();
   for(int offset = 1; offset <= is; offset++)
   {
-    Storage y = index(i, Word::make(offset));
+    Storage y = eval({i, iota::index, Word::make(offset)});
 
     Storage result = Noun::dispatchDyad(x, f, y);
 
@@ -746,6 +783,8 @@ Storage Noun::eachRight_impl(const Storage& i, const Storage& f, const Storage& 
 
 Storage Noun::overNeutral_impl(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(isNil(i))
   {
     return x;
@@ -757,18 +796,20 @@ Storage Noun::overNeutral_impl(const Storage& i, const Storage& f, const Storage
   }
 
   // The next two lines are to dispel the perception that we accidentally swapped the order of the arguments i and x.
-  const Storage& swapX = i;
   const Storage& swapI = x;
-  return over(prepend(swapI, swapX), f);
+  const Storage& swapX = i;
+  return eval({prepend(swapI, swapX), over, f});
 }
 
 Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(x.o == NounType::INTEGER)
   {
     Storage current = i;
     Storage countdown = x;
-    while(more(countdown, Word::make(0)).truth())
+    while(eval({countdown, more, Integer::zero()}).truth())
     {
       current = dispatchMonad(current, f);
       if(current.o == NounType::ERROR)
@@ -776,7 +817,7 @@ Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage&
         return current;
       }
 
-      countdown = minus(countdown, Word::make(1));
+      countdown = eval({countdown, minus, Integer::one()});
       if(countdown.o == NounType::ERROR)
       {
         return countdown;
@@ -791,13 +832,15 @@ Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage&
 
 Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(x.o == NounType::INTEGER)
   {
     mixed results = mixed({i});
 
     Storage current = i;
     Storage countdown = x;
-    while(more(countdown, Word::make(0)).truth())
+    while(eval({countdown, more, Integer::zero()}).truth())
     {
       current = dispatchMonad(current, f);
       if(current.o == NounType::ERROR)
@@ -805,7 +848,7 @@ Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const St
         return current;
       }
 
-      countdown = minus(countdown, Word::make(1));
+      countdown = eval({countdown, minus, Integer::one()});
       if(countdown.o == NounType::ERROR)
       {
         return countdown;
@@ -822,6 +865,8 @@ Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const St
 
 Storage Noun::scanOverNeutral_impl(const Storage& i, const Storage& f, const Storage& x)
 {
+  using namespace iota;
+
   if(isNil(i))
   {
     return x;
@@ -832,7 +877,7 @@ Storage Noun::scanOverNeutral_impl(const Storage& i, const Storage& f, const Sto
     return prepend(i, dispatchDyad(i, f, x));
   }
 
-  return scanOver(prepend(x, i), f);
+  return eval({prepend(x, i), scanOver, f});
 }
 
 // FIXME - address leak

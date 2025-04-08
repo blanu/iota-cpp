@@ -39,7 +39,7 @@ public:
 
   // Serialization
   static maybe<bytes> to_bytes(const Storage& i);
-  static maybe<Storage> from_bytes(bytes bs, int t);
+  static maybe<Storage> from_bytes(const bytes& bs, int t);
   static void to_conn(const Connection& conn, const Storage& i);
   static maybe<Storage> from_conn(const Connection& conn, int t);
 };

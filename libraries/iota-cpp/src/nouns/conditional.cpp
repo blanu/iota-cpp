@@ -10,6 +10,7 @@
 #include "../symbols.h"
 #include "../error.h"
 #include "../verbs.h"
+#include "../api.h"
 
 #include "../storage/word.h"
 #include "../storage/mixed_array.h"
@@ -43,6 +44,8 @@ Storage Conditional::make(const mixed &i)
 
 Storage Conditional::evaluate_impl(const Storage& e)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(e.i))
   {
     mixed mis = std::get<mixed>(e.i);
@@ -58,11 +61,11 @@ Storage Conditional::evaluate_impl(const Storage& e)
 
     if(a.truth())
     {
-      return evaluate(b);
+      return eval({b, evaluate});
     }
     else
     {
-      return evaluate(c);
+      return eval({c, evaluate});
     }
   }
 
@@ -71,5 +74,7 @@ Storage Conditional::evaluate_impl(const Storage& e)
 
 Storage Conditional::truth_impl(const Storage& i)
 {
-  return truth(evaluate(i));
+  using namespace iota;
+
+  return eval({i, evaluate, truth});
 }

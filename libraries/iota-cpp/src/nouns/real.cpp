@@ -18,6 +18,7 @@
 #include "../squeeze.h"
 #include "../symbols.h"
 #include "../verbs.h"
+#include "../api.h"
 
 #include "../storage/float_array.h"
 #include "../storage/iota_float.h"
@@ -443,6 +444,8 @@ Storage Real::divide_reals(const Storage& i, const Storage& x)
 
 Storage Real::divide_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -456,7 +459,8 @@ Storage Real::divide_mixed(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = divide(Float::make(fi, NounType::REAL), y);
+        Storage si = Real::make(fi);
+        Storage result = eval({si, divide, y});
 
         if(result.o == NounType::ERROR)
         {
@@ -494,7 +498,9 @@ Storage Real::divide_mixed(const Storage& i, const Storage& x)
 
 Storage Real::format2_impl(const Storage& i, const Storage& x)
 {
-  Storage formatted = format(i);
+  using namespace iota;
+
+  Storage formatted = eval({i, format});
   if(formatted.o == NounType::ERROR)
   {
     return formatted;
@@ -582,11 +588,11 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
     {
       if(negative)
       {
-        return format2(i, Integer::make(-integerPartTarget));
+        return eval({i, format2, Integer::make(-integerPartTarget)});
       }
       else
       {
-        return format2(i, Integer::make(integerPartTarget));
+        return eval({i, format2, Integer::make(integerPartTarget)});
       }
     }
 
@@ -734,6 +740,8 @@ Storage Real::less_real(const Storage& i, const Storage& x)
 
 Storage Real::less_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -789,7 +797,7 @@ Storage Real::less_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = less(si, y);
+        Storage result = eval({si, less, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -863,6 +871,8 @@ Storage Real::max_real(const Storage& i, const Storage& x)
 
 Storage Real::max_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -918,7 +928,7 @@ Storage Real::max_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = less(si, y);
+        Storage result = eval({si, less, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -992,6 +1002,8 @@ Storage Real::min_real(const Storage& i, const Storage& x)
 
 Storage Real::min_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -1047,7 +1059,7 @@ Storage Real::min_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = more(si, y);
+        Storage result = eval({si, more, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -1107,6 +1119,8 @@ Storage Real::minus_real(const Storage& i, const Storage& x)
 
 Storage Real::minus_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -1148,7 +1162,7 @@ Storage Real::minus_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = minus(si, y);
+        Storage result = eval({si, minus, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -1253,6 +1267,8 @@ Storage Real::more_real(const Storage& i, const Storage& x)
 
 Storage Real::more_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -1308,7 +1324,7 @@ Storage Real::more_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = more(si, y);
+        Storage result = eval({si, more, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -1368,6 +1384,8 @@ Storage Real::plus_real(const Storage& i, const Storage& x)
 
 Storage Real::plus_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -1409,7 +1427,7 @@ Storage Real::plus_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = plus(si, y);
+        Storage result = eval({si, plus, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -1462,6 +1480,8 @@ Storage Real::power_real(const Storage& i, const Storage& x)
 
 Storage Real::power_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -1503,7 +1523,7 @@ Storage Real::power_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = power(si, y);
+        Storage result = eval({si, power, y});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -1556,6 +1576,8 @@ Storage Real::times_real(const Storage& i, const Storage& x)
 
 Storage Real::times_list(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(i.i))
   {
     float fi = std::get<float>(i.i);
@@ -1597,7 +1619,7 @@ Storage Real::times_list(const Storage& i, const Storage& x)
 
       for(const Storage& y : xis)
       {
-        Storage result = times(si, y);
+        Storage result = eval({si, times, y});
         if(result.o == NounType::ERROR)
         {
           return result;

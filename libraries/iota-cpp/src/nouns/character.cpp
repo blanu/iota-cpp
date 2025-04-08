@@ -212,13 +212,14 @@ Storage Character::match_impl(const Storage& i, const Storage& x)
 }
 
 // Serialization
-maybe<Storage> Character::from_bytes(bytes bs, int t) {
-  switch (t) {
-    case StorageType::WORD:
-      return Word::from_bytes(bs, NounType::CHARACTER);
-
-    default:
-      return std::nullopt;
+maybe<Storage> Character::from_bytes(const bytes& bs, int t) {
+  if(t == StorageType::WORD)
+  {
+    return Word::from_bytes(bs, NounType::CHARACTER);
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 
@@ -245,14 +246,15 @@ maybe<bytes> Character::to_bytes(const Storage& i) {
 }
 
 maybe<Storage> Character::from_conn(const Connection& conn, int t) {
-  switch (t) {
-    case StorageType::WORD:
-      return Word::from_conn(conn, NounType::CHARACTER);
+  if(t == StorageType::WORD)
+  {
+    return Word::from_conn(conn, NounType::CHARACTER);
 
-      // FIXME - add support for StorageType::WORD_ARRAY to represent grapheme clusters
-
-    default:
-      return std::nullopt;
+    // FIXME - add support for StorageType::WORD_ARRAY to represent grapheme clusters
+  }
+  else
+  {
+    return std::nullopt;
   }
 }
 

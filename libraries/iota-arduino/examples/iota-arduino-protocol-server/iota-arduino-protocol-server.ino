@@ -8,8 +8,6 @@
 #include "SerialConnection.h"
 
 SerialConnection conn = SerialConnection::make();
-EvalRegister eval_register = EvalRegister();
-EffectsRegister effects_register = EffectsRegister();
 
 void setup()
 {
@@ -21,22 +19,33 @@ void setup()
 
   EvalRegister::initialize();
   EffectsRegister::initialize();
-
-  eval_register.setEffectsRegister(&effects_register);
-  effects_register.setEvalRegister(&eval_register);
 }
 
 void loop()
 {
+  EffectsRegister effects_register = EffectsRegister();
+
   std::optional<Storage> storage = conn.read_storage();
 
   if(storage)
   {
-    eval_register.store_i(*storage);
-    eval_register.eval();
-    maybe<Storage> result = eval_register.fetch_r();
+    maybe<Storage> result = EvalRegister::eval(*storage);
 
     if(result)
+    {
+      if((*result).o == NounType::SIGNAL)
+      {
+        Storage signalResult = effects_register.eval(*result);
+
+        while(signalResult.o == NounType::SIGNAL)
+        {
+          signalResult = effects_register.eval(signalResult);
+        }
+
+        conn.write_storage(signalResult);
+      }
+    }
+    else
     {
       conn.write_storage(*result);
     }

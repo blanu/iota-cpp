@@ -19,6 +19,8 @@
 #include "../squeeze.h"
 #include "../symbols.h"
 #include "../verbs.h"
+#include "../adverbs.h"
+#include "../api.h"
 
 #include "../storage/float_array.h"
 #include "../storage/iota_float.h"
@@ -738,7 +740,7 @@ Storage List::first_impl(const Storage& i)
       return WordArray::make(ints(), NounType::LIST);
     }
 
-    Storage result = ms.front();
+    const Storage& result = ms.front();
 
     return result;
   }
@@ -750,6 +752,8 @@ Storage List::first_impl(const Storage& i)
 
 Storage List::floor_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     return i;
@@ -783,7 +787,7 @@ Storage List::floor_impl(const Storage& i)
     mixed results = mixed();
     for(const Storage& y : ms)
     {
-      results.insert(results.end(), floor(y));
+      results.push_back(eval({y, iota::floor}));
     }
 
     return MixedArray::make(results, NounType::LIST);
@@ -796,6 +800,8 @@ Storage List::floor_impl(const Storage& i)
 
 Storage List::format_impl(const Storage& i)
 {
+  using namespace iota;
+
   Storage mi = Noun::mix(i);
   if(std::holds_alternative<mixed>(mi.i))
   {
@@ -810,7 +816,7 @@ Storage List::format_impl(const Storage& i)
 
     for(const Storage& y : ms)
     {
-      results.push_back(format(y));
+      results.push_back(eval({y, format}));
     }
 
     return MixedArray::make(results);
@@ -821,6 +827,8 @@ Storage List::format_impl(const Storage& i)
 
 Storage List::gradeDown_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     ints integers = std::get<ints>(i.i);
@@ -907,7 +915,7 @@ Storage List::gradeDown_impl(const Storage& i)
 
     std::sort(results.begin(), results.end(), [&ms](int x, int y)
     {
-        Storage result = more(ms[x], ms[y]);
+        Storage result = eval({ms[x], more, ms[y]});
         switch(result.t)
         {
           case NounType::INTEGER:
@@ -938,6 +946,8 @@ Storage List::gradeDown_impl(const Storage& i)
 
 Storage List::gradeUp_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     ints integers = std::get<ints>(i.i);
@@ -1024,7 +1034,7 @@ Storage List::gradeUp_impl(const Storage& i)
 
     std::sort(results.begin(), results.end(), [&ms](int x, int y)
     {
-        Storage result = less(ms[x], ms[y]);
+        Storage result = eval({ms[x], less, ms[y]});
         switch(result.t)
         {
           case NounType::INTEGER:
@@ -1244,6 +1254,8 @@ Storage List::group_impl(const Storage& i)
 
 Storage List::negate_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     ints integers = std::get<ints>(i.i);
@@ -1290,7 +1302,7 @@ Storage List::negate_impl(const Storage& i)
     mixed results = mixed();
     for(const Storage& y : ms)
     {
-      results.insert(results.end(), negate(y));
+      results.push_back(eval({y, negate}));
     }
 
     return MixedArray::make(results, NounType::LIST);
@@ -1303,6 +1315,8 @@ Storage List::negate_impl(const Storage& i)
 
 Storage List::not_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     ints integers = std::get<ints>(i.i);
@@ -1336,7 +1350,7 @@ Storage List::not_impl(const Storage& i)
       return Noun::true0();
     }
 
-    floats results = floats();
+    ints results = ints();
     for (float y : fs)
     {
       if(abs(y) < Float::tolerance)
@@ -1349,7 +1363,7 @@ Storage List::not_impl(const Storage& i)
       }
     }
 
-    return FloatArray::make(results, NounType::LIST);
+    return WordArray::make(results, NounType::LIST);
   }
   else if (std::holds_alternative<mixed>(i.i))
   {
@@ -1360,13 +1374,31 @@ Storage List::not_impl(const Storage& i)
       return Noun::true0();
     }
 
-    mixed results = mixed();
+    ints results = ints();
+    mixed mixedResults = mixed();
     for (const Storage& y : ms)
     {
-      results.push_back(inot(y));
+      Storage result = eval({y, inot});
+      mixedResults.push_back(result);
+
+      if(result.o == NounType::INTEGER)
+      {
+        if(std::holds_alternative<int>(result.i))
+        {
+          int integer = std::get<int>(result.i);
+          results.push_back(integer);
+        }
+      }
     }
 
-    return MixedArray::make(results, NounType::LIST);
+    if(mixedResults.size() > results.size())
+    {
+      return MixedArray::make(mixedResults, NounType::LIST);
+    }
+    else
+    {
+      return WordArray::make(results, NounType::LIST);
+    }
   }
   else
   {
@@ -1376,6 +1408,8 @@ Storage List::not_impl(const Storage& i)
 
 Storage List::reciprocal_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     ints integers = std::get<ints>(i.i);
@@ -1422,7 +1456,7 @@ Storage List::reciprocal_impl(const Storage& i)
     mixed results = mixed();
     for(const Storage& y : ms)
     {
-      results.insert(results.end(), divide(Float::make(1.0, NounType::REAL), y));
+      results.push_back(eval({Real::make(1.0), divide, y}));
     }
 
     return MixedArray::make(results, NounType::LIST);
@@ -1485,6 +1519,8 @@ Storage List::reverse_impl(const Storage& i)
 
 Storage List::shape_impl(const Storage& i)
 {
+  using namespace iota;
+
   if (std::holds_alternative<ints>(i.i))
   {
     ints integers = std::get<ints>(i.i);
@@ -1521,8 +1557,7 @@ Storage List::shape_impl(const Storage& i)
     mixed shapes = mixed();
     for(const Storage& y : ms)
     {
-      Storage result = shape(y);
-      shapes.insert(shapes.end(), result);
+      shapes.push_back(eval({y, shape}));
     }
 
     Storage firstShape = shapes.front();
@@ -1532,7 +1567,7 @@ Storage List::shape_impl(const Storage& i)
 
       for(const Storage& y : shapes)
       {
-        Storage nextShape = shape(y);
+        Storage nextShape = eval({y, shape});
         if(nextShape.o == NounType::LIST && nextShape.t == StorageType::WORD_ARRAY && std::holds_alternative<ints>(nextShape.i))
         {
           ints nextShapeIntegers = std::get<ints>(nextShape.i);
@@ -2586,6 +2621,8 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
 
 Storage List::divide_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -2654,7 +2691,7 @@ Storage List::divide_integer(const Storage& i, const Storage& x)
 
       for(const Storage& y : mis)
       {
-        Storage result = divide(y, Float::make(fxi, NounType::REAL));
+        Storage result = eval({y, divide, Real::make(fxi)});
         if(result.o == NounType::QUOTED_SYMBOL)
         {
           mixedResults.push_back(result);
@@ -2687,6 +2724,8 @@ Storage List::divide_integer(const Storage& i, const Storage& x)
 
 Storage List::divide_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -2741,7 +2780,7 @@ Storage List::divide_real(const Storage& i, const Storage& x)
 
     for(const Storage& y : mis)
     {
-      Storage result = divide(y, x);
+      Storage result = eval({y, divide, x});
       if(result.o == NounType::ERROR)
       {
         return result;
@@ -2758,6 +2797,8 @@ Storage List::divide_real(const Storage& i, const Storage& x)
 
 Storage List::divide_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -2862,8 +2903,8 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
       {
         const Storage& si = iis[index];
         Storage sx = Word::make(xis[index], NounType::INTEGER);
+        Storage result = eval({si, divide, sx});
 
-        Storage result = divide(si, sx);
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -2881,6 +2922,8 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
 
 Storage List::divide_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -2986,7 +3029,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         Storage sx = Float::make(xis[index], NounType::REAL);
 
-        Storage result = divide(si, sx);
+        Storage result = eval({si, divide, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -3004,6 +3047,8 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
 
 Storage List::divide_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -3023,7 +3068,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
         Storage si = Word::make(iis[index], NounType::INTEGER);
         const Storage& sx = xis[index];
 
-        Storage result = divide(si, sx);
+        Storage result = eval({si, divide, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -3054,7 +3099,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
         Storage si = Float::make(iis[index], NounType::REAL);
         const Storage& sx = xis[index];
 
-        Storage result = divide(si, sx);
+        Storage result = eval({si, divide, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -3085,7 +3130,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = divide(si, sx);
+        Storage result = eval({si, divide, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -3250,6 +3295,8 @@ Storage List::equal_impl(const Storage& i, const Storage& x)
 
 Storage List::find_integers_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -3264,7 +3311,7 @@ Storage List::find_integers_integer(const Storage& i, const Storage& x)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         Storage sx = Word::make(xi, NounType::INTEGER);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -3285,6 +3332,8 @@ Storage List::find_integers_integer(const Storage& i, const Storage& x)
 
 Storage List::find_integers_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -3299,7 +3348,7 @@ Storage List::find_integers_real(const Storage& i, const Storage& x)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         Storage sx = Float::make(fx, NounType::REAL);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -3320,6 +3369,8 @@ Storage List::find_integers_real(const Storage& i, const Storage& x)
 
 Storage List::find_reals_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(i.i))
   {
     floats iis = std::get<floats>(i.i);
@@ -3335,7 +3386,7 @@ Storage List::find_reals_integer(const Storage& i, const Storage& x)
       {
         Storage si = Float::make(iis[index], NounType::REAL);
 
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -3356,6 +3407,8 @@ Storage List::find_reals_integer(const Storage& i, const Storage& x)
 
 Storage List::find_reals_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(i.i))
   {
     floats iis = std::get<floats>(i.i);
@@ -3370,7 +3423,7 @@ Storage List::find_reals_real(const Storage& i, const Storage& x)
       {
         Storage si = Float::make(iis[index], NounType::REAL);
         Storage sx = Float::make(xi, NounType::REAL);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -3391,6 +3444,8 @@ Storage List::find_reals_real(const Storage& i, const Storage& x)
 
 Storage List::find_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(i.i))
   {
     mixed iis = std::get<mixed>(i.i);
@@ -3400,7 +3455,7 @@ Storage List::find_mixed(const Storage& i, const Storage& x)
     for(int index = 0; index < iis.size(); index++)
     {
       const Storage& si = iis[index];
-      Storage matched = match(si, x);
+        Storage matched = eval({si, match, x});
       if(matched.o == NounType::ERROR)
       {
         return matched;
@@ -3420,6 +3475,8 @@ Storage List::find_mixed(const Storage& i, const Storage& x)
 
 Storage List::format2_impl(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   Storage mi = Noun::mix(i);
   if(std::holds_alternative<mixed>(mi.i))
   {
@@ -3434,7 +3491,7 @@ Storage List::format2_impl(const Storage& i, const Storage& x)
 
     for(const Storage& y : ms)
     {
-      results.push_back(format2(y, x));
+      results.push_back(eval({y, format2, x}));
     }
 
     return MixedArray::make(results);
@@ -3778,6 +3835,8 @@ Storage List::join_mixed(const Storage& i, const Storage& x)
 
 Storage List::less_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -3831,7 +3890,7 @@ Storage List::less_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = less(sy, x);
+        Storage result = eval({sy, less, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -3857,6 +3916,8 @@ Storage List::less_integer(const Storage& i, const Storage& x)
 
 Storage List::less_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -3911,7 +3972,7 @@ Storage List::less_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = less(sy, x);
+        Storage result = eval({sy, less, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -3937,6 +3998,8 @@ Storage List::less_real(const Storage& i, const Storage& x)
 
 Storage List::less_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -4017,7 +4080,7 @@ Storage List::less_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = less(sy, sx);
+        Storage result = eval({sy, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4043,6 +4106,8 @@ Storage List::less_integers(const Storage& i, const Storage& x)
 
 Storage List::less_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -4123,7 +4188,7 @@ Storage List::less_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = less(sy, sx);
+        Storage result = eval({sy, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4149,6 +4214,8 @@ Storage List::less_reals(const Storage& i, const Storage& x)
 
 Storage List::less_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -4171,7 +4238,7 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = less(si, sx);
+        Storage result = eval({si, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4208,7 +4275,7 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = less(si, sx);
+        Storage result = eval({si, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4243,7 +4310,7 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = less(si, sx);
+        Storage result = eval({si, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4269,6 +4336,8 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
 
 Storage List::more_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -4322,7 +4391,7 @@ Storage List::more_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = more(sy, x);
+        Storage result = eval({sy, more, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4348,6 +4417,8 @@ Storage List::more_integer(const Storage& i, const Storage& x)
 
 Storage List::more_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -4402,7 +4473,7 @@ Storage List::more_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = more(sy, x);
+        Storage result = eval({sy, more, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4428,6 +4499,8 @@ Storage List::more_real(const Storage& i, const Storage& x)
 
 Storage List::more_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -4508,7 +4581,7 @@ Storage List::more_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = more(sy, sx);
+        Storage result = eval({sy, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4534,6 +4607,8 @@ Storage List::more_integers(const Storage& i, const Storage& x)
 
 Storage List::more_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -4614,7 +4689,7 @@ Storage List::more_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = more(sy, sx);
+        Storage result = eval({sy, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4640,6 +4715,8 @@ Storage List::more_reals(const Storage& i, const Storage& x)
 
 Storage List::more_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -4662,7 +4739,7 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = more(si, sx);
+        Storage result = eval({si, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4699,7 +4776,7 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = more(si, sx);
+        Storage result = eval({si, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4734,7 +4811,7 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = more(si, sx);
+        Storage result = eval({si, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -4760,6 +4837,8 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
 
 Storage List::match_impl(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(i.i))
   {
     ints iis = std::get<ints>(i.i);
@@ -4817,7 +4896,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         const Storage& sx = xis[index];
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -4849,7 +4928,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         Storage si = Real::make(fs[index]);
         Storage sx = Integer::make(xis[index]);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -4876,7 +4955,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         Storage si = Real::make(fs[index]);
         Storage sx = Real::make(xis[index]);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -4903,7 +4982,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         Storage si = Real::make(fs[index]);
         const Storage& sx = xis[index];
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -4935,7 +5014,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         const Storage& si = iis[index];
         Storage sx = Word::make(xis[index], NounType::INTEGER);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -4962,7 +5041,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         const Storage& si = iis[index];
         Storage sx = Float::make(xis[index], NounType::REAL);
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -4989,7 +5068,7 @@ Storage List::match_impl(const Storage& i, const Storage& x)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
-        Storage matched = match(si, sx);
+        Storage matched = eval({si, match, sx});
         if(matched.o == NounType::ERROR)
         {
           return matched;
@@ -5010,6 +5089,8 @@ Storage List::match_impl(const Storage& i, const Storage& x)
 
 Storage List::max_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -5063,7 +5144,7 @@ Storage List::max_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = less(sy, x);
+        Storage result = eval({sy, less, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5088,6 +5169,8 @@ Storage List::max_integer(const Storage& i, const Storage& x)
 
 Storage List::max_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -5142,7 +5225,7 @@ Storage List::max_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = less(sy, x);
+        Storage result = eval({sy, less, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5167,6 +5250,8 @@ Storage List::max_real(const Storage& i, const Storage& x)
 
 Storage List::max_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -5247,7 +5332,7 @@ Storage List::max_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = less(sy, sx);
+        Storage result = eval({sy, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5279,6 +5364,8 @@ Storage List::max_integers(const Storage& i, const Storage& x)
 
 Storage List::max_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -5359,7 +5446,7 @@ Storage List::max_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = less(sy, sx);
+        Storage result = eval({sy, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5391,6 +5478,8 @@ Storage List::max_reals(const Storage& i, const Storage& x)
 
 Storage List::max_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -5413,7 +5502,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = less(si, sx);
+        Storage result = eval({si, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5456,7 +5545,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = less(si, sx);
+        Storage result = eval({si, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5497,7 +5586,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = less(si, sx);
+        Storage result = eval({si, less, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5529,6 +5618,8 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
 Storage List::min_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -5582,7 +5673,7 @@ Storage List::min_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = more(sy, x);
+        Storage result = eval({sy, more, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5607,6 +5698,8 @@ Storage List::min_integer(const Storage& i, const Storage& x)
 
 Storage List::min_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -5661,7 +5754,7 @@ Storage List::min_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = more(sy, x);
+        Storage result = eval({sy, more, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5686,6 +5779,8 @@ Storage List::min_real(const Storage& i, const Storage& x)
 
 Storage List::min_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -5766,7 +5861,7 @@ Storage List::min_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = more(sy, sx);
+        Storage result = eval({sy, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5798,6 +5893,8 @@ Storage List::min_integers(const Storage& i, const Storage& x)
 
 Storage List::min_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -5878,7 +5975,7 @@ Storage List::min_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = more(sy, sx);
+        Storage result = eval({sy, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5910,6 +6007,8 @@ Storage List::min_reals(const Storage& i, const Storage& x)
 
 Storage List::min_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -5932,7 +6031,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = more(si, sx);
+        Storage result = eval({si, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -5975,7 +6074,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = more(si, sx);
+        Storage result = eval({si, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6016,7 +6115,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = more(si, sx);
+        Storage result = eval({si, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6048,6 +6147,8 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
 Storage List::minus_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -6087,7 +6188,7 @@ Storage List::minus_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = minus(sy, x);
+        Storage result = eval({sy, minus, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6105,6 +6206,8 @@ Storage List::minus_integer(const Storage& i, const Storage& x)
 
 Storage List::minus_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -6145,7 +6248,7 @@ Storage List::minus_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = minus(sy, x);
+        Storage result = eval({sy, minus, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6163,6 +6266,8 @@ Storage List::minus_real(const Storage& i, const Storage& x)
 
 Storage List::minus_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -6229,7 +6334,7 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = minus(sy, sx);
+        Storage result = eval({sy, minus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6247,6 +6352,8 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
 
 Storage List::minus_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -6313,7 +6420,7 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = more(sy, sx);
+        Storage result = eval({sy, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6331,6 +6438,8 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
 
 Storage List::minus_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -6353,7 +6462,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = minus(si, sx);
+        Storage result = eval({si, minus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6382,7 +6491,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = minus(si, sx);
+        Storage result = eval({si, minus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6409,7 +6518,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = minus(si, sx);
+        Storage result = eval({si, minus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6427,6 +6536,8 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
 Storage List::plus_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -6466,7 +6577,7 @@ Storage List::plus_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = plus(sy, x);
+        Storage result = eval({sy, plus, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6484,6 +6595,8 @@ Storage List::plus_integer(const Storage& i, const Storage& x)
 
 Storage List::plus_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -6524,7 +6637,7 @@ Storage List::plus_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = plus(sy, x);
+        Storage result = eval({sy, plus, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6542,6 +6655,8 @@ Storage List::plus_real(const Storage& i, const Storage& x)
 
 Storage List::plus_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -6608,7 +6723,7 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = plus(sy, sx);
+        Storage result = eval({sy, plus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6626,6 +6741,8 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
 
 Storage List::plus_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -6692,7 +6809,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = more(sy, sx);
+        Storage result = eval({sy, more, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6710,6 +6827,8 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
 
 Storage List::plus_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -6732,7 +6851,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = plus(si, sx);
+        Storage result = eval({si, plus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6761,7 +6880,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = plus(si, sx);
+        Storage result = eval({si, plus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6788,7 +6907,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = plus(si, sx);
+        Storage result = eval({si, plus, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6806,6 +6925,8 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
 Storage List::power_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -6847,7 +6968,7 @@ Storage List::power_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = power(sy, x);
+        Storage result = eval({sy, power, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6865,6 +6986,8 @@ Storage List::power_integer(const Storage& i, const Storage& x)
 
 Storage List::power_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -6905,7 +7028,7 @@ Storage List::power_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = power(sy, x);
+        Storage result = eval({sy, power, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -6923,6 +7046,8 @@ Storage List::power_real(const Storage& i, const Storage& x)
 
 Storage List::power_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -6992,7 +7117,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = power(sy, sx);
+        Storage result = eval({sy, power, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7010,6 +7135,8 @@ Storage List::power_integers(const Storage& i, const Storage& x)
 
 Storage List::power_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -7076,7 +7203,7 @@ Storage List::power_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = power(sy, sx);
+        Storage result = eval({sy, power, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7094,6 +7221,8 @@ Storage List::power_reals(const Storage& i, const Storage& x)
 
 Storage List::power_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -7116,7 +7245,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = power(si, sx);
+        Storage result = eval({si, power, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7145,7 +7274,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = power(si, sx);
+        Storage result = eval({si, power, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7172,7 +7301,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = power(si, sx);
+        Storage result = eval({si, power, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7190,6 +7319,8 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
 Storage List::remainder_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -7215,7 +7346,7 @@ Storage List::remainder_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = remainder(sy, x);
+        Storage result = eval({sy, iota::remainder, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7276,7 +7407,7 @@ Storage List::remainder_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = remainder(sy, sx);
+        Storage result = eval({sy, iota::remainder, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7316,7 +7447,7 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = remainder(si, sx);
+        Storage result = eval({si, iota::remainder, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7343,7 +7474,7 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = remainder(si, sx);
+        Storage result = eval({si, iota::remainder, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7361,6 +7492,8 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
 
 Storage List::reshape_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -7377,7 +7510,7 @@ Storage List::reshape_integer(const Storage& i, const Storage& x)
 
     if(xi == -1)
     {
-      xi = getInteger(divide(size(i), Word::make(2)));
+      xi = getInteger(eval({eval({i, size}), divide, Word::make(2)}));
     }
 
     if(std::holds_alternative<ints>(i.i))
@@ -7429,7 +7562,9 @@ Storage List::reshape_integer(const Storage& i, const Storage& x)
 
 Storage List::reshape_integers(const Storage& i, const Storage& x)
 {
-  int halfSize = getInteger(integerDivide(size(i), Word::make(2)));
+  using namespace iota;
+
+  int halfSize = getInteger(eval({eval({i, size}), integerDivide, Word::make(2)}));
 
   if(std::holds_alternative<ints>(x.i))
   {
@@ -7463,15 +7598,16 @@ Storage List::reshape_integers(const Storage& i, const Storage& x)
       int xi = lengths[0];
       Storage sx = Word::make(xi);
 
-      return reshape(i, sx);
+      return eval({i, reshape, sx});
     }
     else // lengths.size() > 1
     {
-      Storage totals = reverse(scanOver(WordArray::make(lengths), Word::make(Dyads::times, NounType::BUILTIN_DYAD)));
+      Storage sl = WordArray::make(lengths);
+      Storage totals = eval({sl, scanOver, times, reverse});
 
-      Storage working = reshape(i, index(totals, Integer::make(0)));
+      Storage working = eval({i, reshape, eval({totals, iota::index, Integer::zero()})});
 
-      return overNeutral(working, Word::make(Dyads::split, NounType::BUILTIN_DYAD), totals);
+      return eval({working, overNeutral, split, totals});
     }
   }
 
@@ -7480,6 +7616,8 @@ Storage List::reshape_integers(const Storage& i, const Storage& x)
 
 Storage List::reshape_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -7502,7 +7640,7 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = reshape(si, sx);
+        Storage result = eval({si, reshape, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -7529,7 +7667,7 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = reshape(si, sx);
+        Storage result = eval({si, reshape, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8027,6 +8165,8 @@ Storage List::take_integer(const Storage& i, const Storage& x)
 
 Storage List::times_integer(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<int>(x.i))
   {
     int xi = std::get<int>(x.i);
@@ -8066,7 +8206,7 @@ Storage List::times_integer(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = times(sy, x);
+        Storage result = eval({sy, times, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8084,6 +8224,8 @@ Storage List::times_integer(const Storage& i, const Storage& x)
 
 Storage List::times_real(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<float>(x.i))
   {
     float fx = std::get<float>(x.i);
@@ -8124,7 +8266,7 @@ Storage List::times_real(const Storage& i, const Storage& x)
 
       for(const Storage& sy : iis)
       {
-        Storage result = times(sy, x);
+        Storage result = eval({sy, times, x});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8142,6 +8284,8 @@ Storage List::times_real(const Storage& i, const Storage& x)
 
 Storage List::times_integers(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<ints>(x.i))
   {
     ints xis = std::get<ints>(x.i);
@@ -8208,7 +8352,7 @@ Storage List::times_integers(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = times(sy, sx);
+        Storage result = eval({sy, times, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8226,6 +8370,8 @@ Storage List::times_integers(const Storage& i, const Storage& x)
 
 Storage List::times_reals(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<floats>(x.i))
   {
     floats xis = std::get<floats>(x.i);
@@ -8292,7 +8438,7 @@ Storage List::times_reals(const Storage& i, const Storage& x)
 
         const Storage& sy = iis[index];
 
-        Storage result = times(sy, sx);
+        Storage result = eval({sy, times, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8310,6 +8456,8 @@ Storage List::times_reals(const Storage& i, const Storage& x)
 
 Storage List::times_mixed(const Storage& i, const Storage& x)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(x.i))
   {
     mixed xis = std::get<mixed>(x.i);
@@ -8332,7 +8480,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = times(si, sx);
+        Storage result = eval({si, times, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8361,7 +8509,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
 
         const Storage& sx = xis[index];
 
-        Storage result = times(si, sx);
+        Storage result = eval({si, times, sx});
         if(result.o == NounType::ERROR)
         {
           return result;
@@ -8388,7 +8536,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
 
-        Storage result = times(si, sx);
+        Storage result = eval({si, times, sx});
         if(result.o == NounType::ERROR)
         {
           return result;

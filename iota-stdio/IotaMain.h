@@ -1,11 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <iostream>
-
 #include <eval_register.h>
 #include <effects/effects_register.h>
-#include <types.h>
 
 #include "IostreamStorageConnection.h"
 

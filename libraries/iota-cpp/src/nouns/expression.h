@@ -12,6 +12,7 @@ class Expression
   public:
     // Initialize dispatch table
     static void initialize();
+    static Storage make(const mixed& e);
 
     static Storage truth(const Storage& i);
 };

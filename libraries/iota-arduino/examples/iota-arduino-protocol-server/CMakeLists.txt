@@ -10,6 +10,7 @@ set(IOTA_ARDUINO_PROTOCOL_SERVER_DIR ${CMAKE_SOURCE_DIR}/iota-arduino-protocol-s
 set(SKETCH_FILE ${IOTA_ARDUINO_PROTOCOL_SERVER_DIR}/iota-arduino-protocol-server.ino)
 
 set(BOARD "rp2040:rp2040:adafruit_feather_rp2350_hstx")
+set(PORT "/dev/cu.usbmodem1101")
 
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/arduino/rp2350/iota-arduino-protocol-server)
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_DIR}/*.cpp ${IOTA_ARDUINO_DIR}/*.cpp ${IOTA_ARDUINO_PROTOCOL_SERVER_DIR}/*.cpp ${IOTA_ARDUINO_PROTOCOL_SERVER_DIR}/*.ino)
@@ -26,6 +27,18 @@ add_custom_target(build_iota_arduino_protocol_server ALL
             ${SKETCH_FILE}
         WORKING_DIRECTORY ${IOTA_ARDUINO_PROTOCOL_SERVER_DIR}
         COMMENT "Building iota-arduino-protocol-server with arduino-cli"
+)
+
+add_custom_target(upload_iota_arduino_protocol_server ALL
+        COMMAND arduino-cli upload
+        -p ${PORT}
+        --fqbn ${BOARD}
+        --output-dir ${OUTPUT_DIR}
+        --build-property "build.extra_flags=-std=c++17\ -I${CMAKE_SOURCE_DIR}"
+        --libraries ${CMAKE_SOURCE_DIR}
+        ${SKETCH_FILE}
+        WORKING_DIRECTORY ${IOTA_ARDUINO_PROTOCOL_SERVER_DIR}
+        COMMENT "Uploading iota-arduino-protocol-server with arduino-cli"
 )
 
 # Generate ctags for vim

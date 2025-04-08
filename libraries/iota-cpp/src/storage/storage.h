@@ -44,7 +44,10 @@ class NounType
     static constexpr int TYPE = 18;
     static constexpr int CONDITIONAL = 19;
     static constexpr int QUOTED_SYMBOL = 20;
-    static constexpr int TABLE_REFERENCE = 21;
+    static constexpr int EFFECT_TYPE = 21;
+    static constexpr int RESOURCE = 22;
+    static constexpr int CONTINGENCY = 23;
+    static constexpr int SIGNAL = 24;
 };
 
 class SymbolType
@@ -77,7 +80,7 @@ class Storage
 
     // Copy constructor
     // Be careful with this constructor, it moves the x.i value, so only use it as the final use of the x.
-    Storage(const Storage& x) : o(x.o), t(x.t), i(x.i) {}
+    Storage(const Storage& x) = default; // o(x.o), t(x.t), i(x.i)
 
     [[nodiscard]] int truth() const;
 

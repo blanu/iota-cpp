@@ -12,11 +12,11 @@
 using Type = int;
 using Specialization3 = std::tuple<Type, Type, Type>;
 using Specialization5 = std::tuple<Type, Type, Type, Type, Type>;
-using Monad = std::function<Storage(Storage)>;
-using Dyad = std::function<Storage(Storage,Storage)>;
-using Triad = std::function<Storage(Storage,Storage,Storage)>;
-using MonadicAdverb = std::function<Storage(Storage,Storage)>;
-using DyadicAdverb = std::function<Storage(Storage,Storage,Storage)>;
+using MonadicFunction = std::function<Storage(Storage)>;
+using DyadicFunction = std::function<Storage(Storage,Storage)>;
+using TriadicFunction = std::function<Storage(Storage,Storage,Storage)>;
+using MonadicAdverbFunction = std::function<Storage(Storage,Storage)>;
+using DyadicAdverbFunction = std::function<Storage(Storage,Storage,Storage)>;
 
 class Noun
 {
@@ -89,11 +89,11 @@ class Noun
     static void to_conn(const Connection& conn, const Storage& x);
 
     private:
-      static std::map<Specialization3, Monad> monads;
-      static std::map<Specialization5, Dyad> dyads;
-      static std::map<Specialization5, Triad> triads;
-      static std::map<Specialization3, MonadicAdverb> monadicAdverbs;
-      static std::map<Specialization5, DyadicAdverb> dyadicAdverbs;
+      static std::map<Specialization3, MonadicFunction> monads;
+      static std::map<Specialization5, DyadicFunction> dyads;
+      static std::map<Specialization5, TriadicFunction> triads;
+      static std::map<Specialization3, MonadicAdverbFunction> monadicAdverbs;
+      static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;
 };
 
 

@@ -7,17 +7,21 @@
 #include "storage/storage.h"
 #include "nouns/noun.h"
 
+maybe<EvalRegister> EvalRegister::instance = std::nullopt;
+
 void EvalRegister::initialize()
 {
   Noun::initialize();
 }
 
-void EvalRegister::setEffectsRegister(EffectsRegister* newEffectsRegister)
+maybe<Storage> EvalRegister::eval(const Storage& i)
 {
-  effects = newEffectsRegister;
+  auto evalRegister = EvalRegister();
+  evalRegister.store_i(i);
+  evalRegister.eval();
+  return evalRegister.fetch_r();
 }
 
-// Be careful with this function, it moves newI.
 void EvalRegister::store_i(const Storage& newI)
 {
   i = newI;
@@ -59,4 +63,3 @@ void EvalRegister::eval()
 {
   r = Noun::dispatchMonad(i, Word::make(Monads::evaluate, NounType::BUILTIN_MONAD));
 }
-

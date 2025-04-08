@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+ADVERBS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^#define ADVERBS_H$/;"	d
 API_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^#define API_H_$/;"	d
 BAD_INDEX_TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_INDEX_TYPE /;"	d
 BAD_INITIALIZATION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_INITIALIZATION /;"	d
@@ -17,19 +18,36 @@ CHARACTER	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage
 CHARACTER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.h	/^#define CHARACTER_H$/;"	d
 CONDITIONAL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int CONDITIONAL = 19;$/;"	m	class:NounType
 CONDITIONAL_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.h	/^#define CONDITIONAL_H$/;"	d
+CONTINGENCY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int CONTINGENCY = 23;$/;"	m	class:NounType
 Character	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.h	/^class Character$/;"	c
 Conditional	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.h	/^class Conditional$/;"	c
 Connection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/Connection.h	/^class EXPORT Connection$/;"	c
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(CppValues value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(Error value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(Storage value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(char value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(const cppValue& value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(float value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(floats value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(int value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(ints value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(std::string value) : value(value) {} \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+CppValue	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^class CppValue$/;"	c
 DICTIONARY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int DICTIONARY = 5;$/;"	m	class:NounType
 DICTIONARY_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.h	/^#define DICTIONARY_H$/;"	d
 DIVISION_BY_ZERO	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define DIVISION_BY_ZERO /;"	d
 DYADIC_ADVERB	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int DYADIC_ADVERB = 11;$/;"	m	class:NounType
 Dictionary	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.h	/^class Dictionary$/;"	c
+Dyad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^class Dyad$/;"	c
+DyadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^class DyadicAdverb$/;"	c
 DyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class DyadicAdverbs$/;"	c
+DyadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^class DyadicEffect$/;"	c
 Dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class Dyads$/;"	c
 EFFECTS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^#define EFFECTS_H$/;"	d
 EFFECTS_REGISTER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^#define EFFECTS_REGISTER_H$/;"	d
-EFFECT_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect.h	/^#define EFFECT_H$/;"	d
+EFFECT_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_type.h	/^#define EFFECT_H$/;"	d
+EFFECT_SYMBOLS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_symbols.h	/^#define EFFECT_SYMBOLS_H$/;"	d
+EFFECT_TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int EFFECT_TYPE = 21;$/;"	m	class:NounType
 EMPTY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define EMPTY /;"	d
 ERROR	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int ERROR = 16;$/;"	m	class:NounType
 ERROR_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define ERROR_H_$/;"	d
@@ -37,9 +55,11 @@ EXPORT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/Connection.h	/^#de
 EXPORT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^#define EXPORT$/;"	d
 EXPRESSION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int EXPRESSION = 17;$/;"	m	class:NounType
 EXPRESSION_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expression.h	/^#define EXPRESSION_H$/;"	d
-Effect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect.h	/^class Effect$/;"	c
+EffectType	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_type.h	/^class EffectType$/;"	c
 Effects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^class Effects$/;"	c
+EffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    EffectsRegister() {}$/;"	f	class:EffectsRegister
 EffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^class EffectsRegister$/;"	c
+Error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^class Error$/;"	c
 EvalRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EvalRegister() : i(Word::make(0, NounType::INTEGER)), r(std::nullopt) {}$/;"	f	class:EvalRegister
 EvalRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    explicit EvalRegister(const Storage& i) : i(i), r(std::nullopt) {}$/;"	f	class:EvalRegister
 EvalRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^class EvalRegister$/;"	c
@@ -56,7 +76,6 @@ INTEGER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.h
 INVALID_ADVERB_ARGUMENT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define INVALID_ADVERB_ARGUMENT /;"	d
 INVALID_ARGUMENT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define INVALID_ARGUMENT /;"	d
 Integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.h	/^class Integer$/;"	c
-IntsHash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^struct IntsHash$/;"	s
 IotaString	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.h	/^class IotaString$/;"	c
 LIST	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int LIST = 4;$/;"	m	class:NounType
 LIST_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.h	/^#define LIST_H$/;"	d
@@ -66,13 +85,17 @@ MIXED_ARRAY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/stora
 MIXED_ARRAY_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.h	/^#define MIXED_ARRAY_H$/;"	d
 MONADIC_ADVERB	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int MONADIC_ADVERB = 10;$/;"	m	class:NounType
 MixedArray	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.h	/^class MixedArray$/;"	c
+Monad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^class Monad$/;"	c
+MonadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^class MonadicAdverb$/;"	c
 MonadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class MonadicAdverbs$/;"	c
+MonadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^class MonadicEffect$/;"	c
 Monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class Monads$/;"	c
 NOUNS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/nouns.h	/^#define NOUNS_H$/;"	d
 NOUN_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^#define NOUN_H_$/;"	d
 Noun	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^class Noun$/;"	c
 NounType	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^class NounType$/;"	c
 OUT_OF_BOUNDS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define OUT_OF_BOUNDS /;"	d
+Object	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^class Object$/;"	c
 QUOTED_SYMBOL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int QUOTED_SYMBOL = 20;$/;"	m	class:NounType
 QUOTED_SYMBOL_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.h	/^#define QUOTED_SYMBOL_H$/;"	d
 QuotedSymbol	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.h	/^class QuotedSymbol$/;"	c
@@ -80,25 +103,28 @@ REAL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^
 REAL_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.h	/^#define REAL_H$/;"	d
 REGISTER_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^#define REGISTER_H_$/;"	d
 RELATION_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^#define RELATION_H$/;"	d
+RELATION_SYMBOLS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^#define RELATION_SYMBOLS_H$/;"	d
 RELIABLE_CONNECTION_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/Connection.h	/^#define RELIABLE_CONNECTION_H_$/;"	d
+RESOURCE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int RESOURCE = 22;$/;"	m	class:NounType
 Real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.h	/^class Real$/;"	c
 Relation	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^class Relation$/;"	c
 SERIAL_CONNECTION_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^#define SERIAL_CONNECTION_H_$/;"	d
 SHAPE_MISMATCH	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define SHAPE_MISMATCH /;"	d
+SIGNAL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int SIGNAL = 24;$/;"	m	class:NounType
+SIGNAL_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.h	/^#define SIGNAL_H$/;"	d
 SQUEEZE_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.h	/^#define SQUEEZE_H_$/;"	d
 STORAGE_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^#define STORAGE_H_$/;"	d
 STRING	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int STRING = 3;$/;"	m	class:NounType
 STRING_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.h	/^#define STRING_H$/;"	d
 SYMBOLS_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^#define SYMBOLS_H_$/;"	d
 SYMBOL_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^#define SYMBOL_H$/;"	d
-Storage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    Storage(const Storage& x) : o(x.o), t(x.t), i(x.i) {}$/;"	f	class:Storage
+Signal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.h	/^class Signal$/;"	c
 Storage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    Storage(int o, int t, I i) : o(o), t(t), i(std::move(i)) {}$/;"	f	class:Storage
 Storage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^class Storage$/;"	c
 StorageConnection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^class EXPORT StorageConnection$/;"	c
 StorageType	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^class StorageType$/;"	c
 Symbol	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^class Symbol$/;"	c
 SymbolType	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^class SymbolType$/;"	c
-TABLE_REFERENCE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int TABLE_REFERENCE = 21;$/;"	m	class:NounType
 TEST_ERROR	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define TEST_ERROR /;"	d
 TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int TYPE = 18;$/;"	m	class:NounType
 TYPES_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^#define TYPES_H_$/;"	d
@@ -121,7 +147,7 @@ WORD_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.h	/^#
 Word	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.h	/^class Word$/;"	c
 WordArray	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.h	/^class WordArray$/;"	c
 amend	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int amend = 22;$/;"	m	class:Dyads
-amend	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage amend(const Storage& i, const Storage& x) \/\/ a:_b$/;"	f
+amend	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage amend = Dyad::make(Dyads::amend);$/;"	m	namespace:iota
 append	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::append(const Storage& i, const Storage& x)$/;"	f	class:Noun
 append_character	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::append_character(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 append_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::append_integer(const Storage& i, const Storage& x)$/;"	f	class:List
@@ -130,28 +156,38 @@ applyDyad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^   
 applyMonad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int applyMonad = 49;$/;"	m	class:Dyads
 asciiToUTF32	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^ints Symbol::asciiToUTF32(const std::string& ascii)$/;"	f	class:Symbol
 atom	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int atom = 0;$/;"	m	class:Monads
-atom	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage atom(const Storage& i)  \/\/ @a$/;"	f
+atom	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage atom = Monad::make(Monads::atom);$/;"	m	namespace:iota
 atom_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::atom_impl(const Storage& i)$/;"	f	class:IotaString
 atom_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::atom_impl(const Storage& i) {$/;"	f	class:List
 c	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage c()$/;"	f
+cause	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int cause = 67; \/\/ FIXME - renumber sequentially$/;"	m	class:Dyads
+cause_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage Effects::cause_impl(const Storage& i, const Storage& x)$/;"	f	class:Effects
 char_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::char_impl(const Storage& i) {$/;"	f	class:Integer
 char_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::char_impl(const Storage& i) {$/;"	f	class:List
+code	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    int code;$/;"	m	class:Error
+code_to_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^std::string code_to_string(int code)$/;"	f
 columnSize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^        int columnSize = 0;$/;"	m	class:Relation::Table
 columns	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^        std::vector<mixed> columns = {};$/;"	m	class:Relation::Table
+converge	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage converge = MonadicAdverb::make(MonadicAdverbs::converge);$/;"	m	namespace:iota
 converge	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int converge = 52;$/;"	m	class:MonadicAdverbs
-converge	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage converge(const Storage& i, const Storage& f) \/\/ f:~a$/;"	f
 converge_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::converge_impl(const Storage& i, const Storage& f)$/;"	f	class:Noun
+copyTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage copyTable = MonadicEffect::make(effects::relation::copyTable);$/;"	m	namespace:iota
 copyTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::copyTable(const Storage& i)$/;"	f	class:Relation
+copyTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int copyTable = 1;$/;"	m	namespace:effects::relation
 count	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int count = 18;$/;"	m	class:Monads
+crossProduct	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage crossProduct = DyadicEffect::make(effects::relation::crossProduct);$/;"	m	namespace:iota
 crossProduct	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::crossProduct(const Storage& i, const Storage& x)$/;"	f	class:Relation
+crossProduct	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int crossProduct = 10;$/;"	m	namespace:effects::relation
 cut	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int cut = 23;$/;"	m	class:Dyads
-cut	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage cut(const Storage& i, const Storage& x) \/\/ a:_b$/;"	f
+cut	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage cut = Dyad::make(Dyads::cut);$/;"	m	namespace:iota
 cut_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::cut_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 cut_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::cut_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
 cut_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::cut_integers(const Storage& i, const Storage& x)$/;"	f	class:List
 cut_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::cut_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
 cut_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::cut_reals(const Storage& i, const Storage& x)$/;"	f	class:Integer
+difference	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage difference = DyadicEffect::make(effects::relation::difference);$/;"	m	namespace:iota
 difference	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::difference(const Storage& i, const Storage& x)$/;"	f	class:Relation
+difference	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int difference = 8;$/;"	m	namespace:effects::relation
 dispatchDyad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x) {$/;"	f	class:Noun
 dispatchDyadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Storage& g, const Storage& x)$/;"	f	class:Noun
 dispatchDyadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage Effects::dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Effects
@@ -160,7 +196,7 @@ dispatchMonadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nou
 dispatchMonadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage Effects::dispatchMonadicEffect(const Storage& i, const Storage& f)$/;"	f	class:Effects
 dispatchTriad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)$/;"	f	class:Noun
 divide	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int divide = 24;$/;"	m	class:Dyads
-divide	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage divide(const Storage& i, const Storage& x) \/\/ a%b$/;"	f
+divide	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage divide = Dyad::make(Dyads::divide);$/;"	m	namespace:iota
 divide_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::divide_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 divide_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::divide_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 divide_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::divide_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -177,66 +213,68 @@ divide_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/intege
 divide_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 divide_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:Real
 drop	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int drop = 25;$/;"	m	class:Dyads
-drop	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage drop(const Storage& i, const Storage& x) \/\/ a_b$/;"	f
+drop	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage drop = Dyad::make(Dyads::drop);$/;"	m	namespace:iota
 drop_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::drop_impl(const Storage& i, const Storage& x)$/;"	f	class:List
-dyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, DyadicAdverb> Noun::dyadicAdverbs;$/;"	m	class:Noun	file:
-dyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, DyadicAdverb> dyadicAdverbs;$/;"	m	class:Noun
-dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^std::map<Specialization5, Dyad> Effects::dyads;$/;"	m	class:Effects	file:
-dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^    static std::map<Specialization5, Dyad> dyads;$/;"	m	class:Effects
-dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, Dyad> Noun::dyads;$/;"	m	class:Noun	file:
-dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, Dyad> dyads;$/;"	m	class:Noun
+dyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, DyadicAdverbFunction> Noun::dyadicAdverbs;$/;"	m	class:Noun	file:
+dyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;$/;"	m	class:Noun
+dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^std::map<Specialization5, DyadicFunction> Effects::dyads;$/;"	m	class:Effects	file:
+dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^    static std::map<Specialization5, DyadicFunction> dyads;$/;"	m	class:Effects
+dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, DyadicFunction> Noun::dyads;$/;"	m	class:Noun	file:
+dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, DyadicFunction> dyads;$/;"	m	class:Noun
 e	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage e()$/;"	f
+each	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage each = MonadicAdverb::make(MonadicAdverbs::each);$/;"	m	namespace:iota
 each	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int each = 53;$/;"	m	class:MonadicAdverbs
-each	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage each(const Storage& i, const Storage& f) \/\/ f'a$/;"	f
+each2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage each2 = DyadicAdverb::make(DyadicAdverbs::each2);$/;"	m	namespace:iota
 each2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int each2 = 58;$/;"	m	class:DyadicAdverbs
-each2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage each2(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
 each2_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::each2_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+eachLeft	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage eachLeft = DyadicAdverb::make(DyadicAdverbs::eachLeft);$/;"	m	namespace:iota
 eachLeft	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int eachLeft = 59;$/;"	m	class:DyadicAdverbs
-eachLeft	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage eachLeft(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
 eachLeft_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::eachLeft_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+eachPair	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage eachPair = MonadicAdverb::make(MonadicAdverbs::eachPair);$/;"	m	namespace:iota
 eachPair	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int eachPair = 54;$/;"	m	class:MonadicAdverbs
-eachPair	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage eachPair(const Storage& i, const Storage& f) \/\/ f:'a$/;"	f
 eachPair_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::eachPair_integers(const Storage& i, const Storage& f)$/;"	f	class:List
 eachPair_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::eachPair_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
 eachPair_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::eachPair_reals(const Storage& i, const Storage& f)$/;"	f	class:List
+eachRight	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage eachRight = DyadicAdverb::make(DyadicAdverbs::eachRight);$/;"	m	namespace:iota
 eachRight	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int eachRight = 60;$/;"	m	class:DyadicAdverbs
-eachRight	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage eachRight(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
 eachRight_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::eachRight_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
 each_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::each_impl(const Storage& i, const Storage& f)$/;"	f	class:IotaString
 each_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::each_integers(const Storage& i, const Storage& f)$/;"	f	class:List
 each_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::each_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
 each_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::each_reals(const Storage& i, const Storage& f)$/;"	f	class:List
-effectType	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect.h	/^    int effectType;$/;"	m	class:Effect
-effects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::queue<Effect> effects;$/;"	m	class:EffectsRegister
-effects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EffectsRegister* effects = nullptr;$/;"	m	class:EvalRegister
+effects_register	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EffectsRegister* effects_register = nullptr;$/;"	m	class:EvalRegister
 enclose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int enclose = 3;$/;"	m	class:Monads
-enclose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage enclose(const Storage& i)  \/\/ ,a$/;"	f
+enclose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage enclose = Monad::make(Monads::enclose);$/;"	m	namespace:iota
 enclose2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::enclose2(const Storage& i, const Storage& x)$/;"	f	class:Noun
 enclose_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::enclose_impl(const Storage& i) {$/;"	f	class:Character
 enclose_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::enclose_impl(const Storage& i) {$/;"	f	class:Integer
 enclose_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::enclose_impl(const Storage& i) {$/;"	f	class:Noun
 enclose_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::enclose_impl(const Storage& i)$/;"	f	class:Real
 enumerate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int enumerate = 4;$/;"	m	class:Monads
-enumerate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage enumerate(const Storage& i)  \/\/ !a$/;"	f
+enumerate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage enumerate = Monad::make(Monads::enumerate);$/;"	m	namespace:iota
 enumerate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::enumerate_impl(const Storage& i) {$/;"	f	class:Integer
 equal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int equal = 26;$/;"	m	class:Dyads
-equal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage equal(const Storage& i, const Storage& x) \/\/ a=b$/;"	f
+equal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage equal = Dyad::make(Dyads::equal);$/;"	m	namespace:iota
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:Character
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:List
 erase	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int erase = 20;$/;"	m	class:Monads
-erase	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage erase(const Storage& i)$/;"	f
-error_to_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^const char *error_to_string(const Storage &e)$/;"	f
+erase	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage erase = Monad::make(Monads::erase);$/;"	m	namespace:iota
+error_to_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^std::string error_to_string(const Storage &e)$/;"	f
+eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage eval(const mixed& e)$/;"	f
+eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::eval(const Storage& s)$/;"	f	class:EffectsRegister
+eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^maybe<Storage> EvalRegister::eval(const Storage& i)$/;"	f	class:EvalRegister
 eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::eval()$/;"	f	class:EvalRegister
-eval_register	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    EvalRegister* eval_register = nullptr;$/;"	m	class:EffectsRegister
+evalExpression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalExpression(const cppValues& values)$/;"	f
+evalNoun	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalNoun(const cppValue& i)$/;"	f
 evaluate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int evaluate = 19;$/;"	m	class:Monads
-evaluate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage evaluate(const Storage& i)$/;"	f
+evaluate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage evaluate = Monad::make(Monads::evaluate);$/;"	m	namespace:iota
 evaluate_expression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::evaluate_expression(const Storage& e)$/;"	f	class:Noun
 evaluate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.cpp	/^Storage Conditional::evaluate_impl(const Storage& e)$/;"	f	class:Conditional
 evaluate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^Storage Symbol::evaluate_impl(const Storage& i)$/;"	f	class:Symbol
 expand	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int expand = 27;$/;"	m	class:Monads
-expand	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage expand(const Storage& i, const Storage& x) \/\/ &b$/;"	f
+expand	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage expand = Monad::make(Monads::expand);$/;"	m	namespace:iota
 expand_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^varint expand_conn(const Connection& conn)$/;"	f
 expand_conn_floating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_conn_floating(const Connection& conn)$/;"	f
 expand_floating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_floating(bytes value)$/;"	f
@@ -245,6 +283,8 @@ expand_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cp
 expand_int	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^std::tuple<varint, bytes> expand_int(bytes data)$/;"	f
 expand_int_from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^varint expand_int_from_bytes(const bytes &bytes)$/;"	f
 expand_ints	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^std::tuple<ints, bytes> expand_ints(const bytes& data)$/;"	f
+f	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue CppValue::f = 0;$/;"	m	class:CppValue	file:
+f	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    static cppValue f;$/;"	m	class:CppValue
 f	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int f = 4;$/;"	m	class:SymbolType
 false0	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::false0() {$/;"	f	class:Noun
 false1	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::false1(const Storage& i) {$/;"	f	class:Noun
@@ -252,7 +292,7 @@ false2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^S
 fetch_i	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^Storage EvalRegister::fetch_i()$/;"	f	class:EvalRegister
 fetch_r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^maybe<Storage> EvalRegister::fetch_r()$/;"	f	class:EvalRegister
 find	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int find = 28;$/;"	m	class:Dyads
-find	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage find(const Storage& i, const Storage& x) \/\/ a?b$/;"	f
+find	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage find = Dyad::make(Dyads::find);$/;"	m	namespace:iota
 findTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Relation::Table *Relation::findTable(Storage i)$/;"	f	class:Relation
 find_character	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::find_character(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 find_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^Storage Dictionary::find_impl(const Storage& i, const Storage& x)$/;"	f	class:Dictionary
@@ -263,25 +303,27 @@ find_reals_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/
 find_reals_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::find_reals_real(const Storage& i, const Storage& x)$/;"	f	class:List
 find_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::find_string(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 first	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int first = 5;$/;"	m	class:Monads
-first	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage first(const Storage& i)  \/\/ *a$/;"	f
+first	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage first = Monad::make(Monads::first);$/;"	m	namespace:iota
 first_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::first_impl(const Storage& i)$/;"	f	class:IotaString
 first_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::first_impl(const Storage& i)$/;"	f	class:List
+flatten	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage flatten = MonadicEffect::make(effects::relation::flatten);$/;"	m	namespace:iota
 flatten	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::flatten(const Storage& i)$/;"	f	class:Relation
+flatten	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int flatten = 3;$/;"	m	namespace:effects::relation
 floor	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int floor = 6;$/;"	m	class:Monads
-floor	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage floor(const Storage& i)  \/\/ _a$/;"	f
+floor	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage floor = Monad::make(Monads::floor);$/;"	m	namespace:iota
 floor_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::floor_impl(const Storage& i)$/;"	f	class:List
 floor_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::floor_impl(const Storage& i)$/;"	f	class:Real
 form	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int form = 29;$/;"	m	class:Dyads
-form	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage form(const Storage& i, const Storage& x) \/\/ a:$b$/;"	f
+form	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage form = Dyad::make(Dyads::form);$/;"	m	namespace:iota
 form_character	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::form_character(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 form_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::form_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 form_list	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::form_list(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 form_quoted_symbol	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::form_quoted_symbol(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 form_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::form_real(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 format	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int format = 7;$/;"	m	class:Monads
-format	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage format(const Storage& i)  \/\/ $a$/;"	f
+format	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage format = Monad::make(Monads::format);$/;"	m	namespace:iota
 format2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int format2 = 30;$/;"	m	class:Dyads
-format2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage format2(const Storage& i, const Storage& x) \/\/ a$b$/;"	f
+format2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage format2 = Dyad::make(Dyads::format2);$/;"	m	namespace:iota
 format2_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::format2_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
 format2_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::format2_impl(const Storage& i, const Storage& x)$/;"	f	class:List
 format2_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::format2_impl(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -289,8 +331,10 @@ format_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer
 format_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::format_impl(const Storage& i)$/;"	f	class:List
 format_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::format_impl(const Storage& i)$/;"	f	class:QuotedSymbol
 format_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::format_impl(const Storage& i)$/;"	f	class:Real
-free	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::free(const Storage& i)$/;"	f	class:Relation
-from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^maybe<Storage> Character::from_bytes(bytes bs, int t) {$/;"	f	class:Character
+free	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage free = MonadicEffect::make(effects::relation::freeTable);$/;"	m	namespace:iota
+freeTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::freeTable(const Storage& i)$/;"	f	class:Relation
+freeTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int freeTable = 2;$/;"	m	namespace:effects::relation
+from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^maybe<Storage> Character::from_bytes(const bytes& bs, int t) {$/;"	f	class:Character
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^maybe<Storage> Dictionary::from_bytes(const bytes& bs, int t)$/;"	f	class:Dictionary
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^maybe<Storage> Integer::from_bytes(const bytes& bs, int t) {$/;"	f	class:Integer
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^maybe<Storage> IotaString::from_bytes(const bytes& bs, int t) {$/;"	f	class:IotaString
@@ -314,6 +358,8 @@ from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_fl
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_conn(const Connection& conn, int o)$/;"	f	class:MixedArray
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_conn(const Connection& conn, int o)$/;"	f	class:Word
 from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^maybe<Storage> WordArray::from_conn(const Connection& conn, int o)$/;"	f	class:WordArray
+from_cpp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage Object::from_cpp(const cppValue& i)$/;"	f	class:Object
+from_cpp_expression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage Object::from_cpp_expression(const cppValues& i)$/;"	f	class:Object
 getInteger	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^int getInteger(const Storage& i)$/;"	f
 getIntegers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^ints getIntegers(const Storage& i)$/;"	f
 getMixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^mixed getMixed(const Storage& i)$/;"	f
@@ -321,35 +367,36 @@ getReal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^
 getReals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^floats getReals(const Storage& i)$/;"	f
 getSize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^int getSize(const Storage& i)$/;"	f
 gradeDown	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int gradeDown = 8;$/;"	m	class:Monads
-gradeDown	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage gradeDown(const Storage& i)  \/\/ >a$/;"	f
+gradeDown	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage gradeDown = Monad::make(Monads::gradeDown);$/;"	m	namespace:iota
 gradeDown_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::gradeDown_impl(const Storage& i)$/;"	f	class:IotaString
 gradeDown_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::gradeDown_impl(const Storage& i)$/;"	f	class:List
 gradeUp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int gradeUp = 9;$/;"	m	class:Monads
-gradeUp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage gradeUp(const Storage& i)  \/\/ <a$/;"	f
+gradeUp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage gradeUp = Monad::make(Monads::gradeUp);$/;"	m	namespace:iota
 gradeUp_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::gradeUp_impl(const Storage& i)$/;"	f	class:IotaString
 gradeUp_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::gradeUp_impl(const Storage& i)$/;"	f	class:List
 group	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int group = 10;$/;"	m	class:Monads
-group	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage group(const Storage& i)  \/\/ =a$/;"	f
+group	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage group = Monad::make(Monads::group);$/;"	m	namespace:iota
 group_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::group_impl(const Storage& i)$/;"	f	class:IotaString
 group_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::group_impl(const Storage& i)$/;"	f	class:List
-handleEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::handleEffects()$/;"	f	class:EffectsRegister
-handlers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect.h	/^    std::unordered_map<Storage, Storage> handlers;$/;"	m	class:Effect
+hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^struct std::hash<Error>$/;"	s	class:std
 hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^struct std::hash<std::vector<Storage>>$/;"	s	class:std
 hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^struct std::hash<Storage>$/;"	s	class:std
+hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^struct std::hash<floats>$/;"	s	class:std
+hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^struct std::hash<ints>$/;"	s	class:std
 i	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    Storage i;$/;"	m	class:EvalRegister
 i	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    I i;$/;"	m	class:Storage
 i	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int i = 0;$/;"	m	class:SymbolType
 ichar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int ichar = 1;$/;"	m	class:Monads
-ichar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage ichar(const Storage& i)  \/\/ :#a$/;"	f
+ichar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage ichar = Monad::make(Monads::ichar);$/;"	m	namespace:iota
 identity	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^Storage Storage::identity(const Storage& i)$/;"	f	class:Storage
 identity1	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::identity1(const Storage& i)$/;"	f	class:Noun
 identity2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::identity2(const Storage& i, const Storage& x)$/;"	f	class:Noun
 index	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int index = 31;$/;"	m	class:Dyads
-index	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage index(const Storage& i, const Storage& x) \/\/ a@b$/;"	f
+index	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage index = Dyad::make(Dyads::index);$/;"	m	namespace:iota
 indexInDepth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int indexInDepth = 32;$/;"	m	class:Dyads
 index_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::index_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 index_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::index_impl(const Storage& i, const Storage& x)$/;"	f	class:List
-initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^static void initialize()$/;"	f	file:
+initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^void Effects::initialize()$/;"	f	class:Effects
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::initialize()$/;"	f	class:EffectsRegister
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^void Relation::initialize()$/;"	f	class:Relation
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::initialize()$/;"	f	class:EvalRegister
@@ -365,23 +412,34 @@ initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_s
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^void Real::initialize() {$/;"	f	class:Real
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^void Symbol::initialize()$/;"	f	class:Symbol
 inot	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int inot = 2;$/;"	m	class:Monads
-inot	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage inot(const Storage& i)  \/\/ ~a$/;"	f
+inot	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage inot = Monad::make(Monads::inot);$/;"	m	namespace:iota
+insert	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage insert = DyadicEffect::make(effects::relation::insert);$/;"	m	namespace:iota
 insert	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::insert(const Storage& i, const Storage& x)$/;"	f	class:Relation
+insert	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int insert = 4;$/;"	m	namespace:effects::relation
+instance	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^maybe<EvalRegister> EvalRegister::instance = std::nullopt;$/;"	m	class:EvalRegister	file:
+instance	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    static maybe<EvalRegister> instance;$/;"	m	class:EvalRegister
 integerDivide	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int integerDivide = 33;$/;"	m	class:Dyads
-integerDivide	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage integerDivide(const Storage& i, const Storage& x) \/\/ a%b$/;"	f
+integerDivide	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage integerDivide = Dyad::make(Dyads::integerDivide);$/;"	m	namespace:iota
 integerDivide_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::integerDivide_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
 integerToString	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^std::unordered_map<int, ints> Symbol::integerToString;$/;"	m	class:Symbol	file:
 integerToString	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^    static std::unordered_map<int, ints> integerToString;$/;"	m	class:Symbol
+intersection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage intersection = DyadicEffect::make(effects::relation::intersection);$/;"	m	namespace:iota
 intersection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::intersection(const Storage& i, const Storage& x)$/;"	f	class:Relation
+intersection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int intersection = 12;$/;"	m	namespace:effects::relation
+iota	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^namespace iota$/;"	n
+iota	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^namespace iota$/;"	n
+iota	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^namespace iota$/;"	n
 isAtom	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^int isAtom(const Storage& i)$/;"	f
 isLittleEndian	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bool isLittleEndian()$/;"	f
 isNil	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^int isNil(const Storage& i)$/;"	f
+iterate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage iterate = DyadicAdverb::make(DyadicAdverbs::iterate);$/;"	m	namespace:iota
 iterate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int iterate = 63;$/;"	m	class:DyadicAdverbs
-iterate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage iterate(const Storage& i, const Storage& f, const Storage& x) \/\/ a f:*b$/;"	f
 iterate_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+iunion	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage iunion = DyadicEffect::make(effects::relation::iunion);$/;"	m	namespace:iota
 iunion	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::iunion(const Storage& i, const Storage& x)$/;"	f	class:Relation
+iunion	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int iunion = 6;$/;"	m	namespace:effects::relation
 join	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int join = 34;$/;"	m	class:Dyads
-join	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage join(const Storage& i, const Storage& x) \/\/ a,b$/;"	f
+join	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage join = Dyad::make(Dyads::join);$/;"	m	namespace:iota
 join_character	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::join_character(const Storage& i, const Storage& x)$/;"	f	class:Character
 join_enclose_mix	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::join_enclose_mix(const Storage& i, const Storage& x)$/;"	f	class:Noun
 join_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::join_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
@@ -400,7 +458,7 @@ join_scalar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/charact
 join_scalar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::join_scalar(const Storage& i, const Storage& x)$/;"	f	class:Noun
 join_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::join_string(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 less	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int less = 35;$/;"	m	class:Dyads
-less	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage less(const Storage& i, const Storage& x) \/\/ a<b$/;"	f
+less	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage less = Dyad::make(Dyads::less);$/;"	m	namespace:iota
 less_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::less_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 less_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::less_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 less_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::less_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -413,9 +471,17 @@ less_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	
 less_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::less_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 less_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::less_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 load_i	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::load_i(bytes data)$/;"	f	class:EvalRegister
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storage DyadicAdverb::make(int i)$/;"	f	class:DyadicAdverb
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storage MonadicAdverb::make(int i)$/;"	f	class:MonadicAdverb
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_type.cpp	/^Storage EffectType::make(int category, int type)$/;"	f	class:EffectType
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage DyadicEffect::make(int i)$/;"	f	class:DyadicEffect
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage MonadicEffect::make(int i)$/;"	f	class:MonadicEffect
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Signal::make(Storage value, Storage i, Storage e)$/;"	f	class:Signal
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Signal::make(Storage value, Storage i, Storage e, Storage x)$/;"	f	class:Signal
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::make(int i)$/;"	f	class:Character
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.cpp	/^Storage Conditional::make(const mixed &i)$/;"	f	class:Conditional
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^Storage Dictionary::make(const mixed &i)$/;"	f	class:Dictionary
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expression.cpp	/^Storage Expression::make(const mixed& e)$/;"	f	class:Expression
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::make(int i)$/;"	f	class:Integer
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::make(ints i)$/;"	f	class:IotaString
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::make(const ints &i)$/;"	f	class:QuotedSymbol
@@ -425,13 +491,16 @@ make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.c
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^Storage MixedArray::make(mixed x, int o)$/;"	f	class:MixedArray
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^Storage Word::make(int x, int o)$/;"	f	class:Word
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::make(ints x, int o)$/;"	f	class:WordArray
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage Dyad::make(int i)$/;"	f	class:Dyad
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage Monad::make(int i)$/;"	f	class:Monad
 makeEmpty	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^Storage Dictionary::makeEmpty()$/;"	f	class:Dictionary
 makeEmpty	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::makeEmpty()$/;"	f	class:IotaString
 makeReference	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::Table::makeReference(int id)$/;"	f	class:Relation::Table
+makeTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage makeTable = MonadicEffect::make(effects::relation::makeTable);$/;"	m	namespace:iota
 makeTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::makeTable(const Storage& i)$/;"	f	class:Relation
-makeTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^static Storage makeTable(const Storage& i)$/;"	f	file:
+makeTable	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int makeTable = 0;$/;"	m	namespace:effects::relation
 match	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int match = 36;$/;"	m	class:Dyads
-match	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage match(const Storage& i, const Storage& x) \/\/ a~b$/;"	f
+match	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage match = Dyad::make(Dyads::match);$/;"	m	namespace:iota
 match_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Character
 match_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^Storage Dictionary::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Dictionary
 match_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
@@ -439,7 +508,7 @@ match_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_str
 match_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::match_impl(const Storage& i, const Storage& x)$/;"	f	class:List
 match_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::match_impl(const Storage& i, const Storage& x)$/;"	f	class:Real
 max	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int max = 37;$/;"	m	class:Dyads
-max	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage max(const Storage& i, const Storage& x) \/\/ a|b$/;"	f
+max	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage max = Dyad::make(Dyads::max);$/;"	m	namespace:iota
 max_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::max_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 max_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::max_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 max_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::max_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -453,7 +522,7 @@ max_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/
 max_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::max_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 maximumConvergeIterations	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^    static constexpr int maximumConvergeIterations = 1000;$/;"	m	class:Noun
 min	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int min = 38;$/;"	m	class:Dyads
-min	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage min(const Storage& i, const Storage& x) \/\/ a&b$/;"	f
+min	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage min = Dyad::make(Dyads::min);$/;"	m	namespace:iota
 min_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::min_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 min_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::min_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 min_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::min_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -466,7 +535,7 @@ min_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/
 min_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::min_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 min_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::min_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 minus	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int minus = 39;$/;"	m	class:Dyads
-minus	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage minus(const Storage& i, const Storage& x) \/\/ a-b$/;"	f
+minus	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage minus = Dyad::make(Dyads::minus);$/;"	m	namespace:iota
 minus_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::minus_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 minus_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::minus_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 minus_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::minus_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -479,14 +548,14 @@ minus_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp
 minus_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::minus_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 minus_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::minus_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 mix	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::mix(const Storage& i)$/;"	f	class:Noun
-monadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization3, MonadicAdverb> Noun::monadicAdverbs;$/;"	m	class:Noun	file:
-monadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization3, MonadicAdverb> monadicAdverbs;$/;"	m	class:Noun
-monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^std::map<Specialization3, Monad> Effects::monads;$/;"	m	class:Effects	file:
-monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^    static std::map<Specialization3, Monad> monads;$/;"	m	class:Effects
-monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization3, Monad> Noun::monads;$/;"	m	class:Noun	file:
-monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization3, Monad> monads;$/;"	m	class:Noun
+monadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization3, MonadicAdverbFunction> Noun::monadicAdverbs;$/;"	m	class:Noun	file:
+monadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization3, MonadicAdverbFunction> monadicAdverbs;$/;"	m	class:Noun
+monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^std::map<Specialization3, MonadicFunction> Effects::monads;$/;"	m	class:Effects	file:
+monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^    static std::map<Specialization3, MonadicFunction> monads;$/;"	m	class:Effects
+monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization3, MonadicFunction> Noun::monads;$/;"	m	class:Noun	file:
+monads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization3, MonadicFunction> monads;$/;"	m	class:Noun
 more	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int more = 40;$/;"	m	class:Dyads
-more	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage more(const Storage& i, const Storage& x) \/\/ a>b$/;"	f
+more	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage more = Dyad::make(Dyads::more);$/;"	m	namespace:iota
 more_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::more_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 more_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::more_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 more_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::more_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -501,7 +570,7 @@ more_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp
 nameOrder	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^        std::vector<Storage> nameOrder;$/;"	m	class:Relation::Table
 nameSet	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^        std::unordered_map<Storage, int> nameSet;$/;"	m	class:Relation::Table
 negate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int negate = 11;$/;"	m	class:Monads
-negate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage negate(const Storage& i) \/\/ -a$/;"	f
+negate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage negate = Monad::make(Monads::negate);$/;"	m	namespace:iota
 negate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::negate_impl(const Storage& i) {$/;"	f	class:Integer
 negate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::negate_impl(const Storage& i)$/;"	f	class:List
 negate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::negate_impl(const Storage& i) {$/;"	f	class:Real
@@ -511,6 +580,7 @@ nextIdStorage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/rel
 nil	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::nil()$/;"	f	class:WordArray
 nil1	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::nil1(const Storage& i)$/;"	f	class:WordArray
 nil2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::nil2(const Storage& i, const Storage& x)$/;"	f	class:WordArray
+noexcept	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    std::size_t operator()(const CppValue& i) const noexcept;$/;"	m	class:CppValue
 not_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::not_impl(const Storage& i)$/;"	f	class:Integer
 not_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::not_impl(const Storage& i)$/;"	f	class:IotaString
 not_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::not_impl(const Storage& i)$/;"	f	class:List
@@ -518,19 +588,23 @@ not_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/
 o	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    int o;$/;"	m	class:Storage
 one	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::one()$/;"	f	class:Integer
 one	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::one()$/;"	f	class:Real
-operator ()	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^  std::size_t operator()(const std::vector<int>& integers) const$/;"	f	struct:IntsHash
+operator ()	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^  std::size_t operator()(const std::vector<float>& fs) const$/;"	f	struct:std::hash
+operator ()	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^  std::size_t operator()(const std::vector<int>& integers) const$/;"	f	struct:std::hash
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^bool CppValue::operator==(const CppValue& i) const$/;"	f	class:CppValue
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    bool operator==(const Error& rhs) const$/;"	f	class:Error
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^bool Storage::operator==(const Storage& other) const$/;"	f	class:Storage
+other	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(const CppValue& other) = default; \/\/ copy constructor$/;"	m	class:CppValue
+other	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EvalRegister(const EvalRegister& other) = default;$/;"	m	class:EvalRegister
+over	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage over = MonadicAdverb::make(MonadicAdverbs::over);$/;"	m	namespace:iota
 over	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int over = 55;$/;"	m	class:MonadicAdverbs
-over	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage over(const Storage& i, const Storage& f) \/\/ f\/a$/;"	f
+overNeutral	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage overNeutral = DyadicAdverb::make(DyadicAdverbs::overNeutral);$/;"	m	namespace:iota
 overNeutral	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int overNeutral = 61;$/;"	m	class:DyadicAdverbs
-overNeutral	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage overNeutral(const Storage& i, const Storage& f, const Storage& x) \/\/ a f'b$/;"	f
 overNeutral_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::overNeutral_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
 over_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::over_integers(const Storage& i, const Storage& f)$/;"	f	class:List
 over_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::over_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
 over_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::over_reals(const Storage& i, const Storage& f)$/;"	f	class:List
-parameters	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect.h	/^    mixed parameters;$/;"	m	class:Effect
 plus	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int plus = 41;$/;"	m	class:Dyads
-plus	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage plus(const Storage& i, const Storage& x) \/\/ a+b$/;"	f
+plus	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage plus = Dyad::make(Dyads::plus);$/;"	m	namespace:iota
 plus_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::plus_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 plus_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::plus_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 plus_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::plus_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -543,7 +617,7 @@ plus_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	
 plus_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::plus_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 plus_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::plus_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 power	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int power = 42;$/;"	m	class:Dyads
-power	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage power(const Storage& i, const Storage& x) \/\/ a^b$/;"	f
+power	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage power = Dyad::make(Dyads::power);$/;"	m	namespace:iota
 power_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::power_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 power_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::power_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 power_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::power_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -563,10 +637,12 @@ prepend_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/char
 prepend_to_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::prepend_to_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
 prepend_to_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::prepend_to_reals(const Storage& i, const Storage& x)$/;"	f	class:Real
 processEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^void Effects::processEffects()$/;"	f	class:Effects
+project	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage project = DyadicEffect::make(effects::relation::project);$/;"	m	namespace:iota
 project	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::project(const Storage& i, const Storage& x)$/;"	f	class:Relation
+project	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int project = 7;$/;"	m	namespace:effects::relation
 r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    maybe<Storage> r;$/;"	m	class:EvalRegister
 reciprocal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reciprocal = 12;$/;"	m	class:Monads
-reciprocal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage reciprocal(const Storage& i) \/\/ %a$/;"	f
+reciprocal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage reciprocal = Monad::make(Monads::reciprocal);$/;"	m	namespace:iota
 reciprocal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::reciprocal_impl(const Storage& i)$/;"	f	class:Integer
 reciprocal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::reciprocal_impl(const Storage& i)$/;"	f	class:List
 reciprocal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::reciprocal_impl(const Storage& i) {$/;"	f	class:Real
@@ -577,70 +653,76 @@ registerMonad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.
 registerMonadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&)) {$/;"	f	class:Noun
 registerMonadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^void Effects::registerMonadicEffect(Type it, Type io, Type f, Storage (*m)(const Storage&))$/;"	f	class:Effects
 registerTriad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerTriad(Type it, Type io, Type f, Type xt, Type xo, Storage (*t)(const Storage&, const Storage&, const Storage&)) {$/;"	f	class:Noun
+relation	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^    static constexpr int relation = 0;$/;"	m	class:Effects
+relation	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^namespace effects::relation$/;"	n	class:effects
 remainder	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int remainder = 43;$/;"	m	class:Dyads
-remainder	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage remainder(const Storage& i, const Storage& x) \/\/ a!b$/;"	f
+remainder	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage remainder = Dyad::make(Dyads::remainder);$/;"	m	namespace:iota
 remainder_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::remainder_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 remainder_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::remainder_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 remainder_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::remainder_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
 remainder_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::remainder_integers(const Storage& i, const Storage& x)$/;"	f	class:List
 remainder_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::remainder_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
 remainder_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::remainder_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+remove	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage remove = DyadicEffect::make(effects::relation::remove);$/;"	m	namespace:iota
 remove	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::remove(const Storage& i, const Storage& x)$/;"	f	class:Relation
+remove	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int remove = 5;$/;"	m	namespace:effects::relation
+rename	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage rename = DyadicEffect::make(effects::relation::rename);$/;"	m	namespace:iota
 rename	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::rename(const Storage& i, const Storage& x)$/;"	f	class:Relation
+rename	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int rename = 9;$/;"	m	namespace:effects::relation
 reshape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reshape = 44;$/;"	m	class:Dyads
-reshape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage reshape(const Storage& i, const Storage& x) \/\/ a:^b$/;"	f
+reshape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage reshape = Dyad::make(Dyads::reshape);$/;"	m	namespace:iota
 reshape_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::reshape_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 reshape_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::reshape_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 reshape_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::reshape_integers(const Storage& i, const Storage& x)$/;"	f	class:Integer
 reshape_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::reshape_integers(const Storage& i, const Storage& x)$/;"	f	class:List
 reshape_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::reshape_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
 reshape_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::reshape_mixed(const Storage& i, const Storage& x)$/;"	f	class:List
+restrict	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage restrict = DyadicEffect::make(effects::relation::restrict);$/;"	m	namespace:iota
 restrict	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Relation::restrict(const Storage& i, const Storage& x)$/;"	f	class:Relation
+restrict	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int restrict = 11;$/;"	m	namespace:effects::relation
 retrieve_r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^maybe<bytes> EvalRegister::retrieve_r() const$/;"	f	class:EvalRegister
 retype	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int retype = 50;$/;"	m	class:Dyads
 reverse	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reverse = 13;$/;"	m	class:Monads
-reverse	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage reverse(const Storage& i) \/\/ |a$/;"	f
+reverse	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage reverse = Monad::make(Monads::reverse);$/;"	m	namespace:iota
 reverse_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::reverse_impl(const Storage& i)$/;"	f	class:IotaString
 reverse_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::reverse_impl(const Storage& i)$/;"	f	class:List
 rotate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int rotate = 45;$/;"	m	class:Dyads
-rotate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage rotate(const Storage& i, const Storage& x) \/\/ a:+b$/;"	f
+rotate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage rotate = Dyad::make(Dyads::rotate);$/;"	m	namespace:iota
 rotate_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::rotate_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 rotate_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::rotate_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 rowSize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^        int rowSize;$/;"	m	class:Relation::Table
 rows	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^        std::unordered_map<mixed, int> rows;$/;"	m	class:Relation::Table
+scanConverging	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage scanConverging = MonadicAdverb::make(MonadicAdverbs::scanConverging);$/;"	m	namespace:iota
 scanConverging	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanConverging = 56;$/;"	m	class:MonadicAdverbs
-scanConverging	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage scanConverging(const Storage& i, const Storage& f) \/\/ f:~a$/;"	f
 scanConverging_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)$/;"	f	class:Noun
+scanIterating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage scanIterating = DyadicAdverb::make(DyadicAdverbs::scanIterating);$/;"	m	namespace:iota
 scanIterating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanIterating = 66;$/;"	m	class:DyadicAdverbs
-scanIterating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage scanIterating(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\*b$/;"	f
 scanIterating_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+scanOver	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage scanOver = MonadicAdverb::make(MonadicAdverbs::scanOver);$/;"	m	namespace:iota
 scanOver	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanOver = 57;$/;"	m	class:MonadicAdverbs
-scanOver	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage scanOver(const Storage& i, const Storage& f) \/\/ f\\a$/;"	f
+scanOverNeutral	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage scanOverNeutral = DyadicAdverb::make(DyadicAdverbs::scanOverNeutral);$/;"	m	namespace:iota
 scanOverNeutral	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanOverNeutral = 64;$/;"	m	class:DyadicAdverbs
-scanOverNeutral	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage scanOverNeutral(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\b$/;"	f
 scanOverNeutral_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::scanOverNeutral_impl(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
 scanOver_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::scanOver_integers(const Storage& i, const Storage& f)$/;"	f	class:List
 scanOver_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::scanOver_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
 scanOver_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::scanOver_reals(const Storage& i, const Storage& f)$/;"	f	class:List
+scanWhileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage scanWhileOne = DyadicAdverb::make(DyadicAdverbs::scanWhileOne);$/;"	m	namespace:iota
 scanWhileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int scanWhileOne = 65;$/;"	m	class:DyadicAdverbs
-scanWhileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage scanWhileOne(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\b$/;"	f
 scanWhileOne_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::scanWhileOne_impl(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun
-setEffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::setEffectsRegister(EffectsRegister* newEffectsRegister)$/;"	f	class:EvalRegister
-setEvalRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::setEvalRegister(EvalRegister* newEvalRegister)$/;"	f	class:EffectsRegister
 shape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int shape = 14;$/;"	m	class:Monads
-shape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage shape(const Storage& i) \/\/ ^a$/;"	f
+shape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage shape = Monad::make(Monads::shape);$/;"	m	namespace:iota
 shape_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::shape_impl(const Storage& i)$/;"	f	class:List
 shape_scalar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::shape_scalar(const Storage& i)$/;"	f	class:Noun
 simplify	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::simplify(const Storage& i)$/;"	f	class:Noun
 size	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int size = 15;$/;"	m	class:Monads
-size	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage size(const Storage& i) \/\/ #a$/;"	f
+size	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage size = Monad::make(Monads::size);$/;"	m	namespace:iota
 size_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::size_impl(const Storage& i)$/;"	f	class:Character
 size_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::size_impl(const Storage& i) {$/;"	f	class:Integer
 size_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::size_impl(const Storage& i)$/;"	f	class:IotaString
 size_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::size_impl(const Storage& i)$/;"	f	class:List
 size_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::size_impl(const Storage& i) {$/;"	f	class:Real
 split	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int split = 46;$/;"	m	class:Dyads
-split	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage split(const Storage& i, const Storage& x) \/\/ a:#b$/;"	f
+split	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage split = Dyad::make(Dyads::split);$/;"	m	namespace:iota
 split_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::split_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 split_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::split_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 split_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::split_integers(const Storage& i, const Storage& x)$/;"	f	class:IotaString
@@ -652,18 +734,21 @@ squeeze_int	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/
 squeeze_ints	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_ints(const ints &values)$/;"	f
 squeeze_varint	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^bytes squeeze_varint(const varint &i)$/;"	f
 store_i	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::store_i(const Storage& newI)$/;"	f	class:EvalRegister
-stringToInteger	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^std::unordered_map<ints, int, IntsHash> Symbol::stringToInteger;$/;"	m	class:Symbol	file:
-stringToInteger	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^    static std::unordered_map<ints, int, IntsHash> stringToInteger;$/;"	m	class:Symbol
+string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^std::string Error::string() const$/;"	f	class:Error
+stringToInteger	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^std::unordered_map<ints, int> Symbol::stringToInteger;$/;"	m	class:Symbol	file:
+stringToInteger	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^    static std::unordered_map<ints, int> stringToInteger;$/;"	m	class:Symbol
+t	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue CppValue::t = 1;$/;"	m	class:CppValue	file:
+t	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    static cppValue t;$/;"	m	class:CppValue
 t	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    int t;$/;"	m	class:Storage
 tables	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^std::unordered_map<int, Relation::Table*> Relation::tables;$/;"	m	class:Relation	file:
 tables	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^    static std::unordered_map<int, Table*> tables;$/;"	m	class:Relation
 take	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int take = 47;$/;"	m	class:Dyads
-take	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage take(const Storage& i, const Storage& x) \/\/ a#b$/;"	f
+take	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage take = Dyad::make(Dyads::take);$/;"	m	namespace:iota
 take_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::take_integer(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 take_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::take_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 test_error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage test_error()$/;"	f
 times	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int times = 48;$/;"	m	class:Dyads
-times	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage times(const Storage& i, const Storage& x) \/\/ a*b$/;"	f
+times	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage times = Dyad::make(Dyads::times);$/;"	m	namespace:iota
 times_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::times_integer(const Storage& i, const Storage& x)$/;"	f	class:Integer
 times_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::times_integer(const Storage& i, const Storage& x)$/;"	f	class:List
 times_integer	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::times_integer(const Storage& i, const Storage& x)$/;"	f	class:Real
@@ -699,34 +784,37 @@ to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_floa
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^void MixedArray::to_conn(const Connection& conn, const Storage& x)$/;"	f	class:MixedArray
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^void Word::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Word
 to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^void WordArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:WordArray
+to_cpp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue Object::to_cpp(Storage i)$/;"	f	class:Object
 tolerance	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.h	/^    static constexpr float tolerance = 1e-14f; \/\/ for match$/;"	m	class:Float
 transpose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int transpose = 16;$/;"	m	class:Monads
-transpose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage transpose(const Storage& i) \/\/ +a$/;"	f
+transpose	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage transpose = Monad::make(Monads::transpose);$/;"	m	namespace:iota
 transpose_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::transpose_impl(const Storage& i)$/;"	f	class:List
-triads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, Triad> Noun::triads;$/;"	m	class:Noun	file:
-triads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, Triad> triads;$/;"	m	class:Noun
+triads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, TriadicFunction> Noun::triads;$/;"	m	class:Noun	file:
+triads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, TriadicFunction> triads;$/;"	m	class:Noun
 true0	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::true0() {$/;"	f	class:Noun
 true1	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::true1(const Storage& i) {$/;"	f	class:Noun
 true2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::true2(const Storage& i, const Storage& x) {$/;"	f	class:Noun
 truth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expression.cpp	/^Storage Expression::truth(const Storage& i)$/;"	f	class:Expression
 truth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^int Storage::truth() const$/;"	f	class:Storage
 truth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int truth = 21;$/;"	m	class:Monads
-truth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage truth(const Storage& i)$/;"	f
+truth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage truth = Monad::make(Monads::truth);$/;"	m	namespace:iota
 truth_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.cpp	/^Storage Conditional::truth_impl(const Storage& i)$/;"	f	class:Conditional
 truth_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^Storage Symbol::truth_impl(const Storage& i)$/;"	f	class:Symbol
 undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::undefined()$/;"	f	class:QuotedSymbol
 undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int undefined = 5; \/\/ If adding new symbols, undefined must also be the last symbol as it marks the end of the list of builtin symbols.$/;"	m	class:SymbolType
 undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int undefined = 67;$/;"	m	class:Monads
-undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage undefined(const Storage& i) \/\/ ?a$/;"	f
+undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage undefined = Monad::make(Monads::undefined);$/;"	m	namespace:iota
 undefined_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::undefined_impl(const Storage& i)$/;"	f	class:QuotedSymbol
 unique	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int unique = 17;$/;"	m	class:Monads
-unique	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage unique(const Storage& i) \/\/ ?a$/;"	f
+unique	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage unique = Monad::make(Monads::unique);$/;"	m	namespace:iota
 unique_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::unique_impl(const Storage& i)$/;"	f	class:List
+value	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    cppValue value;$/;"	m	class:CppValue
 values	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^std::unordered_map<int, Storage> Symbol::values;$/;"	m	class:Symbol	file:
 values	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^    static std::unordered_map<int, Storage> values;$/;"	m	class:Symbol
+whileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage whileOne = DyadicAdverb::make(DyadicAdverbs::whileOne);$/;"	m	namespace:iota
 whileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int whileOne = 62;$/;"	m	class:DyadicAdverbs
-whileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.cpp	/^Storage whileOne(const Storage& i, const Storage& f, const Storage& x) \/\/ a f\\b$/;"	f
 whileOne_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::whileOne_impl(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun
+x	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    Storage(const Storage& x) = default; \/\/ o(x.o), t(x.t), i(x.i)$/;"	m	class:Storage
 x	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int x = 1;$/;"	m	class:SymbolType
 y	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int y = 2;$/;"	m	class:SymbolType
 z	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int z = 3;$/;"	m	class:SymbolType

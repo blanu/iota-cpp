@@ -2,7 +2,6 @@
 #define SERIAL_CONNECTION_H_
 
 #include "types.h"
-#include "Connection.h"
 #include "storage/storage.h"
 
 #define EXPORT

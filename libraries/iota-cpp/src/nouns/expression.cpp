@@ -3,11 +3,14 @@
 //
 
 #include "expression.h"
+
 #include "noun.h"
 
 #include "../symbols.h"
 #include "../verbs.h"
+#include "../api.h"
 
+#include "../storage/mixed_array.h"
 
 // Expression
 void Expression::initialize()
@@ -28,8 +31,15 @@ void Expression::initialize()
   */
 }
 
+Storage Expression::make(const mixed& e)
+{
+  return MixedArray::make(e, NounType::EXPRESSION);
+}
+
 // FIXME - infinite recursion
 Storage Expression::truth(const Storage& i)
 {
-  return truth(evaluate(i));
+  using namespace iota;
+
+  return eval({i, evaluate, iota::truth});
 }

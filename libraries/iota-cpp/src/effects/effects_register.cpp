@@ -4,19 +4,50 @@
 
 #include "effects_register.h"
 
-#include "effects/effect.h"
+#include "effects.h"
+#include "../error.h"
+
+#include "../storage/word.h"
 
 void EffectsRegister::initialize()
 {
-  // FIXME;
+  Effects::initialize();
 }
 
-void EffectsRegister::setEvalRegister(EvalRegister* newEvalRegister)
+Storage EffectsRegister::eval(const Storage& s)
 {
-  eval_register = newEvalRegister;
-}
+  if(s.o == NounType::SIGNAL)
+  {
+    if(std::holds_alternative<mixed>(s.i))
+    {
+      mixed ms = std::get<mixed>(s.i);
 
-void EffectsRegister::handleEffects()
-{
-  // FIXME
+      if(ms.size() == 4 || ms.size() == 5)
+      {
+        Storage result = ms[0];
+
+        Storage t = ms[1];
+        Storage i = ms[2];
+
+        if(ms.size() == 4)
+        {
+          Effects::dispatchMonadicEffect(t, i);
+        }
+        else
+        {
+          Storage x = ms[3];
+
+          Effects::dispatchDyadicEffect(t, i, x);
+        }
+
+        return result;
+      }
+    }
+
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  }
+  else
+  {
+    return s;
+  }
 }

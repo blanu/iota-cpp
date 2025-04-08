@@ -5,101 +5,79 @@
 #ifndef VERBS_H
 #define VERBS_H
 
+#include "symbols.h"
+
 #include "storage/storage.h"
 
 int getInteger(const Storage& i);
 
+class Monad
+{
+  public:
+    static Storage make(int i);
+};
+
+class Dyad
+{
+  public:
+    static Storage make(int i);
+};
+
 // Monads
-Storage atom(const Storage& i);
-Storage ichar(const Storage& i);
-Storage enclose(const Storage& i);
-Storage enumerate(const Storage& i);
-Storage expand(const Storage& i);
-Storage first(const Storage& i);
-Storage floor(const Storage& i);
-Storage format(const Storage& i);
-Storage gradeDown(const Storage& i);
-Storage gradeUp(const Storage& i);
-Storage group(const Storage& i);
-Storage negate(const Storage& i);
-Storage reciprocal(const Storage& i);
-Storage reverse(const Storage& i);
-Storage shape(const Storage& i);
-Storage size(const Storage& i);
-Storage transpose(const Storage& i);
-Storage unique(const Storage& i);
-Storage inot(const Storage& i);
-Storage undefined(const Storage& i);
+namespace iota
+{
+  inline Storage atom = Monad::make(Monads::atom);
+  inline Storage ichar = Monad::make(Monads::ichar);
+  inline Storage enclose = Monad::make(Monads::enclose);
+  inline Storage enumerate = Monad::make(Monads::enumerate);
+  inline Storage expand = Monad::make(Monads::expand);
+  inline Storage first = Monad::make(Monads::first);
+  inline Storage floor = Monad::make(Monads::floor);
+  inline Storage format = Monad::make(Monads::format);
+  inline Storage gradeDown = Monad::make(Monads::gradeDown);
+  inline Storage gradeUp = Monad::make(Monads::gradeUp);
+  inline Storage group = Monad::make(Monads::group);
+  inline Storage negate = Monad::make(Monads::negate);
+  inline Storage inot = Monad::make(Monads::inot);
+  inline Storage reciprocal = Monad::make(Monads::reciprocal);
+  inline Storage reverse = Monad::make(Monads::reverse);
+  inline Storage shape = Monad::make(Monads::shape);
+  inline Storage size = Monad::make(Monads::size);
+  inline Storage transpose = Monad::make(Monads::transpose);
+  inline Storage unique = Monad::make(Monads::unique);
+  inline Storage undefined = Monad::make(Monads::undefined);
 
-// Extension Monads
+  // Extension Monads
+  inline Storage evaluate = Monad::make(Monads::evaluate);
+  inline Storage erase = Monad::make(Monads::erase);
+  inline Storage truth = Monad::make(Monads::truth);
 
-Storage evaluate(const Storage& i);
-Storage erase(const Storage& i);
-Storage truth(const Storage& i);
-
-// Dyads
-Storage amend(const Storage& i, const Storage& x);
-Storage cut(const Storage& i, const Storage& x);
-Storage divide(const Storage& i, const Storage& x);
-Storage drop(const Storage& i, const Storage& x);
-Storage equal(const Storage& i, const Storage& x);
-Storage find(const Storage& i, const Storage& x);
-Storage form(const Storage& i, const Storage& x);
-Storage format2(const Storage& i, const Storage& x);
-Storage index(const Storage& i, const Storage& x);
-Storage integerDivide(const Storage& i, const Storage& x);
-Storage join(const Storage& i, const Storage& x);
-Storage less(const Storage& i, const Storage& x);
-Storage match(const Storage& i, const Storage& x);
-Storage max(const Storage& i, const Storage& x);
-Storage min(const Storage& i, const Storage& x);
-Storage minus(const Storage& i, const Storage& x);
-Storage more(const Storage& i, const Storage& x);
-Storage plus(const Storage& i, const Storage& x);
-Storage power(const Storage& i, const Storage& x);
-Storage remainder(const Storage& i, const Storage& x);
-Storage reshape(const Storage& i, const Storage& x);
-Storage rotate(const Storage& i, const Storage& x);
-Storage split(const Storage& i, const Storage& x);
-Storage take(const Storage& i, const Storage& x);
-Storage times(const Storage& i, const Storage& x);
-
-// Monadic Adverbs
-Storage converge(const Storage& i, const Storage& f);
-Storage each(const Storage& i, const Storage& f);
-Storage eachPair(const Storage& i, const Storage& f);
-Storage over(const Storage& i, const Storage& f);
-Storage scanConverging(const Storage& i, const Storage& f);
-Storage scanOver(const Storage& i, const Storage& f);
-
-// Dyadic Adverbs
-Storage each2(const Storage& i, const Storage& f, const Storage& x);
-Storage eachLeft(const Storage& i, const Storage& f, const Storage& x);
-Storage eachRight(const Storage& i, const Storage& f, const Storage& x);
-Storage overNeutral(const Storage& i, const Storage& f, const Storage& x);
-Storage iterate(const Storage& i, const Storage& f, const Storage& x);
-Storage scanIterating(const Storage& i, const Storage& f, const Storage& x);
-Storage scanOverNeutral(const Storage& i, const Storage& f, const Storage& x);
-Storage scanWhileOne(const Storage& i, const Storage& f, const Storage& x);
-Storage whileOne(const Storage& i, const Storage& f, const Storage& x);
-
-// Effects
-// Effect: Relations
-// Effect: Relations: Monads
-static Storage makeTable(const Storage& i);
-static Storage copyTable(const Storage& i);
-static Storage free(const Storage& i);
-static Storage flatten(const Storage& i);
-
-// Effect: Relations: Dyads
-static Storage insert(const Storage& i, const Storage& x);
-static Storage remove(const Storage& i, const Storage& x);
-static Storage iunion(const Storage& i, const Storage& x);
-static Storage project(const Storage& i, const Storage& x);
-static Storage difference(const Storage& i, const Storage& x);
-static Storage rename(const Storage& i, const Storage& x);
-static Storage crossProduct(const Storage& i, const Storage& x);
-static Storage restrict(const Storage& i, const Storage& x);
-static Storage intersection(const Storage& i, const Storage& x);
+  // Dyads
+  inline Storage amend = Dyad::make(Dyads::amend);
+  inline Storage cut = Dyad::make(Dyads::cut);
+  inline Storage divide = Dyad::make(Dyads::divide);
+  inline Storage drop = Dyad::make(Dyads::drop);
+  inline Storage equal = Dyad::make(Dyads::equal);
+  inline Storage find = Dyad::make(Dyads::find);
+  inline Storage form = Dyad::make(Dyads::form);
+  inline Storage format2 = Dyad::make(Dyads::format2);
+  inline Storage index = Dyad::make(Dyads::index);
+  inline Storage integerDivide = Dyad::make(Dyads::integerDivide);
+  inline Storage join = Dyad::make(Dyads::join);
+  inline Storage less = Dyad::make(Dyads::less);
+  inline Storage match = Dyad::make(Dyads::match);
+  inline Storage max = Dyad::make(Dyads::max);
+  inline Storage min = Dyad::make(Dyads::min);
+  inline Storage minus = Dyad::make(Dyads::minus);
+  inline Storage more = Dyad::make(Dyads::more);
+  inline Storage plus = Dyad::make(Dyads::plus);
+  inline Storage power = Dyad::make(Dyads::power);
+  inline Storage remainder = Dyad::make(Dyads::remainder);
+  inline Storage reshape = Dyad::make(Dyads::reshape);
+  inline Storage rotate = Dyad::make(Dyads::rotate);
+  inline Storage split = Dyad::make(Dyads::split);
+  inline Storage take = Dyad::make(Dyads::take);
+  inline Storage times = Dyad::make(Dyads::times);
+}
 
 #endif //VERBS_H

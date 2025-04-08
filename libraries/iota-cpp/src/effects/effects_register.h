@@ -5,26 +5,16 @@
 #ifndef EFFECTS_REGISTER_H
 #define EFFECTS_REGISTER_H
 
-#include <queue>
-
-#include "eval_register.h"
-
-#include "effects/effect.h"
-
-class EvalRegister;
+#include "../storage/storage.h"
 
 class EffectsRegister
 {
   public:
     static void initialize();
 
-    void setEvalRegister(EvalRegister* reg);
+    EffectsRegister() {}
 
-    void handleEffects();
-
-  private:
-    EvalRegister* eval_register = nullptr;
-    std::queue<Effect> effects;
+    Storage eval(const Storage& s);
 };
 
 #endif //EFFECTS_REGISTER_H

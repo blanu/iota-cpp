@@ -33,7 +33,7 @@ class Relation
     // Monads
     static Storage makeTable(const Storage& i);
     static Storage copyTable(const Storage& i);
-    static Storage free(const Storage& i);
+    static Storage freeTable(const Storage& i);
     static Storage flatten(const Storage& i);
 
     // Dyads
