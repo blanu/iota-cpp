@@ -5617,6 +5617,8 @@ operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^    MyType2& operator=(MyType2 const&) { throw 4; }$/;"	f	struct:MyType2
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^bool CppValue::operator==(const CppValue& i) const$/;"	f	class:CppValue
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    bool operator==(const Error& rhs) const$/;"	f	class:Error
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const T& left, const cppValue& right) {$/;"	f
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const cppValue& left, const T& right) {$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^bool Storage::operator==(const Storage& other) const$/;"	f	class:Storage
 operator ==	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    bool operator==( ProcessedReporterSpec const& lhs,$/;"	f	namespace:Catch::Benchmark::Detail::Catch
 operator ==	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    bool operator==( ReporterSpec const& lhs, ReporterSpec const& rhs ) {$/;"	f	namespace:Catch::Benchmark::Detail::Catch::Catch
@@ -5683,7 +5685,10 @@ operator bool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catc
 operator bool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^    explicit operator bool() const {$/;"	f	struct:Boolable
 operator bool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/third_party/clara.hpp	/^        explicit operator bool() const { return m_type == ResultBase::Ok; }$/;"	f	class:clara::detail::BasicResult
 operator bool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/third_party/clara.hpp	/^        explicit operator bool() const {$/;"	f	class:clara::detail::TokenStream
+operator char	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    operator char() const \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
 operator double	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Approx.tests.cpp	/^        explicit operator double() const { return d_; }$/;"	f	class:__anon45::StrongDoubleTypedef
+operator float	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    operator float() const \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+operator int	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    operator int() const \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
 operator int	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^    operator int() const { return 7; }$/;"	f	struct:Awkward
 operator std::string	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        explicit operator std::string() const {$/;"	f	class:Catch::StringRef
 operator std::string	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_stringref.hpp	/^        explicit operator std::string() const {$/;"	f	class:Catch::StringRef
@@ -7185,6 +7190,7 @@ valueOr	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 values	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^std::unordered_map<int, Storage> Symbol::values;$/;"	m	class:Symbol	file:
 values	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^    static std::unordered_map<int, Storage> values;$/;"	m	class:Symbol
 values	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators.hpp	/^    GeneratorWrapper<T> values(std::initializer_list<T> values) {$/;"	f	namespace:Catch::Generators
+variant_cast	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^T variant_cast(const cppValue& value) {$/;"	f
 verbosity	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    Verbosity Config::verbosity() const                { return m_data.verbosity; }$/;"	f	class:Catch::Benchmark::Detail::Catch::Config
 verbosity	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.cpp	/^    Verbosity Config::verbosity() const                { return m_data.verbosity; }$/;"	f	class:Catch::Config
 verbosity	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.hpp	/^        Verbosity verbosity = Verbosity::Normal;$/;"	m	struct:Catch::ConfigData

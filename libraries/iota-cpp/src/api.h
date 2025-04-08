@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <optional>
+#include <type_traits>
 
 #include "storage/storage.h"
 #include "verbs.h" // NOLINT, included for convenience for users of api.h
@@ -62,7 +63,43 @@ class CppValue
     // CppValue(std::unordered_map<CppValue, CppValue> value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(Error value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(Storage value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+
+    // implicit conversions back to C++ types
+    operator int() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+    {
+      return std::get<int>(value);
+    }
+
+    operator float() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+    {
+      return std::get<float>(value);
+    }
+
+    operator char() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+    {
+      return std::get<char>(value);
+    }
 };
+
+template <typename T>
+T variant_cast(const cppValue& value) {
+  return std::get<T>(value);
+}
+
+template <typename T>
+typename std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
+operator==(const cppValue& left, const T& right) {
+  if (std::holds_alternative<T>(left)) {
+    return std::get<T>(left) == right;
+  }
+  return false;
+}
+
+template <typename T>
+typename std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
+operator==(const T& left, const cppValue& right) {
+  return right == left; // Use the overload above
+}
 
 class Object
 {

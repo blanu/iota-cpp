@@ -218,7 +218,7 @@ Storage IotaString::gradeUp_impl(const Storage& i)
 
     std::sort(results.begin(), results.end(), [&integers](int x, int y)
     {
-      return integers[x] > integers[y];
+      return integers[x] < integers[y];
     });
 
     for (int & result : results)

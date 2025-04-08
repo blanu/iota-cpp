@@ -592,7 +592,12 @@ operator ()	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^  s
 operator ()	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^  std::size_t operator()(const std::vector<int>& integers) const$/;"	f	struct:std::hash
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^bool CppValue::operator==(const CppValue& i) const$/;"	f	class:CppValue
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    bool operator==(const Error& rhs) const$/;"	f	class:Error
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const T& left, const cppValue& right) {$/;"	f
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const cppValue& left, const T& right) {$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^bool Storage::operator==(const Storage& other) const$/;"	f	class:Storage
+operator char	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    operator char() const \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+operator float	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    operator float() const \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
+operator int	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    operator int() const \/\/ NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that$/;"	f	class:CppValue
 other	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    CppValue(const CppValue& other) = default; \/\/ copy constructor$/;"	m	class:CppValue
 other	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EvalRegister(const EvalRegister& other) = default;$/;"	m	class:EvalRegister
 over	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage over = MonadicAdverb::make(MonadicAdverbs::over);$/;"	m	namespace:iota
@@ -811,6 +816,7 @@ unique_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cp
 value	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    cppValue value;$/;"	m	class:CppValue
 values	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.cpp	/^std::unordered_map<int, Storage> Symbol::values;$/;"	m	class:Symbol	file:
 values	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/symbol.h	/^    static std::unordered_map<int, Storage> values;$/;"	m	class:Symbol
+variant_cast	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^T variant_cast(const cppValue& value) {$/;"	f
 whileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage whileOne = DyadicAdverb::make(DyadicAdverbs::whileOne);$/;"	m	namespace:iota
 whileOne	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int whileOne = 62;$/;"	m	class:DyadicAdverbs
 whileOne_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::whileOne_impl(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun

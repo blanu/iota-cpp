@@ -784,13 +784,31 @@ Storage List::floor_impl(const Storage& i)
       return WordArray::make(ints(), NounType::LIST);
     }
 
-    mixed results = mixed();
+    ints results = ints();
+    mixed mixedResults = mixed();
     for(const Storage& y : ms)
     {
-      results.push_back(eval({y, iota::floor}));
+      Storage result = eval({y, iota::floor});
+      mixedResults.push_back(result);
+
+      if(result.o == NounType::INTEGER)
+      {
+        if(std::holds_alternative<int>(result.i))
+        {
+          int integer = std::get<int>(result.i);
+          results.push_back(integer);
+        }
+      }
     }
 
-    return MixedArray::make(results, NounType::LIST);
+    if(mixedResults.size() > results.size())
+    {
+      return MixedArray::make(mixedResults, NounType::LIST);
+    }
+    else
+    {
+      return WordArray::make(results, NounType::LIST);
+    }
   }
   else
   {

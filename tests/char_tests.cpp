@@ -10,21 +10,21 @@ TEST_CASE("char integer")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{1, ichar}) == cppValue('\x01'));
+  REQUIRE(evalExpression({1, ichar}) == '\x01');
 }
 
 TEST_CASE("char list")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{ints{}, ichar}) == cppValue(ints{}));
+  REQUIRE(evalExpression({ints{}, ichar}) == ints{});
 
-  REQUIRE(evalExpression(cppValues{ints{2, 3}, ichar}) == cppValue(CppValues{'\x02', '\x03'}));
+  REQUIRE(evalExpression({ints{2, 3}, ichar}) == CppValues{'\x02', '\x03'});
 }
 
 TEST_CASE("char character")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{'a', ichar}) == cppValue('a'));
+  REQUIRE(evalExpression({'a', ichar}) == 'a');
 }
