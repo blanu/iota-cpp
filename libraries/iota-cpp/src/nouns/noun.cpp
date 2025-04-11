@@ -456,7 +456,13 @@ Storage Noun::simplify(const Storage& i)
     }    
     else
     {
-      return i;
+      mixed results = mixed();
+      for(const Storage& y : iis)
+      {
+        results.push_back(simplify(y));
+      }
+
+      return MixedArray::make(results, NounType::LIST);
     }
   }
 

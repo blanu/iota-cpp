@@ -6,7 +6,7 @@
 
 #include "api.h"
 
-TEST_CASE("not integer")
+TEST_CASE("not integer", "[monad]")
 {
   using namespace iota;
 
@@ -14,7 +14,7 @@ TEST_CASE("not integer")
   REQUIRE(evalExpression(cppValues{5, inot}) == cppValue(0));
 }
 
-TEST_CASE("not real")
+TEST_CASE("not real", "[monad]")
 {
   using namespace iota;
 
@@ -22,7 +22,7 @@ TEST_CASE("not real")
   REQUIRE(evalExpression(cppValues{5.0f, inot}) == cppValue(0));
 }
 
-TEST_CASE("not list")
+TEST_CASE("not list", "[monad]")
 {
   using namespace iota;
 
@@ -32,14 +32,14 @@ TEST_CASE("not list")
   REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f, 2}, inot}) == cppValue(ints{1, 0, 0}));
 }
 
-TEST_CASE("not character")
+TEST_CASE("not character", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression(cppValues{'a', inot}) == cppValue{0});
 }
 
-TEST_CASE("not string")
+TEST_CASE("not string", "[monad]")
 {
   using namespace iota;
 
@@ -48,7 +48,7 @@ TEST_CASE("not string")
 }
 
 // FIXME
-// TEST_CASE("not dictionary")
+// TEST_CASE("not dictionary", "[monad]")
 // {
 //   using namespace iota;
 //

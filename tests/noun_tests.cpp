@@ -6,7 +6,7 @@
 
 #include "api.h"
 
-TEST_CASE("small words")
+TEST_CASE("small words", "[monad]")
 {
   REQUIRE(evalNoun(0) == cppValue(0));
   REQUIRE(evalNoun(1) == cppValue(1));
@@ -24,7 +24,7 @@ TEST_CASE("small words")
 }
 
 // FIXME
-// TEST_CASE("big words")
+// TEST_CASE("big words", "[monad]")
 // {
 //   REQUIRE(evalNoun(2147483648) == 2147483648);  // requires 4 bytes
 //   REQUIRE(evalNoun(-2147483648) == -2147483648);  // requires 4 bytes
@@ -38,7 +38,7 @@ TEST_CASE("small words")
 //   REQUIRE(evalNoun(-9223372036854775807) == -9223372036854775807); // signed 64-bit max
 // }
 
-TEST_CASE("float")
+TEST_CASE("float", "[monad]")
 {
   REQUIRE(evalNoun(0.0f) == cppValue(0.0f));
   REQUIRE(evalNoun(1.0f) == cppValue(1.0f));
@@ -47,7 +47,7 @@ TEST_CASE("float")
   REQUIRE(evalNoun(-100.0f) == cppValue(-100.0f));
 }
 
-TEST_CASE("words")
+TEST_CASE("words", "[monad]")
 {
   REQUIRE(evalNoun(ints{0}) == cppValue(ints{0}));
   REQUIRE(evalNoun(ints{1}) == cppValue(ints{1}));
@@ -62,7 +62,7 @@ TEST_CASE("words")
   REQUIRE(evalNoun(ints{-256, -1024}) == cppValue(ints{-256, -1024}));
 }
 
-TEST_CASE("floats")
+TEST_CASE("floats", "[monad]")
 {
   REQUIRE(evalNoun(floats{0.0f}) == cppValue(floats{0.0f}));
   REQUIRE(evalNoun(floats{1.0f}) == cppValue(floats{1.0f}));
@@ -77,7 +77,7 @@ TEST_CASE("floats")
   REQUIRE(evalNoun(floats{-256.0f, -1024.0f}) == cppValue(floats{-256.0f, -1024.0f}));
 }
 
-TEST_CASE("mixed")
+TEST_CASE("mixed", "[monad]")
 {
   REQUIRE(evalNoun(CppValues{0, 0.0f}) == cppValue(CppValues{0, 0.0f}));
   REQUIRE(evalNoun(CppValues{1.0f, 1}) == cppValue(CppValues{1.0f, 1}));
@@ -88,14 +88,14 @@ TEST_CASE("mixed")
   REQUIRE(evalNoun(CppValues{floats{1.0f}, floats{2.0f}}) == cppValue(CppValues{floats{1.0f}, floats{2.0f}}));
 }
 
-TEST_CASE("character")
+TEST_CASE("character", "[monad]")
 {
   REQUIRE(evalNoun('a') == cppValue('a'));
   REQUIRE(evalNoun('b') == cppValue('b'));
   REQUIRE(evalNoun('\x00') == cppValue('\x00'));
 }
 
-TEST_CASE("string")
+TEST_CASE("string", "[monad]")
 {
   REQUIRE(evalNoun("a") == cppValue("a"));
   REQUIRE(evalNoun("b") == cppValue("b"));
@@ -103,7 +103,7 @@ TEST_CASE("string")
   REQUIRE(evalNoun("😀") == cppValue("😀"));
 }
 
-TEST_CASE("eval")
+TEST_CASE("eval", "[monad]")
 {
   using namespace iota;
 

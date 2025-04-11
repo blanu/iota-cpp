@@ -7,7 +7,7 @@
 #include "api.h"
 #include "nouns/quoted_symbol.h"
 
-TEST_CASE("gradeDown integers")
+TEST_CASE("gradeDown integers", "[monad]")
 {
   using namespace iota;
 
@@ -16,7 +16,7 @@ TEST_CASE("gradeDown integers")
   REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f, 0, 2.0f}, gradeDown}) == cppValue(ints{4, 2, 1, 3}));
 }
 
-TEST_CASE("gradeDown string")
+TEST_CASE("gradeDown string", "[monad]")
 {
   using namespace iota;
 

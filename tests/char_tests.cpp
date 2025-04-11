@@ -6,14 +6,14 @@
 
 #include "api.h"
 
-TEST_CASE("char integer")
+TEST_CASE("char integer", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({1, ichar}) == '\x01');
 }
 
-TEST_CASE("char list")
+TEST_CASE("char list", "[monad]")
 {
   using namespace iota;
 
@@ -22,7 +22,7 @@ TEST_CASE("char list")
   REQUIRE(evalExpression({ints{2, 3}, ichar}) == CppValues{'\x02', '\x03'});
 }
 
-TEST_CASE("char character")
+TEST_CASE("char character", "[monad]")
 {
   using namespace iota;
 

@@ -6,21 +6,21 @@
 
 #include "api.h"
 
-TEST_CASE("atom integer")
+TEST_CASE("atom integer", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({1, atom}) == 1);
 }
 
-TEST_CASE("atom real")
+TEST_CASE("atom real", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({1.0f, atom}) == 1);
 }
 
-TEST_CASE("atom list")
+TEST_CASE("atom list", "[monad]")
 {
   using namespace iota;
 
@@ -31,14 +31,14 @@ TEST_CASE("atom list")
   REQUIRE(evalExpression({CppValues{2, 3.0f}, atom}) == 0);
 }
 
-TEST_CASE("atom character")
+TEST_CASE("atom character", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({'a', atom}) == 1);
 }
 
-TEST_CASE("atom string")
+TEST_CASE("atom string", "[monad]")
 {
   using namespace iota;
 
@@ -46,7 +46,7 @@ TEST_CASE("atom string")
   REQUIRE(evalExpression({"abc", atom}) == 0);
 }
 
-// TEST_CASE("atom dictionary")
+// TEST_CASE("atom dictionary", "[monad]")
 // {
 //   using namespace iota;
 //

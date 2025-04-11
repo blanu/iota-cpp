@@ -34,6 +34,15 @@ add_executable(tests main.cpp
   format_tests.cpp
   gradeDown_tests.cpp
   gradeUp_tests.cpp
+  group_tests.cpp
+  negate_tests.cpp
+  reciprocal_tests.cpp
+  reverse_tests.cpp
+  shape_tests.cpp
+  size_tests.cpp
+  transpose_tests.cpp
+  undefined_tests.cpp
+  unique_tests.cpp
 )
 target_link_libraries(tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
 

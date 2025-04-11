@@ -6,21 +6,21 @@
 
 #include "api.h"
 
-TEST_CASE("floor integer")
+TEST_CASE("floor integer", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression(cppValues{5, iota::floor}) == cppValue(5));
 }
 
-TEST_CASE("floor real")
+TEST_CASE("floor real", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression(cppValues{5.0f, iota::floor}) == cppValue(5));
 }
 
-TEST_CASE("floor list")
+TEST_CASE("floor list", "[monad]")
 {
   using namespace iota;
 

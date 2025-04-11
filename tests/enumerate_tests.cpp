@@ -6,7 +6,7 @@
 
 #include "api.h"
 
-TEST_CASE("enumerate integer")
+TEST_CASE("enumerate integer", "[monad]")
 {
   using namespace iota;
 

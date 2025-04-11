@@ -1471,13 +1471,32 @@ Storage List::reciprocal_impl(const Storage& i)
       return i;
     }
 
-    mixed results = mixed();
+    floats results = floats();
+    mixed mixedResults = mixed();
     for(const Storage& y : ms)
     {
-      results.push_back(eval({Real::make(1.0), divide, y}));
+      Storage result = eval({Real::make(1.0), divide, y});
+      mixedResults.push_back(result);
+
+      if(result.o == NounType::REAL)
+      {
+        if(std::holds_alternative<float>(result.i))
+        {
+          float f = std::get<float>(result.i);
+
+          results.push_back(f);
+        }
+      }
     }
 
-    return MixedArray::make(results, NounType::LIST);
+    if(mixedResults.size() > results.size())
+    {
+      return MixedArray::make(mixedResults, NounType::LIST);
+    }
+    else
+    {
+      return FloatArray::make(results, NounType::LIST);
+    }
   }
   else
   {
@@ -1644,6 +1663,8 @@ Storage List::size_impl(const Storage& i)
 // FIXME - support 2D arrays of bigints
 Storage List::transpose_impl(const Storage& i)
 {
+  using namespace iota;
+
   if(std::holds_alternative<mixed>(i.i))
   {
     mixed ms = std::get<mixed>(i.i);
@@ -1755,8 +1776,34 @@ Storage List::transpose_impl(const Storage& i)
             results.insert(results.end(), FloatArray::make(transposed[k], NounType::LIST));
           }
 
-          return MixedArray::make(results, NounType::LIST);
+          return Noun::simplify(MixedArray::make(results, NounType::LIST));
         }
+      }
+      else // mixed
+      {
+        mixed results = mixed();
+
+        Storage first = ms.front();
+
+        int columnSize = ms.size();
+        int rowSize = getInteger(eval({first, size}));
+
+        for(int rowOffset = 0; rowOffset < rowSize; ++rowOffset)
+        {
+          results.push_back(MixedArray::make(mixed()));
+        }
+
+        for(int columnOffset = 0; columnOffset < columnSize; ++columnOffset)
+        {
+          Storage column = ms[columnOffset];
+          for(int rowOffset = 0; rowOffset < rowSize; ++rowOffset)
+          {
+            Storage element = eval({column, iota::index, Integer::make(rowOffset + 1)});
+            results[rowOffset] = eval({results[rowOffset], join, element});
+          }
+        }
+
+        return Noun::simplify(MixedArray::make(results, NounType::LIST));
       }
     }
   }
@@ -1804,23 +1851,21 @@ Storage List::unique_impl(const Storage& i)
   }
   else if(std::holds_alternative<mixed>(i.i))
   {
-    // FIXME - implement unique for mixed
-    // mixed ms = std::get<mixed>(i.i);
+    mixed ms = std::get<mixed>(i.i);
 
-    // std::unordered_set<Storage> set = std::unordered_set<Storage>();
-    // mixed results = mixed();
+    std::unordered_set<Storage> set = std::unordered_set<Storage>();
+    mixed results = mixed();
 
-    // for(Storage y : ms)
-    // {
-    //   if(set.find(y) == set.end())
-    //   {
-    //     set.insert(y);
-    //     results.insert(results.end(), y);
-    //   }
-    // }
+    for(Storage y : ms)
+    {
+      if(set.find(y) == set.end())
+      {
+        set.insert(y);
+        results.insert(results.end(), y);
+      }
+    }
 
-    // return MixedArray::make(results, NounType::LIST);
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return MixedArray::make(results, NounType::LIST);
   }
   else
   {

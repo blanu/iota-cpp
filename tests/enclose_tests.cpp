@@ -6,21 +6,21 @@
 
 #include "api.h"
 
-TEST_CASE("enclose integer")
+TEST_CASE("enclose integer", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({5, enclose}) == ints{5});
 }
 
-TEST_CASE("enclose real")
+TEST_CASE("enclose real", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({5.0f, enclose}) == floats{5.0f});
 }
 
-TEST_CASE("enclose list")
+TEST_CASE("enclose list", "[monad]")
 {
   using namespace iota;
 
@@ -31,7 +31,7 @@ TEST_CASE("enclose list")
 }
 
 // FIXME
-// TEST_CASE("enclose character")
+// TEST_CASE("enclose character", "[monad]")
 // {
 //   using namespace iota;
 //
@@ -39,7 +39,7 @@ TEST_CASE("enclose list")
 // }
 
 // FIXME
-// TEST_CASE("enclose string")
+// TEST_CASE("enclose string", "[monad]")
 // {
 //   using namespace iota;
 //
@@ -47,7 +47,7 @@ TEST_CASE("enclose list")
 // }
 
 // FIXME
-// TEST_CASE("enclose dictionary")
+// TEST_CASE("enclose dictionary", "[monad]")
 // {
 //   using namespace iota;
 //

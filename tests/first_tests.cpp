@@ -6,21 +6,21 @@
 
 #include "api.h"
 
-TEST_CASE("first integer")
+TEST_CASE("first integer", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({5, first}) == 5);
 }
 
-TEST_CASE("first real")
+TEST_CASE("first real", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({5.0f, first}) == 5.0f);
 }
 
-TEST_CASE("first list")
+TEST_CASE("first list", "[monad]")
 {
   using namespace iota;
 
@@ -30,14 +30,14 @@ TEST_CASE("first list")
   REQUIRE(evalExpression({CppValues{0, 1.0f, 2}, first}) == 0);
 }
 
-TEST_CASE("first character")
+TEST_CASE("first character", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression({'a', first}) == 'a');
 }
 
-TEST_CASE("first string")
+TEST_CASE("first string", "[monad]")
 {
   using namespace iota;
 

@@ -5617,6 +5617,7 @@ operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^    MyType2& operator=(MyType2 const&) { throw 4; }$/;"	f	struct:MyType2
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^bool CppValue::operator==(const CppValue& i) const$/;"	f	class:CppValue
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    bool operator==(const Error& rhs) const$/;"	f	class:Error
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^bool operator==(const std::vector<T>& left, const std::vector<T>& right)$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const T& left, const cppValue& right) {$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const cppValue& left, const T& right) {$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^bool Storage::operator==(const Storage& other) const$/;"	f	class:Storage

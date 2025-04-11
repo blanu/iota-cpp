@@ -7,7 +7,7 @@
 #include "api.h"
 #include "nouns/quoted_symbol.h"
 
-TEST_CASE("format integer")
+TEST_CASE("format integer", "[monad]")
 {
   using namespace iota;
 
@@ -20,7 +20,7 @@ TEST_CASE("format integer")
   REQUIRE(evalExpression(cppValues{-38473, format}) == cppValue("-38473"));
 }
 
-TEST_CASE("format real")
+TEST_CASE("format real", "[monad]")
 {
   using namespace iota;
 
@@ -33,7 +33,7 @@ TEST_CASE("format real")
   REQUIRE(evalExpression(cppValues{-38473.0f, format}) == cppValue("-38473.0"));
 }
 
-TEST_CASE("format list")
+TEST_CASE("format list", "[monad]")
 {
   using namespace iota;
 
@@ -43,14 +43,14 @@ TEST_CASE("format list")
   REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f}, format}) == cppValue(CppValues{cppValue("0"), cppValue("1.0")}));
 }
 
-TEST_CASE("format character")
+TEST_CASE("format character", "[monad]")
 {
   using namespace iota;
 
   REQUIRE(evalExpression(cppValues{'a', format}) == cppValue("a"));
 }
 
-TEST_CASE("format string")
+TEST_CASE("format string", "[monad]")
 {
   using namespace iota;
 
@@ -58,7 +58,7 @@ TEST_CASE("format string")
 }
 
 // FIXME - quoted symbol
-// TEST_CASE("format quoted symbol")
+// TEST_CASE("format quoted symbol", "[monad]")
 // {
 //   using namespace iota;
 //

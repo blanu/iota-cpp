@@ -101,6 +101,29 @@ operator==(const T& left, const cppValue& right) {
   return right == left; // Use the overload above
 }
 
+template <typename T>
+bool operator==(const std::vector<T>& left, const std::vector<T>& right)
+{
+  if(left.size() != right.size())
+  {
+    return false;
+  }
+
+  for(int i = 0; i < left.size(); i++)
+  {
+    if(left[i] == right[i])
+    {
+      continue;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 class Object
 {
   public:
