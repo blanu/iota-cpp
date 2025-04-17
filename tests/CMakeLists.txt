@@ -23,26 +23,28 @@ set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(tests main.cpp
-  noun_tests.cpp
-  atom_tests.cpp
-  char_tests.cpp
-  enclose_tests.cpp
-  not_tests.cpp
-  enumerate_tests.cpp
-  first_tests.cpp
-  floor_tests.cpp
-  format_tests.cpp
-  gradeDown_tests.cpp
-  gradeUp_tests.cpp
-  group_tests.cpp
-  negate_tests.cpp
-  reciprocal_tests.cpp
-  reverse_tests.cpp
-  shape_tests.cpp
-  size_tests.cpp
-  transpose_tests.cpp
-  undefined_tests.cpp
-  unique_tests.cpp
+  monad_tests/noun_tests.cpp
+  monad_tests/atom_tests.cpp
+  monad_tests/char_tests.cpp
+  monad_tests/enclose_tests.cpp
+  monad_tests/not_tests.cpp
+  monad_tests/enumerate_tests.cpp
+  monad_tests/first_tests.cpp
+  monad_tests/floor_tests.cpp
+  monad_tests/format_tests.cpp
+  monad_tests/gradeDown_tests.cpp
+  monad_tests/gradeUp_tests.cpp
+  monad_tests/group_tests.cpp
+  monad_tests/negate_tests.cpp
+  monad_tests/reciprocal_tests.cpp
+  monad_tests/reverse_tests.cpp
+  monad_tests/shape_tests.cpp
+  monad_tests/size_tests.cpp
+  monad_tests/transpose_tests.cpp
+  monad_tests/undefined_tests.cpp
+  monad_tests/unique_tests.cpp
+  dyad_tests/cut_tests.cpp
+  dyad_tests/divide_tests.cpp
 )
 target_link_libraries(tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
 

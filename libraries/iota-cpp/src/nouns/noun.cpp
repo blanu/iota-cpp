@@ -361,7 +361,11 @@ Storage Noun::mix(const Storage& i)
 
 Storage Noun::simplify(const Storage& i)
 {
-  if(std::holds_alternative<ints>(i.i) || std::holds_alternative<floats>(i.i))
+  if(std::holds_alternative<int>(i.i) || std::holds_alternative<float>(i.i))
+  {
+    return i;
+  }
+  else if(std::holds_alternative<ints>(i.i) || std::holds_alternative<floats>(i.i))
   {
     return i;
   }

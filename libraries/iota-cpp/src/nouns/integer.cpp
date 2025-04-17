@@ -473,13 +473,13 @@ Storage Integer::cut_mixed(const Storage& i, const Storage& x)
           Storage result = WordArray::nil();
           mixed results = mixed({result});
 
-          return MixedArray::make(results, NounType::LIST);
+          return Noun::simplify(MixedArray::make(results, NounType::LIST));
         }
         else
         {
           mixed results = mixed();
-          results.insert(results.end(), WordArray::nil());
-          results.insert(results.end(), x);
+          results.push_back(WordArray::nil());
+          results.push_back(x);
 
           return MixedArray::make(results, NounType::LIST);
         }
@@ -492,7 +492,7 @@ Storage Integer::cut_mixed(const Storage& i, const Storage& x)
         mixed results = mixed();
         results.insert(results.end(), MixedArray::make(left, NounType::LIST));
         results.insert(results.end(), MixedArray::make(right, NounType::LIST));
-        return MixedArray::make(results, NounType::LIST);
+        return Noun::simplify(MixedArray::make(results, NounType::LIST));
       }
     }
   }

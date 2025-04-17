@@ -2419,24 +2419,24 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
           Storage result = WordArray::nil();
           mixed results = mixed({result});
 
-          return MixedArray::make(results, NounType::LIST);
+          return Noun::simplify(MixedArray::make(results, NounType::LIST));
         }
         else
         {
           mixed results = mixed();
-          results.insert(results.end(), WordArray::nil());
-          results.insert(results.end(), i);
+          results.push_back(WordArray::nil());
+          results.push_back(i);
 
-          return MixedArray::make(results, NounType::LIST);
+          return Noun::simplify(MixedArray::make(results, NounType::LIST));
         }
       }
       else if(integer == list.size())
       {
           mixed results = mixed();
-          results.insert(results.end(), i);
-          results.insert(results.end(), WordArray::nil());
+          results.push_back(i);
+          results.push_back(WordArray::nil());
 
-          return MixedArray::make(results, NounType::LIST);
+          return Noun::simplify(MixedArray::make(results, NounType::LIST));
       }
       else if(integer > 0 && integer < list.size())
       {
@@ -2444,9 +2444,9 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
         mixed right = mixed(list.begin() + integer, list.end());
 
         mixed results = mixed();
-        results.insert(results.end(), MixedArray::make(left, NounType::LIST));
-        results.insert(results.end(), MixedArray::make(right, NounType::LIST));
-        return MixedArray::make(results, NounType::LIST);
+        results.push_back(MixedArray::make(left, NounType::LIST));
+        results.push_back(MixedArray::make(right, NounType::LIST));
+        return Noun::simplify(MixedArray::make(results, NounType::LIST));
       }
     }
   }
@@ -2771,13 +2771,13 @@ Storage List::divide_integer(const Storage& i, const Storage& x)
         }
       }
 
-      if(mixedResults.size() == results.size())
+      if(mixedResults.size() > results.size())
       {
-        return FloatArray::make(results);
+        return MixedArray::make(mixedResults);
       }
       else
       {
-        return MixedArray::make(mixedResults);
+        return FloatArray::make(results);
       }
     }
   }
@@ -2852,7 +2852,7 @@ Storage List::divide_real(const Storage& i, const Storage& x)
       results.push_back(result);
     }
 
-    return MixedArray::make(results);
+    return Noun::simplify(MixedArray::make(results));
   }
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -2895,13 +2895,13 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
         }
       }
 
-      if(mixedResults.size() == results.size())
+      if(mixedResults.size() > results.size())
       {
-        return FloatArray::make(results);
+        return MixedArray::make(mixedResults);
       }
       else
       {
-        return MixedArray::make(mixedResults);
+        return FloatArray::make(results);
       }
     }
   }
@@ -2938,13 +2938,13 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
         }
       }
 
-      if(mixedResults.size() == results.size())
+      if(mixedResults.size() > results.size())
       {
-        return FloatArray::make(results);
+        return MixedArray::make(mixedResults);
       }
       else
       {
-        return MixedArray::make(mixedResults);
+        return FloatArray::make(results);
       }
     }
   }
@@ -2976,7 +2976,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
         results.push_back(result);
       }
 
-      return MixedArray::make(results, NounType::LIST);
+      return Noun::simplify(MixedArray::make(results, NounType::LIST));
     }
   }
 
@@ -3020,13 +3020,13 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
         }
       }
 
-      if(mixedResults.size() == results.size())
+      if(mixedResults.size() > results.size())
       {
-        return FloatArray::make(results);
+        return MixedArray::make(mixedResults);
       }
       else
       {
-        return MixedArray::make(mixedResults);
+        return FloatArray::make(results);
       }
     }
   }
@@ -3063,13 +3063,13 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
         }
       }
 
-      if(mixedResults.size() == results.size())
+      if(mixedResults.size() > results.size())
       {
-        return FloatArray::make(results);
+        return MixedArray::make(mixedResults);
       }
       else
       {
-        return MixedArray::make(mixedResults);
+        return FloatArray::make(results);
       }
     }
   }
@@ -3101,7 +3101,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
         results.push_back(result);
       }
 
-      return MixedArray::make(results, NounType::LIST);
+      return Noun::simplify(MixedArray::make(results, NounType::LIST));
     }
   }
 
@@ -3140,7 +3140,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
         results.push_back(result);
       }
 
-      return MixedArray::make(results);
+      return Noun::simplify(MixedArray::make(results));
     }
   }
   else if(std::holds_alternative<floats>(i.i))
@@ -3171,7 +3171,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
         results.push_back(result);
       }
 
-      return MixedArray::make(results);
+      return Noun::simplify(MixedArray::make(results));
     }
   }
   else if(std::holds_alternative<mixed>(i.i))
@@ -3202,7 +3202,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
         results.push_back(result);
       }
 
-      return MixedArray::make(results, NounType::LIST);
+      return Noun::simplify(MixedArray::make(results, NounType::LIST));
     }
   }
 
