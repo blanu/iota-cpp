@@ -59,5 +59,3 @@ TEST_CASE("equal string", "[dyad]")
   REQUIRE(evalExpression({"abc", equal, "abc"}) == 1);
   REQUIRE(evalExpression({"abc", equal, "abd"}) == 0);
 }
-
-
