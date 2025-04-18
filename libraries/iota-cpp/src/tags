@@ -259,6 +259,7 @@ equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/characte
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:Integer
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:List
+equal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::equal_impl(const Storage& i, const Storage& x)$/;"	f	class:Real
 erase	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int erase = 20;$/;"	m	class:Monads
 erase	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage erase = Monad::make(Monads::erase);$/;"	m	namespace:iota
 error_to_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^std::string error_to_string(const Storage &e)$/;"	f

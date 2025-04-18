@@ -70,6 +70,14 @@ void List::initialize() {
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::drop, StorageType::WORD, NounType::INTEGER, List::drop_impl);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::WORD_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::FLOAT_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::MIXED_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT_ARRAY, NounType::LIST, Dyads::equal, StorageType::WORD_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT_ARRAY, NounType::LIST, Dyads::equal, StorageType::FLOAT_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT_ARRAY, NounType::LIST, Dyads::equal, StorageType::MIXED_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LIST, Dyads::equal, StorageType::WORD_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LIST, Dyads::equal, StorageType::FLOAT_ARRAY, NounType::LIST, List::equal_impl);
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LIST, Dyads::equal, StorageType::MIXED_ARRAY, NounType::LIST, List::equal_impl);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::find, StorageType::WORD, NounType::INTEGER, List::find_integers_integer);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::find, StorageType::FLOAT, NounType::REAL, List::find_integers_real);
@@ -3329,31 +3337,31 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
 
 Storage List::equal_impl(const Storage& i, const Storage& x)
 {
-  if(std::holds_alternative<ints>(i.i))
+  using namespace iota;
+
+  int is = getInteger(eval({i, size}));
+  int xs = getInteger(eval({x, size}));
+
+  if(is != xs)
   {
-    ints iis = std::get<ints>(i.i);
-
-    if(std::holds_alternative<ints>(x.i))
-    {
-      ints xis = std::get<ints>(x.i);
-
-      if(iis.size() != xis.size())
-      {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
-      }
-
-      ints results = ints();
-
-      for(int index = 0; index < iis.size(); index++)
-      {
-        results.insert(results.end(), iis[index] == xis[index]);
-      }
-
-      return WordArray::make(results, NounType::LIST);
-    }
+    return Word::make(SHAPE_MISMATCH, NounType::ERROR);
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  if(is == 0)
+  {
+    return WordArray::nil();
+  }
+
+  mixed results = mixed();
+  for(int offset = 1; offset <= is; offset++)
+  {
+    Storage y = eval({i, iota::index, Integer::make(offset)});
+    Storage z = eval({x, iota::index, Integer::make(offset)});
+    Storage result = eval({y, equal, z});
+    results.push_back(result);
+  }
+
+  return Noun::simplify(MixedArray::make(results));
 }
 
 Storage List::find_integers_integer(const Storage& i, const Storage& x)

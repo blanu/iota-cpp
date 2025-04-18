@@ -36,6 +36,7 @@ class Real
     static Storage divide_integers(const Storage& i, const Storage& x);
     static Storage divide_reals(const Storage& i, const Storage& x);
     static Storage divide_mixed(const Storage& i, const Storage& x);
+    static Storage equal_impl(const Storage& i, const Storage& x);
     static Storage format2_impl(const Storage& i, const Storage& x);
     static Storage join_real(const Storage& i, const Storage& x);
     static Storage prepend_to_reals(const Storage& i, const Storage& x);

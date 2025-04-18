@@ -53,6 +53,15 @@ void Real::initialize() {
   Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::divide, StorageType::FLOAT_ARRAY, NounType::LIST, Real::divide_reals);
   Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::divide, StorageType::MIXED_ARRAY, NounType::LIST, Real::divide_mixed);
 
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::WORD, NounType::INTEGER, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::FLOAT, NounType::REAL, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::WORD_ARRAY, NounType::LIST, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::FLOAT_ARRAY, NounType::LIST, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::MIXED_ARRAY, NounType::LIST, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::WORD, NounType::CHARACTER, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::WORD_ARRAY, NounType::STRING, Real::equal_impl);
+  Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::equal, StorageType::MIXED_ARRAY, NounType::DICTIONARY, Real::equal_impl);
+
   Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::join, StorageType::WORD, NounType::INTEGER, Noun::join_scalar);
   Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::join, StorageType::FLOAT, NounType::REAL, Real::join_real);
   Noun::registerDyad(StorageType::FLOAT, NounType::REAL, Dyads::join, StorageType::WORD_ARRAY, NounType::LIST, Noun::prepend);
@@ -494,6 +503,26 @@ Storage Real::divide_mixed(const Storage& i, const Storage& x)
   }
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+Storage Real::equal_impl(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<float>(i.i))
+  {
+    float ii = std::get<float>(i.i);
+
+    if(std::holds_alternative<float>(x.i))
+    {
+      float xi = std::get<float>(x.i);
+
+      if(abs(ii - xi) < Float::tolerance)
+      {
+        return Integer::make(1);
+      }
+    }
+  }
+
+  return Integer::make(0);
 }
 
 Storage Real::format2_impl(const Storage& i, const Storage& x)

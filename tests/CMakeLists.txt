@@ -45,6 +45,8 @@ add_executable(tests main.cpp
   monad_tests/unique_tests.cpp
   dyad_tests/cut_tests.cpp
   dyad_tests/divide_tests.cpp
+  dyad_tests/drop_tests.cpp
+  dyad_tests/equal_tests.cpp
 )
 target_link_libraries(tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
 
