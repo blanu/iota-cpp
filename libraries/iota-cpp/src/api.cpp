@@ -4,6 +4,7 @@
 #include "error.h"
 #include "types.h"
 #include "eval_register.h"
+#include "effects/iota_signal.h"
 
 #include "storage/storage.h"
 #include "storage/word_array.h"
@@ -155,16 +156,6 @@ bool CppValue::operator==(const CppValue& i) const
 //   }
 // };
 
-Storage e()
-{
-  return Word::make(0, 0);
-}
-
-Storage c()
-{
-  return Word::make(0, 0);
-}
-
 Storage test_error()
 {
   return Word::make(TEST_ERROR, NounType::ERROR);
@@ -276,6 +267,21 @@ cppValue evalExpression(const cppValues& values)
   }
 }
 
+void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register)
+{
+  Storage se = Object::from_cpp_expression(values);
+  if(const maybe<Storage> result = EvalRegister::eval(se))
+  {
+    if(result)
+    {
+      if((*result).o == NounType::SIGNAL)
+      {
+        effects_register->eval(*result);
+      }
+    }
+  }
+}
+
 cppValue evalNoun(const cppValue& i)
 {
   Storage se = Object::from_cpp(i);
@@ -293,13 +299,26 @@ Storage Object::from_cpp_expression(const cppValues& i)
 {
   mixed results = mixed();
 
+  bool effective = false;
   for(const auto& y : i)
   {
     Storage result = Object::from_cpp(y);
+    if(result.o == NounType::EFFECT_TYPE)
+    {
+      effective = true;
+    }
+
     results.push_back(result);
   }
 
-  return MixedArray::make(results, NounType::EXPRESSION);
+  if(effective)
+  {
+    return MixedArray::make(results, NounType::EFFECT_EXPRESSION);
+  }
+  else
+  {
+    return MixedArray::make(results, NounType::EXPRESSION);
+  }
 }
 
 Storage Object::from_cpp(const cppValue& i)
@@ -349,13 +368,27 @@ Storage Object::from_cpp(const cppValue& i)
     std::vector<CppValue> vs = std::get<std::vector<CppValue>>(i);
 
     mixed results = mixed();
+
+    bool effective = false;
     for(const auto& y : vs)
     {
       Storage sy = from_cpp(y.value);
+      if(sy.o == NounType::EFFECT_TYPE)
+      {
+        effective = true;
+      }
+
       results.push_back(sy);
     }
 
-    return MixedArray::make(results);
+    if(effective)
+    {
+      return MixedArray::make(results, NounType::EFFECT_EXPRESSION);
+    }
+    else
+    {
+      return MixedArray::make(results);
+    }
   }
   // else if(std::holds_alternative<std::unordered_map<CppValue, CppValue>>(i))
   // {

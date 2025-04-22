@@ -18,6 +18,7 @@ class StorageType
     static constexpr int WORD_ARRAY = 2;  // all integers
     static constexpr int FLOAT_ARRAY = 3; // all floats
     static constexpr int MIXED_ARRAY = 4; // array of storage types
+    static constexpr int ANY = 255;
 };
 
 class NounType
@@ -48,6 +49,10 @@ class NounType
     static constexpr int RESOURCE = 22;
     static constexpr int CONTINGENCY = 23;
     static constexpr int SIGNAL = 24;
+    static constexpr int SEQUENCE = 25;
+    static constexpr int DEPENDENCY = 26;
+    static constexpr int EFFECT_EXPRESSION = 27;
+    static constexpr int ANY = 255;
 };
 
 class SymbolType
@@ -58,7 +63,8 @@ class SymbolType
     static constexpr int y = 2;
     static constexpr int z = 3;
     static constexpr int f = 4;
-    static constexpr int undefined = 5; // If adding new symbols, undefined must also be the last symbol as it marks the end of the list of builtin symbols.
+    static constexpr int causing = 5;
+    static constexpr int undefined = 6; // If adding new symbols, undefined must always be the last symbol as it marks the end of the SymbolType sequence.
 };
 
 class Storage;

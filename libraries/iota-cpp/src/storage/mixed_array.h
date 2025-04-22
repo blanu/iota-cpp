@@ -20,7 +20,7 @@ public:
   static maybe<Storage> from_conn(const Connection& conn, int objectType);
   static void to_conn(const Connection& conn, const Storage& i);
 
-  static Storage make(mixed x, int o = NounType::LIST);
+  static Storage make(mixed x = {}, int o = NounType::LIST);
 };
 
 #endif //MIXED_ARRAY_H

@@ -25,7 +25,7 @@ struct std::hash<std::vector<Storage>>
   }
 };
 
-class Relation
+class Log
 {
   public:
     static void initialize();

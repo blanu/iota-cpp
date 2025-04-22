@@ -9,9 +9,13 @@
 #include <type_traits>
 
 #include "storage/storage.h"
+#include "storage/word.h"
+
 #include "verbs.h" // NOLINT, included for convenience for users of api.h
 #include "adverbs.h" // NOLINT, included for convenience for users of api.h
+#include "effects/effects.h" // NOLINT, included for convenience for users of api.h
 #include "types.h"
+#include "effects/effects_register.h"
 
 class CppValue;
 
@@ -143,5 +147,17 @@ Storage eval(const mixed& e);
 cppValue evalNoun(const cppValue& i);
 
 cppValue evalExpression(const cppValues& values);
+void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register);
+
+namespace iota
+{
+  inline Storage i = Word::make(SymbolType::i, NounType::BUILTIN_SYMBOL);
+  inline Storage x = Word::make(SymbolType::x, NounType::BUILTIN_SYMBOL);
+  inline Storage y = Word::make(SymbolType::y, NounType::BUILTIN_SYMBOL);
+  inline Storage z = Word::make(SymbolType::z, NounType::BUILTIN_SYMBOL);
+  inline Storage f = Word::make(SymbolType::f, NounType::BUILTIN_SYMBOL);
+  inline Storage causing = Word::make(SymbolType::causing, NounType::BUILTIN_SYMBOL);
+  //inline Storage undefined = Word::make(SymbolType::undefined, NounType::BUILTIN_SYMBOL); // conflicts with the undefined verb
+}
 
 #endif

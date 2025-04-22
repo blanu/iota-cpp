@@ -5,6 +5,13 @@
 #ifndef EFFECT_SYMBOLS_H
 #define EFFECT_SYMBOLS_H
 
-#include "relation/relation_symbols.h"
+#include "log/log_symbols.h" // NOLINT
+#include "relation/relation_symbols.h" // NOLINT
+
+namespace effects::families
+{
+  static constexpr int log = 1;
+  static constexpr int relation = 2;
+}
 
 #endif //EFFECT_SYMBOLS_H

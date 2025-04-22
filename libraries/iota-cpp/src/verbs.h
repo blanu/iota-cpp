@@ -51,6 +51,7 @@ namespace iota
   inline Storage evaluate = Monad::make(Monads::evaluate);
   inline Storage erase = Monad::make(Monads::erase);
   inline Storage truth = Monad::make(Monads::truth);
+  inline Storage lift = Monad::make(Monads::lift);
 
   // Dyads
   inline Storage amend = Dyad::make(Dyads::amend);
@@ -78,6 +79,9 @@ namespace iota
   inline Storage split = Dyad::make(Dyads::split);
   inline Storage take = Dyad::make(Dyads::take);
   inline Storage times = Dyad::make(Dyads::times);
+
+  // Extension Dyads
+  inline Storage cause = Dyad::make(Dyads::cause);
 }
 
 #endif //VERBS_H

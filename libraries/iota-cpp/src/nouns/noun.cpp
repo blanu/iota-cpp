@@ -74,8 +74,16 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
   int fi = std::get<int>(f.i);
 
   Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
-  if (dyads.find(specialization) == dyads.end()) {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  if (dyads.find(specialization) == dyads.end())
+  {
+    Specialization5 anySpecialization = Specialization5(NounType::ANY, NounType::ANY, fi, x.t, x.o);
+    if (dyads.find(anySpecialization) == dyads.end())
+    {
+      return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    }
+
+    DyadicFunction verb = dyads[anySpecialization];
+    return verb(i, x);
   }
 
   DyadicFunction verb = dyads[specialization];
@@ -235,7 +243,7 @@ Storage Noun::evaluate_expression(const Storage& e)
     {
       case NounType::BUILTIN_MONAD:
       {
-        Storage result = Noun::dispatchMonad(i, f);
+        Storage result = dispatchMonad(i, f);
         if (rest.empty())
         {
           return result;
@@ -256,7 +264,7 @@ Storage Noun::evaluate_expression(const Storage& e)
         Storage x = items[2];
         rest = mixed(items.begin() + 3, items.end());
 
-        Storage result = Noun::dispatchDyad(i, f, x);
+        Storage result = dispatchDyad(i, f, x);
         if (rest.empty())
         {
           return result;
@@ -277,7 +285,7 @@ Storage Noun::evaluate_expression(const Storage& e)
         Storage g = items[2];
         rest = mixed(items.begin() + 3, items.end());
 
-        Storage result = Noun::dispatchMonadicAdverb(i, f, g);
+        Storage result = dispatchMonadicAdverb(i, f, g);
         if(rest.empty())
         {
           return result;

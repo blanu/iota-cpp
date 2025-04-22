@@ -11,9 +11,8 @@
 int main(int argc, char** argv)
 {
   EvalRegister::initialize();
-  EffectsRegister::initialize();
 
-  int result = Catch::Session().run(argc, argv);
+  const int result = Catch::Session().run(argc, argv);
 
   return result;
 

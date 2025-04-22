@@ -16,11 +16,11 @@
 #include "../../nouns/noun.h"
 #include "../../storage/mixed_array.h"
 
-std::unordered_map<int, Relation::Table*> Relation::tables;
+std::unordered_map<int, Log::Table*> Log::tables;
 
-int Relation::Table::nextId = 1;
+int Log::Table::nextId = 1;
 
-Relation::Table::Table(const mixed& i)
+Log::Table::Table(const mixed& i)
 {
   rowSize = 0;
 
@@ -32,7 +32,7 @@ Relation::Table::Table(const mixed& i)
 }
 
 // Copy constructor
-Relation::Table::Table(Table *x)
+Log::Table::Table(Table *x)
 {
   rowSize = 0;
 
@@ -55,17 +55,17 @@ Relation::Table::Table(Table *x)
   }
 }
 
-Storage Relation::Table::nextIdStorage()
+Storage Log::Table::nextIdStorage()
 {
   return makeReference(nextId);
 }
 
-Storage Relation::Table::makeReference(int id)
+Storage Log::Table::makeReference(int id)
 {
   return Word::make(id, NounType::RESOURCE);
 }
 
-Relation::Table *Relation::findTable(Storage i)
+Log::Table *Log::findTable(Storage i)
 {
   if(std::holds_alternative<int>(i.i))
   {
@@ -81,14 +81,14 @@ Relation::Table *Relation::findTable(Storage i)
   return nullptr;
 }
 
-void Relation::initialize()
+void Log::initialize()
 {
   // Effects::registerMonadicEffect();
 }
 
 // Monads
 // This moves i.i.
-Storage Relation::makeTable(const Storage& i)
+Storage Log::makeTable(const Storage& i)
 {
   if(std::holds_alternative<mixed>(i.i))
   {
@@ -104,7 +104,7 @@ Storage Relation::makeTable(const Storage& i)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-Storage Relation::copyTable(const Storage& i)
+Storage Log::copyTable(const Storage& i)
 {
   Table *oldTable = findTable(i);
   if(oldTable == nullptr)
@@ -120,7 +120,7 @@ Storage Relation::copyTable(const Storage& i)
   return Table::makeReference(newId);
 }
 
-Storage Relation::freeTable(const Storage& i)
+Storage Log::freeTable(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
@@ -139,7 +139,7 @@ Storage Relation::freeTable(const Storage& i)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-Storage Relation::flatten(const Storage& i)
+Storage Log::flatten(const Storage& i)
 {
   Table *oldTable = findTable(i);
   if(oldTable == nullptr)
@@ -157,7 +157,7 @@ Storage Relation::flatten(const Storage& i)
 }
 
 // Dyads
-Storage Relation::insert(const Storage& i, const Storage& x)
+Storage Log::insert(const Storage& i, const Storage& x)
 {
   Table *oldTable = findTable(i);
   if(oldTable == nullptr)
@@ -194,7 +194,7 @@ Storage Relation::insert(const Storage& i, const Storage& x)
   return i;
 }
 
-Storage Relation::remove(const Storage& i, const Storage& x)
+Storage Log::remove(const Storage& i, const Storage& x)
 {
   Table *oldTable = findTable(i);
   if(oldTable == nullptr)
@@ -224,7 +224,7 @@ Storage Relation::remove(const Storage& i, const Storage& x)
   return i;
 }
 
-Storage Relation::iunion(const Storage& i, const Storage& x)
+Storage Log::iunion(const Storage& i, const Storage& x)
 {
   Table *iTable = findTable(i);
   if(iTable == nullptr)
@@ -264,7 +264,7 @@ Storage Relation::iunion(const Storage& i, const Storage& x)
   return temp;
 }
 
-Storage Relation::project(const Storage& i, const Storage& x)
+Storage Log::project(const Storage& i, const Storage& x)
 {
   using namespace iota;
 
@@ -307,7 +307,7 @@ Storage Relation::project(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-Storage Relation::difference(const Storage& i, const Storage& x)
+Storage Log::difference(const Storage& i, const Storage& x)
 {
   Table *iTable = findTable(i);
   if(iTable == nullptr)
@@ -347,7 +347,7 @@ Storage Relation::difference(const Storage& i, const Storage& x)
   return temp;
 }
 
-Storage Relation::rename(const Storage& i, const Storage& x)
+Storage Log::rename(const Storage& i, const Storage& x)
 {
   Table *oldTable = findTable(i);
   if(oldTable == nullptr)
@@ -355,7 +355,7 @@ Storage Relation::rename(const Storage& i, const Storage& x)
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  Storage newTableStorage = Relation::copyTable(i);
+  Storage newTableStorage = Log::copyTable(i);
   Table *newTable = findTable(newTableStorage);
 
   if(std::holds_alternative<mixed>(x.i))
@@ -397,7 +397,7 @@ Storage Relation::rename(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-Storage Relation::crossProduct(const Storage& i, const Storage& x)
+Storage Log::crossProduct(const Storage& i, const Storage& x)
 {
   Table *iTable = findTable(i);
   if(iTable == nullptr)
@@ -441,7 +441,7 @@ Storage Relation::crossProduct(const Storage& i, const Storage& x)
   return temp;
 }
 
-Storage Relation::restrict(const Storage& i, const Storage& x)
+Storage Log::restrict(const Storage& i, const Storage& x)
 {
   using namespace iota;
 
@@ -498,7 +498,7 @@ Storage Relation::restrict(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-Storage Relation::intersection(const Storage& i, const Storage& x)
+Storage Log::intersection(const Storage& i, const Storage& x)
 {
   Table *iTable = findTable(i);
   if(iTable == nullptr)

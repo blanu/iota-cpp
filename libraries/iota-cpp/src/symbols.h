@@ -30,6 +30,7 @@ class Monads
     static constexpr int evaluate = 19;
     static constexpr int erase = 20;
     static constexpr int truth = 21;
+    static constexpr int lift = 68;
 };
 
 // Dyads
@@ -65,8 +66,7 @@ class Dyads
 
     static constexpr int applyMonad = 49;
     static constexpr int retype = 50;
-
-    static constexpr int cause = 67; // FIXME - renumber sequentially
+    static constexpr int cause = 69;
 };
 
 // Triads

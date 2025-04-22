@@ -11,7 +11,9 @@
 
 using Type = int;
 using Specialization3 = std::tuple<Type, Type, Type>;
+using Specialization4 = std::tuple<Type, Type, Type, Type>;
 using Specialization5 = std::tuple<Type, Type, Type, Type, Type>;
+using Specialization6 = std::tuple<Type, Type, Type, Type, Type, Type>;
 using MonadicFunction = std::function<Storage(Storage)>;
 using DyadicFunction = std::function<Storage(Storage,Storage)>;
 using TriadicFunction = std::function<Storage(Storage,Storage,Storage)>;

@@ -4,20 +4,24 @@
 
 #include "iota_signal.h"
 
-#include "effect_type.h"
-
 #include "../storage/mixed_array.h"
 
-Storage Signal::make(Storage value, Storage i, Storage e)
+#include "../nouns/noun.h"
+#include "../verbs.h"
+
+void Signal::initialize()
 {
-  mixed results = {value, i, e};
+  Noun::registerMonad(StorageType::ANY, NounType::ANY, Monads::lift, lift_impl);
+}
+
+Storage Signal::make(const Storage& i, const Storage& x)
+{
+  const mixed results = {i, x};
 
   return MixedArray::make(results, NounType::SIGNAL);
 }
 
-Storage Signal::make(Storage value, Storage i, Storage e, Storage x)
+Storage Signal::lift_impl(const Storage& i)
 {
-  mixed results = {value, i, e, x};
-
-  return MixedArray::make(results, NounType::SIGNAL);
+  return make(i, MixedArray::make());
 }

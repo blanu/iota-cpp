@@ -10,8 +10,33 @@
 class Signal
 {
   public:
-    static Storage make(Storage value, Storage i, Storage e);
-    static Storage make(Storage value, Storage i, Storage e, Storage x);
+    static void initialize();
+
+    static Storage make(const Storage& i, const Storage& x);
+
+    static Storage lift_impl(const Storage& i);
+    static Storage then_impl(const Storage& i);
+    static Storage bind_impl(const Storage& i);
+};
+
+class Sequence
+{
+  public:
+    static void initialize();
+
+    static Storage make(const Storage& i, const Storage& x);
+
+    static Storage then_impl(const Storage& i);
+};
+
+class Depenency
+{
+  public:
+    static void initialize();
+
+    static Storage make(const Storage& i, const Storage& x);
+
+    static Storage bind_impl(const Storage& i);
 };
 
 #endif //SIGNAL_H
