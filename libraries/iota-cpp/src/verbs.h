@@ -82,6 +82,7 @@ namespace iota
 
   // Extension Dyads
   inline Storage cause = Dyad::make(Dyads::cause);
+  inline Storage then = Dyad::make(Dyads::then);
 }
 
 #endif //VERBS_H

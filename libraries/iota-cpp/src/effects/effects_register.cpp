@@ -4,6 +4,8 @@
 
 #include "effects_register.h"
 
+#include <list>
+
 #include "iota_signal.h"
 #include "../error.h"
 
@@ -11,10 +13,13 @@
 #include "../storage/word.h"
 
 #include "../verbs.h"
+#include "../storage/mixed_array.h"
 
 EffectsRegister::EffectsRegister()
 {
   Noun::registerDyad(StorageType::ANY, NounType::ANY, Dyads::cause, StorageType::MIXED_ARRAY, NounType::EFFECT_EXPRESSION, cause_impl);
+
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::SIGNAL, Dyads::then, StorageType::MIXED_ARRAY, NounType::EFFECT_EXPRESSION, then_impl);
 }
 
 void EffectsRegister::registerMonadicEffect(Type it, Type io, Type f, Type e, std::function<void(Storage)> m)
@@ -85,16 +90,43 @@ void EffectsRegister::dispatchDyadicEffect(const Storage& i, const Storage& fe, 
   verb(i, x);
 }
 
-void EffectsRegister::processEffects()
-{
-
-}
-
 Storage EffectsRegister::cause_impl(const Storage& i, const Storage& x)
 {
-  if(x.o == NounType::EFFECT_EXPRESSION)
+  return Signal::make(i, x);
+}
+
+Storage EffectsRegister::then_impl(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<mixed>(i.i))
   {
-    return Signal::make(i, x);
+    mixed is = std::get<mixed>(i.i);
+
+    if(is.size() == 2)
+    {
+      Storage value = is[0];
+      Storage effect = is[1];
+
+      if(effect.o == NounType::EFFECT_EXPRESSION)
+      {
+        // There is just one effect in this Signal.
+        // Make it into a list of multiple signals.
+        mixed results = mixed{effect, x};
+        return Signal::make(value, MixedArray::make(results));
+      }
+      else if(effect.o == NounType::LIST)
+      {
+        // There are multiple effects in this Signal.
+        // Append the new effect to the list.
+        if(std::holds_alternative<mixed>(effect.i))
+        {
+          mixed effects = std::get<mixed>(effect.i);
+          mixed results = mixed(effects);
+          results.push_back(x);
+
+          return Signal::make(value, MixedArray::make(results));
+        }
+      }
+    }
   }
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -113,25 +145,7 @@ Storage EffectsRegister::eval(const Storage& s)
         Storage i = ms[0];
         Storage e = ms[1];
 
-        if(std::holds_alternative<mixed>(e.i))
-        {
-          auto mes = std::get<mixed>(e.i);
-          if(mes.size() == 2)
-          {
-            Storage ei = mes[0];
-            Storage ef = mes[1];
-
-            dispatchMonadicEffect(ei, ef);
-          }
-          else if(mes.size() == 3)
-          {
-            Storage ei = mes[0];
-            Storage ef = mes[1];
-            Storage ex = mes[2];
-
-            dispatchDyadicEffect(ei, ef, ex);
-          }
-        }
+        eval_effect_expression(e);
 
         return i;
       }
@@ -139,4 +153,41 @@ Storage EffectsRegister::eval(const Storage& s)
   }
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+void EffectsRegister::eval_effect_expression(const Storage& e)
+{
+  if(e.o == NounType::EFFECT_EXPRESSION)
+  {
+    if(std::holds_alternative<mixed>(e.i))
+    {
+      auto mes = std::get<mixed>(e.i);
+      if(mes.size() == 2)
+      {
+        Storage ei = mes[0];
+        Storage ef = mes[1];
+
+        dispatchMonadicEffect(ei, ef);
+      }
+      else if(mes.size() == 3)
+      {
+        Storage ei = mes[0];
+        Storage ef = mes[1];
+        Storage ex = mes[2];
+
+        dispatchDyadicEffect(ei, ef, ex);
+      }
+    }
+  }
+  else if(e.o == NounType::LIST)
+  {
+    if(std::holds_alternative<mixed>(e.i))
+    {
+      auto mes  = std::get<mixed>(e.i);
+      for(auto me : mes)
+      {
+        eval_effect_expression(me);
+      }
+    }
+  }
 }

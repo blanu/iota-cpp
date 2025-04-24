@@ -31,7 +31,13 @@ namespace iota // Effects
 {
   // Effect: Log
   // Effect: Log: Monads
+  inline Storage level = MonadicEffect::make(effects::families::log, effects::log::level);
+  inline Storage critical = MonadicEffect::make(effects::families::log, effects::log::critical);
+  inline Storage error = MonadicEffect::make(effects::families::log, effects::log::error);
+  inline Storage warning = MonadicEffect::make(effects::families::log, effects::log::warning);
   inline Storage info = MonadicEffect::make(effects::families::log, effects::log::info);
+  inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);
+  inline Storage trace = MonadicEffect::make(effects::families::log, effects::log::trace);
 
   // Effect: Relations
   // Effect: Relations: Monads

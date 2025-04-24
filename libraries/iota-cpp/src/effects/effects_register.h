@@ -15,6 +15,7 @@ class EffectsRegister
 {
   public:
     static Storage cause_impl(const Storage& i, const Storage& x);
+    static Storage then_impl(const Storage& i, const Storage& x);
 
     EffectsRegister();
 
@@ -24,9 +25,8 @@ class EffectsRegister
     void dispatchMonadicEffect(const Storage& i, const Storage& fe);
     void dispatchDyadicEffect(const Storage& i, const Storage& fe, const Storage& x);
 
-    void processEffects();
-
     Storage eval(const Storage& s);
+    void eval_effect_expression(const Storage& s);
 
   private:
     std::map<Specialization4, std::function<void(Storage)>> monads;

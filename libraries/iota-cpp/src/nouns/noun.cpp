@@ -328,9 +328,9 @@ Storage Noun::evaluate_expression(const Storage& e)
       default:
         return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
     }
-  } else {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
 Storage Noun::mix(const Storage& i)

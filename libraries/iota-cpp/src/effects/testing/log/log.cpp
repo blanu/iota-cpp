@@ -4,20 +4,53 @@
 
 #include "log.h"
 
-#include "../../effect_symbols.h"
-
 #include "../../../storage/storage.h"
 #include "../../../storage/mixed_array.h"
 
 void Log::initialize(EffectsRegister* effects_register)
 {
+  logLevel = Levels::warning;
+  logs = std::queue<Storage>();
 }
 
 // Monads
-// This moves i.i.
+void Log::level_impl(const Storage& i)
+{
+  if(std::holds_alternative<int>(i.i))
+  {
+    int newLevel = std::get<int>(i.i);
+    logLevel = newLevel;
+  }
+}
+
+void Log::critical_impl(const Storage& i)
+{
+  write(Levels::critical, i);
+}
+
+void Log::error_impl(const Storage& i)
+{
+  write(Levels::error, i);
+}
+
+void Log::warning_impl(const Storage& i)
+{
+  write(Levels::warning, i);
+}
+
 void Log::info_impl(const Storage& i)
 {
-  logs.push(i);
+  write(Levels::info, i);
+}
+
+void Log::debug_impl(const Storage& i)
+{
+  write(Levels::debug, i);
+}
+
+void Log::trace_impl(const Storage& i)
+{
+  write(Levels::trace, i);
 }
 
 Storage Log::getLogs()
@@ -35,4 +68,13 @@ Storage Log::getLogs()
   return MixedArray::make(results);
 }
 
+int Log::logLevel;
 std::queue<Storage> Log::logs;
+
+void Log::write(const int level, const Storage& i)
+{
+  if(level <= logLevel)
+  {
+    logs.push(i);
+  }
+}
