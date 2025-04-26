@@ -19,6 +19,50 @@
 cppValue CppValue::t = 1;
 cppValue CppValue::f = 0;
 
+cppValue CppValue::wrap(cppValues values)
+{
+  CppValues results;
+  results.reserve(values.size());
+
+  std::transform(
+    values.begin(),
+    values.end(),
+    std::back_inserter(results),
+      [](const cppValue& result)
+      {
+        return CppValue(result);
+      }
+    );
+
+  return results;
+}
+
+bool CppValue::all_ints(CppValues values)
+{
+  for(const auto& value : values)
+  {
+    if(!std::holds_alternative<int>(value.value))
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+bool CppValue::all_floats(CppValues values)
+{
+  for(const auto& value : values)
+  {
+    if(!std::holds_alternative<float>(value.value))
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 // bool CppValue::operator==(const CppValue& i) const
 // {
 //   if(std::holds_alternative<int>(i.value) && std::holds_alternative<int>(value))
@@ -333,15 +377,59 @@ Storage Object::from_cpp(const cppValue& i)
     const float fi = std::get<float>(i);
     return Real::make(fi);
   }
-  else if(std::holds_alternative<std::vector<int>>(i))
+  else if(std::holds_alternative<CppValues>(i))
   {
-    std::vector<int> iis = std::get<std::vector<int>>(i);
-    return WordArray::make(iis);
-  }
-  else if(std::holds_alternative<std::vector<float>>(i))
-  {
-    std::vector<float> fis = std::get<std::vector<float>>(i);
-    return FloatArray::make(fis);
+    auto values = std::get<CppValues>(i);
+
+    if(CppValue::all_ints(values))
+    {
+      ints results;
+      results.reserve(values.size());
+      for(const auto& value : values)
+      {
+        int result = std::get<int>(value.value);
+        results.push_back(result);
+      }
+
+      return WordArray::make(results);
+    }
+    else if(CppValue::all_floats(values))
+    {
+      floats results;
+      results.reserve(values.size());
+      for(const auto& value : values)
+      {
+        float result = std::get<float>(value.value);
+        results.push_back(result);
+      }
+
+      return FloatArray::make(results);
+    }
+    else
+    {
+      mixed results;
+      results.reserve(values.size());
+
+      bool effective = false;
+      for(const auto& value : values)
+      {
+        Storage result = Object::from_cpp(value.value);
+        if(result.o == NounType::EFFECT_TYPE)
+        {
+          effective = true;
+        }
+        results.push_back(result);
+      }
+
+      if(effective)
+      {
+        return MixedArray::make(results, NounType::EFFECT_EXPRESSION);
+      }
+      else
+      {
+        return MixedArray::make(results);
+      }
+    }
   }
   else if(std::holds_alternative<char>(i))
   {
@@ -362,33 +450,6 @@ Storage Object::from_cpp(const cppValue& i)
     }
 
     return IotaString::make(integers);
-  }
-  else if(std::holds_alternative<std::vector<CppValue>>(i))
-  {
-    std::vector<CppValue> vs = std::get<std::vector<CppValue>>(i);
-
-    mixed results = mixed();
-
-    bool effective = false;
-    for(const auto& y : vs)
-    {
-      Storage sy = from_cpp(y.value);
-      if(sy.o == NounType::EFFECT_TYPE)
-      {
-        effective = true;
-      }
-
-      results.push_back(sy);
-    }
-
-    if(effective)
-    {
-      return MixedArray::make(results, NounType::EFFECT_EXPRESSION);
-    }
-    else
-    {
-      return MixedArray::make(results);
-    }
   }
   // else if(std::holds_alternative<std::unordered_map<CppValue, CppValue>>(i))
   // {
@@ -456,7 +517,16 @@ cppValue Object::to_cpp(Storage i)
         {
           if(std::holds_alternative<ints>(i.i))
           {
-            return std::get<ints>(i.i);
+            auto integers = std::get<ints>(i.i);
+
+            CppValues results;
+            results.reserve(integers.size());
+            for (const auto& result : integers)
+            {
+              results.push_back(result);  // Implicit conversion
+            }
+
+            return results;
           }
           else
           {
@@ -468,7 +538,16 @@ cppValue Object::to_cpp(Storage i)
         {
           if(std::holds_alternative<floats>(i.i))
           {
-            return std::get<floats>(i.i);
+            auto fs = std::get<floats>(i.i);
+
+            CppValues results;
+            results.reserve(fs.size());
+            for (const auto& result : fs)
+            {
+              results.push_back(result);  // Implicit conversion
+            }
+
+            return results;
           }
           else
           {

@@ -41,7 +41,7 @@ struct std::hash<Error>
   }
 };
 
-using cppValue = std::variant<int, float, char, std::string, std::vector<int>, std::vector<float>, std::vector<CppValue>, Error, Storage>;
+using cppValue = std::variant<std::vector<CppValue>, int, float, char, std::string, Error, Storage>;
 using cppValues = std::vector<cppValue>;
 using CppValues = std::vector<CppValue>;
 class CppValue
@@ -50,23 +50,29 @@ class CppValue
     static cppValue t;
     static cppValue f;
 
+    static cppValue wrap(cppValues values);
+    static bool all_ints(CppValues values);
+    static bool all_floats(CppValues values);
+
     bool operator==(const CppValue& i) const;
     std::size_t operator()(const CppValue& i) const noexcept;
 
     cppValue value;
 
-    CppValue(const CppValue& other) = default; // copy constructor
     CppValue(const cppValue& value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(int value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(float value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(char value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(std::string value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(ints value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(floats value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+    //CppValue(ints value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+    //CppValue(floats value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(CppValues value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     // CppValue(std::unordered_map<CppValue, CppValue> value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+    CppValue(const cppValues& value) : value(wrap(value)) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(Error value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
     CppValue(Storage value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+
+    //CppValue(const CppValue& other) = default; // copy constructor
 
     // implicit conversions back to C++ types
     operator int() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
@@ -132,7 +138,7 @@ class Object
 {
   public:
     static Storage from_cpp(const cppValue& i);
-    static Storage from_cpp_expression(const std::vector<cppValue>& i);
+    static Storage from_cpp_expression(const cppValues& i);
     static cppValue to_cpp(Storage i);
 };
 

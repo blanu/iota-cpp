@@ -11,10 +11,10 @@ TEST_CASE("transpose list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{ints{1, 2}, ints{3, 4}}, transpose}) == CppValues{ints{1, 3}, ints{2, 4}});
-  REQUIRE(evalExpression({CppValues{floats{1.0f, 2.0f}, floats{3.0f, 4.0f}}, transpose}) == CppValues{floats{1.0f, 3.0f}, floats{2.0f, 4.0f}});
+  REQUIRE(evalExpression({CppValues{CppValues{1, 2}, CppValues{3, 4}}, transpose}) == CppValues{CppValues{1, 3}, CppValues{2, 4}});
+  REQUIRE(evalExpression({CppValues{CppValues{1.0f, 2.0f}, CppValues{3.0f, 4.0f}}, transpose}) == CppValues{CppValues{1.0f, 3.0f}, CppValues{2.0f, 4.0f}});
   auto result = evalExpression({CppValues{CppValues{1, 2.0f}, CppValues{3, 4.0f}}, transpose});
-  auto correct = CppValues{ints{1, 3}, floats{2.0f, 4.0f}};
+  auto correct = CppValues{CppValues{1, 3}, CppValues{2.0f, 4.0f}};
   REQUIRE(result == correct);
-  // REQUIRE(evalExpression({CppValues{CppValues{1, 2.0f}, CppValues{3, 4.0f}}, transpose}) == CppValues{ints{1, 3}, floats{2.0f, 4.0f}});
+  // REQUIRE(evalExpression({CppValues{CppValues{1, 2.0f}, CppValues{3, 4.0f}}, transpose}) == CppValues{CppValues{1, 3}, CppValues{2.0f, 4.0f}});
 }

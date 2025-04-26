@@ -54,6 +54,7 @@ add_executable(tests main.cpp
   dyad_tests/index_tests.cpp
   dyad_tests/integerDivide_tests.cpp
   effect_tests/log_tests.cpp
+  effect_tests/random_tests.cpp
 )
 target_link_libraries(tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
 

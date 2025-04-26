@@ -25,9 +25,9 @@ TEST_CASE("reverse list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{}, reverse}) == ints{});
-  REQUIRE(evalExpression({ints{2, 3}, reverse}) == ints{3, 2});
-  REQUIRE(evalExpression({floats{2.0f, 3.0f}, reverse}) == floats{3.0f, 2.0f});
+  REQUIRE(evalExpression({CppValues{}, reverse}) == CppValues{});
+  REQUIRE(evalExpression({CppValues{2, 3}, reverse}) == CppValues{3, 2});
+  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, reverse}) == CppValues{3.0f, 2.0f});
   REQUIRE(evalExpression({CppValues{2, 3.0f}, reverse}) == CppValues{3.0f, 2});
 }
 

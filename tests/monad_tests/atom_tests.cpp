@@ -24,10 +24,10 @@ TEST_CASE("atom list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{}, atom}) == 1);
+  REQUIRE(evalExpression({CppValues{}, atom}) == 1);
 
-  REQUIRE(evalExpression({ints{2, 3}, atom}) == 0);
-  REQUIRE(evalExpression({floats{2.0f, 3.0f}, atom}) == 0);
+  REQUIRE(evalExpression({CppValues{2, 3}, atom}) == 0);
+  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, atom}) == 0);
   REQUIRE(evalExpression({CppValues{2, 3.0f}, atom}) == 0);
 }
 

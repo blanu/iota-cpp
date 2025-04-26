@@ -29,12 +29,12 @@ TEST_CASE("size list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{}, size}) == 0);
-  REQUIRE(evalExpression({ints{0, 1, 2}, size}) == 3);
-  REQUIRE(evalExpression({floats{0.1f, 1.5f, 2.9f}, size}) == 3);
-  REQUIRE(evalExpression({floats{0, 1.0f, 2}, size}) == 3);
-  REQUIRE(evalExpression({CppValues{0, 1, ints{1, 2, 3}}, size}) == 3);
-  REQUIRE(evalExpression({CppValues{ints{0}, ints{1}, ints{0}}, size}) == 3);
+  REQUIRE(evalExpression({CppValues{}, size}) == 0);
+  REQUIRE(evalExpression({CppValues{0, 1, 2}, size}) == 3);
+  REQUIRE(evalExpression({CppValues{0.1f, 1.5f, 2.9f}, size}) == 3);
+  REQUIRE(evalExpression({CppValues{0, 1.0f, 2}, size}) == 3);
+  REQUIRE(evalExpression({CppValues{0, 1, CppValues{1, 2, 3}}, size}) == 3);
+  REQUIRE(evalExpression({CppValues{CppValues{0}, CppValues{1}, CppValues{0}}, size}) == 3);
 }
 
 TEST_CASE("size character", "[monad]")

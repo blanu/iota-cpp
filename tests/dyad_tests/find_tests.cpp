@@ -11,11 +11,11 @@ TEST_CASE("find ref", "[dyad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{1, 2, 3, 1, 2, 1}, find, 1}) == ints{1, 4, 6});
-  REQUIRE(evalExpression({ints{1, 2, 3}, find, 4}) == ints{});
-  REQUIRE(evalExpression({"hello", find, 'l'}) == ints{3, 4});
-  REQUIRE(evalExpression({"xyyyyz", find, "yy"}) == ints{2, 3, 4});
-  REQUIRE(evalExpression({"", find, ""}) == ints{1});
+  REQUIRE(evalExpression({CppValues{1, 2, 3, 1, 2, 1}, find, 1}) == CppValues{1, 4, 6});
+  REQUIRE(evalExpression({CppValues{1, 2, 3}, find, 4}) == CppValues{});
+  REQUIRE(evalExpression({"hello", find, 'l'}) == CppValues{3, 4});
+  REQUIRE(evalExpression({"xyyyyz", find, "yy"}) == CppValues{2, 3, 4});
+  REQUIRE(evalExpression({"", find, ""}) == CppValues{1});
   // FIXME - dictionaries
 }
 

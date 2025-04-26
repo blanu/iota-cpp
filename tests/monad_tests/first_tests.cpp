@@ -24,9 +24,9 @@ TEST_CASE("first list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{}, first}) == ints{});
-  REQUIRE(evalExpression({ints{0, 1, 2}, first}) == 0);
-  REQUIRE(evalExpression({floats{0.0f, 1.0f, 2.0f}, first}) == 0.0f);
+  REQUIRE(evalExpression({CppValues{}, first}) == CppValues{});
+  REQUIRE(evalExpression({CppValues{0, 1, 2}, first}) == 0);
+  REQUIRE(evalExpression({CppValues{0.0f, 1.0f, 2.0f}, first}) == 0.0f);
   REQUIRE(evalExpression({CppValues{0, 1.0f, 2}, first}) == 0);
 }
 

@@ -39,6 +39,14 @@ namespace iota // Effects
   inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);
   inline Storage trace = MonadicEffect::make(effects::families::log, effects::log::trace);
 
+  // Effect: Random
+  // Effect: Random: Monads
+  inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);
+
+  // Effect: Random: Dyads
+  inline Storage rolls = MonadicEffect::make(effects::families::random, effects::random::rolls);
+  inline Storage deal = MonadicEffect::make(effects::families::random, effects::random::deal);
+
   // Effect: Relations
   // Effect: Relations: Monads
   inline Storage makeTable = MonadicEffect::make(effects::families::relation, effects::relation::makeTable);

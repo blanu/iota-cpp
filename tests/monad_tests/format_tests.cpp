@@ -37,9 +37,9 @@ TEST_CASE("format list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{ints{}, format}) == cppValue("[]"));
-  REQUIRE(evalExpression(cppValues{ints{0}, format}) == cppValue(CppValues{cppValue("0")}));
-  REQUIRE(evalExpression(cppValues{floats{0.0f}, format}) == cppValue(CppValues{cppValue("0.0")}));
+  REQUIRE(evalExpression(cppValues{CppValues{}, format}) == cppValue("[]"));
+  REQUIRE(evalExpression(cppValues{CppValues{0}, format}) == cppValue(CppValues{cppValue("0")}));
+  REQUIRE(evalExpression(cppValues{CppValues{0.0f}, format}) == cppValue(CppValues{cppValue("0.0")}));
   REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f}, format}) == cppValue(CppValues{cppValue("0"), cppValue("1.0")}));
 }
 

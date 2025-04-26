@@ -17,9 +17,9 @@ TEST_CASE("char list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{}, ichar}) == ints{});
+  REQUIRE(evalExpression({{}, ichar}) == CppValues{});
 
-  REQUIRE(evalExpression({ints{2, 3}, ichar}) == CppValues{'\x02', '\x03'});
+  REQUIRE(evalExpression({CppValues{2, 3}, ichar}) == CppValues{'\x02', '\x03'});
 }
 
 TEST_CASE("char character", "[monad]")

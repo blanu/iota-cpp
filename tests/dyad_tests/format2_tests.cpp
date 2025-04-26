@@ -45,64 +45,64 @@ TEST_CASE("format2 list", "[dyad]")
   using namespace std::literals::string_literals; // This allows std::string literals using "value"s.
 
   // FIXME - :undefined results
-  // REQUIRE(evalExpression({ints{}, format2, 0}) == ":undefined"s);
+  // REQUIRE(evalExpression({CppValues{}, format2, 0}) == ":undefined"s);
 
-  REQUIRE(evalExpression({ints{0}, format2, 0}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 1}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, -1}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 2}) == CppValues{"0 "s});
-  REQUIRE(evalExpression({ints{0}, format2, -2}) == CppValues{" 0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 3}) == CppValues{"0  "s});
-  REQUIRE(evalExpression({ints{0}, format2, -3}) == CppValues{"  0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 0}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 1}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -1}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 2}) == CppValues{"0 "s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -2}) == CppValues{" 0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 3}) == CppValues{"0  "s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -3}) == CppValues{"  0"s});
 
-  REQUIRE(evalExpression({ints{0}, format2, 0.0f}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 1.0f}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, -1.0f}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 2.0f}) == CppValues{"0 "s});
-  REQUIRE(evalExpression({ints{0}, format2, -2.0f}) == CppValues{" 0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 3.0f}) == CppValues{"0  "s});
-  REQUIRE(evalExpression({ints{0}, format2, -3.0f}) == CppValues{"  0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 0.0f}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 1.0f}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -1.0f}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 2.0f}) == CppValues{"0 "s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -2.0f}) == CppValues{" 0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 3.0f}) == CppValues{"0  "s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -3.0f}) == CppValues{"  0"s});
 
-  REQUIRE(evalExpression({ints{0}, format2, 0.5f}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 1.5f}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, -1.5f}) == CppValues{"0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 2.5f}) == CppValues{"0 "s});
-  REQUIRE(evalExpression({ints{0}, format2, -2.5f}) == CppValues{" 0"s});
-  REQUIRE(evalExpression({ints{0}, format2, 3.5f}) == CppValues{"0  "s});
-  REQUIRE(evalExpression({ints{0}, format2, -3.5f}) == CppValues{"  0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 0.5f}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 1.5f}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -1.5f}) == CppValues{"0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 2.5f}) == CppValues{"0 "s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -2.5f}) == CppValues{" 0"s});
+  REQUIRE(evalExpression({CppValues{0}, format2, 3.5f}) == CppValues{"0  "s});
+  REQUIRE(evalExpression({CppValues{0}, format2, -3.5f}) == CppValues{"  0"s});
 
-  REQUIRE(evalExpression({floats{0.0f}, format2, 0}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 1}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -1}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 2}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -2}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 3}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -3}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 4}) == CppValues{"0.0 "s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -4}) == CppValues{" 0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 5}) == CppValues{"0.0  "s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -5}) == CppValues{"  0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 0}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 1}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -1}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 2}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -2}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 3}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -3}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 4}) == CppValues{"0.0 "s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -4}) == CppValues{" 0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 5}) == CppValues{"0.0  "s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -5}) == CppValues{"  0.0"s});
 
-  REQUIRE(evalExpression({floats{0.0f}, format2, 0.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 1.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -1.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 2.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -2.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 3.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -3.0f}) == CppValues{"0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 4.0f}) == CppValues{"0.0 "s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -4.0f}) == CppValues{" 0.0"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 5.0f}) == CppValues{"0.0  "s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -5.0f}) == CppValues{"  0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 0.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 1.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -1.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 2.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -2.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 3.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -3.0f}) == CppValues{"0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 4.0f}) == CppValues{"0.0 "s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -4.0f}) == CppValues{" 0.0"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 5.0f}) == CppValues{"0.0  "s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -5.0f}) == CppValues{"  0.0"s});
 
-  REQUIRE(evalExpression({floats{0.0f}, format2, 0.5f}) == CppValues{"0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -0.5f}) == CppValues{"0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 1.5f}) == CppValues{"0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -1.5f}) == CppValues{"0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 2.5f}) == CppValues{" 0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -2.5f}) == CppValues{" 0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, 3.5f}) == CppValues{"  0.00000"s});
-  REQUIRE(evalExpression({floats{0.0f}, format2, -3.5f}) == CppValues{"  0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 0.5f}) == CppValues{"0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -0.5f}) == CppValues{"0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 1.5f}) == CppValues{"0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -1.5f}) == CppValues{"0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 2.5f}) == CppValues{" 0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -2.5f}) == CppValues{" 0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, 3.5f}) == CppValues{"  0.00000"s});
+  REQUIRE(evalExpression({CppValues{0.0f}, format2, -3.5f}) == CppValues{"  0.00000"s});
 
   REQUIRE(evalExpression({CppValues{0.0f, 1}, format2, 0}) == CppValues{"0.0"s, "1"s});
   REQUIRE(evalExpression({CppValues{0.0f, 1}, format2, 1}) == CppValues{"0.0"s, "1"s});
@@ -144,7 +144,7 @@ TEST_CASE("format2 character", "[dyad]")
   using namespace std::literals::string_literals; // This allows std::string literals using "value"s.
 
   // FIXME - :undefined results
-  // REQUIRE(evalExpression({ints{}, format2, 0}) == ":undefined"s);
+  // REQUIRE(evalExpression({CppValues{}, format2, 0}) == ":undefined"s);
 
   REQUIRE(evalExpression({'a', format2, 0}) == "a"s);
   REQUIRE(evalExpression({'a', format2, 1}) == "a"s);
@@ -165,7 +165,7 @@ TEST_CASE("format2 string", "[dyad]")
   using namespace std::literals::string_literals; // This allows std::string literals using "value"s.
 
   // FIXME - :undefined results
-  // REQUIRE(evalExpression({ints{}, format2, 0}) == ":undefined"s);
+  // REQUIRE(evalExpression({CppValues{}, format2, 0}) == ":undefined"s);
 
   REQUIRE(evalExpression({"abc", format2, 0}) == "abc"s);
   REQUIRE(evalExpression({"abc", format2, 1}) == "abc"s);

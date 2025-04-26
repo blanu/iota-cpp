@@ -37,9 +37,9 @@ TEST_CASE("undefined list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{}, undefined}) == 0);
-  REQUIRE(evalExpression({ints{0}, undefined}) == 0);
-  REQUIRE(evalExpression({floats{0.0f}, undefined}) == 0);
+  REQUIRE(evalExpression({CppValues{}, undefined}) == 0);
+  REQUIRE(evalExpression({CppValues{0}, undefined}) == 0);
+  REQUIRE(evalExpression({CppValues{0.0f}, undefined}) == 0);
   REQUIRE(evalExpression({CppValues{0.0f, 1}, undefined}) == 0);
 }
 

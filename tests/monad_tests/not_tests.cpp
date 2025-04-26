@@ -26,10 +26,10 @@ TEST_CASE("not list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{ints{}, inot}) == cppValue(1));
-  REQUIRE(evalExpression(cppValues{ints{0, 1, 2}, inot}) == cppValue(ints{1, 0, 0}));
-  REQUIRE(evalExpression(cppValues{floats{0.0f, 1.0f, 2.0f}, inot}) == cppValue(ints{1, 0, 0}));
-  REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f, 2}, inot}) == cppValue(ints{1, 0, 0}));
+  REQUIRE(evalExpression(cppValues{CppValues{}, inot}) == cppValue(1));
+  REQUIRE(evalExpression(cppValues{CppValues{0, 1, 2}, inot}) == cppValue(CppValues{1, 0, 0}));
+  REQUIRE(evalExpression(cppValues{CppValues{0.0f, 1.0f, 2.0f}, inot}) == cppValue(CppValues{1, 0, 0}));
+  REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f, 2}, inot}) == cppValue(CppValues{1, 0, 0}));
 }
 
 TEST_CASE("not character", "[monad]")

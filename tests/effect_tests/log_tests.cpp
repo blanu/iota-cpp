@@ -16,7 +16,7 @@ TEST_CASE("critical string", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({ints{}, cause, CppValues{"test"s, critical}}, &effects_register);
+  evalExpressionForEffects({CppValues{}, cause, CppValues{"test"s, critical}}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
@@ -29,7 +29,7 @@ TEST_CASE("warning string", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({ints{}, cause, CppValues{"test"s, warning}}, &effects_register);
+  evalExpressionForEffects({CppValues{}, cause, CppValues{"test"s, warning}}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
@@ -42,7 +42,7 @@ TEST_CASE("error string", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({ints{}, cause, CppValues{"test"s, error}}, &effects_register);
+  evalExpressionForEffects({CppValues{}, cause, CppValues{"test"s, error}}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
@@ -55,7 +55,7 @@ TEST_CASE("log level filtering", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({ints{}, cause, CppValues{"test"s, trace}}, &effects_register);
+  evalExpressionForEffects({CppValues{}, cause, CppValues{"test"s, trace}}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
@@ -68,9 +68,22 @@ TEST_CASE("log level setting", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({ints{}, cause, CppValues{Log::Levels::debug, level}, then, CppValues{"test"s, debug}}, &effects_register);
+  evalExpressionForEffects({CppValues{}, cause, CppValues{Log::Levels::debug, level}, then, CppValues{"test"s, debug}}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
   REQUIRE(result == CppValues{"test"s});
+}
+
+TEST_CASE("log chaining", "[effect]")
+{
+  using namespace iota;
+  using namespace std::string_literals;
+
+  auto effects_register = TestingEffectsRegister();
+  evalExpressionForEffects({CppValues{}, cause, CppValues{"test 1"s, warning}, then, CppValues{"test 2"s, warning}}, &effects_register);
+  Storage effects = effects_register.getEffectState();
+  cppValue result = Object::to_cpp(effects);
+
+  REQUIRE(result == CppValues{"test 1"s, "test 2"s});
 }

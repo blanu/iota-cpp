@@ -25,7 +25,7 @@ TEST_CASE("negate list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({ints{2, 3}, negate}) == ints{-2, -3});
-  REQUIRE(evalExpression({floats{2.0f, 3.0f}, negate}) == floats{-2.0, -3.0f});
+  REQUIRE(evalExpression({CppValues{2, 3}, negate}) == CppValues{-2, -3});
+  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, negate}) == CppValues{-2.0f, -3.0f});
   REQUIRE(evalExpression({CppValues{2, 3.0f}, negate}) == CppValues{-2, -3.0f});
 }

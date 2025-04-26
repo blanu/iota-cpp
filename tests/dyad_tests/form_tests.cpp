@@ -47,8 +47,8 @@ TEST_CASE("form list", "[dyad]")
   using namespace iota;
   using namespace std::literals::string_literals; // This allows std::string literals using "value"s.
 
-  REQUIRE(evalExpression({"0"s, form, ints{0}}) == ints{0});
-  REQUIRE(evalExpression({"0"s, form, floats{0.0f}}) == floats{0.0f});
+  REQUIRE(evalExpression({"0"s, form, CppValues{0}}) == CppValues{0});
+  REQUIRE(evalExpression({"0"s, form, CppValues{0.0f}}) == CppValues{0.0f});
   REQUIRE(evalExpression({"0"s, form, CppValues{0, 0.0f}}) == CppValues{0, 0.0f});
 }
 
