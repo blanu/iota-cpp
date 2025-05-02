@@ -15,11 +15,29 @@ TEST_CASE("roll", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  Storage effectResult = evalExpressionWithEffects({{10, roll}, bind, negate}, &effects_register);
-  cppValue result = Object::to_cpp(effectResult);
+  cppValue result = evalExpressionWithEffects({{10, roll}, bind, negate}, &effects_register);
 
-  REQUIRE(std::holds_alternative<int>(result));
-  int integer = std::get<int>(result);
-  
-  REQUIRE(integer == -7); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(result == -9); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+}
+
+TEST_CASE("rolls", "[effect]")
+{
+  using namespace iota;
+  using namespace std::string_literals;
+
+  auto effects_register = TestingEffectsRegister();
+  cppValue result = evalExpressionWithEffects({{10, rolls, 2}, bind, negate}, &effects_register);
+
+  REQUIRE(result == a{-9, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+}
+
+TEST_CASE("deal", "[effect]")
+{
+  using namespace iota;
+  using namespace std::string_literals;
+
+  auto effects_register = TestingEffectsRegister();
+  cppValue result = evalExpressionWithEffects({{{1, 2, 3}, deal, 0}, bind, negate}, &effects_register);
+
+  REQUIRE(result == a{-1, -1, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }

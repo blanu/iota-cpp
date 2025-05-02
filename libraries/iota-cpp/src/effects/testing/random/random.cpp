@@ -4,12 +4,15 @@
 
 #include "random.h"
 
+#include "../../../api.h"
 #include "../../../error.h"
+#include "../../../verbs.h"
 
 #include "../../../storage/storage.h"
 #include "../../../storage/word.h"
 #include "../../../storage/word_array.h"
 #include "../../../storage/float_array.h"
+#include "../../../storage/mixed_array.h"
 
 #include "../../../nouns/integer.h"
 #include "../../../nouns/real.h"
@@ -89,42 +92,36 @@ Storage Random::rolls_impl(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-// FIXME
 Storage Random::deal_impl(const Storage& i, const Storage& x)
 {
-  if(std::holds_alternative<int>(x.i))
+  using namespace iota;
+
+  Storage isize = eval({i, size});
+  if(isize.o == NounType::ERROR)
   {
-    int xi = std::get<int>(x.i);
+    return isize;
+  }
 
-    if(std::holds_alternative<int>(i.i))
+  if(isize.o == NounType::INTEGER && std::holds_alternative<int>(isize.i))
+  {
+    int is = std::get<int>(isize.i);
+
+    if(is == 0)
     {
-      ints results = ints();
-
-      for(int offset = 0; offset < xi; offset++)
-      {
-        Storage result = roll_impl(i);
-        if(result.o == NounType::INTEGER && std::holds_alternative<int>(result.i))
-        {
-          results.push_back(std::get<int>(result.i));
-        }
-      }
-
-      return WordArray::make(results);
+      return WordArray::nil();
     }
-    else if(std::holds_alternative<float>(i.i))
+    else if(is > 0)
     {
-      floats results = floats();
+      mixed results = mixed();
 
-      for(int offset = 0; offset < xi; offset++)
+      for(int offset = 0; offset < is; offset++)
       {
-        Storage result = roll_impl(i);
-        if(result.o == NounType::REAL && std::holds_alternative<float>(result.i))
-        {
-          results.push_back(std::get<float>(result.i));
-        }
+        Storage choice = roll_impl(isize);
+        Storage result = eval({i, iota::index, choice});
+        results.push_back(result);
       }
 
-      return FloatArray::make(results);
+      return Noun::simplify(MixedArray::make(results));
     }
   }
 

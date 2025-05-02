@@ -192,7 +192,7 @@ void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_
   }
 }
 
-Storage evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)
+cppValue evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)
 {
   const Storage se = Object::from_cpp_expression(values);
   if(const maybe<Storage> result = EvalRegister::eval(se))
@@ -203,16 +203,20 @@ Storage evalExpressionWithEffects(const cppValues& values, EffectsRegister* effe
       {
         effects_register->eval(*result); // Discard result
 
-        return WordArray::nil();
+        return a{};
       }
       else if(result->o == NounType::CONTINGENCY)
       {
-        return effects_register->eval(*result);
+        return Object::to_cpp(effects_register->eval(*result));
+      }
+      else
+      {
+        return Object::to_cpp(*result);
       }
     }
   }
 
-  return WordArray::nil();
+  return a{};
 }
 
 cppValue evalNoun(const cppValue& i)

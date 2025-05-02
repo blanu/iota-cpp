@@ -17,6 +17,7 @@
 TestingEffectsRegister::TestingEffectsRegister()
 {
   Log::initialize(this);
+  Random::initialize(this);
 
   // Initialize system effects
   // Random
@@ -39,6 +40,7 @@ TestingEffectsRegister::TestingEffectsRegister()
 
   // Random : Dyads
   registerDyadicSourceEffect(StorageType::WORD, NounType::INTEGER, effects::families::random, effects::random::rolls, StorageType::WORD, NounType::INTEGER, Random::rolls_impl);
+
   registerDyadicSourceEffect(StorageType::WORD_ARRAY, NounType::LIST, effects::families::random, effects::random::deal, StorageType::WORD, NounType::INTEGER, Random::deal_impl);
 }
 

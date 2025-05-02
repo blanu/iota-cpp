@@ -308,7 +308,7 @@ eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^
 eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::eval()$/;"	f	class:EvalRegister
 evalExpression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalExpression(const cppValues& values)$/;"	f
 evalExpressionForEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register)$/;"	f
-evalExpressionWithEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)$/;"	f
+evalExpressionWithEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)$/;"	f
 evalNoun	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalNoun(const cppValue& i)$/;"	f
 eval_effect_expression_sink	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::eval_effect_expression_sink(const Storage& e) \/\/ NOLINT$/;"	f	class:EffectsRegister
 eval_effect_expression_source	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::eval_effect_expression_source(const Storage& e) \/\/ NOLINT$/;"	f	class:EffectsRegister
