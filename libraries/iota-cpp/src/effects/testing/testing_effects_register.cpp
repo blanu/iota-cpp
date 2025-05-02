@@ -35,6 +35,9 @@ TestingEffectsRegister::TestingEffectsRegister()
   registerMonadicSinkEffect(StorageType::WORD_ARRAY, NounType::STRING, effects::families::log, effects::log::trace, Log::trace_impl);
 
   // Random
+  // Random: Nilads
+  registerNiladicSourceEffect(effects::families::random, effects::random::random, Random::random_impl);
+
   // Random: Monads
   registerMonadicSourceEffect(StorageType::WORD, NounType::INTEGER, effects::families::random, effects::random::roll, Random::roll_impl);
 

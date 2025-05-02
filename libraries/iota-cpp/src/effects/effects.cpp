@@ -15,6 +15,11 @@
 #include "../storage/word.h"
 #include "../storage/word_array.h"
 
+Storage NiladicEffect::make(int f, int e)
+{
+  return WordArray::make(ints{f, e}, NounType::EFFECT_TYPE);
+}
+
 Storage MonadicEffect::make(int f, int e)
 {
   return WordArray::make(ints{f, e}, NounType::EFFECT_TYPE);

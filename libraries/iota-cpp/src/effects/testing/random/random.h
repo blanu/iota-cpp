@@ -16,6 +16,9 @@ class Random
   public:
     static void initialize(EffectsRegister* effects_register);
 
+    // Nilads
+    static Storage random_impl();
+
     // Monads
     static Storage roll_impl(const Storage& i);
 

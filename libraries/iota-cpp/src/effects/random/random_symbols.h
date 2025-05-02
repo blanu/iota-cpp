@@ -8,11 +8,12 @@
 namespace effects::random
 {
   // Monads
-  static constexpr int roll = 0;
+  static constexpr int random = 1;
+  static constexpr int roll = 2;
 
   // Dyads
-  static constexpr int rolls = 0;
-  static constexpr int deal = 1;
+  static constexpr int rolls = 3;
+  static constexpr int deal = 4;
 }
 
 #endif //RANDOM_SYMBOLS_H

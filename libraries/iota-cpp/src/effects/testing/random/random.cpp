@@ -25,6 +25,13 @@ void Random::initialize(EffectsRegister* effects_register)
   generator = std::mt19937(123456789); // Use a static seed for the testing version of the random number generator. Obviously, do not do this in the production random number generator.
 }
 
+Storage Random::random_impl()
+{
+  std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+  float result = dist(generator);
+  return Real::make(result);
+}
+
 Storage Random::roll_impl(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))

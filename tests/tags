@@ -3290,7 +3290,7 @@ data	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/sr
 datetime	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/generateAmalgamatedFiles.py	/^import datetime$/;"	i
 deactivate	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_output_redirect.hpp	/^        void deactivate() {$/;"	f	class:Catch::OutputRedirect
 deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage deal = MonadicEffect::make(effects::families::random, effects::random::deal);$/;"	m	namespace:iota
-deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int deal = 1;$/;"	m	namespace:effects::random
+deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int deal = 4;$/;"	m	namespace:effects::random
 deal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::deal_impl(const Storage& i, const Storage& x)$/;"	f	class:Random
 deallocate	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVector.tests.cpp	/^        void deallocate( T *p, size_type \/*n*\/ ) {$/;"	f	struct:__anon39::minimal_allocator
 debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);$/;"	m	namespace:iota
@@ -5087,6 +5087,7 @@ make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storag
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storage MonadicAdverb::make(int i)$/;"	f	class:MonadicAdverb
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage DyadicEffect::make(int f, int e)$/;"	f	class:DyadicEffect
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage MonadicEffect::make(int f, int e)$/;"	f	class:MonadicEffect
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage NiladicEffect::make(int f, int e)$/;"	f	class:NiladicEffect
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Contingency::make(const Storage& i, const Storage& x)$/;"	f	class:Contingency
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Signal::make(const Storage& i, const Storage& x)$/;"	f	class:Signal
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::make(int i)$/;"	f	class:Character
@@ -6310,11 +6311,14 @@ qnxnto	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4
 qnxnto	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* qnxnto = "INFO" ":" "qnxnto[]";$/;"	v
 r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    maybe<Storage> r;$/;"	m	class:EvalRegister
 random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_symbols.h	/^  static constexpr int random = 3;$/;"	m	namespace:effects::families
+random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage random = NiladicEffect::make(effects::families::random, effects::random::random);$/;"	m	namespace:iota
+random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int random = 1;$/;"	m	namespace:effects::random
 random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^namespace effects::random$/;"	n	class:effects
 random	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/300-Gen-OwnGenerator.cpp	/^Catch::Generators::GeneratorWrapper<int> random(int low, int high) {$/;"	f	namespace:__anon65
 random	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators_random.hpp	/^random(T a, T b) {$/;"	f	namespace:Catch::Generators
 random	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testRandomOrder.py	/^import random$/;"	i
 random	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testSharding.py	/^import random$/;"	i
+random_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::random_impl()$/;"	f	class:Random
 range	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators_range.hpp	/^GeneratorWrapper<T> range(T const& start, T const& end) {$/;"	f	namespace:Catch::Generators
 range	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators_range.hpp	/^GeneratorWrapper<T> range(T const& start, T const& end, T const& step) {$/;"	f	namespace:Catch::Generators
 rangeToString	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_tostring.hpp	/^        std::string rangeToString(InputIterator first, Sentinel last) {$/;"	f	namespace:Catch::Detail
@@ -6493,10 +6497,10 @@ rngSeed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 rngSeed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.hpp	/^        uint32_t rngSeed = generateRandomSeed(GenerateFrom::Default);$/;"	m	struct:Catch::ConfigData
 rngSeed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp	/^    unsigned int rngSeed() {$/;"	f	namespace:Catch
 roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);$/;"	m	namespace:iota
-roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int roll = 0;$/;"	m	namespace:effects::random
+roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int roll = 2;$/;"	m	namespace:effects::random
 roll_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::roll_impl(const Storage& i)$/;"	f	class:Random
 rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage rolls = MonadicEffect::make(effects::families::random, effects::random::rolls);$/;"	m	namespace:iota
-rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int rolls = 0;$/;"	m	namespace:effects::random
+rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int rolls = 3;$/;"	m	namespace:effects::random
 rolls_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::rolls_impl(const Storage& i, const Storage& x)$/;"	f	class:Random
 rootPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approvalTests.py	/^rootPath = os.path.join(catchPath, 'tests\/SelfTest\/Baselines')$/;"	v
 rootPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approve.py	/^rootPath = os.path.join( catchPath, 'tests\/SelfTest\/Baselines' )$/;"	v

@@ -210,7 +210,7 @@ cut_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.c
 cut_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::cut_mixed(const Storage& i, const Storage& x)$/;"	f	class:Integer
 cut_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::cut_reals(const Storage& i, const Storage& x)$/;"	f	class:Integer
 deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage deal = MonadicEffect::make(effects::families::random, effects::random::deal);$/;"	m	namespace:iota
-deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int deal = 1;$/;"	m	namespace:effects::random
+deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int deal = 4;$/;"	m	namespace:effects::random
 deal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::deal_impl(const Storage& i, const Storage& x)$/;"	f	class:Random
 debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);$/;"	m	namespace:iota
 debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int debug = 4;$/;"	m	namespace:effects::log
@@ -547,6 +547,7 @@ make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storag
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storage MonadicAdverb::make(int i)$/;"	f	class:MonadicAdverb
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage DyadicEffect::make(int f, int e)$/;"	f	class:DyadicEffect
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage MonadicEffect::make(int f, int e)$/;"	f	class:MonadicEffect
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage NiladicEffect::make(int f, int e)$/;"	f	class:NiladicEffect
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Contingency::make(const Storage& i, const Storage& x)$/;"	f	class:Contingency
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Signal::make(const Storage& i, const Storage& x)$/;"	f	class:Signal
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::make(int i)$/;"	f	class:Character
@@ -719,7 +720,10 @@ project	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/
 project	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int project = 7;$/;"	m	namespace:effects::relation
 r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    maybe<Storage> r;$/;"	m	class:EvalRegister
 random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_symbols.h	/^  static constexpr int random = 3;$/;"	m	namespace:effects::families
+random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage random = NiladicEffect::make(effects::families::random, effects::random::random);$/;"	m	namespace:iota
+random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int random = 1;$/;"	m	namespace:effects::random
 random	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^namespace effects::random$/;"	n	class:effects
+random_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::random_impl()$/;"	f	class:Random
 reciprocal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int reciprocal = 12;$/;"	m	class:Monads
 reciprocal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage reciprocal = Monad::make(Monads::reciprocal);$/;"	m	namespace:iota
 reciprocal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::reciprocal_impl(const Storage& i)$/;"	f	class:Integer
@@ -770,10 +774,10 @@ reverse	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inlin
 reverse_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::reverse_impl(const Storage& i)$/;"	f	class:IotaString
 reverse_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::reverse_impl(const Storage& i)$/;"	f	class:List
 roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);$/;"	m	namespace:iota
-roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int roll = 0;$/;"	m	namespace:effects::random
+roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int roll = 2;$/;"	m	namespace:effects::random
 roll_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::roll_impl(const Storage& i)$/;"	f	class:Random
 rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage rolls = MonadicEffect::make(effects::families::random, effects::random::rolls);$/;"	m	namespace:iota
-rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int rolls = 0;$/;"	m	namespace:effects::random
+rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int rolls = 3;$/;"	m	namespace:effects::random
 rolls_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::rolls_impl(const Storage& i, const Storage& x)$/;"	f	class:Random
 rotate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int rotate = 45;$/;"	m	class:Dyads
 rotate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage rotate = Dyad::make(Dyads::rotate);$/;"	m	namespace:iota

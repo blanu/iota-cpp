@@ -9,6 +9,17 @@
 
 #include "../../libraries/iota-cpp/src/effects/testing/testing_effects_register.h"
 
+TEST_CASE("random", "[effect]")
+{
+  using namespace iota;
+  using namespace std::string_literals;
+
+  auto effects_register = TestingEffectsRegister();
+  cppValue result = evalExpressionWithEffects({{iota::random}, bind, iota::floor}, &effects_register);
+
+  REQUIRE(result == 0); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+}
+
 TEST_CASE("roll", "[effect]")
 {
   using namespace iota;

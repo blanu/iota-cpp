@@ -41,6 +41,9 @@ namespace iota // Effects
   inline Storage timestamp = MonadicEffect::make(effects::families::log, effects::log::timestamp);
 
   // Effect: Random
+  // Effect: Random: Nilads
+  inline Storage random = NiladicEffect::make(effects::families::random, effects::random::random);
+
   // Effect: Random: Monads
   inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);
 
