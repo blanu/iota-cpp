@@ -10,14 +10,14 @@
 
 #include "storage/storage.h"
 #include "storage/word.h"
+#include "storage/word_array.h"
 
 #include "verbs.h" // NOLINT, included for convenience for users of api.h
 #include "adverbs.h" // NOLINT, included for convenience for users of api.h
 #include "effects/effects.h" // NOLINT, included for convenience for users of api.h
 #include "types.h"
 #include "effects/effects_register.h"
-
-class CppValue;
+#include "storage/iota_float.h"
 
 class Error
 {
@@ -41,54 +41,87 @@ struct std::hash<Error>
   }
 };
 
-using cppValue = std::variant<std::vector<CppValue>, int, float, char, std::string, Error, Storage>;
+struct cppValue;
+using cppValueVariant = std::variant<std::vector<cppValue>, int, float, char, std::string, Error, Storage>;
+struct cppValue : cppValueVariant
+{
+  using cppValueVariant::cppValueVariant;
+
+  bool operator==(const cppValue& other) const
+  {
+    if(std::holds_alternative<std::vector<cppValue>>(*this))
+    {
+      auto i = std::get<std::vector<cppValue>>(*this);
+      auto x = std::get<std::vector<cppValue>>(other);
+      if(i.size() != x.size())
+      {
+        return false;
+      }
+
+      return std::equal(i.begin(), i.end(), x.begin());
+    }
+    else if(std::holds_alternative<int>(*this))
+    {
+      if(std::holds_alternative<int>(other))
+      {
+        return std::get<int>(*this) == std::get<int>(other);
+      }
+    }
+    else if(std::holds_alternative<float>(*this))
+    {
+      if(std::holds_alternative<float>(other))
+      {
+        return std::abs(std::get<float>(*this) - std::get<float>(other)) < Float::precision;
+      }
+    }
+    else if(std::holds_alternative<char>(*this))
+    {
+      if(std::holds_alternative<char>(other))
+      {
+        return std::get<char>(*this) == std::get<char>(other);
+      }
+    }
+    else if(std::holds_alternative<std::string>(*this))
+    {
+      if(std::holds_alternative<std::string>(other))
+      {
+        return std::get<std::string>(*this) == std::get<std::string>(other);
+      }
+    }
+    else if(std::holds_alternative<Error>(*this))
+    {
+      if(std::holds_alternative<Error>(other))
+      {
+        return std::get<Error>(*this) == std::get<Error>(other);
+      }
+    }
+    else if(std::holds_alternative<Storage>(*this))
+    {
+      if(std::holds_alternative<Storage>(other))
+      {
+        return std::get<Storage>(*this) == std::get<Storage>(other);
+      }
+    }
+
+    return false;
+  }
+
+  cppValue() : cppValueVariant(std::vector<cppValue>()) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+  cppValue(std::initializer_list<cppValue> values) : cppValueVariant(std::vector<cppValue>(values)) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+};
+
 using cppValues = std::vector<cppValue>;
-using CppValues = std::vector<CppValue>;
+using a = cppValues; // alias for convenience
+const cppValue nil = {};
+
 class CppValue
 {
   public:
     static cppValue t;
     static cppValue f;
 
-    static cppValue wrap(cppValues values);
-    static bool all_ints(CppValues values);
-    static bool all_floats(CppValues values);
-
-    bool operator==(const CppValue& i) const;
-    std::size_t operator()(const CppValue& i) const noexcept;
-
-    cppValue value;
-
-    CppValue(const cppValue& value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(int value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(float value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(char value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(std::string value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    //CppValue(ints value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    //CppValue(floats value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(CppValues value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    // CppValue(std::unordered_map<CppValue, CppValue> value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(const cppValues& value) : value(wrap(value)) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(Error value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    CppValue(Storage value) : value(value) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-
-    //CppValue(const CppValue& other) = default; // copy constructor
-
-    // implicit conversions back to C++ types
-    operator int() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    {
-      return std::get<int>(value);
-    }
-
-    operator float() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    {
-      return std::get<float>(value);
-    }
-
-    operator char() const // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-    {
-      return std::get<char>(value);
-    }
+    static bool all_ints(const cppValues& values);
+    static bool all_floats(const cppValues& values);
 };
 
 template <typename T>

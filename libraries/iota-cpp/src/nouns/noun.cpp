@@ -17,9 +17,9 @@
 #include "../storage/float_array.h"
 #include "../storage/mixed_array.h"
 
-std::map<Specialization3, MonadicFunction> Noun::monads;
-std::map<Specialization5, DyadicFunction> Noun::dyads;
-std::map<Specialization5, TriadicFunction> Noun::triads;
+std::map<Specialization3, MonadicSourceFunction> Noun::monadSources;
+std::map<Specialization5, DyadicSourceFunction> Noun::dyadSources;
+std::map<Specialization5, TriadicSourceFunction> Noun::triadSources;
 std::map<Specialization3, MonadicAdverbFunction> Noun::monadicAdverbs;
 std::map<Specialization5, DyadicAdverbFunction> Noun::dyadicAdverbs;
 
@@ -50,11 +50,11 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f) {
   int fi = std::get<int>(f.i);
 
   Specialization3 specialization = Specialization3(i.t, i.o, fi);
-  if (monads.find(specialization) == monads.end()) {
+  if (monadSources.find(specialization) == monadSources.end()) {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  MonadicFunction verb = monads[specialization];
+  MonadicSourceFunction verb = monadSources[specialization];
   return verb(i);
 }
 
@@ -74,19 +74,19 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
   int fi = std::get<int>(f.i);
 
   Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
-  if (dyads.find(specialization) == dyads.end())
+  if (dyadSources.find(specialization) == dyadSources.end())
   {
     Specialization5 anySpecialization = Specialization5(NounType::ANY, NounType::ANY, fi, x.t, x.o);
-    if (dyads.find(anySpecialization) == dyads.end())
+    if (dyadSources.find(anySpecialization) == dyadSources.end())
     {
       return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
     }
 
-    DyadicFunction verb = dyads[anySpecialization];
+    DyadicSourceFunction verb = dyadSources[anySpecialization];
     return verb(i, x);
   }
 
-  DyadicFunction verb = dyads[specialization];
+  DyadicSourceFunction verb = dyadSources[specialization];
   return verb(i, x);
 }
 
@@ -108,11 +108,11 @@ Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x
   int fi = std::get<int>(f.i);
 
   Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
-  if (triads.find(specialization) == triads.end()) {
+  if (triadSources.find(specialization) == triadSources.end()) {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
 
-  TriadicFunction verb = triads[specialization];
+  TriadicSourceFunction verb = triadSources[specialization];
   return verb(i, x, y);
 }
 
@@ -169,15 +169,15 @@ Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Sto
 
 void Noun::registerMonad(Type it, Type io, Type f, Storage (*m)(const Storage&))
 {
-  Noun::monads[Specialization3(it, io, f)] = m;
+  Noun::monadSources[Specialization3(it, io, f)] = m;
 }
 
 void Noun::registerDyad(Type it, Type io, Type f, Type xt, Type xo, Storage (*d)(const Storage&, const Storage&)) {
-  Noun::dyads[Specialization5(it, io, f, xt, xo)] = d;
+  Noun::dyadSources[Specialization5(it, io, f, xt, xo)] = d;
 }
 
 void Noun::registerTriad(Type it, Type io, Type f, Type xt, Type xo, Storage (*t)(const Storage&, const Storage&, const Storage&)) {
-  Noun::triads[Specialization5(it, io, f, xt, xo)] = t;
+  Noun::triadSources[Specialization5(it, io, f, xt, xo)] = t;
 }
 
 void Noun::registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&)) {

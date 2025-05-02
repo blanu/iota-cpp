@@ -16,9 +16,10 @@ class Random
   public:
     static void initialize(EffectsRegister* effects_register);
 
-    // Dyads
+    // Monads
     static Storage roll_impl(const Storage& i);
 
+    // Dyads
     static Storage rolls_impl(const Storage& i, const Storage& x);
     static Storage deal_impl(const Storage& i, const Storage& x);
 

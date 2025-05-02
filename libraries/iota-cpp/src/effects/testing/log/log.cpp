@@ -4,13 +4,27 @@
 
 #include "log.h"
 
+#include <chrono>
+
 #include "../../../storage/storage.h"
+#include "../../../storage/word_array.h"
 #include "../../../storage/mixed_array.h"
+
+#include "../../../nouns/integer.h"
 
 void Log::initialize(EffectsRegister* effects_register)
 {
   logLevel = Levels::warning;
   logs = std::queue<Storage>();
+  timestamps = ints();
+}
+
+// Nilad Sinks
+void Log::timestamp_impl()
+{
+  auto now = std::chrono::system_clock::now();
+  int integer = static_cast<int>(std::chrono::system_clock::to_time_t(now));
+  timestamps.push_back(integer);
 }
 
 // Monads
@@ -53,6 +67,17 @@ void Log::trace_impl(const Storage& i)
   write(Levels::trace, i);
 }
 
+Storage Log::getEffectState()
+{
+  auto results = mixed();
+
+  results.push_back(Integer::make(logLevel));
+  results.push_back(getTimestamps());
+  results.push_back(getLogs());
+
+  return MixedArray::make(results);
+}
+
 Storage Log::getLogs()
 {
   auto results = mixed();
@@ -68,8 +93,22 @@ Storage Log::getLogs()
   return MixedArray::make(results);
 }
 
+Storage Log::getTimestamps()
+{
+  auto results = ints();
+  results.reserve(timestamps.size());
+
+  for(int timestamp : timestamps)
+  {
+    results.push_back(timestamp);
+  }
+
+  return WordArray::make(results);
+}
+
 int Log::logLevel;
 std::queue<Storage> Log::logs;
+ints Log::timestamps;
 
 void Log::write(const int level, const Storage& i)
 {

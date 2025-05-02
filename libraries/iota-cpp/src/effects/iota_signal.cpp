@@ -25,3 +25,19 @@ Storage Signal::lift_impl(const Storage& i)
 {
   return make(i, MixedArray::make());
 }
+
+void Contingency::initialize()
+{
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::EFFECT_EXPRESSION, Dyads::bind, StorageType::MIXED_ARRAY, NounType::EXPRESSION, bind_impl);
+}
+
+Storage Contingency::make(const Storage& i, const Storage& x)
+{
+  mixed results = {i, x};
+  return MixedArray::make(results, NounType::CONTINGENCY);
+}
+
+Storage Contingency::bind_impl(const Storage& i, const Storage& x)
+{
+  return make(i, x);
+}

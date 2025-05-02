@@ -10,5 +10,5 @@ TEST_CASE("enumerate integer", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{5, enumerate}) == CppValues{1, 2, 3, 4, 5});
+  REQUIRE(evalExpression({5, enumerate}) == a{1, 2, 3, 4, 5});
 }

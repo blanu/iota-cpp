@@ -31,15 +31,15 @@ TEST_CASE("equal list", "[dyad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{}, equal, CppValues{}}) == CppValues{});
-  REQUIRE(evalExpression({CppValues{1}, equal, CppValues{1}}) == CppValues{1});
-  REQUIRE(evalExpression({CppValues{1}, equal, CppValues{2}}) == CppValues{0});
+  REQUIRE(evalExpression({nil, equal, nil}) == nil);
+  REQUIRE(evalExpression({{1}, equal, {1}}) == a{1});
+  REQUIRE(evalExpression({{1}, equal, {2}}) == a{0});
 
-  REQUIRE(evalExpression({CppValues{1}, equal, CppValues{1}}) == CppValues{1});
-  REQUIRE(evalExpression({CppValues{1}, equal, CppValues{2}}) == CppValues{0});
+  REQUIRE(evalExpression({{1}, equal, {1}}) == a{1});
+  REQUIRE(evalExpression({{1}, equal, {2}}) == a{0});
 
-  REQUIRE(evalExpression({CppValues{1, 2.0f}, equal, CppValues{1, 2.0f}}) == CppValues{1, 1});
-  REQUIRE(evalExpression({CppValues{1, 2.0f}, equal, CppValues{2, 1.0f}}) == CppValues{0, 0});
+  REQUIRE(evalExpression({{1, 2.0f}, equal, {1, 2.0f}}) == a{1, 1});
+  REQUIRE(evalExpression({{1, 2.0f}, equal, {2, 1.0f}}) == a{0, 0});
 }
 
 TEST_CASE("equal character", "[dyad]")

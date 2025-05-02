@@ -51,43 +51,43 @@ TEST_CASE("float", "[monad]")
 
 TEST_CASE("words", "[monad]")
 {
-  REQUIRE(evalNoun({0}) == 0);
-  REQUIRE(evalNoun({1}) == 1);
-  REQUIRE(evalNoun({-1}) == -1);
-  REQUIRE(evalNoun({256}) == 256);
-  REQUIRE(evalNoun({-256}) == -256);
+  REQUIRE(evalNoun(0) == 0);
+  REQUIRE(evalNoun(1) == 1);
+  REQUIRE(evalNoun(-1) == -1);
+  REQUIRE(evalNoun(256) == 256);
+  REQUIRE(evalNoun(-256) == -256);
 
-  REQUIRE(evalNoun(CppValues{0, 1}) == CppValues{0, 1});
-  REQUIRE(evalNoun(CppValues{1, 2}) == CppValues{1, 2});
-  REQUIRE(evalNoun(CppValues{-1, 1}) == CppValues{-1, 1});
-  REQUIRE(evalNoun(CppValues{256, 1024}) == CppValues{256, 1024});
-  REQUIRE(evalNoun(CppValues{-256, -1024}) == CppValues{-256, -1024});
+  REQUIRE(evalNoun({0, 1}) == a{0, 1});
+  REQUIRE(evalNoun({1, 2}) == a{1, 2});
+  REQUIRE(evalNoun({-1, 1}) == a{-1, 1});
+  REQUIRE(evalNoun({256, 1024}) == a{256, 1024});
+  REQUIRE(evalNoun({-256, -1024}) == a{-256, -1024});
 }
 
 TEST_CASE("floats", "[monad]")
 {
-  REQUIRE(evalNoun({0.0f}) == 0.0f);
-  REQUIRE(evalNoun({1.0f}) == 1.0f);
-  REQUIRE(evalNoun({-1.0f}) == -1.0f);
-  REQUIRE(evalNoun({256.0f}) == 256.0f);
-  REQUIRE(evalNoun({-256.0f}) == -256.0f);
+  REQUIRE(evalNoun(0.0f) == 0.0f);
+  REQUIRE(evalNoun(1.0f) == 1.0f);
+  REQUIRE(evalNoun(-1.0f) == -1.0f);
+  REQUIRE(evalNoun(256.0f) == 256.0f);
+  REQUIRE(evalNoun(-256.0f) == -256.0f);
 
-  REQUIRE(evalNoun(CppValues{0.0f, 1.0f}) == CppValues{0.0f, 1.0f});
-  REQUIRE(evalNoun(CppValues{1.0f, 2.0f}) == CppValues{1.0f, 2.0f});
-  REQUIRE(evalNoun(CppValues{-1.0f, 1.0f}) == CppValues{-1.0f, 1.0f});
-  REQUIRE(evalNoun(CppValues{256.0f, 1024.0f}) == CppValues{256.0f, 1024.0f});
-  REQUIRE(evalNoun(CppValues{-256.0f, -1024.0f}) == CppValues{-256.0f, -1024.0f});
+  REQUIRE(evalNoun({0.0f, 1.0f}) == a{0.0f, 1.0f});
+  REQUIRE(evalNoun({1.0f, 2.0f}) == a{1.0f, 2.0f});
+  REQUIRE(evalNoun({-1.0f, 1.0f}) == a{-1.0f, 1.0f});
+  REQUIRE(evalNoun({256.0f, 1024.0f}) == a{256.0f, 1024.0f});
+  REQUIRE(evalNoun({-256.0f, -1024.0f}) == a{-256.0f, -1024.0f});
 }
 
 TEST_CASE("mixed", "[monad]")
 {
-  REQUIRE(evalNoun(CppValues{0, 0.0f}) == CppValues{0, 0.0f});
-  REQUIRE(evalNoun(CppValues{1.0f, 1}) == CppValues{1.0f, 1});
-  REQUIRE(evalNoun(CppValues{0, {0}}) == CppValues{0, {0}});
-  REQUIRE(evalNoun(CppValues{1.0f, {2.0f}}) == CppValues{1.0f, {2.0f}});
-  REQUIRE(evalNoun(CppValues{{0}, {0}}) == CppValues{{0}, {0}});
-  REQUIRE(evalNoun(CppValues{{1}, {2}}) == CppValues{{1}, {2}});
-  REQUIRE(evalNoun(CppValues{{1.0f}, {2.0f}}) == CppValues{{1.0f}, {2.0f}});
+  REQUIRE(evalNoun({0, 0.0f}) == a{0, 0.0f});
+  REQUIRE(evalNoun({1.0f, 1}) == a{1.0f, 1});
+  REQUIRE(evalNoun({0, {0}}) == a{0, {0}});
+  REQUIRE(evalNoun({1.0f, {2.0f}}) == a{1.0f, {2.0f}});
+  REQUIRE(evalNoun({{0}, {0}}) == a{{0}, {0}});
+  REQUIRE(evalNoun({{1}, {2}}) == a{{1}, {2}});
+  REQUIRE(evalNoun({{1.0f}, {2.0f}}) == a{{1.0f}, {2.0f}});
 }
 
 TEST_CASE("character", "[monad]")
@@ -111,11 +111,11 @@ TEST_CASE("eval", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{0, negate}) == 0);
-  REQUIRE(evalExpression(cppValues{1, negate}) == -1);
-  REQUIRE(evalExpression(cppValues{2, negate}) == -2);
-  REQUIRE(evalExpression(cppValues{-2, negate}) == 2);
+  REQUIRE(evalExpression({0, negate}) == 0);
+  REQUIRE(evalExpression({1, negate}) == -1);
+  REQUIRE(evalExpression({2, negate}) == -2);
+  REQUIRE(evalExpression({-2, negate}) == 2);
 
-  REQUIRE(evalExpression(cppValues{1, negate, negate}) == 1);
-  REQUIRE(evalExpression(cppValues{1, negate, negate, negate}) == -1);
+  REQUIRE(evalExpression({1, negate, negate}) == 1);
+  REQUIRE(evalExpression({1, negate, negate, negate}) == -1);
 }

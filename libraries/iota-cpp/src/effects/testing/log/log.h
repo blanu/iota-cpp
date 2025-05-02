@@ -28,6 +28,9 @@ class Log
 
     static void initialize(EffectsRegister* effects_register);
 
+    // Nilad Sinks
+    static void timestamp_impl();
+
     // Monads
     static void level_impl(const Storage& i);
     static void critical_impl(const Storage& i);
@@ -37,11 +40,14 @@ class Log
     static void debug_impl(const Storage& i);
     static void trace_impl(const Storage& i);
 
+    static Storage getEffectState();
     static Storage getLogs();
+    static Storage getTimestamps();
 
   private:
     static int logLevel;
     static std::queue<Storage> logs;
+    static ints timestamps;
 
     static void write(int level, const Storage& i);
 };

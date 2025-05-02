@@ -9,14 +9,8 @@ set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
 set(IOTA_LIB_SOURCE_DIR ${IOTA_LIB_DIR}/src)
 include_directories(${IOTA_LIB_SOURCE_DIR})
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp)
-add_library(iota-cpp-lib STATIC ${IOTA_FILES}
-  src/effects/testing/testing_effects_register.cpp
-  src/effects/testing/testing_effects_register.h
-  src/effects/testing/log/log.cpp
-  src/effects/testing/log/log.h
-  src/effects/random/random_symbols.h
-  src/effects/testing/random/random.cpp
-  src/effects/testing/random/random.h)
+add_library(iota-cpp-lib STATIC ${IOTA_FILES})
+
 target_include_directories(iota-cpp-lib PUBLIC ${IOTA_LIB_SOURCE_DIR})
 
 # Generate ctags for vim

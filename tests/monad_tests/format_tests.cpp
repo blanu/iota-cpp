@@ -10,51 +10,56 @@
 TEST_CASE("format integer", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression(cppValues{0, format}) == cppValue("0"));
-  REQUIRE(evalExpression(cppValues{1, format}) == cppValue("1"));
-  REQUIRE(evalExpression(cppValues{-1, format}) == cppValue("-1"));
-  REQUIRE(evalExpression(cppValues{10, format}) == cppValue("10"));
-  REQUIRE(evalExpression(cppValues{-10, format}) == cppValue("-10"));
-  REQUIRE(evalExpression(cppValues{38473, format}) == cppValue("38473"));
-  REQUIRE(evalExpression(cppValues{-38473, format}) == cppValue("-38473"));
+  REQUIRE(evalExpression(cppValues{0, format}) == cppValue("0"s));
+  REQUIRE(evalExpression(cppValues{1, format}) == cppValue("1"s));
+  REQUIRE(evalExpression(cppValues{-1, format}) == cppValue("-1"s));
+  REQUIRE(evalExpression(cppValues{10, format}) == cppValue("10"s));
+  REQUIRE(evalExpression(cppValues{-10, format}) == cppValue("-10"s));
+  REQUIRE(evalExpression(cppValues{38473, format}) == cppValue("38473"s));
+  REQUIRE(evalExpression(cppValues{-38473, format}) == cppValue("-38473"s));
 }
 
 TEST_CASE("format real", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression(cppValues{0.0f, format}) == cppValue("0.0"));
-  REQUIRE(evalExpression(cppValues{1.0f, format}) == cppValue("1.0"));
-  REQUIRE(evalExpression(cppValues{-1.0f, format}) == cppValue("-1.0"));
-  REQUIRE(evalExpression(cppValues{10.0f, format}) == cppValue("10.0"));
-  REQUIRE(evalExpression(cppValues{-10.0f, format}) == cppValue("-10.0"));
-  REQUIRE(evalExpression(cppValues{38473.0f, format}) == cppValue("38473.0"));
-  REQUIRE(evalExpression(cppValues{-38473.0f, format}) == cppValue("-38473.0"));
+  REQUIRE(evalExpression(cppValues{0.0f, format}) == cppValue("0.0"s));
+  REQUIRE(evalExpression(cppValues{1.0f, format}) == cppValue("1.0"s));
+  REQUIRE(evalExpression(cppValues{-1.0f, format}) == cppValue("-1.0"s));
+  REQUIRE(evalExpression(cppValues{10.0f, format}) == cppValue("10.0"s));
+  REQUIRE(evalExpression(cppValues{-10.0f, format}) == cppValue("-10.0"s));
+  REQUIRE(evalExpression(cppValues{38473.0f, format}) == cppValue("38473.0"s));
+  REQUIRE(evalExpression(cppValues{-38473.0f, format}) == cppValue("-38473.0"s));
 }
 
 TEST_CASE("format list", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression(cppValues{CppValues{}, format}) == cppValue("[]"));
-  REQUIRE(evalExpression(cppValues{CppValues{0}, format}) == cppValue(CppValues{cppValue("0")}));
-  REQUIRE(evalExpression(cppValues{CppValues{0.0f}, format}) == cppValue(CppValues{cppValue("0.0")}));
-  REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f}, format}) == cppValue(CppValues{cppValue("0"), cppValue("1.0")}));
+  REQUIRE(evalExpression({{}, format}) == "[]"s);
+  REQUIRE(evalExpression({{0}, format}) == a{"0"s});
+  REQUIRE(evalExpression({{0.0f}, format}) == a{"0.0"s});
+  REQUIRE(evalExpression({{0, 1.0f}, format}) == a{"0"s, "1.0"s});
 }
 
 TEST_CASE("format character", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression(cppValues{'a', format}) == cppValue("a"));
+  REQUIRE(evalExpression(cppValues{'a', format}) == "a"s);
 }
 
 TEST_CASE("format string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression(cppValues{"abc", format}) == cppValue("abc"));
+  REQUIRE(evalExpression(cppValues{"abc", format}) == "abc"s);
 }
 
 // FIXME - quoted symbol

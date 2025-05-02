@@ -25,10 +25,10 @@ TEST_CASE("reverse list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{}, reverse}) == CppValues{});
-  REQUIRE(evalExpression({CppValues{2, 3}, reverse}) == CppValues{3, 2});
-  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, reverse}) == CppValues{3.0f, 2.0f});
-  REQUIRE(evalExpression({CppValues{2, 3.0f}, reverse}) == CppValues{3.0f, 2});
+  REQUIRE(evalExpression({{}, reverse}) == a{});
+  REQUIRE(evalExpression({{2, 3}, reverse}) == a{3, 2});
+  REQUIRE(evalExpression({{2.0f, 3.0f}, reverse}) == a{3.0f, 2.0f});
+  REQUIRE(evalExpression({{2, 3.0f}, reverse}) == a{3.0f, 2});
 }
 
 TEST_CASE("reverse character", "[monad]")

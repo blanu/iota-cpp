@@ -10,13 +10,22 @@
 #include "../Connection.h"
 
 using Type = int;
+using Specialization2 = std::tuple<Type, Type>;
 using Specialization3 = std::tuple<Type, Type, Type>;
 using Specialization4 = std::tuple<Type, Type, Type, Type>;
 using Specialization5 = std::tuple<Type, Type, Type, Type, Type>;
 using Specialization6 = std::tuple<Type, Type, Type, Type, Type, Type>;
-using MonadicFunction = std::function<Storage(Storage)>;
-using DyadicFunction = std::function<Storage(Storage,Storage)>;
-using TriadicFunction = std::function<Storage(Storage,Storage,Storage)>;
+
+using NiladicSourceFunction = std::function<Storage()>;
+using MonadicSourceFunction = std::function<Storage(Storage)>;
+using DyadicSourceFunction = std::function<Storage(Storage,Storage)>;
+using TriadicSourceFunction = std::function<Storage(Storage,Storage,Storage)>;
+
+using NiladicSinkFunction = std::function<void()>;
+using MonadicSinkFunction = std::function<void(Storage)>;
+using DyadicSinkFunction = std::function<void(Storage,Storage)>;
+using TriadicSinkFunction = std::function<void(Storage,Storage,Storage)>;
+
 using MonadicAdverbFunction = std::function<Storage(Storage,Storage)>;
 using DyadicAdverbFunction = std::function<Storage(Storage,Storage,Storage)>;
 
@@ -91,9 +100,16 @@ class Noun
     static void to_conn(const Connection& conn, const Storage& x);
 
     private:
-      static std::map<Specialization3, MonadicFunction> monads;
-      static std::map<Specialization5, DyadicFunction> dyads;
-      static std::map<Specialization5, TriadicFunction> triads;
+      static std::map<Specialization2, NiladicSourceFunction> niladSources;
+      static std::map<Specialization3, MonadicSourceFunction> monadSources;
+      static std::map<Specialization5, DyadicSourceFunction> dyadSources;
+      static std::map<Specialization5, TriadicSourceFunction> triadSources;
+
+      static std::map<Specialization2, NiladicSourceFunction> niladSinks;
+      static std::map<Specialization3, MonadicSourceFunction> monadSinks;
+      static std::map<Specialization5, DyadicSourceFunction> dyadSinks;
+      static std::map<Specialization5, TriadicSourceFunction> triadSinks;
+
       static std::map<Specialization3, MonadicAdverbFunction> monadicAdverbs;
       static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;
 };

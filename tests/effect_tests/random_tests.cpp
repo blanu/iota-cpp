@@ -16,13 +16,13 @@ TEST_CASE("roll", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({CppValues{}, cause, CppValues{10, roll}}, &effects_register);
+  evalExpressionForEffects({{10, roll}, bind, negate}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
   REQUIRE(std::holds_alternative<int>(result));
   int integer = std::get<int>(result);
   
-  REQUIRE(integer > 0);
-  REQUIRE(integer <= 10);
+  REQUIRE(integer < 0);
+  REQUIRE(integer >= -10);
 }

@@ -66,8 +66,10 @@ class Dyads
 
     static constexpr int applyMonad = 49;
     static constexpr int retype = 50;
-    static constexpr int cause = 69;
+    static constexpr int causes = 69;
+    static constexpr int because = 72;
     static constexpr int then = 70;
+    static constexpr int bind = 71;
 };
 
 // Triads

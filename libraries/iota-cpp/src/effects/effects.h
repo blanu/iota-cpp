@@ -38,6 +38,7 @@ namespace iota // Effects
   inline Storage info = MonadicEffect::make(effects::families::log, effects::log::info);
   inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);
   inline Storage trace = MonadicEffect::make(effects::families::log, effects::log::trace);
+  inline Storage timestamp = MonadicEffect::make(effects::families::log, effects::log::timestamp);
 
   // Effect: Random
   // Effect: Random: Monads

@@ -18,33 +18,33 @@ TEST_CASE("not real", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{0.0f, inot}) == cppValue(1));
-  REQUIRE(evalExpression(cppValues{5.0f, inot}) == cppValue(0));
+  REQUIRE(evalExpression(cppValues{0.0f, inot}) == 1);
+  REQUIRE(evalExpression(cppValues{5.0f, inot}) == 0);
 }
 
 TEST_CASE("not list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{CppValues{}, inot}) == cppValue(1));
-  REQUIRE(evalExpression(cppValues{CppValues{0, 1, 2}, inot}) == cppValue(CppValues{1, 0, 0}));
-  REQUIRE(evalExpression(cppValues{CppValues{0.0f, 1.0f, 2.0f}, inot}) == cppValue(CppValues{1, 0, 0}));
-  REQUIRE(evalExpression(cppValues{CppValues{0, 1.0f, 2}, inot}) == cppValue(CppValues{1, 0, 0}));
+  REQUIRE(evalExpression(cppValues{{}, inot}) == 1);
+  REQUIRE(evalExpression(cppValues{{0, 1, 2}, inot}) == a{1, 0, 0});
+  REQUIRE(evalExpression(cppValues{{0.0f, 1.0f, 2.0f}, inot}) == a{1, 0, 0});
+  REQUIRE(evalExpression(cppValues{{0, 1.0f, 2}, inot}) == a{1, 0, 0});
 }
 
 TEST_CASE("not character", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{'a', inot}) == cppValue{0});
+  REQUIRE(evalExpression({'a', inot}) == 0);
 }
 
 TEST_CASE("not string", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression(cppValues{"", inot}) == cppValue{1});
-  REQUIRE(evalExpression(cppValues{"a", inot}) == cppValue{0});
+  REQUIRE(evalExpression({"", inot}) == 1);
+  REQUIRE(evalExpression({"a", inot}) == 0);
 }
 
 // FIXME

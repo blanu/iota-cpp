@@ -26,8 +26,8 @@ TEST_CASE("reciprocal list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{}, reciprocal}) == CppValues{});
-  REQUIRE(evalExpression({CppValues{2, 3}, reciprocal}) == CppValues{1.0f/2.0f, 1.0f/3.0f});
-  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, reciprocal}) == CppValues{1.0f/2.0f, 1.0f/3.0f});
-  REQUIRE(evalExpression({CppValues{2, 4.0f}, reciprocal}) == CppValues{1.0f/2.0f, 1.0f/4.0f});
+  REQUIRE(evalExpression({{}, reciprocal}) == a{});
+  REQUIRE(evalExpression({{2, 3}, reciprocal}) == a{1.0f/2.0f, 1.0f/3.0f});
+  REQUIRE(evalExpression({{2.0f, 3.0f}, reciprocal}) == a{1.0f/2.0f, 1.0f/3.0f});
+  REQUIRE(evalExpression({{2, 4.0f}, reciprocal}) == a{1.0f/2.0f, 1.0f/4.0f});
 }

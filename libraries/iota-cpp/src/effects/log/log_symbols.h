@@ -14,6 +14,7 @@ namespace effects::log
   static constexpr int debug = 4;
   static constexpr int trace = 5;
   static constexpr int level = 6;
+  static constexpr int timestamp = 7;
 }
 
 #endif //LOG_SYMBOLS_H

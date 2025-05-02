@@ -11,18 +11,18 @@ TEST_CASE("index list integer", "[dyad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{2, 3}, iota::index, 1}) == 2);
-  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, iota::index, 1}) == 2.0f);
-  REQUIRE(evalExpression({CppValues{2, 3.0f}, iota::index, 1}) == 2);
+  REQUIRE(evalExpression({{2, 3}, iota::index, 1}) == 2);
+  REQUIRE(evalExpression({{2.0f, 3.0f}, iota::index, 1}) == 2.0f);
+  REQUIRE(evalExpression({{2, 3.0f}, iota::index, 1}) == 2);
 }
 
 TEST_CASE("index list list", "[dyad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{2, 3}, iota::index, CppValues{1, 2}}) == CppValues{2, 3});
-  REQUIRE(evalExpression({CppValues{2.0f, 3.0f}, iota::index, CppValues{1, 2}}) == CppValues{2.0f, 3.0f});
-  REQUIRE(evalExpression({CppValues{2, 3.0f}, iota::index, CppValues{1, 2}}) == CppValues{2, 3.0f});
+  REQUIRE(evalExpression({{2, 3}, iota::index, a{1, 2}}) == a{2, 3});
+  REQUIRE(evalExpression({{2.0f, 3.0f}, iota::index, a{1, 2}}) == a{2.0f, 3.0f});
+  REQUIRE(evalExpression({{2, 3.0f}, iota::index, a{1, 2}}) == a{2, 3.0f});
 }
 
 TEST_CASE("index string list", "[dyad]")
@@ -30,5 +30,5 @@ TEST_CASE("index string list", "[dyad]")
   using namespace iota;
   using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"abc"s, iota::index, CppValues{2, 3}}) == "bc"s);
+  REQUIRE(evalExpression({"abc"s, iota::index, a{2, 3}}) == "bc"s);
 }

@@ -29,14 +29,14 @@ class Sequence
     static Storage then_impl(const Storage& i);
 };
 
-class Depenency
+class Contingency
 {
   public:
     static void initialize();
 
     static Storage make(const Storage& i, const Storage& x);
 
-    static Storage bind_impl(const Storage& i);
+    static Storage bind_impl(const Storage& i, const Storage& x);
 };
 
 #endif //SIGNAL_H

@@ -10,14 +10,14 @@ TEST_CASE("enclose integer", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({5, enclose}) == CppValues{5});
+  REQUIRE(evalExpression({5, enclose}) == a{5});
 }
 
 TEST_CASE("enclose real", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({5.0f, enclose}) == CppValues{5.0f});
+  REQUIRE(evalExpression({5.0f, enclose}) == a{5.0f});
 }
 
 // FIXME
@@ -25,8 +25,8 @@ TEST_CASE("enclose list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{0, 1, 2}, enclose}) == cppValue{CppValues{cppValue{CppValues{0, 1, 2}}}});
-  REQUIRE(evalExpression({CppValues{0.0f, 1.0f, 2.0f}, enclose}) == cppValue{CppValues{cppValue{CppValues{0.0f, 1.0f, 2.0f}}}});
+  REQUIRE(evalExpression({{0, 1, 2}, enclose}) == a{{0, 1, 2}});
+  REQUIRE(evalExpression({{0.0f, 1.0f, 2.0f}, enclose}) == a{{0.0f, 1.0f, 2.0f}});
 //  FIXME
 //  REQUIRE(evalExpression({CppValues{0.0f, 1, 2.0f}, enclose}) == CppValues{CppValues{0.0f, 1, 2.0f}});
 }

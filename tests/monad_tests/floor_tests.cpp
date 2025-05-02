@@ -24,10 +24,10 @@ TEST_CASE("floor list", "[monad]")
 {
   using namespace iota;
 
-  REQUIRE(evalExpression({CppValues{}, iota::floor}) == CppValues{});
-  REQUIRE(evalExpression({CppValues{0, 1, 2}, iota::floor}) == CppValues{0, 1, 2});
-  REQUIRE(evalExpression({CppValues{0.1f, 1.5f, 2.9f}, iota::floor}) == CppValues{0, 1, 2});
-  REQUIRE(evalExpression({CppValues{1, 2.0f, 3, 4, 5}, iota::floor}) == CppValues{1, 2, 3, 4, 5});
+  REQUIRE(evalExpression({{}, iota::floor}) == a{});
+  REQUIRE(evalExpression({{0, 1, 2}, iota::floor}) == a{0, 1, 2});
+  REQUIRE(evalExpression({{0.1f, 1.5f, 2.9f}, iota::floor}) == a{0, 1, 2});
+  REQUIRE(evalExpression({{1, 2.0f, 3, 4, 5}, iota::floor}) == a{1, 2, 3, 4, 5});
 }
 
 // FIXME - first dictionary

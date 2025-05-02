@@ -86,3 +86,47 @@ Storage Random::rolls_impl(const Storage& i, const Storage& x)
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
+
+// FIXME
+Storage Random::deal_impl(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<int>(x.i))
+  {
+    int xi = std::get<int>(x.i);
+
+    if(std::holds_alternative<int>(i.i))
+    {
+      ints results = ints();
+
+      for(int offset = 0; offset < xi; offset++)
+      {
+        Storage result = roll_impl(i);
+        if(result.o == NounType::INTEGER && std::holds_alternative<int>(result.i))
+        {
+          results.push_back(std::get<int>(result.i));
+        }
+      }
+
+      return WordArray::make(results);
+    }
+    else if(std::holds_alternative<float>(i.i))
+    {
+      floats results = floats();
+
+      for(int offset = 0; offset < xi; offset++)
+      {
+        Storage result = roll_impl(i);
+        if(result.o == NounType::REAL && std::holds_alternative<float>(result.i))
+        {
+          results.push_back(std::get<float>(result.i));
+        }
+      }
+
+      return FloatArray::make(results);
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+std::mt19937 Random::generator;

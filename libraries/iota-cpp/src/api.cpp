@@ -4,7 +4,6 @@
 #include "error.h"
 #include "types.h"
 #include "eval_register.h"
-#include "effects/iota_signal.h"
 
 #include "storage/storage.h"
 #include "storage/word_array.h"
@@ -19,186 +18,49 @@
 cppValue CppValue::t = 1;
 cppValue CppValue::f = 0;
 
-cppValue CppValue::wrap(cppValues values)
-{
-  CppValues results;
-  results.reserve(values.size());
-
-  std::transform(
-    values.begin(),
-    values.end(),
-    std::back_inserter(results),
-      [](const cppValue& result)
-      {
-        return CppValue(result);
-      }
-    );
-
-  return results;
-}
-
-bool CppValue::all_ints(CppValues values)
-{
-  for(const auto& value : values)
-  {
-    if(!std::holds_alternative<int>(value.value))
-    {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-bool CppValue::all_floats(CppValues values)
-{
-  for(const auto& value : values)
-  {
-    if(!std::holds_alternative<float>(value.value))
-    {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-// bool CppValue::operator==(const CppValue& i) const
+// cppValue CppValue::wrap(cppValues values)
 // {
-//   if(std::holds_alternative<int>(i.value) && std::holds_alternative<int>(value))
-//   {
-//     return std::get<int>(i.value) == std::get<int>(value);
-//   }
-//   else if(std::holds_alternative<float>(i.value) && std::holds_alternative<float>(value))
-//   {
-//     return std::get<float>(i.value) == std::get<float>(value);
-//   }
-//   else if(std::holds_alternative<std::string>(i.value) && std::holds_alternative<std::string>(value))
-//   {
-//     return std::get<std::string>(i.value) == std::get<std::string>(value);
-//   }
-//   else if(std::holds_alternative<std::vector<int>>(i.value) && std::holds_alternative<std::vector<int>>(value))
-//   {
-//     return std::get<std::vector<int>>(i.value) == std::get<std::vector<int>>(value);
-//   }
-//   else if(std::holds_alternative<std::vector<float>>(i.value) && std::holds_alternative<std::vector<float>>(value))
-//   {
-//     return std::get<std::vector<float>>(i.value) == std::get<std::vector<float>>(value);
-//   }
-//   // FIXME
-//   // else if(std::holds_alternative<std::unordered_map<CppValue, CppValue>>(i.value))
-//   // {
-//   //   const auto map = std::get<std::unordered_map<CppValue, CppValue>>(i.value);
-//   //
-//   //   std::size_t hash = 0;
-//   //
-//   //   for (const auto& pair : map)
-//   //   {
-//   //     hash ^= std::hash<CppValue>()(pair.first) ^ (std::hash<CppValue>()(pair.second) << 1) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
-//   //   }
-//   //
-//   //   return hash;
-//   // }
-//   // FIXME
-//   // else if(std::holds_alternative<std::vector<CppValue>>(i.value) && std::holds_alternative<std::vector<CppValue>>(value))
-//   // {
-//   //   const std::vector<CppValue> vs = std::get<std::vector<CppValue>>(i.value);
-//   //
-//   //   std::size_t hash = 0;
-//   //
-//   //   for (const CppValue& v : vs)
-//   //   {
-//   //     hash ^= std::hash<CppValue>()(v) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
-//   //   }
-//   //
-//   //   return hash;
-//   // }
-//   else if(std::holds_alternative<Error>(i.value) && std::holds_alternative<Error>(value))
-//   {
-//     return std::get<Error>(i.value) == std::get<Error>(value);
-//   }
-//   else if(std::holds_alternative<Storage>(i.value) && std::holds_alternative<Storage>(value))
-//   {
-//     return std::get<Storage>(i.value) == std::get<Storage>(value);
-//   }
-//   else
-//   {
-//     return false;
-//   }
+//   CppValues results;
+//   results.reserve(values.size());
+//
+//   std::transform(
+//     values.begin(),
+//     values.end(),
+//     std::back_inserter(results),
+//       [](const cppValue& result)
+//       {
+//         return CppValue(result);
+//       }
+//     );
+//
+//   return results;
 // }
 
-bool CppValue::operator==(const CppValue& i) const
+bool CppValue::all_ints(const cppValues& values)
 {
-  return value == i.value;
+  for(const auto& value : values)
+  {
+    if(!std::holds_alternative<int>(value))
+    {
+      return false;
+    }
+  }
+
+  return true;
 }
 
-// template<>
-// struct std::hash<CppValue>
-// {
-//   std::size_t operator()(const CppValue& i) const noexcept
-//   {
-//     if(std::holds_alternative<int>(i.value))
-//     {
-//       return std::hash<int>()(std::get<int>(i.value));
-//     }
-//     else if(std::holds_alternative<float>(i.value))
-//     {
-//       return std::hash<float>()(std::get<float>(i.value));
-//     }
-//     else if(std::holds_alternative<std::string>(i.value))
-//     {
-//       return std::hash<std::string>()(std::get<std::string>(i.value));
-//     }
-//     else if(std::holds_alternative<std::vector<int>>(i.value))
-//     {
-//       return std::hash<std::vector<int>>()(std::get<std::vector<int>>(i.value));
-//     }
-//     else if(std::holds_alternative<std::vector<float>>(i.value))
-//     {
-//       return std::hash<std::vector<float>>()(std::get<std::vector<float>>(i.value));
-//     }
-//     // FIXME
-//     // else if(std::holds_alternative<std::unordered_map<CppValue, CppValue>>(i.value))
-//     // {
-//     //   const auto map = std::get<std::unordered_map<CppValue, CppValue>>(i.value);
-//     //
-//     //   std::size_t hash = 0;
-//     //
-//     //   for (const auto& pair : map)
-//     //   {
-//     //     hash ^= std::hash<CppValue>()(pair.first) ^ (std::hash<CppValue>()(pair.second) << 1) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
-//     //   }
-//     //
-//     //   return hash;
-//     // }
-//     // FIXME
-//     // else if(std::holds_alternative<std::vector<CppValue>>(i.value))
-//     // {
-//     //   const std::vector<CppValue> vs = std::get<std::vector<CppValue>>(i.value);
-//     //
-//     //   std::size_t hash = 0;
-//     //
-//     //   for (const CppValue& v : vs)
-//     //   {
-//     //     hash ^= std::hash<CppValue>()(v) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
-//     //   }
-//     //
-//     //   return hash;
-//     // }
-//     else if(std::holds_alternative<Error>(i.value))
-//     {
-//       return std::hash<Error>()(std::get<Error>(i.value));
-//     }
-//     else if(std::holds_alternative<Storage>(i.value))
-//     {
-//       return std::hash<Storage>()(std::get<Storage>(i.value));
-//     }
-//     else
-//     {
-//       return 0;
-//     }
-//   }
-// };
+bool CppValue::all_floats(const cppValues& values)
+{
+  for(const auto& value : values)
+  {
+    if(!std::holds_alternative<float>(value))
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
 
 Storage test_error()
 {
@@ -313,17 +175,44 @@ cppValue evalExpression(const cppValues& values)
 
 void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register)
 {
-  Storage se = Object::from_cpp_expression(values);
+  const Storage se = Object::from_cpp_expression(values);
   if(const maybe<Storage> result = EvalRegister::eval(se))
   {
     if(result)
     {
-      if((*result).o == NounType::SIGNAL)
+      if(result->o == NounType::SIGNAL)
       {
-        effects_register->eval(*result);
+        effects_register->eval(*result); // Discard result
+      }
+      else if(result->o == NounType::CONTINGENCY)
+      {
+        effects_register->eval(*result); // Discard result
       }
     }
   }
+}
+
+Storage evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)
+{
+  const Storage se = Object::from_cpp_expression(values);
+  if(const maybe<Storage> result = EvalRegister::eval(se))
+  {
+    if(result)
+    {
+      if(result->o == NounType::SIGNAL)
+      {
+        effects_register->eval(*result); // Discard result
+
+        return WordArray::nil();
+      }
+      else if(result->o == NounType::CONTINGENCY)
+      {
+        return effects_register->eval(*result);
+      }
+    }
+  }
+
+  return WordArray::nil();
 }
 
 cppValue evalNoun(const cppValue& i)
@@ -377,9 +266,9 @@ Storage Object::from_cpp(const cppValue& i)
     const float fi = std::get<float>(i);
     return Real::make(fi);
   }
-  else if(std::holds_alternative<CppValues>(i))
+  else if(std::holds_alternative<cppValues>(i))
   {
-    auto values = std::get<CppValues>(i);
+    auto values = std::get<cppValues>(i);
 
     if(CppValue::all_ints(values))
     {
@@ -387,7 +276,7 @@ Storage Object::from_cpp(const cppValue& i)
       results.reserve(values.size());
       for(const auto& value : values)
       {
-        int result = std::get<int>(value.value);
+        int result = std::get<int>(value);
         results.push_back(result);
       }
 
@@ -399,7 +288,7 @@ Storage Object::from_cpp(const cppValue& i)
       results.reserve(values.size());
       for(const auto& value : values)
       {
-        float result = std::get<float>(value.value);
+        float result = std::get<float>(value);
         results.push_back(result);
       }
 
@@ -413,7 +302,7 @@ Storage Object::from_cpp(const cppValue& i)
       bool effective = false;
       for(const auto& value : values)
       {
-        Storage result = Object::from_cpp(value.value);
+        Storage result = Object::from_cpp(value);
         if(result.o == NounType::EFFECT_TYPE)
         {
           effective = true;
@@ -519,11 +408,11 @@ cppValue Object::to_cpp(Storage i)
           {
             auto integers = std::get<ints>(i.i);
 
-            CppValues results;
+            cppValues results;
             results.reserve(integers.size());
             for (const auto& result : integers)
             {
-              results.push_back(result);  // Implicit conversion
+              results.emplace_back(result);  // Implicit conversion
             }
 
             return results;
@@ -540,11 +429,11 @@ cppValue Object::to_cpp(Storage i)
           {
             auto fs = std::get<floats>(i.i);
 
-            CppValues results;
+            cppValues results;
             results.reserve(fs.size());
             for (const auto& result : fs)
             {
-              results.push_back(result);  // Implicit conversion
+              results.emplace_back(result);  // Implicit conversion
             }
 
             return results;
@@ -561,7 +450,7 @@ cppValue Object::to_cpp(Storage i)
           {
             mixed ms = std::get<mixed>(i.i);
 
-            std::vector<CppValue> vs = std::vector<CppValue>();
+            std::vector<cppValue> vs = std::vector<cppValue>();
 
             for(const auto& y : ms)
             {
@@ -696,7 +585,7 @@ cppValue Object::to_cpp(Storage i)
       {
         mixed ms = std::get<mixed>(i.i);
 
-        std::vector<CppValue> results = std::vector<CppValue>();
+        std::vector<cppValue> results = std::vector<cppValue>();
 
         for(const auto& y : ms)
         {
