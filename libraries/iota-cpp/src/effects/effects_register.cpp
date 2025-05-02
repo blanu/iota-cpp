@@ -5,13 +5,14 @@
 #include "effects_register.h"
 
 #include "iota_signal.h"
+#include "../api.h"
 #include "../error.h"
 
 #include "../storage/storage.h"
 #include "../storage/word.h"
-
-#include "../verbs.h"
 #include "../storage/mixed_array.h"
+
+#include "../nouns/expression.h"
 
 EffectsRegister::EffectsRegister()
 {
@@ -51,6 +52,113 @@ void EffectsRegister::registerMonadicSinkEffect(Type it, Type io, Type f, Type e
 void EffectsRegister::registerDyadicSinkEffect(Type it, Type io, Type f, Type e, Type xt, Type xo, const std::function<void(const Storage&, const Storage&)>& m)
 {
   dyadSinks[Specialization6(it, io, f, e, xt, xo)] = m;
+}
+
+Storage EffectsRegister::dispatchNiladicSourceEffect(const Storage& fe)
+{
+  if(fe.t == StorageType::WORD_ARRAY)
+  {
+    if(std::holds_alternative<ints>(fe.i))
+    {
+      const auto fis = std::get<ints>(fe.i);
+      if(fis.size() == 2)
+      {
+        int f = fis[0];
+        int e = fis[1];
+
+        Specialization2 specialization = Specialization2(f, e);
+        if (niladSources.find(specialization) != niladSources.end())
+        {
+          std::function<Storage()> verb = niladSources[specialization];
+          return verb();
+        }
+      }
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+Storage EffectsRegister::dispatchMonadicSourceEffect(const Storage& i, const Storage& fe)
+{
+  if(i.o != NounType::ERROR)
+  {
+    if(fe.t == StorageType::WORD_ARRAY)
+    {
+      if(std::holds_alternative<ints>(fe.i))
+      {
+        const auto fis = std::get<ints>(fe.i);
+        if(fis.size() == 2)
+        {
+          int f = fis[0];
+          int e = fis[1];
+
+          Specialization4 specialization = Specialization4(i.t, i.o, f, e);
+          if (monadSources.find(specialization) != monadSources.end())
+          {
+            std::function<Storage(Storage)> verb = monadSources[specialization];
+            return verb(i);
+          }
+        }
+      }
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+Storage EffectsRegister::dispatchDyadicSourceEffect(const Storage& i, const Storage& fe, const Storage& x)
+{
+  if(i.o != NounType::ERROR)
+  {
+    if(x.o != NounType::ERROR)
+    {
+      if(std::holds_alternative<ints>(fe.i))
+      {
+        const auto fis = std::get<ints>(fe.i);
+        if(fis.size() == 2)
+        {
+          int f = fis[0];
+          int e = fis[1];
+
+          Specialization6 specialization = Specialization6(i.t, i.o, f, e, x.t, x.o);
+          if (dyadSources.find(specialization) != dyadSources.end())
+          {
+            std::function<Storage(Storage,Storage)> verb = dyadSources[specialization];
+            return verb(i, x);
+          }
+        }
+      }
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+void EffectsRegister::dispatchNiladicSinkEffect(const Storage& fe)
+{
+  if (fe.t != StorageType::WORD_ARRAY)
+  {
+    return;
+  }
+
+  const auto fis = std::get<ints>(fe.i);
+  if(fis.size() != 2)
+  {
+    return;
+  }
+
+  int f = fis[0];
+  int e = fis[1];
+
+  Specialization2 specialization = Specialization2(f, e);
+  if (niladSinks.find(specialization) == niladSinks.end())
+  {
+    return;
+  }
+
+  std::function<void()> verb = niladSinks[specialization];
+  return verb();
 }
 
 void EffectsRegister::dispatchMonadicSinkEffect(const Storage& i, const Storage& fe)
@@ -204,6 +312,8 @@ Storage EffectsRegister::bind_expression(const Storage& i, const Storage& x)
 
 Storage EffectsRegister::eval(const Storage& s)
 {
+  using namespace iota;
+
   if(s.o == NounType::SIGNAL)
   {
     if(std::holds_alternative<mixed>(s.i))
@@ -215,7 +325,7 @@ Storage EffectsRegister::eval(const Storage& s)
         const Storage& i = ms[0];
         const Storage& e = ms[1];
 
-        eval_effect_expression(e);
+        eval_effect_expression_sink(e);
 
         return i;
       }
@@ -230,11 +340,11 @@ Storage EffectsRegister::eval(const Storage& s)
       if(ms.size() == 2)
       {
         const Storage& i = ms[0];
-        // Discard ms[1];
+        const Storage& x = ms[1];
 
-        eval_effect_expression(i);
+        Storage effectResult = eval_effect_expression_source(i);
 
-        return i;
+        return ::eval({effectResult, x}); // Call eval() from api.h, not EffectsRegister::eval
       }
     }
   }
@@ -242,14 +352,21 @@ Storage EffectsRegister::eval(const Storage& s)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-void EffectsRegister::eval_effect_expression(const Storage& e) // NOLINT
+void EffectsRegister::eval_effect_expression_sink(const Storage& e) // NOLINT
 {
   if(e.o == NounType::EFFECT_EXPRESSION)
   {
     if(std::holds_alternative<mixed>(e.i))
     {
       auto mes = std::get<mixed>(e.i);
-      if(mes.size() == 2)
+
+      if(mes.size() == 1)
+      {
+        const Storage& ef = mes[0];
+
+        dispatchNiladicSinkEffect(ef);
+      }
+      else if(mes.size() == 2)
       {
         const Storage& ei = mes[0];
         const Storage& ef = mes[1];
@@ -273,8 +390,43 @@ void EffectsRegister::eval_effect_expression(const Storage& e) // NOLINT
       auto mes  = std::get<mixed>(e.i);
       for(const auto& me : mes)
       {
-        eval_effect_expression(me);
+        eval_effect_expression_sink(me);
       }
     }
   }
+}
+
+Storage EffectsRegister::eval_effect_expression_source(const Storage& e) // NOLINT
+{
+  if(e.o == NounType::EFFECT_EXPRESSION)
+  {
+    if(std::holds_alternative<mixed>(e.i))
+    {
+      auto mes = std::get<mixed>(e.i);
+
+      if(mes.size() == 1)
+      {
+        const Storage& ef = mes[0];
+
+        return dispatchNiladicSourceEffect(ef);
+      }
+      else if(mes.size() == 2)
+      {
+        const Storage& ei = mes[0];
+        const Storage& ef = mes[1];
+
+        return dispatchMonadicSourceEffect(ei, ef);
+      }
+      else if(mes.size() == 3)
+      {
+        const Storage& ei = mes[0];
+        const Storage& ef = mes[1];
+        const Storage& ex = mes[2];
+
+        return dispatchDyadicSourceEffect(ei, ef, ex);
+      }
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }

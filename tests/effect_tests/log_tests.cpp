@@ -15,7 +15,7 @@ TEST_CASE("timestamp", "[effect]")
   using namespace iota;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({nil, causes, timestamp}, &effects_register);
+  evalExpressionForEffects({nil, causes, {timestamp}}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
@@ -45,7 +45,15 @@ TEST_CASE("critical string, causes", "[effect]")
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
-  REQUIRE(result == a{"test"s});
+  REQUIRE(std::holds_alternative<cppValues>(result));
+  auto results = std::get<cppValues>(result);
+  REQUIRE(results.size() == 3);
+
+  cppValue value = results[2];
+  REQUIRE(std::holds_alternative<cppValues>(value));
+
+  auto loglines = std::get<cppValues>(value);
+  REQUIRE(loglines == a{"test"s});
 }
 
 TEST_CASE("warning string, because", "[effect]")
@@ -54,11 +62,19 @@ TEST_CASE("warning string, because", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({"test"s, warning, because, nil}, &effects_register);
+  evalExpressionForEffects({{"test"s, warning}, because, nil}, &effects_register);
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
-  REQUIRE(result == a{"test"s});
+  REQUIRE(std::holds_alternative<cppValues>(result));
+  auto results = std::get<cppValues>(result);
+  REQUIRE(results.size() == 3);
+
+  cppValue value = results[2];
+  REQUIRE(std::holds_alternative<cppValues>(value));
+
+  auto loglines = std::get<cppValues>(value);
+  REQUIRE(loglines == a{"test"s});
 }
 
 TEST_CASE("error string", "[effect]")
@@ -71,7 +87,15 @@ TEST_CASE("error string", "[effect]")
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
-  REQUIRE(result == a{"test"s});
+  REQUIRE(std::holds_alternative<cppValues>(result));
+  auto results = std::get<cppValues>(result);
+  REQUIRE(results.size() == 3);
+
+  cppValue value = results[2];
+  REQUIRE(std::holds_alternative<cppValues>(value));
+
+  auto loglines = std::get<cppValues>(value);
+  REQUIRE(loglines == a{"test"s});
 }
 
 TEST_CASE("log level filtering", "[effect]")
@@ -84,7 +108,15 @@ TEST_CASE("log level filtering", "[effect]")
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
-  REQUIRE(result == a{});
+  REQUIRE(std::holds_alternative<cppValues>(result));
+  auto results = std::get<cppValues>(result);
+  REQUIRE(results.size() == 3);
+
+  cppValue value = results[2];
+  REQUIRE(std::holds_alternative<cppValues>(value));
+
+  auto loglines = std::get<cppValues>(value);
+  REQUIRE(loglines == nil);
 }
 
 TEST_CASE("log level setting", "[effect]")
@@ -97,7 +129,15 @@ TEST_CASE("log level setting", "[effect]")
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
-  REQUIRE(result == a{"test"s});
+  REQUIRE(std::holds_alternative<cppValues>(result));
+  auto results = std::get<cppValues>(result);
+  REQUIRE(results.size() == 3);
+
+  cppValue value = results[2];
+  REQUIRE(std::holds_alternative<cppValues>(value));
+
+  auto loglines = std::get<cppValues>(value);
+  REQUIRE(loglines == a{"test"s});
 }
 
 TEST_CASE("log chaining", "[effect]")
@@ -110,5 +150,13 @@ TEST_CASE("log chaining", "[effect]")
   Storage effects = effects_register.getEffectState();
   cppValue result = Object::to_cpp(effects);
 
-  REQUIRE(result == a{"test 1"s, "test 2"s});
+  REQUIRE(std::holds_alternative<cppValues>(result));
+  auto results = std::get<cppValues>(result);
+  REQUIRE(results.size() == 3);
+
+  cppValue value = results[2];
+  REQUIRE(std::holds_alternative<cppValues>(value));
+
+  auto loglines = std::get<cppValues>(value);
+  REQUIRE(loglines == a{"test 1"s, "test 2"s});
 }

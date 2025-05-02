@@ -40,7 +40,8 @@ class EffectsRegister
     Storage dispatchDyadicSourceEffect(const Storage& i, const Storage& fe, const Storage& x);
 
     Storage eval(const Storage& s);
-    void eval_effect_expression(const Storage& s);
+    void eval_effect_expression_sink(const Storage& s);
+    Storage eval_effect_expression_source(const Storage& s);
 
   private:
     std::map<Specialization2, std::function<void()>> niladSinks;

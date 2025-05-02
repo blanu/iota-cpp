@@ -187,6 +187,7 @@ cppValue evalNoun(const cppValue& i);
 
 cppValue evalExpression(const cppValues& values);
 void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register);
+Storage evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register);
 
 namespace iota
 {

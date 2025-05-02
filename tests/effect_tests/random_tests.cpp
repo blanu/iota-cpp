@@ -8,7 +8,6 @@
 #include "api.h"
 
 #include "../../libraries/iota-cpp/src/effects/testing/testing_effects_register.h"
-#include "effects/testing/log/log.h"
 
 TEST_CASE("roll", "[effect]")
 {
@@ -16,13 +15,11 @@ TEST_CASE("roll", "[effect]")
   using namespace std::string_literals;
 
   auto effects_register = TestingEffectsRegister();
-  evalExpressionForEffects({{10, roll}, bind, negate}, &effects_register);
-  Storage effects = effects_register.getEffectState();
-  cppValue result = Object::to_cpp(effects);
+  Storage effectResult = evalExpressionWithEffects({{10, roll}, bind, negate}, &effects_register);
+  cppValue result = Object::to_cpp(effectResult);
 
   REQUIRE(std::holds_alternative<int>(result));
   int integer = std::get<int>(result);
   
-  REQUIRE(integer < 0);
-  REQUIRE(integer >= -10);
+  REQUIRE(integer == -7); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }

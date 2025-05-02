@@ -73,21 +73,38 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
 
   int fi = std::get<int>(f.i);
 
-  Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
-  if (dyadSources.find(specialization) == dyadSources.end())
-  {
-    Specialization5 anySpecialization = Specialization5(NounType::ANY, NounType::ANY, fi, x.t, x.o);
-    if (dyadSources.find(anySpecialization) == dyadSources.end())
-    {
-      return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-    }
+  const std::vector<Specialization5> specializations = {
+    Specialization5(i.t, i.o, fi, x.t, x.o),
+    Specialization5(i.t, i.o, fi, x.t, NounType::ANY),
+    Specialization5(i.t, i.o, fi, NounType::ANY, x.o),
+    Specialization5(i.t, i.o, fi, NounType::ANY, NounType::ANY),
 
-    DyadicSourceFunction verb = dyadSources[anySpecialization];
-    return verb(i, x);
+    Specialization5(i.t, NounType::ANY, fi, x.t, x.o),
+    Specialization5(i.t, NounType::ANY, fi, x.t, NounType::ANY),
+    Specialization5(i.t, NounType::ANY, fi, NounType::ANY, x.o),
+    Specialization5(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY),
+
+    Specialization5(NounType::ANY, i.o, fi, x.t, x.o),
+    Specialization5(NounType::ANY, i.o, fi, x.t, NounType::ANY),
+    Specialization5(NounType::ANY, i.o, fi, NounType::ANY, x.o),
+    Specialization5(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY),
+
+    Specialization5(NounType::ANY, NounType::ANY, fi, x.t, x.o),
+    Specialization5(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY),
+    Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o),
+    Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY)
+  };
+
+  for(auto specialization : specializations)
+  {
+    if (dyadSources.find(specialization) != dyadSources.end())
+    {
+      const DyadicSourceFunction verb = dyadSources[specialization];
+      return verb(i, x);
+    }
   }
 
-  DyadicSourceFunction verb = dyadSources[specialization];
-  return verb(i, x);
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
 Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)

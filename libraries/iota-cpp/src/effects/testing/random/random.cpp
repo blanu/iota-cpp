@@ -16,8 +16,10 @@
 
 void Random::initialize(EffectsRegister* effects_register)
 {
-  std::random_device rd;
-  generator = std::mt19937(rd());
+  //std::random_device rd;
+  //generator = std::mt19937(rd());
+
+  generator = std::mt19937(123456789); // Use a static seed for the testing version of the random number generator. Obviously, do not do this in the production random number generator.
 }
 
 Storage Random::roll_impl(const Storage& i)
