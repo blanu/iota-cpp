@@ -10,6 +10,7 @@
 #include "../Connection.h"
 
 using Type = int;
+using Specialization1 = std::tuple<Type>;
 using Specialization2 = std::tuple<Type, Type>;
 using Specialization3 = std::tuple<Type, Type, Type>;
 using Specialization4 = std::tuple<Type, Type, Type, Type>;
@@ -36,12 +37,17 @@ class Noun
 
     static void initialize();
 
+    static Storage dispatchNilad(const Storage& f);
     static Storage dispatchMonad(const Storage& i, const Storage& f);
     static Storage dispatchDyad(const Storage& i, const Storage& f, const Storage& x);
     static Storage dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y);
     static Storage dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g);
     static Storage dispatchDyadicAdverb(const Storage& i, const Storage& f, const Storage& g, const Storage& x);
+    static Storage dispatchNiladicEffect(const Storage& f);
+    static Storage dispatchMonadicEffect(const Storage& i, const Storage& f);
+    static Storage dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x);
 
+    static void registerNilad(Type f, Storage (*m)());
     static void registerMonad(Type it, Type io, Type f, Storage (*m)(const Storage&));
     static void registerDyad(Type it, Type io, Type f, Type xt, Type xo, Storage (*d)(const Storage&, const Storage&));
     static void registerTriad(Type it, Type io, Type f, Type xt, Type xo, Storage (*t)(const Storage&, const Storage&, const Storage&));
@@ -100,7 +106,7 @@ class Noun
     static void to_conn(const Connection& conn, const Storage& x);
 
     private:
-      static std::map<Specialization2, NiladicSourceFunction> niladSources;
+      static std::map<Specialization1, NiladicSourceFunction> niladSources;
       static std::map<Specialization3, MonadicSourceFunction> monadSources;
       static std::map<Specialization5, DyadicSourceFunction> dyadSources;
       static std::map<Specialization5, TriadicSourceFunction> triadSources;

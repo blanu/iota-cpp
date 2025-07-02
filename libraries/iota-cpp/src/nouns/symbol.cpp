@@ -6,7 +6,7 @@
 #include "noun.h"
 
 #include "../symbols.h"
-#include "../error.h"
+#include "error.h"
 #include "../verbs.h"
 #include "../api.h"
 

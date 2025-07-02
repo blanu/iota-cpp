@@ -12,7 +12,7 @@
 
 #include "../../../nouns/integer.h"
 
-void Log::initialize(EffectsRegister* effects_register)
+void Log::initialize(EffectsProvider* effects_provider)
 {
   logLevel = Levels::warning;
   logs = std::queue<Storage>();
@@ -20,59 +20,75 @@ void Log::initialize(EffectsRegister* effects_register)
 }
 
 // Nilad Sinks
-void Log::timestamp_impl()
+Storage Log::timestamp_impl()
 {
   auto now = std::chrono::system_clock::now();
   int integer = static_cast<int>(std::chrono::system_clock::to_time_t(now));
   timestamps.push_back(integer);
+
+  return WordArray::nil();
 }
 
 // Monads
-void Log::level_impl(const Storage& i)
+Storage Log::level_impl(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
     int newLevel = std::get<int>(i.i);
     logLevel = newLevel;
   }
+
+  return WordArray::nil();
 }
 
-void Log::critical_impl(const Storage& i)
+Storage Log::critical_impl(const Storage& i)
 {
   write(Levels::critical, i);
+
+  return WordArray::nil();
 }
 
-void Log::error_impl(const Storage& i)
+Storage Log::error_impl(const Storage& i)
 {
   write(Levels::error, i);
+
+  return WordArray::nil();
 }
 
-void Log::warning_impl(const Storage& i)
+Storage Log::warning_impl(const Storage& i)
 {
   write(Levels::warning, i);
+
+  return WordArray::nil();
 }
 
-void Log::info_impl(const Storage& i)
+Storage Log::info_impl(const Storage& i)
 {
   write(Levels::info, i);
+
+  return WordArray::nil();
 }
 
-void Log::debug_impl(const Storage& i)
+Storage Log::debug_impl(const Storage& i)
 {
   write(Levels::debug, i);
+
+  return WordArray::nil();
 }
 
-void Log::trace_impl(const Storage& i)
+Storage Log::trace_impl(const Storage& i)
 {
   write(Levels::trace, i);
+
+  return WordArray::nil();
 }
 
 Storage Log::getEffectState()
 {
   auto results = mixed();
 
-  results.push_back(Integer::make(logLevel));
   results.push_back(getTimestamps());
+  results.push_back(Integer::make(logLevel));
   results.push_back(getLogs());
 
   return MixedArray::make(results);

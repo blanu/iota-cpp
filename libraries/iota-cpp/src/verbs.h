@@ -52,6 +52,7 @@ namespace iota
   inline Storage erase = Monad::make(Monads::erase);
   inline Storage truth = Monad::make(Monads::truth);
   inline Storage lift = Monad::make(Monads::lift);
+  inline Storage occurs = Monad::make(Monads::occurs);
 
   // Dyads
   inline Storage amend = Dyad::make(Dyads::amend);
@@ -85,6 +86,8 @@ namespace iota
   inline Storage because = Dyad::make(Dyads::because);
   inline Storage then = Dyad::make(Dyads::then);
   inline Storage bind = Dyad::make(Dyads::bind);
+  inline Storage retrieve = Dyad::make(Dyads::retrieve);
+  inline Storage mutate = Dyad::make(Dyads::mutate);
 }
 
 #endif //VERBS_H

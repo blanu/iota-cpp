@@ -2,7 +2,7 @@
 #define MAIN_H
 
 #include <eval_register.h>
-#include <effects/effects_register.h>
+#include <effects/effects_provider.h>
 
 #include "IostreamStorageConnection.h"
 
@@ -16,7 +16,7 @@ class IotaMain
   private:
     IostreamStorageConnection conn;
     EvalRegister eval_register;
-    EffectsRegister effects_register;
+    EffectsProvider effects_register;
 };
 
 #endif //MAIN_H

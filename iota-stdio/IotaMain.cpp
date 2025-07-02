@@ -5,13 +5,9 @@
 #include <eval_register.h>
 #include <types.h>
 
-IotaMain::IotaMain() : conn(IostreamStorageConnection::make()), eval_register(EvalRegister()), effects_register(EffectsRegister())
+IotaMain::IotaMain() : conn(IostreamStorageConnection::make()), eval_register(EvalRegister()), effects_register(EffectsProvider())
 {
     EvalRegister::initialize();
-    EffectsRegister::initialize();
-
-    eval_register.setEffectsRegister(&effects_register);
-    effects_register.setEvalRegister(&eval_register);
 }
 
 void IotaMain::loop()

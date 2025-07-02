@@ -8,11 +8,11 @@ set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(iota-stdio
-        IotaMain.cpp
-        IostreamConnection.cpp
-        IostreamStorageConnection.cpp
-        main.cpp
-  ../tests/main.cpp)
+  IotaMain.cpp
+  IostreamConnection.cpp
+  IostreamStorageConnection.cpp
+  main.cpp
+)
 target_link_libraries(iota-stdio iota-cpp-lib)
 
 # Generate ctags for vim

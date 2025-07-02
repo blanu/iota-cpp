@@ -15,5 +15,6 @@
 #include "conditional.h"
 #include "symbol.h"
 #include "quoted_symbol.h"
+#include "lens.h"
 
 #endif //NOUNS_H

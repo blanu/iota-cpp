@@ -12,7 +12,7 @@ using floats = std::vector<float>;
 template<>
 struct std::hash<ints>
 {
-  std::size_t operator()(const std::vector<int>& integers) const
+  std::size_t operator()(const std::vector<int>& integers) const noexcept
   {
     std::size_t hash = 0;
 
@@ -28,11 +28,11 @@ struct std::hash<ints>
 template<>
 struct std::hash<floats>
 {
-  std::size_t operator()(const std::vector<float>& fs) const
+  std::size_t operator()(const std::vector<float>& fs) const noexcept
   {
     std::size_t hash = 0;
 
-    for (int f : fs) {
+    for (float f : fs) {
       std::hash<float> hasher;
       hash ^= hasher(f) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
     }

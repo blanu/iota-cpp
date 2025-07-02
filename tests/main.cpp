@@ -6,14 +6,17 @@
 #include <catch2/catch_all.hpp>
 
 #include "eval_register.h"
-#include "effects/effects_register.h"
+#include "effects/effects_provider.h"
+#include "effects/testing/testing_effects_provider.h"
 
 int main(int argc, char** argv)
 {
   EvalRegister::initialize();
+  EffectsProvider provider = TestingEffectsProvider();
+
+  EvalRegister::registerEffectsProvider(provider);
 
   const int result = Catch::Session().run(argc, argv);
 
   return result;
-
 }

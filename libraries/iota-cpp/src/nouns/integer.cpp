@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "../Connection.h"
-#include "../error.h"
+#include "error.h"
 #include "../squeeze.h"
 #include "../symbols.h"
 #include "../verbs.h"

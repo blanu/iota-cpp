@@ -4,11 +4,6 @@
 
 #include "effects.h"
 
-#include "relation/relation.h"
-
-#include "../symbols.h"
-#include "../error.h"
-
 #include "../nouns/noun.h"
 
 #include "../storage/storage.h"
@@ -17,15 +12,15 @@
 
 Storage NiladicEffect::make(int f, int e)
 {
-  return WordArray::make(ints{f, e}, NounType::EFFECT_TYPE);
+  return WordArray::make(ints{f, e}, NounType::NILADIC_EFFECT);
 }
 
 Storage MonadicEffect::make(int f, int e)
 {
-  return WordArray::make(ints{f, e}, NounType::EFFECT_TYPE);
+  return WordArray::make(ints{f, e}, NounType::MONADIC_EFFECT);
 }
 
 Storage DyadicEffect::make(int f, int e)
 {
-  return WordArray::make(ints{f, e}, NounType::EFFECT_TYPE);
+  return WordArray::make(ints{f, e}, NounType::DYADIC_EFFECT);
 }

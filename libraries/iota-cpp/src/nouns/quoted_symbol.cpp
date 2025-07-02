@@ -9,7 +9,7 @@
 #include "integer.h"
 
 #include "../symbols.h"
-#include "../error.h"
+#include "error.h"
 
 #include "../storage/word.h"
 #include "../storage/word_array.h"

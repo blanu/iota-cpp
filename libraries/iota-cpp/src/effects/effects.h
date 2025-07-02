@@ -48,8 +48,8 @@ namespace iota // Effects
   inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);
 
   // Effect: Random: Dyads
-  inline Storage rolls = MonadicEffect::make(effects::families::random, effects::random::rolls);
-  inline Storage deal = MonadicEffect::make(effects::families::random, effects::random::deal);
+  inline Storage rolls = DyadicEffect::make(effects::families::random, effects::random::rolls);
+  inline Storage deal = DyadicEffect::make(effects::families::random, effects::random::deal);
 
   // Effect: Relations
   // Effect: Relations: Monads
@@ -68,6 +68,15 @@ namespace iota // Effects
   inline Storage crossProduct = DyadicEffect::make(effects::families::relation, effects::relation::crossProduct);
   inline Storage restrict = DyadicEffect::make(effects::families::relation, effects::relation::restrict);
   inline Storage intersection = DyadicEffect::make(effects::families::relation, effects::relation::intersection);
+
+  // Effect: State
+  // Effect: State: Nilads
+  inline Storage put = NiladicEffect::make(effects::families::state, effects::state::put);
+
+  // Effect: State: Monads
+  inline Storage get = MonadicEffect::make(effects::families::state, effects::state::get);
+  inline Storage modify = MonadicEffect::make(effects::families::state, effects::state::modify);
+
 } // namespace iota
 
 #endif //EFFECTS_H

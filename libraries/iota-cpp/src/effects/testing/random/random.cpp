@@ -5,7 +5,7 @@
 #include "random.h"
 
 #include "../../../api.h"
-#include "../../../error.h"
+#include "../../../nouns/error.h"
 #include "../../../verbs.h"
 
 #include "../../../storage/storage.h"
@@ -14,10 +14,11 @@
 #include "../../../storage/float_array.h"
 #include "../../../storage/mixed_array.h"
 
+#include "../../../nouns/noun.h"
 #include "../../../nouns/integer.h"
 #include "../../../nouns/real.h"
 
-void Random::initialize(EffectsRegister* effects_register)
+void Random::initialize(EffectsProvider* effects_register)
 {
   //std::random_device rd;
   //generator = std::mt19937(rd());

@@ -10,7 +10,7 @@
 #include "integer.h"
 #include "noun.h"
 
-#include "../error.h"
+#include "error.h"
 #include "../squeeze.h"
 #include "../symbols.h"
 

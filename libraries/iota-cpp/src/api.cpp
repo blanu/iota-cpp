@@ -1,7 +1,7 @@
 #include "api.h"
 
 #include <utility>
-#include "error.h"
+#include "nouns/error.h"
 #include "types.h"
 #include "eval_register.h"
 
@@ -18,27 +18,9 @@
 cppValue CppValue::t = 1;
 cppValue CppValue::f = 0;
 
-// cppValue CppValue::wrap(cppValues values)
-// {
-//   CppValues results;
-//   results.reserve(values.size());
-//
-//   std::transform(
-//     values.begin(),
-//     values.end(),
-//     std::back_inserter(results),
-//       [](const cppValue& result)
-//       {
-//         return CppValue(result);
-//       }
-//     );
-//
-//   return results;
-// }
-
 bool CppValue::all_ints(const cppValues& values)
 {
-  for(const auto& value : values)
+  for(const auto& value : values) // NOLINT
   {
     if(!std::holds_alternative<int>(value))
     {
@@ -51,7 +33,7 @@ bool CppValue::all_ints(const cppValues& values)
 
 bool CppValue::all_floats(const cppValues& values)
 {
-  for(const auto& value : values)
+  for(const auto& value : values) // NOLINT
   {
     if(!std::holds_alternative<float>(value))
     {
@@ -67,21 +49,21 @@ Storage test_error()
   return Word::make(TEST_ERROR, NounType::ERROR);
 }
 
-std::string error_to_string(const Storage &e)
+std::string error_to_string(const Storage &error)
 {
-  if(e.o != NounType::ERROR)
+  if(error.o != NounType::ERROR)
   {
     return "Unknown error";
   }
 
-  if(e.t != StorageType::WORD)
+  if(error.t != StorageType::WORD)
   {
     return "Unknown error";
   }
 
-  if(std::holds_alternative<int>(e.i))
+  if(std::holds_alternative<int>(error.i))
   {
-    return code_to_string(std::get<int>(e.i));
+    return code_to_string(std::get<int>(error.i));
   }
   else
   {
@@ -89,7 +71,7 @@ std::string error_to_string(const Storage &e)
   }
 }
 
-std::string code_to_string(int code)
+std::string code_to_string(const int code)
 {
   switch(code)
   {
@@ -162,8 +144,8 @@ Storage eval(const mixed& e)
 
 cppValue evalExpression(const cppValues& values)
 {
-  Storage se = Object::from_cpp_expression(values);
-  if(maybe<Storage> result = EvalRegister::eval(se))
+  const Storage se = Object::from_cpp_expression(values);
+  if(const maybe<Storage> result = EvalRegister::eval(se))
   {
     return Object::to_cpp(*result);
   }
@@ -173,56 +155,22 @@ cppValue evalExpression(const cppValues& values)
   }
 }
 
-void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register)
+Storage evalExpression(const Storage& values)
 {
-  const Storage se = Object::from_cpp_expression(values);
-  if(const maybe<Storage> result = EvalRegister::eval(se))
+  if(maybe<Storage> result = EvalRegister::eval(values))
   {
-    if(result)
-    {
-      if(result->o == NounType::SIGNAL)
-      {
-        effects_register->eval(*result); // Discard result
-      }
-      else if(result->o == NounType::CONTINGENCY)
-      {
-        effects_register->eval(*result); // Discard result
-      }
-    }
+    return *result;
   }
-}
-
-cppValue evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)
-{
-  const Storage se = Object::from_cpp_expression(values);
-  if(const maybe<Storage> result = EvalRegister::eval(se))
+  else
   {
-    if(result)
-    {
-      if(result->o == NounType::SIGNAL)
-      {
-        effects_register->eval(*result); // Discard result
-
-        return a{};
-      }
-      else if(result->o == NounType::CONTINGENCY)
-      {
-        return Object::to_cpp(effects_register->eval(*result));
-      }
-      else
-      {
-        return Object::to_cpp(*result);
-      }
-    }
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
-
-  return a{};
 }
 
 cppValue evalNoun(const cppValue& i)
 {
-  Storage se = Object::from_cpp(i);
-  if(maybe<Storage> result = EvalRegister::eval(se))
+  const Storage se = Object::from_cpp(i);
+  if(const maybe<Storage> result = EvalRegister::eval(se))
   {
     return Object::to_cpp(*result);
   }
@@ -234,31 +182,18 @@ cppValue evalNoun(const cppValue& i)
 
 Storage Object::from_cpp_expression(const cppValues& i)
 {
-  mixed results = mixed();
+  auto results = mixed();
 
-  bool effective = false;
   for(const auto& y : i)
   {
     Storage result = Object::from_cpp(y);
-    if(result.o == NounType::EFFECT_TYPE)
-    {
-      effective = true;
-    }
-
     results.push_back(result);
   }
 
-  if(effective)
-  {
-    return MixedArray::make(results, NounType::EFFECT_EXPRESSION);
-  }
-  else
-  {
-    return MixedArray::make(results, NounType::EXPRESSION);
-  }
+  return MixedArray::make(results, NounType::EXPRESSION);
 }
 
-Storage Object::from_cpp(const cppValue& i)
+Storage Object::from_cpp(const cppValue& i) // NOLINT
 {
   if(std::holds_alternative<int>(i))
   {
@@ -272,7 +207,7 @@ Storage Object::from_cpp(const cppValue& i)
   }
   else if(std::holds_alternative<cppValues>(i))
   {
-    auto values = std::get<cppValues>(i);
+    auto values = std::get<cppValues>(i); // NOLINT
 
     if(CppValue::all_ints(values))
     {
@@ -303,25 +238,13 @@ Storage Object::from_cpp(const cppValue& i)
       mixed results;
       results.reserve(values.size());
 
-      bool effective = false;
       for(const auto& value : values)
       {
         Storage result = Object::from_cpp(value);
-        if(result.o == NounType::EFFECT_TYPE)
-        {
-          effective = true;
-        }
         results.push_back(result);
       }
 
-      if(effective)
-      {
-        return MixedArray::make(results, NounType::EFFECT_EXPRESSION);
-      }
-      else
-      {
-        return MixedArray::make(results);
-      }
+      return MixedArray::make(results);
     }
   }
   else if(std::holds_alternative<char>(i))
@@ -365,7 +288,7 @@ Storage Object::from_cpp(const cppValue& i)
   // }
   else if(std::holds_alternative<Storage>(i))
   {
-    Storage s = std::get<Storage>(i);
+    auto s = std::get<Storage>(i);
     return s;
   }
   else
@@ -374,7 +297,7 @@ Storage Object::from_cpp(const cppValue& i)
   }
 }
 
-cppValue Object::to_cpp(Storage i)
+cppValue Object::to_cpp(Storage i) // NOLINT
 {
   switch(i.o)
   {
@@ -452,9 +375,9 @@ cppValue Object::to_cpp(Storage i)
         {
           if(std::holds_alternative<mixed>(i.i))
           {
-            mixed ms = std::get<mixed>(i.i);
+            auto ms = std::get<mixed>(i.i);
 
-            std::vector<cppValue> vs = std::vector<cppValue>();
+            auto vs = std::vector<cppValue>();
 
             for(const auto& y : ms)
             {
@@ -495,9 +418,9 @@ cppValue Object::to_cpp(Storage i)
       // FIXME - This only works for ASCII, fix it to work with Unicode.
       if(std::holds_alternative<ints>(i.i))
       {
-        ints iis = std::get<ints>(i.i);
+        auto iis = std::get<ints>(i.i);
 
-        std::string result = std::string();
+        auto result = std::string();
         for(auto y : iis)
         {
           result += static_cast<char>(static_cast<unsigned char>(y));
@@ -587,9 +510,9 @@ cppValue Object::to_cpp(Storage i)
     {
       if(std::holds_alternative<mixed>(i.i))
       {
-        mixed ms = std::get<mixed>(i.i);
+        auto ms = std::get<mixed>(i.i);
 
-        std::vector<cppValue> results = std::vector<cppValue>();
+        auto results = std::vector<cppValue>();
 
         for(const auto& y : ms)
         {

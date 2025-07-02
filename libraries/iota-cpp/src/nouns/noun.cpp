@@ -7,7 +7,7 @@
 
 #include "../squeeze.h"
 #include "../verbs.h"
-#include "../error.h"
+#include "error.h"
 #include "../api.h"
 #include "../adverbs.h"
 
@@ -17,6 +17,8 @@
 #include "../storage/float_array.h"
 #include "../storage/mixed_array.h"
 
+
+std::map<Specialization1, NiladicSourceFunction> Noun::niladSources;
 std::map<Specialization3, MonadicSourceFunction> Noun::monadSources;
 std::map<Specialization5, DyadicSourceFunction> Noun::dyadSources;
 std::map<Specialization5, TriadicSourceFunction> Noun::triadSources;
@@ -35,10 +37,29 @@ void Noun::initialize()
   Conditional::initialize();
   Symbol::initialize();
   QuotedSymbol::initialize();
+  Lens::initialize();
 }
 
 // Dispatch
-Storage Noun::dispatchMonad(const Storage& i, const Storage& f) {
+Storage Noun::dispatchNilad(const Storage& f)
+{
+  if (f.t != StorageType::WORD) {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  int fi = std::get<int>(f.i);
+
+  Specialization1 specialization = Specialization1(fi);
+  if (niladSources.find(specialization) == niladSources.end()) {
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  }
+
+  NiladicSourceFunction verb = niladSources[specialization];
+  return verb();
+}
+
+Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
+{
   if (i.o == NounType::ERROR) {
     return i;
   }
@@ -182,7 +203,136 @@ Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Sto
   return adverb(i, g, x);
 }
 
+Storage Noun::dispatchNiladicEffect(const Storage& f)
+{
+  if(f.o != NounType::NILADIC_EFFECT)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  if (f.t != StorageType::WORD_ARRAY)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  ints fis = std::get<ints>(f.i);
+
+  if(fis.size() != 2)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  Specialization1 specialization = Specialization1((fis[0] << 8) | fis[1]);
+  if (niladSources.find(specialization) == niladSources.end())
+  {
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  }
+
+  NiladicSourceFunction verb = niladSources[specialization];
+  return verb();
+}
+
+Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
+{
+  if (i.o == NounType::ERROR)
+  {
+    return i;
+  }
+
+  if(f.o != NounType::MONADIC_EFFECT)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  if (f.t != StorageType::WORD_ARRAY)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  ints fis = std::get<ints>(f.i);
+
+  if(fis.size() != 2)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  Specialization3 specialization = Specialization3(i.t, i.o, fis[0] << 8 | fis[1]);
+  if (monadSources.find(specialization) == monadSources.end()) {
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  }
+
+  MonadicSourceFunction verb = monadSources[specialization];
+  return verb(i);
+}
+
+Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x)
+{
+  if (i.o == NounType::ERROR) {
+    return i;
+  }
+
+  if (x.o == NounType::ERROR) {
+    return x;
+  }
+
+  if(f.o != NounType::DYADIC_EFFECT)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  if (f.t != StorageType::WORD_ARRAY)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  ints fis = std::get<ints>(f.i);
+
+  if(fis.size() != 2)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  int fi = (fis[0] << 8) | fis[1];
+
+  const std::vector<Specialization5> specializations = {
+    Specialization5(i.t, i.o, fi, x.t, x.o),
+    Specialization5(i.t, i.o, fi, x.t, NounType::ANY),
+    Specialization5(i.t, i.o, fi, NounType::ANY, x.o),
+    Specialization5(i.t, i.o, fi, NounType::ANY, NounType::ANY),
+
+    Specialization5(i.t, NounType::ANY, fi, x.t, x.o),
+    Specialization5(i.t, NounType::ANY, fi, x.t, NounType::ANY),
+    Specialization5(i.t, NounType::ANY, fi, NounType::ANY, x.o),
+    Specialization5(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY),
+
+    Specialization5(NounType::ANY, i.o, fi, x.t, x.o),
+    Specialization5(NounType::ANY, i.o, fi, x.t, NounType::ANY),
+    Specialization5(NounType::ANY, i.o, fi, NounType::ANY, x.o),
+    Specialization5(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY),
+
+    Specialization5(NounType::ANY, NounType::ANY, fi, x.t, x.o),
+    Specialization5(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY),
+    Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o),
+    Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY)
+  };
+
+  for(auto specialization : specializations)
+  {
+    if (dyadSources.find(specialization) != dyadSources.end())
+    {
+      const DyadicSourceFunction verb = dyadSources[specialization];
+      return verb(i, x);
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
 // Registration
+void Noun::registerNilad(Type f, Storage (*m)())
+{
+  Noun::niladSources[Specialization1(f)] = m;
+}
 
 void Noun::registerMonad(Type it, Type io, Type f, Storage (*m)(const Storage&))
 {
@@ -248,10 +398,31 @@ Storage Noun::evaluate_expression(const Storage& e)
 
     Storage i = items[0];
 
+    // First item might be a nilad effect
+    if(i.o == NounType::NILADIC_EFFECT)
+    {
+      Storage result = dispatchNiladicEffect(i);
+      if(items.size() == 1)
+      {
+        return result;
+      }
+      else
+      {
+        mixed rest(items.begin() + 1, items.end());
+
+        rest.insert(rest.begin(), result);
+
+        Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
+        return evaluate_expression(next_e);
+      }
+    }
+
+    // If there is only one item, and it's not a nilad effect, then it must be a value.
     if (items.size() == 1) {
       return i;
     }
 
+    // If there is more than one item, and the first item is not a nilad effect, then the first item is a value and the second item is a function or non-nilad effect.
     Storage f = items[1];
 
     mixed rest(items.begin() + 2, items.end());
@@ -340,7 +511,46 @@ Storage Noun::evaluate_expression(const Storage& e)
         }
       }
 
-      // FIXME - add case for BUILTIN_TRIAD
+      // FIXME - add case for BUILTIN_TRIAD - this has not been implemented because we have no triads at the moment, but it's in Klong
+
+      case NounType::MONADIC_EFFECT:
+      {
+        Storage result = dispatchMonadicEffect(i, f);
+        if (rest.empty())
+        {
+          return result;
+        }
+        else
+        {
+          rest.insert(rest.begin(), result);
+
+          Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
+          result = evaluate_expression(next_e);
+
+          return result;
+        }
+      }
+
+      case NounType::DYADIC_EFFECT:
+      {
+        Storage x = items[2];
+        rest = mixed(items.begin() + 3, items.end());
+
+        Storage result = dispatchDyadicEffect(i, f, x);
+        if (rest.empty())
+        {
+          return result;
+        }
+        else
+        {
+          rest.insert(rest.begin(), result);
+
+          Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
+          result = evaluate_expression(next_e);
+
+          return result;
+        }
+      }
 
       default:
         return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);

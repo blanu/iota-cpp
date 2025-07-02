@@ -2,9 +2,12 @@
 #include <vector>
 #include <variant>
 #include <tuple>
+#include <cstdio> // NOLINT, required for printf
 
 #include "../types.h"
 #include "storage.h"
+
+#include "word.h"
 
 bool Storage::operator==(const Storage& other) const
 {
@@ -169,5 +172,77 @@ int Storage::truth() const
 
     default:
       return 0;
+  }
+}
+
+void Storage::print()
+{
+  switch(t)
+  {
+    case StorageType::WORD:
+      printf("WORD:");
+      printf("%d:", t);
+      printf("%d", std::get<int>(i));
+      break;
+
+    case StorageType::FLOAT:
+      printf("FLOAT:");
+      printf("%d:", t);
+      printf("%.1f", std::get<float>(i));
+      break;
+
+    case StorageType::WORD_ARRAY:
+      printf("WORDS:");
+      printf("%d:[", t);
+
+      for(int index = 0; index < std::get<ints>(i).size(); index++)
+      {
+        int integer = std::get<ints>(i)[index];
+        printf("%d", integer);
+        if(index < std::get<ints>(i).size() - 1)
+        {
+          printf(", ");
+        }
+      }
+
+      printf("]");
+      break;
+
+    case StorageType::FLOAT_ARRAY:
+      printf("FLOATS:");
+      printf("%d:[", t);
+
+      for(int index = 0; index < std::get<floats>(i).size(); index++)
+      {
+        float f = std::get<floats>(i)[index];
+        printf("%.1f", f);
+        if(index < std::get<floats>(i).size() - 1)
+        {
+          printf(", ");
+        }
+      }
+
+      printf("]");
+      break;
+
+    case StorageType::MIXED_ARRAY:
+      printf("MIXED:");
+      printf("%d:[", t);
+
+      for(int index = 0; index < std::get<mixed>(i).size(); index++)
+      {
+        Storage s = std::get<mixed>(i)[index];
+        s.print();
+        if(index < std::get<mixed>(i).size() - 1)
+        {
+          printf(", ");
+        }
+      }
+
+      printf("]");
+      break;
+
+    default:
+      return;
   }
 }

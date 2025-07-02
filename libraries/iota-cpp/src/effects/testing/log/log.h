@@ -7,7 +7,7 @@
 
 #include <queue>
 
-#include "../../effects_register.h"
+#include "../../effects_provider.h"
 
 #include "../../../storage/storage.h"
 
@@ -26,19 +26,19 @@ class Log
 
     };
 
-    static void initialize(EffectsRegister* effects_register);
+    static void initialize(EffectsProvider* effects_provider);
 
     // Nilad Sinks
-    static void timestamp_impl();
+    static Storage timestamp_impl();
 
     // Monads
-    static void level_impl(const Storage& i);
-    static void critical_impl(const Storage& i);
-    static void error_impl(const Storage& i);
-    static void warning_impl(const Storage& i);
-    static void info_impl(const Storage& i);
-    static void debug_impl(const Storage& i);
-    static void trace_impl(const Storage& i);
+    static Storage level_impl(const Storage& i);
+    static Storage critical_impl(const Storage& i);
+    static Storage error_impl(const Storage& i);
+    static Storage warning_impl(const Storage& i);
+    static Storage info_impl(const Storage& i);
+    static Storage debug_impl(const Storage& i);
+    static Storage trace_impl(const Storage& i);
 
     static Storage getEffectState();
     static Storage getLogs();

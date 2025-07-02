@@ -31,6 +31,7 @@ class Monads
     static constexpr int erase = 20;
     static constexpr int truth = 21;
     static constexpr int lift = 68;
+    static constexpr int occurs = 75;
 };
 
 // Dyads
@@ -70,6 +71,8 @@ class Dyads
     static constexpr int because = 72;
     static constexpr int then = 70;
     static constexpr int bind = 71;
+    static constexpr int retrieve = 73;
+    static constexpr int mutate = 74;
 };
 
 // Triads

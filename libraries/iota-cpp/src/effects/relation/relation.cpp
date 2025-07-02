@@ -7,7 +7,7 @@
 #include "../effects.h"
 
 #include "../../verbs.h"
-#include "../../error.h"
+#include "../../nouns/error.h"
 #include "../../api.h"
 
 #include "../../storage/word.h"

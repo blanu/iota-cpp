@@ -7,14 +7,14 @@
 
 #include <random>
 
-#include "../../effects_register.h"
+#include "../../effects_provider.h"
 
 #include "../../../storage/storage.h"
 
 class Random
 {
   public:
-    static void initialize(EffectsRegister* effects_register);
+    static void initialize(EffectsProvider* effects_register);
 
     // Nilads
     static Storage random_impl();

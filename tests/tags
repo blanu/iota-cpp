@@ -94,10 +94,10 @@ Awkward	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 B	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Class.tests.cpp	/^        namespace B {$/;"	n	namespace:__anon54::A	file:
 B	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Compilation.tests.cpp	/^struct B : private A {$/;"	s	file:
 B	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^namespace B {$/;"	n	file:
-BAD_INDEX_TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_INDEX_TYPE /;"	d
-BAD_INITIALIZATION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_INITIALIZATION /;"	d
-BAD_OPERATION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_OPERATION /;"	d
-BAD_STORAGE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define BAD_STORAGE /;"	d
+BAD_INDEX_TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define BAD_INDEX_TYPE /;"	d
+BAD_INITIALIZATION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define BAD_INITIALIZATION /;"	d
+BAD_OPERATION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define BAD_OPERATION /;"	d
+BAD_STORAGE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define BAD_STORAGE /;"	d
 BUILTIN_DYAD	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int BUILTIN_DYAD = 8;$/;"	m	class:NounType
 BUILTIN_MONAD	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int BUILTIN_MONAD = 7;$/;"	m	class:NounType
 BUILTIN_SYMBOL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int BUILTIN_SYMBOL = 6;$/;"	m	class:NounType
@@ -1191,7 +1191,6 @@ ContainsSubstring	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/
 ContainsSubstring	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp	/^    StringContainsMatcher ContainsSubstring( std::string const& str, CaseSensitive caseSensitivity ) {$/;"	f	namespace:Catch::Matchers
 Context	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^    class Context {$/;"	c	namespace:Catch
 Context	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_context.hpp	/^    class Context {$/;"	c	namespace:Catch
-Contingency	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.h	/^class Contingency$/;"	c
 ContinueOnFailure	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        ContinueOnFailure = 0x02,   \/\/ Failures fail test, but execution continues$/;"	e	enum:Catch::ResultDisposition::Flags
 ContinueOnFailure	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_result_type.hpp	/^        ContinueOnFailure = 0x02,   \/\/ Failures fail test, but execution continues$/;"	e	enum:Catch::ResultDisposition::Flags
 ConvertibleToBool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp	/^    struct ConvertibleToBool$/;"	s	namespace:__anon42	file:
@@ -1223,8 +1222,9 @@ DEFINE_COMP_OP	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/cat
 DEPENDENCY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int DEPENDENCY = 26;$/;"	m	class:NounType
 DICTIONARY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int DICTIONARY = 5;$/;"	m	class:NounType
 DICTIONARY_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.h	/^#define DICTIONARY_H$/;"	d
-DIVISION_BY_ZERO	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define DIVISION_BY_ZERO /;"	d
+DIVISION_BY_ZERO	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define DIVISION_BY_ZERO /;"	d
 DYADIC_ADVERB	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int DYADIC_ADVERB = 11;$/;"	m	class:NounType
+DYADIC_EFFECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int DYADIC_EFFECT = 32;$/;"	m	class:NounType
 DYNAMIC_SECTION	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define DYNAMIC_SECTION(/;"	d
 Data	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Generators.tests.cpp	/^struct Data { std::string str; size_t len; };$/;"	s	file:
 DebugOutStream	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            DebugOutStream()$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Detail::__anon129::final
@@ -1327,13 +1327,14 @@ DyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/
 DyadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^class DyadicEffect$/;"	c
 Dyads	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^class Dyads$/;"	c
 EFFECTS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^#define EFFECTS_H$/;"	d
-EFFECTS_REGISTER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^#define EFFECTS_REGISTER_H$/;"	d
+EFFECTS_PROVIDER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_provider.h	/^#define EFFECTS_PROVIDER_H$/;"	d
+EFFECT_CHAIN	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int EFFECT_CHAIN = 29;$/;"	m	class:NounType
 EFFECT_EXPRESSION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int EFFECT_EXPRESSION = 27;$/;"	m	class:NounType
 EFFECT_SYMBOLS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_symbols.h	/^#define EFFECT_SYMBOLS_H$/;"	d
 EFFECT_TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int EFFECT_TYPE = 21;$/;"	m	class:NounType
-EMPTY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define EMPTY /;"	d
+EMPTY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define EMPTY /;"	d
 ERROR	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int ERROR = 16;$/;"	m	class:NounType
-ERROR_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define ERROR_H_$/;"	d
+ERROR_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define ERROR_H_$/;"	d
 ET	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelReporter.py	/^import xml.etree.ElementTree as ET$/;"	i
 ET	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testRandomOrder.py	/^import xml.etree.ElementTree as ET$/;"	i
 ET	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testSharding.py	/^import xml.etree.ElementTree as ET$/;"	i
@@ -1341,8 +1342,8 @@ EXPORT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/Connection.h	/^#de
 EXPORT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^#define EXPORT$/;"	d
 EXPRESSION	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int EXPRESSION = 17;$/;"	m	class:NounType
 EXPRESSION_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expression.h	/^#define EXPRESSION_H$/;"	d
-EffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^EffectsRegister::EffectsRegister()$/;"	f	class:EffectsRegister
-EffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^class EffectsRegister$/;"	c
+EffectsProvider	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_provider.cpp	/^EffectsProvider::EffectsProvider()$/;"	f	class:EffectsProvider
+EffectsProvider	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_provider.h	/^class EffectsProvider$/;"	c
 Empty	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/helpers/range_test_helpers.hpp	/^        bool Empty() const { return true; }$/;"	f	struct:unrelated::ADL_empty
 End	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/helpers/range_test_helpers.hpp	/^        const_iterator End() const { return m_elements.end(); }$/;"	f	class:unrelated::needs_ADL_begin
 EndTag	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_textflow.hpp	/^                struct EndTag {};$/;"	s	class:Catch::TextFlow::Column::const_iterator
@@ -1383,7 +1384,7 @@ EqualsRangeMatcher	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps
 ErrnoGuard	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        ErrnoGuard::ErrnoGuard():m_oldErrno(errno){}$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::ErrnoGuard
 ErrnoGuard	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_errno_guard.cpp	/^        ErrnoGuard::ErrnoGuard():m_oldErrno(errno){}$/;"	f	class:Catch::ErrnoGuard
 ErrnoGuard	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_errno_guard.hpp	/^    class ErrnoGuard {$/;"	c	namespace:Catch
-Error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^class Error$/;"	c
+Error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^class Error$/;"	c
 Error	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_console_colour.hpp	/^            Error = BrightRed,$/;"	e	enum:Catch::ColourMode::Code
 EscapedName	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_test_spec_parser.hpp	/^        enum Mode{ None, Name, QuotedName, Tag, EscapedName };$/;"	e	enum:Catch::TestSpecParser::Mode
 Estimate	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        struct Estimate {$/;"	s	namespace:Catch::Benchmark
@@ -1666,8 +1667,8 @@ INTERNAL_CATCH_UNIQUE_NAME_LINE2	/Users/dr.brandonwiley/iota-cpp/tests/cmake-bui
 INTERNAL_CATCH_UNSCOPED_INFO	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_message.hpp	/^#define INTERNAL_CATCH_UNSCOPED_INFO(/;"	d
 INTERNAL_CATCH_VA_NARGS_IMPL	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_preprocessor.hpp	/^#define INTERNAL_CATCH_VA_NARGS_IMPL(/;"	d
 INTERNAL_CHECK_THAT	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/matchers/internal/catch_matchers_impl.hpp	/^#define INTERNAL_CHECK_THAT(/;"	d
-INVALID_ADVERB_ARGUMENT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define INVALID_ADVERB_ARGUMENT /;"	d
-INVALID_ARGUMENT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define INVALID_ARGUMENT /;"	d
+INVALID_ADVERB_ARGUMENT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define INVALID_ADVERB_ARGUMENT /;"	d
+INVALID_ARGUMENT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define INVALID_ARGUMENT /;"	d
 IRegistryHub	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^    class IRegistryHub {$/;"	c	namespace:Catch
 IRegistryHub	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_registry_hub.hpp	/^    class IRegistryHub {$/;"	c	namespace:Catch
 IReporterFactory	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_reporter_factory.hpp	/^    class IReporterFactory {$/;"	c	namespace:Catch
@@ -1725,6 +1726,8 @@ JunitReporter	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catc
 Justification	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^enum class Justification : uint8_t {$/;"	c	namespace:Catch::Benchmark::Detail::Catch::Catch::Catch	file:
 Justification	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_console.cpp	/^enum class Justification : uint8_t {$/;"	c	namespace:Catch	file:
 Kind	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_output_redirect.hpp	/^        enum Kind {$/;"	g	class:Catch::OutputRedirect
+LENS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int LENS = 28;$/;"	m	class:NounType
+LENS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.h	/^#define LENS_H$/;"	d
 LIST	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int LIST = 4;$/;"	m	class:NounType
 LIST_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.h	/^#define LIST_H$/;"	d
 LLVMFuzzerTestOneInput	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/fuzzing/fuzz_TestSpecParser.cpp	/^extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {$/;"	f
@@ -1742,6 +1745,7 @@ LeakDetector	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch
 LeakDetector	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_leak_detector.hpp	/^    struct LeakDetector {$/;"	s	namespace:Catch
 Left	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    Left,$/;"	m	class:Catch::Benchmark::Detail::Catch::Catch::Catch::Justification	file:
 Left	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_console.cpp	/^    Left,$/;"	m	class:Catch::Justification	file:
+Lens	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.h	/^class Lens$/;"	c
 LessThanMatcher	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp	/^        explicit LessThanMatcher(size_t target):$/;"	f	class:__anon41::final
 Levels	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^    class Levels$/;"	c	class:Log
 LexicographicallySorted	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        LexicographicallySorted,$/;"	m	class:Catch::TestRunOrder
@@ -1761,11 +1765,12 @@ Log	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/l
 LogicError	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_clara.hpp	/^                LogicError,  \/\/\/< Error in user-specified arguments for$/;"	m	class:Catch::Clara::Detail::ResultType
 LogicError	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/third_party/clara.hpp	/^            Ok, LogicError, RuntimeError$/;"	e	enum:clara::detail::ResultBase::Type
 Lt	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp	/^    LessThanMatcher Lt(size_t sz) {$/;"	f	namespace:__anon41
-MAXIMUM_ITERATIONS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define MAXIMUM_ITERATIONS /;"	d
+MAXIMUM_ITERATIONS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define MAXIMUM_ITERATIONS /;"	d
 METHOD_AS_TEST_CASE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define METHOD_AS_TEST_CASE(/;"	d
 MIXED_ARRAY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int MIXED_ARRAY = 4; \/\/ array of storage types$/;"	m	class:StorageType
 MIXED_ARRAY_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.h	/^#define MIXED_ARRAY_H$/;"	d
 MONADIC_ADVERB	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int MONADIC_ADVERB = 10;$/;"	m	class:NounType
+MONADIC_EFFECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int MONADIC_EFFECT = 31;$/;"	m	class:NounType
 MapGenerator	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators_adapters.hpp	/^        MapGenerator(F2&& function, GeneratorWrapper<U>&& generator) :$/;"	f	class:Catch::Generators::final
 MatchAllOfGeneric	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/matchers/catch_matchers_templated.hpp	/^            MatchAllOfGeneric(MatcherTs const&... matchers) : m_matchers{ {std::addressof(matchers)...} } {}$/;"	f	class:Catch::Matchers::Detail::final
 MatchAllOfGeneric	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/matchers/catch_matchers_templated.hpp	/^            explicit MatchAllOfGeneric(std::array<void const*, sizeof...(MatcherTs)> matchers) : m_matchers{matchers} {}$/;"	f	class:Catch::Matchers::Detail::final
@@ -1844,6 +1849,7 @@ MyType1	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 MyType1	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^struct MyType1 {$/;"	s	file:
 MyType2	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^    [[noreturn]] MyType2(MyType2 const&) { throw 2; }$/;"	f	struct:MyType2
 MyType2	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^struct MyType2 {$/;"	s	file:
+NILADIC_EFFECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int NILADIC_EFFECT = 30;$/;"	m	class:NounType
 NOMINMAX	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^#  define NOMINMAX$/;"	d	file:
 NOMINMAX	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_windows_h_proxy.hpp	/^#  define NOMINMAX$/;"	d
 NOUNS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/nouns.h	/^#define NOUNS_H$/;"	d
@@ -1910,7 +1916,7 @@ NounType	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.
 Nttp_Fixture	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Class.tests.cpp	/^    template <int V> struct Nttp_Fixture { int value = V; };$/;"	s	namespace:__anon53	file:
 NullOStream	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/fuzzing/NullOStream.h	/^  NullOStream() : std::ostream(this) {}$/;"	f	class:final
 NullStreambuf	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/fuzzing/NullOStream.h	/^class NullStreambuf : public std::streambuf {$/;"	c
-OUT_OF_BOUNDS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define OUT_OF_BOUNDS /;"	d
+OUT_OF_BOUNDS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define OUT_OF_BOUNDS /;"	d
 Obj	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^    Obj():prop(&p){}$/;"	f	struct:Obj
 Obj	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^struct Obj$/;"	s	file:
 Object	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^class Object$/;"	c
@@ -2124,9 +2130,8 @@ SCENARIO_METHOD	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/ca
 SECTION	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define SECTION(/;"	d
 SEQUENCE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int SEQUENCE = 25;$/;"	m	class:NounType
 SERIAL_CONNECTION_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^#define SERIAL_CONNECTION_H_$/;"	d
-SHAPE_MISMATCH	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define SHAPE_MISMATCH /;"	d
+SHAPE_MISMATCH	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define SHAPE_MISMATCH /;"	d
 SIGNAL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int SIGNAL = 24;$/;"	m	class:NounType
-SIGNAL_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.h	/^#define SIGNAL_H$/;"	d
 SIMULATE_ID	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_ID /;"	d	file:
 SIMULATE_ID	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdC/CMakeCCompilerId.c	/^# define SIMULATE_ID /;"	d	file:
 SIMULATE_ID	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define SIMULATE_ID /;"	d	file:
@@ -2147,6 +2152,7 @@ SIMULATE_VERSION_PATCH	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/C
 SIMULATE_VERSION_PATCH	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define SIMULATE_VERSION_PATCH /;"	d	file:
 SKIP	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define SKIP(/;"	d
 SQUEEZE_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.h	/^#define SQUEEZE_H_$/;"	d
+STATE_SYMBOLS_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/state/state_symbols.h	/^#define STATE_SYMBOLS_H$/;"	d
 STATIC_CHECK	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^    #define STATIC_CHECK(/;"	d
 STATIC_CHECK	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define STATIC_CHECK(/;"	d
 STATIC_CHECK_FALSE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^    #define STATIC_CHECK_FALSE(/;"	d
@@ -2191,7 +2197,6 @@ SectionStats	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch
 SectionTracker	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    SectionTracker::SectionTracker( NameAndLocation&& nameAndLocation, TrackerContext& ctx, ITracker* parent )$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::TestCaseTracking::SectionTracker
 SectionTracker	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_test_case_tracker.cpp	/^    SectionTracker::SectionTracker( NameAndLocation&& nameAndLocation, TrackerContext& ctx, ITracker* parent )$/;"	f	class:Catch::TestCaseTracking::SectionTracker
 SectionTracker	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_test_case_tracker.hpp	/^    class SectionTracker : public TrackerBase {$/;"	c	namespace:Catch::TestCaseTracking
-Sequence	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.h	/^class Sequence$/;"	c
 Session	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    Session::Session() {$/;"	f	class:Catch::Benchmark::Detail::Catch::Session
 Session	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_session.cpp	/^    Session::Session() {$/;"	f	class:Catch::Session
 Session	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_session.hpp	/^    class Session : Detail::NonCopyable {$/;"	c	namespace:Catch
@@ -2200,7 +2205,6 @@ ShortCircuitAll	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/ca
 ShouldFail	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_case_info.hpp	/^        ShouldFail = 1 << 2,$/;"	m	class:Catch::TestCaseProperties
 ShowDurations	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^    enum class ShowDurations {$/;"	c	namespace:Catch
 ShowDurations	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_config.hpp	/^    enum class ShowDurations {$/;"	c	namespace:Catch
-Signal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.h	/^class Signal$/;"	c
 SignalDefs	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    struct SignalDefs { DWORD id; const char* name; };$/;"	s	namespace:Catch::Benchmark::Detail::Catch::Catch	file:
 SignalDefs	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    struct SignalDefs {$/;"	s	namespace:Catch::Benchmark::Detail::Catch::Catch	file:
 SignalDefs	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_fatal_condition_handler.cpp	/^    struct SignalDefs { DWORD id; const char* name; };$/;"	s	namespace:Catch	file:
@@ -2233,6 +2237,7 @@ StartsWith	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 StartsWithMatcher	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    StartsWithMatcher::StartsWithMatcher( CasedString const& comparator ) : StringMatcherBase( "starts with"_sr, comparator ) {}$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::Matchers::StartsWithMatcher
 StartsWithMatcher	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/matchers/catch_matchers_string.cpp	/^    StartsWithMatcher::StartsWithMatcher( CasedString const& comparator ) : StringMatcherBase( "starts with"_sr, comparator ) {}$/;"	f	class:Catch::Matchers::StartsWithMatcher
 StartupExceptionRegistry	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_startup_exception_registry.hpp	/^    class StartupExceptionRegistry {$/;"	c	namespace:Catch
+State	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.h	/^class State$/;"	c
 Storage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    Storage(int o, int t, I i) : o(o), t(t), i(std::move(i)) {}$/;"	f	class:Storage
 Storage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^class Storage$/;"	c
 StorageConnection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/StorageConnection.h	/^class EXPORT StorageConnection$/;"	c
@@ -2340,9 +2345,10 @@ TEMPLATE_TEST_CASE_METHOD_SIG	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-
 TEMPLATE_TEST_CASE_METHOD_SIG	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Class.tests.cpp	/^    TEMPLATE_TEST_CASE_METHOD_SIG(Nttp_Fixture, "A TEMPLATE_TEST_CASE_METHOD_SIG based test run that fails", "[.][class][template][nttp][failing]", ((int V), V), 1, 3, 6) {$/;"	f	namespace:Inner
 TEMPLATE_TEST_CASE_METHOD_SIG	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Class.tests.cpp	/^TEMPLATE_TEST_CASE_METHOD_SIG(Nttp_Fixture, "A TEMPLATE_TEST_CASE_METHOD_SIG based test run that succeeds", "[class][template][nttp]",((int V), V), 1, 3, 6) {$/;"	f
 TEMPLATE_TEST_CASE_SIG	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_template_test_macros.hpp	/^    #define TEMPLATE_TEST_CASE_SIG(/;"	d
-TESTING_EFFECTS_REGISTER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_register.h	/^#define TESTING_EFFECTS_REGISTER_H$/;"	d
+TESTING_EFFECTS_PROVIDER_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_provider.h	/^#define TESTING_EFFECTS_PROVIDER_H$/;"	d
 TESTING_LOG_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^#define TESTING_LOG_H$/;"	d
 TESTING_RANDOM_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.h	/^#define TESTING_RANDOM_H$/;"	d
+TESTING_STATE_H	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.h	/^#define TESTING_STATE_H$/;"	d
 TEST_CASE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define TEST_CASE(/;"	d
 TEST_CASE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp	/^TEST_CASE() {$/;"	f
 TEST_CASE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp	/^TEST_CASE()$/;"	f
@@ -2363,7 +2369,7 @@ TEST_CASE_PERSISTENT_FIXTURE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-d
 TEST_CASE_PERSISTENT_FIXTURE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/ExtraTests/X02-DisabledMacros.cpp	/^TEST_CASE_PERSISTENT_FIXTURE( DisabledFixture, "Disabled Persistent Fixture" ) {$/;"	f
 TEST_CASE_PERSISTENT_FIXTURE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Class.tests.cpp	/^    TEST_CASE_PERSISTENT_FIXTURE( Persistent_Fixture, "A TEST_CASE_PERSISTENT_FIXTURE based test run that fails", "[.][class][failing]" )$/;"	f	namespace:Inner
 TEST_CASE_PERSISTENT_FIXTURE	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Class.tests.cpp	/^TEST_CASE_PERSISTENT_FIXTURE( Persistent_Fixture, "A TEST_CASE_PERSISTENT_FIXTURE based test run that succeeds", "[class]" )$/;"	f
-TEST_ERROR	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define TEST_ERROR /;"	d
+TEST_ERROR	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define TEST_ERROR /;"	d
 THEN	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_macros.hpp	/^  #define THEN(/;"	d
 TYPE	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int TYPE = 18;$/;"	m	class:NounType
 TYPES_H_	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^#define TYPES_H_$/;"	d
@@ -2469,8 +2475,8 @@ TestSpecParser	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/cat
 TestSpecParser	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_test_spec_parser.hpp	/^    class TestSpecParser {$/;"	c	namespace:Catch
 TestStringStream	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/ColourImpl.tests.cpp	/^    class TestStringStream : public Catch::IStream {$/;"	c	namespace:__anon21	file:
 TestSubject	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/302-Gen-Table.cpp	/^struct TestSubject {$/;"	s	file:
-TestingEffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_register.cpp	/^TestingEffectsRegister::TestingEffectsRegister()$/;"	f	class:TestingEffectsRegister
-TestingEffectsRegister	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_register.h	/^class TestingEffectsRegister : public EffectsRegister$/;"	c
+TestingEffectsProvider	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_provider.cpp	/^TestingEffectsProvider::TestingEffectsProvider() : EffectsProvider()$/;"	f	class:TestingEffectsProvider
+TestingEffectsProvider	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_provider.h	/^class TestingEffectsProvider : public EffectsProvider$/;"	c
 TextFlow	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    namespace TextFlow {$/;"	n	namespace:Catch::Benchmark::Detail::Catch::Catch::Catch	file:
 TextFlow	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_textflow.cpp	/^    namespace TextFlow {$/;"	n	namespace:Catch	file:
 TextFlow	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_textflow.hpp	/^    namespace TextFlow {$/;"	n	namespace:Catch
@@ -2509,10 +2515,10 @@ TypeWithConstevalLit0Comparison	/Users/dr.brandonwiley/iota-cpp/tests/cmake-buil
 TypeWithLit0Comparisons	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/helpers/type_with_lit_0_comparisons.hpp	/^struct TypeWithLit0Comparisons {$/;"	s
 TypedListenerFactory	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_registrars.hpp	/^            TypedListenerFactory( StringRef listenerName ):$/;"	f	class:Catch::ListenerRegistrar::TypedListenerFactory
 TypedListenerFactory	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_registrars.hpp	/^        class TypedListenerFactory : public EventListenerFactory {$/;"	c	class:Catch::ListenerRegistrar
-UNEQUAL_ARRAY_LENGTHS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNEQUAL_ARRAY_LENGTHS /;"	d
-UNKNOWN_KEY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNKNOWN_KEY /;"	d
-UNSUPPORTED_OBJECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNSUPPORTED_OBJECT /;"	d
-UNSUPPORTED_SUBJECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/error.h	/^#define UNSUPPORTED_SUBJECT /;"	d
+UNEQUAL_ARRAY_LENGTHS	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define UNEQUAL_ARRAY_LENGTHS /;"	d
+UNKNOWN_KEY	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define UNKNOWN_KEY /;"	d
+UNSUPPORTED_OBJECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define UNSUPPORTED_OBJECT /;"	d
+UNSUPPORTED_SUBJECT	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^#define UNSUPPORTED_SUBJECT /;"	d
 USER_DYAD	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int USER_DYAD = 14;$/;"	m	class:NounType
 USER_MONAD	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int USER_MONAD = 13;$/;"	m	class:NounType
 USER_SYMBOL	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    static constexpr int USER_SYMBOL = 12;$/;"	m	class:NounType
@@ -2825,6 +2831,10 @@ b	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/c
 b	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^        int b;$/;"	m	struct:A::X	file:
 b	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Tricky.tests.cpp	/^        int b;$/;"	m	struct:B::Y	file:
 backingTags	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_case_info.hpp	/^        std::string backingTags;$/;"	m	struct:Catch::TestCaseProperties::TestCaseInfo
+bad_index_type	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int bad_index_type = BAD_INDEX_TYPE;$/;"	m	class:Error
+bad_initialization	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int bad_initialization = BAD_INITIALIZATION;$/;"	m	class:Error
+bad_operation	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int bad_operation = BAD_OPERATION;$/;"	m	class:Error
+bad_storage	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int bad_storage = BAD_STORAGE;$/;"	m	class:Error
 bar	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Compilation.tests.cpp	/^namespace bar {$/;"	n	file:
 base	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp	/^        base(int i_) :i(i_) {}$/;"	f	struct:__anon14::base
 base	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp	/^    struct base {$/;"	s	namespace:__anon14	file:
@@ -2836,7 +2846,6 @@ bazelShardingOptions	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_de
 bazelShardingOptions	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.cpp	/^        struct bazelShardingOptions {$/;"	s	namespace:Catch::__anon69	file:
 because	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int because = 72;$/;"	m	class:Dyads
 because	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage because = Dyad::make(Dyads::because);$/;"	m	namespace:iota
-because_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::because_impl(const Storage& i, const Storage& x)$/;"	f	class:EffectsRegister
 begin	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        AnsiSkippingString::const_iterator AnsiSkippingString::begin() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::TextFlow::AnsiSkippingString
 begin	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        constexpr const_iterator begin() const { return m_start; }$/;"	f	class:Catch::StringRef
 begin	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_stringref.hpp	/^        constexpr const_iterator begin() const { return m_start; }$/;"	f	class:Catch::StringRef
@@ -2922,9 +2931,6 @@ bin_path	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-sr
 bin_path	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelSharding.py	/^bin_path = os.path.abspath(sys.argv[1])$/;"	v
 bind	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int bind = 71;$/;"	m	class:Dyads
 bind	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage bind = Dyad::make(Dyads::bind);$/;"	m	namespace:iota
-bind_expression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::bind_expression(const Storage& i, const Storage& x)$/;"	f	class:EffectsRegister
-bind_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Contingency::bind_impl(const Storage& i, const Storage& x)$/;"	f	class:Contingency
-bind_monad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::bind_monad(const Storage& i, const Storage& x)$/;"	f	class:EffectsRegister
 bool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_generatortracker.hpp	/^        virtual auto hasGenerator() const -> bool = 0;$/;"	m	class:Catch::IGeneratorTracker
 bool	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_assertion_handler.hpp	/^        auto allowThrows() const -> bool;$/;"	m	class:Catch::AssertionHandler
 bootstrap	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            bootstrap( double confidence_level,$/;"	f	namespace:Catch::Benchmark::Detail
@@ -2989,7 +2995,6 @@ catchPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-s
 catch_path	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/misc/coverage-helper.cpp	/^std::string catch_path(std::string path) {$/;"	f
 catch_strnlen	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_tostring.hpp	/^        inline std::size_t catch_strnlen(const char *str, std::size_t n) {$/;"	f	namespace:Catch::Detail
 catch_test_names	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/DiscoverTests/VerifyRegistration.py	/^    catch_test_names = escape_catch2_test_names(get_test_names(build_path))$/;"	v
-cause_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::cause_impl(const Storage& i, const Storage& x)$/;"	f	class:EffectsRegister
 causes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int causes = 69;$/;"	m	class:Dyads
 causes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage causes = Dyad::make(Dyads::causes);$/;"	m	namespace:iota
 causing	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^  inline Storage causing = Word::make(SymbolType::causing, NounType::BUILTIN_SYMBOL);$/;"	m	namespace:iota
@@ -3057,7 +3062,7 @@ cmake_layout	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch
 cmake_version	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/DiscoverTests/VerifyRegistration.py	/^    cmake_version = get_cmake_version()$/;"	v
 cmake_version_regex	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/DiscoverTests/VerifyRegistration.py	/^cmake_version_regex = re.compile('cmake version (\\d+)\\.(\\d+)\\.(\\d+)')$/;"	v
 cmdPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approvalTests.py	/^    cmdPath = sys.argv[1]$/;"	v
-code	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    int code;$/;"	m	class:Error
+code	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    int code;$/;"	m	class:Error
 code_to_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^std::string code_to_string(int code)$/;"	f
 collated_includes	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/checkConvenienceHeaders.py	/^def collated_includes(folder):$/;"	f
 colour	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    Colour::Code colour;$/;"	m	class:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon142::ConsoleAssertionPrinter	file:
@@ -3246,9 +3251,9 @@ createToc	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-s
 create_empty_file	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/misc/coverage-helper.cpp	/^void create_empty_file(std::string const& path) {$/;"	f
 create_introduced_in_text	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/extractFeaturesFromReleaseNotes.py	/^def create_introduced_in_text(version, bug_number = None):$/;"	f
 critical	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage critical = MonadicEffect::make(effects::families::log, effects::log::critical);$/;"	m	namespace:iota
-critical	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int critical = 0;$/;"	m	namespace:effects::log
+critical	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int critical = 3;$/;"	m	namespace:effects::log
 critical	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^        static constexpr int critical = 0;$/;"	m	class:Log::Levels
-critical_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::critical_impl(const Storage& i)$/;"	f	class:Log
+critical_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::critical_impl(const Storage& i)$/;"	f	class:Log
 crossProduct	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage crossProduct = DyadicEffect::make(effects::families::relation, effects::relation::crossProduct);$/;"	m	namespace:iota
 crossProduct	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Log::crossProduct(const Storage& i, const Storage& x)$/;"	f	class:Log
 crossProduct	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int crossProduct = 10;$/;"	m	namespace:effects::relation
@@ -3289,14 +3294,14 @@ data	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/ex
 data	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_istream.cpp	/^            char data[bufferSize];$/;"	m	class:Catch::Detail::__anon71::final	file:
 datetime	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/generateAmalgamatedFiles.py	/^import datetime$/;"	i
 deactivate	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_output_redirect.hpp	/^        void deactivate() {$/;"	f	class:Catch::OutputRedirect
-deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage deal = MonadicEffect::make(effects::families::random, effects::random::deal);$/;"	m	namespace:iota
+deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage deal = DyadicEffect::make(effects::families::random, effects::random::deal);$/;"	m	namespace:iota
 deal	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int deal = 4;$/;"	m	namespace:effects::random
 deal_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::deal_impl(const Storage& i, const Storage& x)$/;"	f	class:Random
 deallocate	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVector.tests.cpp	/^        void deallocate( T *p, size_type \/*n*\/ ) {$/;"	f	struct:__anon39::minimal_allocator
 debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);$/;"	m	namespace:iota
-debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int debug = 4;$/;"	m	namespace:effects::log
+debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int debug = 7;$/;"	m	namespace:effects::log
 debug	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^        static constexpr int debug = 4;$/;"	m	class:Log::Levels
-debug_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::debug_impl(const Storage& i)$/;"	f	class:Log
+debug_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::debug_impl(const Storage& i)$/;"	f	class:Log
 decltype	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_container_nonmembers.hpp	/^    constexpr auto empty(Container const& cont) -> decltype(cont.empty()) {$/;"	f	namespace:Catch::Detail
 decltype	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_container_nonmembers.hpp	/^    constexpr auto size(Container const& cont) -> decltype(cont.size()) {$/;"	f	namespace:Catch::Detail
 defaultColourMode	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    ColourMode Config::defaultColourMode() const       { return m_data.defaultColourMode; }$/;"	f	class:Catch::Benchmark::Detail::Catch::Config
@@ -3368,14 +3373,12 @@ discard	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 discard	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_random_number_generator.cpp	/^    void SimplePcg32::discard(uint64_t skip) {$/;"	f	class:Catch::SimplePcg32
 dispatchDyad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x) {$/;"	f	class:Noun
 dispatchDyadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Storage& g, const Storage& x)$/;"	f	class:Noun
-dispatchDyadicSinkEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::dispatchDyadicSinkEffect(const Storage& i, const Storage& fe, const Storage& x)$/;"	f	class:EffectsRegister
-dispatchDyadicSourceEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::dispatchDyadicSourceEffect(const Storage& i, const Storage& fe, const Storage& x)$/;"	f	class:EffectsRegister
-dispatchMonad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchMonad(const Storage& i, const Storage& f) {$/;"	f	class:Noun
+dispatchDyadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x)$/;"	f	class:Noun
+dispatchMonad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchMonad(const Storage& i, const Storage& f)$/;"	f	class:Noun
 dispatchMonadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g)$/;"	f	class:Noun
-dispatchMonadicSinkEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::dispatchMonadicSinkEffect(const Storage& i, const Storage& fe)$/;"	f	class:EffectsRegister
-dispatchMonadicSourceEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::dispatchMonadicSourceEffect(const Storage& i, const Storage& fe)$/;"	f	class:EffectsRegister
-dispatchNiladicSinkEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::dispatchNiladicSinkEffect(const Storage& fe)$/;"	f	class:EffectsRegister
-dispatchNiladicSourceEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::dispatchNiladicSourceEffect(const Storage& fe)$/;"	f	class:EffectsRegister
+dispatchMonadicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)$/;"	f	class:Noun
+dispatchNilad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchNilad(const Storage& f)$/;"	f	class:Noun
+dispatchNiladicEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchNiladicEffect(const Storage& f)$/;"	f	class:Noun
 dispatchTriad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)$/;"	f	class:Noun
 dist	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            std::uniform_real_distribution<long double> dist;$/;"	m	struct:Catch::Benchmark::Detail::Catch::Generators::RandomFloatingGenerator::PImpl	file:
 dist	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators_random.cpp	/^            std::uniform_real_distribution<long double> dist;$/;"	m	struct:Catch::Generators::RandomFloatingGenerator::PImpl	file:
@@ -3397,6 +3400,7 @@ divide_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cp
 divide_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:Integer
 divide_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 divide_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::divide_reals(const Storage& i, const Storage& x)$/;"	f	class:Real
+division_by_zero	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int division_by_zero = DIVISION_BY_ZERO;$/;"	m	class:Error
 do_nothing	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            struct do_nothing {$/;"	s	namespace:Catch::Benchmark::Detail	file:
 do_nothing	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_function.cpp	/^            struct do_nothing {$/;"	s	namespace:Catch::Benchmark::Detail	file:
 documentsDefault	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/updateDocumentToC.py	/^documentsDefault = os.path.join(os.path.relpath(catchPath), 'docs\/*.md')$/;"	v
@@ -3423,13 +3427,12 @@ dup2	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/sr
 duplicate	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_message.hpp	/^        ScopedMessage( ScopedMessage& duplicate ) = delete;$/;"	m	class:Catch::ScopedMessage
 durationInSeconds	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_section_info.hpp	/^        double durationInSeconds;$/;"	m	struct:Catch::SectionEndInfo
 durationInSeconds	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_reporter.hpp	/^        double durationInSeconds;$/;"	m	struct:Catch::SectionStats
-dyadSinks	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::map<Specialization6, std::function<void(Storage,Storage)>> dyadSinks;$/;"	m	class:EffectsRegister
 dyadSinks	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, DyadicSourceFunction> dyadSinks;$/;"	m	class:Noun
-dyadSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::map<Specialization6, std::function<Storage(Storage,Storage)>> dyadSources;$/;"	m	class:EffectsRegister
 dyadSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, DyadicSourceFunction> Noun::dyadSources;$/;"	m	class:Noun	file:
 dyadSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, DyadicSourceFunction> dyadSources;$/;"	m	class:Noun
 dyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization5, DyadicAdverbFunction> Noun::dyadicAdverbs;$/;"	m	class:Noun	file:
 dyadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;$/;"	m	class:Noun
+e	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^Storage e(Args&&... values)$/;"	f
 each	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage each = MonadicAdverb::make(MonadicAdverbs::each);$/;"	m	namespace:iota
 each	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int each = 53;$/;"	m	class:MonadicAdverbs
 each2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.h	/^  inline Storage each2 = DyadicAdverb::make(DyadicAdverbs::each2);$/;"	m	namespace:iota
@@ -3450,12 +3453,13 @@ each_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_stri
 each_integers	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::each_integers(const Storage& i, const Storage& f)$/;"	f	class:List
 each_mixed	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::each_mixed(const Storage& i, const Storage& f)$/;"	f	class:List
 each_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::each_reals(const Storage& i, const Storage& f)$/;"	f	class:List
-effects_register	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EffectsRegister* effects_register = nullptr;$/;"	m	class:EvalRegister
+effects_register	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    EffectsProvider* effects_register = nullptr;$/;"	m	class:EvalRegister
 elapsed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^                IDuration elapsed() const {$/;"	f	struct:Catch::Benchmark::Detail::final
 elapsed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/catch_chronometer.hpp	/^                IDuration elapsed() const {$/;"	f	struct:Catch::Benchmark::Detail::final
 elapsed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_timing.hpp	/^            IDuration elapsed;$/;"	m	struct:Catch::Benchmark::Timing
 emplaceUnscopedMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void RunContext::emplaceUnscopedMessage( MessageBuilder&& builder ) {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::RunContext
 emplaceUnscopedMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp	/^    void RunContext::emplaceUnscopedMessage( MessageBuilder&& builder ) {$/;"	f	class:Catch::RunContext
+empty	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int empty = EMPTY;$/;"	m	class:Error
 empty	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp	/^        bool empty() const { return false; }$/;"	f	struct:__anon40::has_empty
 empty	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/helpers/range_test_helpers.hpp	/^        friend bool empty( ADL_empty e ) { return e.Empty(); }$/;"	f	struct:unrelated::ADL_empty
 enableBazelEnvSupport	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        static bool enableBazelEnvSupport() {$/;"	f	namespace:Catch::Benchmark::Detail::Catch::__anon116
@@ -3543,9 +3547,9 @@ erf_inv	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 erfc_inv	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            double erfc_inv(double x) {$/;"	f	namespace:Catch::Benchmark::Detail
 erfc_inv	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_stats.cpp	/^            double erfc_inv(double x) {$/;"	f	namespace:Catch::Benchmark::Detail
 error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage error = MonadicEffect::make(effects::families::log, effects::log::error);$/;"	m	namespace:iota
-error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int error = 1;$/;"	m	namespace:effects::log
+error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int error = 4;$/;"	m	namespace:effects::log
 error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^        static constexpr int error = 1;$/;"	m	class:Log::Levels
-error_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::error_impl(const Storage& i)$/;"	f	class:Log
+error_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::error_impl(const Storage& i)$/;"	f	class:Log
 error_to_string	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^std::string error_to_string(const Storage &e)$/;"	f
 errors_found	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/checkConvenienceHeaders.py	/^errors_found = False$/;"	v
 escape	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        std::string escape(StringRef str) {$/;"	f	namespace:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon150
@@ -3564,15 +3568,11 @@ etree	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/t
 etree	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testRandomOrder.py	/^import xml.etree.ElementTree as ET$/;"	i
 etree	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testSharding.py	/^import xml.etree.ElementTree as ET$/;"	i
 eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage eval(const mixed& e)$/;"	f
-eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::eval(const Storage& s)$/;"	f	class:EffectsRegister
 eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^maybe<Storage> EvalRegister::eval(const Storage& i)$/;"	f	class:EvalRegister
 eval	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::eval()$/;"	f	class:EvalRegister
+evalExpression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage evalExpression(const Storage& values)$/;"	f
 evalExpression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalExpression(const cppValues& values)$/;"	f
-evalExpressionForEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register)$/;"	f
-evalExpressionWithEffects	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register)$/;"	f
 evalNoun	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue evalNoun(const cppValue& i)$/;"	f
-eval_effect_expression_sink	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::eval_effect_expression_sink(const Storage& e) \/\/ NOLINT$/;"	f	class:EffectsRegister
-eval_effect_expression_source	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::eval_effect_expression_source(const Storage& e) \/\/ NOLINT$/;"	f	class:EffectsRegister
 evaluate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int evaluate = 19;$/;"	m	class:Monads
 evaluate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage evaluate = Monad::make(Monads::evaluate);$/;"	m	namespace:iota
 evaluate_expression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::evaluate_expression(const Storage& e)$/;"	f	class:Noun
@@ -3878,6 +3878,8 @@ generator	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing
 generator	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.h	/^    static std::mt19937 generator;$/;"	m	class:Random
 generatorExpression	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators.hpp	/^    auto generate( StringRef generatorName, SourceLineInfo const& lineInfo, L const& generatorExpression ) -> typename decltype(generatorExpression())::type {$/;"	f	namespace:Catch::Generators
 generators	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/.conan/test_package/conanfile.py	/^    generators = "CMakeToolchain", "CMakeDeps", "VirtualRunEnv"$/;"	v	class:TestPackageConan
+get	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage get = MonadicEffect::make(effects::families::state, effects::state::get);$/;"	m	namespace:iota
+get	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/state/state_symbols.h	/^  static constexpr int get = 1;$/;"	m	namespace:effects::state
 get	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/300-Gen-OwnGenerator.cpp	/^int const& RandomIntGenerator::get() const {$/;"	f	class:__anon65::RandomIntGenerator
 get	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/301-Gen-MapTypeConversion.cpp	/^std::string const& LineGenerator::get() const {$/;"	f	class:__anon66::std::LineGenerator
 get	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    ITagAliasRegistry const& ITagAliasRegistry::get() {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::ITagAliasRegistry
@@ -3938,7 +3940,8 @@ getDescription	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/cat
 getDescriptionImpl	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_registrars.hpp	/^            std::string getDescriptionImpl( std::false_type ) const {$/;"	f	class:Catch::ListenerRegistrar::TypedListenerFactory
 getDescriptionImpl	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_registrars.hpp	/^            std::string getDescriptionImpl( std::true_type ) const {$/;"	f	class:Catch::ListenerRegistrar::TypedListenerFactory
 getEffectState	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::getEffectState()$/;"	f	class:Log
-getEffectState	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_register.cpp	/^Storage TestingEffectsRegister::getEffectState() const$/;"	f	class:TestingEffectsRegister
+getEffectState	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.cpp	/^Storage State::getEffectState()$/;"	f	class:State
+getEffectState	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/testing_effects_provider.cpp	/^Storage TestingEffectsProvider::getEffectState() const$/;"	f	class:TestingEffectsProvider
 getEnv	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        char const* getEnv( char const* ) { return nullptr; }$/;"	f	namespace:Catch::Benchmark::Detail::Catch::Catch::Detail
 getEnv	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_getenv.cpp	/^        char const* getEnv( char const* ) { return nullptr; }$/;"	f	namespace:Catch::Detail
 getExpandedExpression	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    std::string AssertionResult::getExpandedExpression() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::AssertionResult
@@ -3969,6 +3972,7 @@ getLastResult	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catc
 getListeners	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    ReporterRegistry::getListeners() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::std::ReporterRegistry
 getListeners	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_reporter_registry.cpp	/^    ReporterRegistry::getListeners() const {$/;"	f	class:Catch::std::ReporterRegistry
 getLogs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::getLogs()$/;"	f	class:Log
+getLogs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^std::vector<std::tuple<Storage, Storage>> EvalRegister::getLogs()$/;"	f	class:EvalRegister
 getMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    StringRef AssertionResult::getMessage() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::AssertionResult
 getMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_assertion_result.cpp	/^    StringRef AssertionResult::getMessage() const {$/;"	f	class:Catch::AssertionResult
 getMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Exception.tests.cpp	/^        std::string const& getMessage() const {$/;"	f	class:__anon25::CustomException::std
@@ -4020,6 +4024,7 @@ get_cmake_version	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/
 get_ctest_listing	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/DiscoverTests/VerifyRegistration.py	/^def get_ctest_listing(build_path):$/;"	f
 get_duplicates	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/checkConvenienceHeaders.py	/^def get_duplicates(xs):$/;"	f
 get_filteredResultsPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approvalTests.py	/^def get_filteredResultsPath(baseName):$/;"	f
+get_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.cpp	/^Storage State::get_impl()$/;"	f	class:State
 get_rawResultsPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approvalTests.py	/^def get_rawResultsPath(baseName):$/;"	f
 get_test_names	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/DiscoverTests/VerifyRegistration.py	/^def get_test_names(build_path: str) -> List[TestInfo]:$/;"	f
 get_test_output	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testPartialTestCaseEvent.py	/^def get_test_output(test_exe: str, sections: bool) -> List[str]:$/;"	f
@@ -4115,8 +4120,8 @@ has_neither	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2
 has_operator	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp	/^struct has_operator { };$/;"	s	namespace:__anon47	file:
 has_size	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp	/^    struct has_size {$/;"	s	namespace:__anon41	file:
 has_template_operator	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp	/^struct has_template_operator {};$/;"	s	namespace:__anon47	file:
-hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^struct std::hash<Error>$/;"	s	class:std
 hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.h	/^struct std::hash<std::vector<Storage>>$/;"	s	class:std
+hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^struct std::hash<Error>$/;"	s	class:std
 hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^struct std::hash<Storage>$/;"	s	class:std
 hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^struct std::hash<floats>$/;"	s	class:std
 hash	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/types.h	/^struct std::hash<ints>$/;"	s	class:std
@@ -4178,7 +4183,7 @@ indexInDepth	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^
 index_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::index_impl(const Storage& i, const Storage& x)$/;"	f	class:IotaString
 index_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::index_impl(const Storage& i, const Storage& x)$/;"	f	class:List
 info	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage info = MonadicEffect::make(effects::families::log, effects::log::info);$/;"	m	namespace:iota
-info	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int info = 3;$/;"	m	namespace:effects::log
+info	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int info = 6;$/;"	m	namespace:effects::log
 info	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^        static constexpr int info = 3;$/;"	m	class:Log::Levels
 info	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        BenchmarkInfo info;$/;"	m	struct:Catch::BenchmarkStats
 info	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_stats.hpp	/^        BenchmarkInfo info;$/;"	m	struct:Catch::BenchmarkStats
@@ -4190,7 +4195,7 @@ info_compiler	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles
 info_cray	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdC/CMakeCCompilerId.c	/^char const *info_cray = "INFO" ":" "compiler_wrapper[CrayPrgEnv]";$/;"	v
 info_cray	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const *info_cray = "INFO" ":" "compiler_wrapper[CrayPrgEnv]";$/;"	v
 info_file_path	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelSharding.py	/^info_file_path = os.path.join(output_dir, '{}.shard-support'.format(os.path.basename(bin_path)))$/;"	v
-info_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::info_impl(const Storage& i)$/;"	f	class:Log
+info_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::info_impl(const Storage& i)$/;"	f	class:Log
 info_language_extensions_default	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdC/CMakeCCompilerId.c	/^const char* info_language_extensions_default = "INFO" ":" "extensions_default["$/;"	v
 info_language_extensions_default	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^const char* info_language_extensions_default = "INFO" ":" "extensions_default["$/;"	v
 info_language_standard_default	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdC/CMakeCCompilerId.c	/^const char* info_language_standard_default =$/;"	v
@@ -4211,11 +4216,10 @@ info_version_internal	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CM
 info_version_internal	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_version_internal = "INFO" ":" "compiler_version_internal[" COMPILER_VERSION_INTERNAL_STR "]";$/;"	v
 initialIndent	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_textflow.hpp	/^            Column& initialIndent( size_t newIndent ) & {$/;"	f	class:Catch::TextFlow::Column
 initialIndent	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_textflow.hpp	/^            Column&& initialIndent( size_t newIndent ) && {$/;"	f	class:Catch::TextFlow::Column
-initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^void Contingency::initialize()$/;"	f	class:Contingency
-initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^void Signal::initialize()$/;"	f	class:Signal
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^void Log::initialize()$/;"	f	class:Log
-initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::initialize(EffectsRegister* effects_register)$/;"	f	class:Log
-initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^void Random::initialize(EffectsRegister* effects_register)$/;"	f	class:Random
+initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::initialize(EffectsProvider* effects_provider)$/;"	f	class:Log
+initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^void Random::initialize(EffectsProvider* effects_register)$/;"	f	class:Random
+initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.cpp	/^void State::initialize(EffectsProvider* effects_register)$/;"	f	class:State
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::initialize()$/;"	f	class:EvalRegister
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^void Character::initialize() {$/;"	f	class:Character
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.cpp	/^void Conditional::initialize()$/;"	f	class:Conditional
@@ -4223,6 +4227,7 @@ initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictiona
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expression.cpp	/^void Expression::initialize()$/;"	f	class:Expression
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^void Integer::initialize()$/;"	f	class:Integer
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^void IotaString::initialize() {$/;"	f	class:IotaString
+initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.cpp	/^void Lens::initialize()$/;"	f	class:Lens
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^void List::initialize() {$/;"	f	class:List
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::initialize()$/;"	f	class:Noun
 initialize	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^void QuotedSymbol::initialize()$/;"	f	class:QuotedSymbol
@@ -4250,6 +4255,8 @@ internal_include_parser	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/
 intersection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage intersection = DyadicEffect::make(effects::families::relation, effects::relation::intersection);$/;"	m	namespace:iota
 intersection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation.cpp	/^Storage Log::intersection(const Storage& i, const Storage& x)$/;"	f	class:Log
 intersection	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/relation/relation_symbols.h	/^  static constexpr int intersection = 12;$/;"	m	namespace:effects::relation
+invalid_adverb_argument	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int invalid_adverb_argument = INVALID_ADVERB_ARGUMENT;$/;"	m	class:Error
+invalid_argument	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int invalid_argument = INVALID_ARGUMENT;$/;"	m	class:Error
 invoke	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_complete_invoke.hpp	/^                static CompleteType_t<void> invoke(Fun&& fun, Args&&... args) {$/;"	f	struct:Catch::Benchmark::Detail::CompleteInvoker
 invoke	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_complete_invoke.hpp	/^                static Result invoke(Fun&& fun, Args&&... args) {$/;"	f	struct:Catch::Benchmark::Detail::CompleteInvoker
 invoke	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_case_info.hpp	/^        void invoke() const {$/;"	f	class:Catch::TestCaseProperties::TestCaseHandle
@@ -4451,8 +4458,8 @@ less_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	
 less_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::less_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 less_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::less_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 level	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage level = MonadicEffect::make(effects::families::log, effects::log::level);$/;"	m	namespace:iota
-level	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int level = 6;$/;"	m	namespace:effects::log
-level_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::level_impl(const Storage& i)$/;"	f	class:Log
+level	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int level = 2;$/;"	m	namespace:effects::log
+level_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::level_impl(const Storage& i)$/;"	f	class:Log
 libIdentify	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.hpp	/^        bool libIdentify = false;$/;"	m	struct:Catch::ConfigData
 libIdentify	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_session.cpp	/^    void Session::libIdentify() {$/;"	f	class:Catch::Session
 libraryVersion	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    Version const& libraryVersion() {$/;"	f	namespace:Catch::Benchmark::Detail::Catch
@@ -4460,7 +4467,6 @@ libraryVersion	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/cat
 license	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/conanfile.py	/^    license = "BSL-1.0"$/;"	v	class:CatchConan
 lift	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int lift = 68;$/;"	m	class:Monads
 lift	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage lift = Monad::make(Monads::lift);$/;"	m	namespace:iota
-lift_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Signal::lift_impl(const Storage& i)$/;"	f	class:Signal
 line	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_source_line_info.hpp	/^            line( _line )$/;"	f	struct:Catch::SourceLineInfo
 line	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_source_line_info.hpp	/^        std::size_t line;$/;"	m	struct:Catch::SourceLineInfo
 lineInfo	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_assertion_info.hpp	/^        SourceLineInfo lineInfo;$/;"	m	struct:Catch::AssertionInfo
@@ -4560,6 +4566,7 @@ logic_t	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 login_username	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/.conan/build.py	/^    def login_username(self):$/;"	m	class:BuilderSettings
 logs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^std::queue<Storage> Log::logs;$/;"	m	class:Log	file:
 logs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^    static std::queue<Storage> logs;$/;"	m	class:Log
+logs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    std::vector<std::tuple<Storage, Storage>> logs = std::vector<std::tuple<Storage, Storage>>();$/;"	m	class:EvalRegister
 lookup	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        StringRef EnumInfo::lookup( int value ) const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Detail::EnumInfo
 lookup	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_enum_values_registry.cpp	/^        StringRef EnumInfo::lookup( int value ) const {$/;"	f	class:Catch::Detail::EnumInfo
 low_mild	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^            int low_mild = 0;       \/\/ 1.5 to 3 times IQR below Q1$/;"	m	struct:Catch::Benchmark::OutlierClassification
@@ -5088,14 +5095,16 @@ make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/adverbs.cpp	/^Storag
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage DyadicEffect::make(int f, int e)$/;"	f	class:DyadicEffect
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage MonadicEffect::make(int f, int e)$/;"	f	class:MonadicEffect
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.cpp	/^Storage NiladicEffect::make(int f, int e)$/;"	f	class:NiladicEffect
-make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Contingency::make(const Storage& i, const Storage& x)$/;"	f	class:Contingency
-make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/iota_signal.cpp	/^Storage Signal::make(const Storage& i, const Storage& x)$/;"	f	class:Signal
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^Storage Character::make(int i)$/;"	f	class:Character
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/conditional.cpp	/^Storage Conditional::make(const mixed &i)$/;"	f	class:Conditional
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^Storage Dictionary::make(const mixed &i)$/;"	f	class:Dictionary
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.cpp	/^Storage Error::make(int i)$/;"	f	class:Error
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/expression.cpp	/^Storage Expression::make(const mixed& e)$/;"	f	class:Expression
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::make(int i)$/;"	f	class:Integer
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^Storage IotaString::make(ints i)$/;"	f	class:IotaString
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.cpp	/^Storage Lens::make(int i)$/;"	f	class:Lens
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.cpp	/^Storage Lens::make(ints i)$/;"	f	class:Lens
+make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.cpp	/^Storage Lens::make(mixed i)$/;"	f	class:Lens
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::make(const ints &i)$/;"	f	class:QuotedSymbol
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::make(float i)$/;"	f	class:Real
 make	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^Storage FloatArray::make(floats x, int o)$/;"	f	class:FloatArray
@@ -5233,6 +5242,7 @@ max_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/
 max_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::max_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 max_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::max_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 maximumConvergeIterations	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^    static constexpr int maximumConvergeIterations = 1000;$/;"	m	class:Noun
+maximum_iterations	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int maximum_iterations = MAXIMUM_ITERATIONS;$/;"	m	class:Error
 mean	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            double mean( double const* first, double const* last ) {$/;"	f	namespace:Catch::Benchmark::Detail
 mean	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^            FDuration mean;$/;"	m	struct:Catch::Benchmark::EnvironmentEstimate
 mean	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        Benchmark::Estimate<Benchmark::FDuration> mean;$/;"	m	struct:Catch::BenchmarkStats
@@ -5308,9 +5318,10 @@ model	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/e
 model	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_function.hpp	/^                    model(Fun const& fun_) : fun(fun_) {}$/;"	f	struct:Catch::Benchmark::Detail::BenchmarkFunction::model
 model	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_function.hpp	/^                    model(Fun&& fun_) : fun(CATCH_MOVE(fun_)) {}$/;"	f	struct:Catch::Benchmark::Detail::BenchmarkFunction::model
 model	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_function.hpp	/^                struct model : public callable {$/;"	s	struct:Catch::Benchmark::Detail::BenchmarkFunction
-monadSinks	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::map<Specialization4, std::function<void(Storage)>> monadSinks;$/;"	m	class:EffectsRegister
+modify	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage modify = MonadicEffect::make(effects::families::state, effects::state::modify);$/;"	m	namespace:iota
+modify	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/state/state_symbols.h	/^  static constexpr int modify = 3;$/;"	m	namespace:effects::state
+modify_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.cpp	/^Storage State::modify_impl(const Storage& i)$/;"	f	class:State
 monadSinks	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization3, MonadicSourceFunction> monadSinks;$/;"	m	class:Noun
-monadSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::map<Specialization4, std::function<Storage(Storage)>> monadSources;$/;"	m	class:EffectsRegister
 monadSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization3, MonadicSourceFunction> Noun::monadSources;$/;"	m	class:Noun	file:
 monadSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization3, MonadicSourceFunction> monadSources;$/;"	m	class:Noun
 monadicAdverbs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization3, MonadicAdverbFunction> Noun::monadicAdverbs;$/;"	m	class:Noun	file:
@@ -5335,6 +5346,9 @@ moveToThis	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 move_detector	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp	/^    struct move_detector {$/;"	s	namespace:__anon15	file:
 mpl_	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^namespace mpl_{$/;"	n
 mpl_	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_meta.hpp	/^namespace mpl_{$/;"	n
+mutate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int mutate = 74;$/;"	m	class:Dyads
+mutate	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage mutate = Dyad::make(Dyads::mutate);$/;"	m	namespace:iota
+mutate_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.cpp	/^Storage Lens::mutate_impl(const Storage& i, const Storage& x)$/;"	f	class:Lens
 myInt	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/111-Fix-PersistentFixture.cpp	/^    mutable int myInt = 0;$/;"	m	struct:MyFixture	file:
 name	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/conanfile.py	/^    name = "catch2"$/;"	v	class:CatchConan
 name	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        const char* name;$/;"	m	struct:Catch::Benchmark::Detail::Catch::Catch::SignalDefs	file:
@@ -5397,10 +5411,9 @@ nil	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^const cppValu
 nil	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::nil()$/;"	f	class:WordArray
 nil1	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::nil1(const Storage& i)$/;"	f	class:WordArray
 nil2	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^Storage WordArray::nil2(const Storage& i, const Storage& x)$/;"	f	class:WordArray
-niladSinks	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::map<Specialization2, std::function<void()>> niladSinks;$/;"	m	class:EffectsRegister
 niladSinks	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization2, NiladicSourceFunction> niladSinks;$/;"	m	class:Noun
-niladSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.h	/^    std::map<Specialization2, std::function<Storage()>> niladSources;$/;"	m	class:EffectsRegister
-niladSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization2, NiladicSourceFunction> niladSources;$/;"	m	class:Noun
+niladSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^std::map<Specialization1, NiladicSourceFunction> Noun::niladSources;$/;"	m	class:Noun	file:
+niladSources	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.h	/^      static std::map<Specialization1, NiladicSourceFunction> niladSources;$/;"	m	class:Noun
 noMatchingTestCases	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        void CompactReporter::noMatchingTestCases( StringRef unmatchedSpec ) {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::CompactReporter
 noMatchingTestCases	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void EventListenerBase::noMatchingTestCases( StringRef ) {}$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::EventListenerBase
 noMatchingTestCases	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void MultiReporter::noMatchingTestCases( StringRef unmatchedSpec ) {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::MultiReporter
@@ -5475,6 +5488,8 @@ nullableValue	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catc
 num	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp	/^    int num = 0;$/;"	m	struct:MoveOnlyTestElement	file:
 number_of_shards	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testSharding.py	/^number_of_shards = 5$/;"	v
 o	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.h	/^    int o;$/;"	m	class:Storage
+occurs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int occurs = 75;$/;"	m	class:Monads
+occurs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage occurs = Monad::make(Monads::occurs);$/;"	m	namespace:iota
 okToFail	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    bool TestCaseInfo::okToFail() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::TestCaseInfo
 okToFail	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_case_info.cpp	/^    bool TestCaseInfo::okToFail() const {$/;"	f	class:Catch::TestCaseInfo
 oldSigActions	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    static struct sigaction oldSigActions[sizeof(signalDefs) \/ sizeof(SignalDefs)]{};$/;"	s	namespace:Catch::Benchmark::Detail::Catch::Catch	file:
@@ -5692,11 +5707,11 @@ operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Matchers.tests.cpp	/^    ThrowOnCopyOrMoveMatcher& operator=( ThrowOnCopyOrMoveMatcher&& ) {$/;"	f	struct:ThrowOnCopyOrMoveMatcher
 operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^    MyType1& operator=(MyType1 const&) { throw 3; }$/;"	f	struct:MyType1
 operator =	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp	/^    MyType2& operator=(MyType2 const&) { throw 4; }$/;"	f	struct:MyType2
-operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^    bool operator==(const Error& rhs) const$/;"	f	class:Error
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^  bool operator==(const cppValue& other) const$/;"	f	struct:cppValue
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^bool operator==(const std::vector<T>& left, const std::vector<T>& right)$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const T& left, const cppValue& right) {$/;"	f
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.h	/^operator==(const cppValue& left, const T& right) {$/;"	f
+operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    bool operator==(const Error& rhs) const$/;"	f	class:Error
 operator ==	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^bool Storage::operator==(const Storage& other) const$/;"	f	class:Storage
 operator ==	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    bool operator==( ProcessedReporterSpec const& lhs,$/;"	f	namespace:Catch::Benchmark::Detail::Catch
 operator ==	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    bool operator==( ReporterSpec const& lhs, ReporterSpec const& rhs ) {$/;"	f	namespace:Catch::Benchmark::Detail::Catch::Catch
@@ -5830,6 +5845,7 @@ other	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/s
 other	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_cumulative_base.cpp	/^            BySectionInfo( BySectionInfo const& other ) = default;$/;"	m	struct:Catch::__anon104::BySectionInfo	file:
 out_buff	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/231-Cfg-OutputStreams.cpp	/^    out_buff(std::FILE* stream):m_stream(stream) {}$/;"	f	class:out_buff
 out_buff	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/231-Cfg-OutputStreams.cpp	/^class out_buff : public std::stringbuf {$/;"	c	file:
+out_of_bounds	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int out_of_bounds = OUT_OF_BOUNDS;$/;"	m	class:Error
 outlierVariance	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.hpp	/^        double outlierVariance;$/;"	m	struct:Catch::BenchmarkStats
 outlierVariance	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_benchmark_stats.hpp	/^        double outlierVariance;$/;"	m	struct:Catch::BenchmarkStats
 outlier_variance	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^                static double outlier_variance( Estimate<double> mean,$/;"	f	namespace:Catch::Benchmark::Detail::__anon114
@@ -6207,6 +6223,7 @@ previousTopLevelExceptionFilter	/Users/dr.brandonwiley/iota-cpp/tests/cmake-buil
 previousTopLevelExceptionFilter	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_fatal_condition_handler.cpp	/^    static LPTOP_LEVEL_EXCEPTION_FILTER previousTopLevelExceptionFilter = nullptr;$/;"	m	namespace:Catch	file:
 previouslyRun	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp	/^static bool previouslyRun = false;$/;"	v	file:
 previouslyRunNested	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp	/^static bool previouslyRunNested = false;$/;"	v	file:
+print	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage.cpp	/^void Storage::print()$/;"	f	class:Storage
 print	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/210-Evt-EventListeners.cpp	/^void print( std::ostream& os, int const level, Catch::MessageInfo const& info ) {$/;"	f	namespace:__anon64
 print	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/210-Evt-EventListeners.cpp	/^void print( std::ostream& os, int const level, std::string const& title, Catch::AssertionInfo const& info ) {$/;"	f	namespace:__anon64
 print	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/examples/210-Evt-EventListeners.cpp	/^void print( std::ostream& os, int const level, std::string const& title, Catch::AssertionResult const& info ) {$/;"	f	namespace:__anon64
@@ -6249,6 +6266,8 @@ printIssue	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 printIssue	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void printIssue(char const* issue) const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon141::AssertionPrinter	file:
 printIssue	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_compact.cpp	/^    void printIssue(char const* issue) const {$/;"	f	class:Catch::__anon105::AssertionPrinter	file:
 printIssue	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_tap.cpp	/^            void printIssue(StringRef issue) const {$/;"	f	class:Catch::__anon102::TapAssertionPrinter	file:
+printLog	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::printLog(Storage li, Storage lr)$/;"	f	class:EvalRegister
+printLogs	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::printLogs()$/;"	f	class:EvalRegister
 printMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            void printMessage() {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon149::TapAssertionPrinter	file:
 printMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void printMessage() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon142::ConsoleAssertionPrinter	file:
 printMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void printMessage() {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon141::AssertionPrinter	file:
@@ -6307,6 +6326,9 @@ prop	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/te
 properties	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_test_case_info.hpp	/^        TestCaseProperties properties = TestCaseProperties::None;$/;"	m	struct:Catch::TestCaseProperties::TestCaseInfo
 pushScopedMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void RunContext::pushScopedMessage(MessageInfo const & message) {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::RunContext
 pushScopedMessage	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_run_context.cpp	/^    void RunContext::pushScopedMessage(MessageInfo const & message) {$/;"	f	class:Catch::RunContext
+put	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage put = NiladicEffect::make(effects::families::state, effects::state::put);$/;"	m	namespace:iota
+put	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/state/state_symbols.h	/^  static constexpr int put = 2;$/;"	m	namespace:effects::state
+put_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.cpp	/^Storage State::put_impl(const Storage& i)$/;"	f	class:State
 qnxnto	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdC/CMakeCCompilerId.c	/^char const* qnxnto = "INFO" ":" "qnxnto[]";$/;"	v
 qnxnto	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/CMakeFiles/3.31.4/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* qnxnto = "INFO" ":" "qnxnto[]";$/;"	v
 r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.h	/^    maybe<Storage> r;$/;"	m	class:EvalRegister
@@ -6360,8 +6382,7 @@ reconstructedExpression	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/
 reference	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/.conan/build.py	/^    def reference(self):$/;"	m	class:BuilderSettings
 registerDyad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerDyad(Type it, Type io, Type f, Type xt, Type xo, Storage (*d)(const Storage&, const Storage&)) {$/;"	f	class:Noun
 registerDyadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerDyadicAdverb(Type it, Type io, Type f, Type xt, Type xo, Storage (*a)(const Storage&, const Storage&, const Storage&)) {$/;"	f	class:Noun
-registerDyadicSinkEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::registerDyadicSinkEffect(Type it, Type io, Type f, Type e, Type xt, Type xo, const std::function<void(const Storage&, const Storage&)>& m)$/;"	f	class:EffectsRegister
-registerDyadicSourceEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::registerDyadicSourceEffect(Type it, Type io, Type f, Type e, Type xt, Type xo, const std::function<Storage (const Storage&, const Storage&)>& m)$/;"	f	class:EffectsRegister
+registerEffectsProvider	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^void EvalRegister::registerEffectsProvider(EffectsProvider& provider)$/;"	f	class:EvalRegister
 registerEnum	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        EnumInfo const& EnumValuesRegistry::registerEnum( StringRef enumName, StringRef allValueNames, std::vector<int> const& values ) {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::Detail::EnumValuesRegistry
 registerEnum	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_enum_values_registry.hpp	/^        Detail::EnumInfo const& registerEnum( StringRef enumName, StringRef allEnums, std::initializer_list<E> values ) {$/;"	f	class:Catch::IMutableEnumValuesRegistry::Detail
 registerEnum	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_enum_values_registry.cpp	/^        EnumInfo const& EnumValuesRegistry::registerEnum( StringRef enumName, StringRef allValueNames, std::vector<int> const& values ) {$/;"	f	class:Catch::Detail::EnumValuesRegistry
@@ -6371,10 +6392,7 @@ registerListenerImpl	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_de
 registerListenerImpl	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_registrars.cpp	/^        void registerListenerImpl( Detail::unique_ptr<EventListenerFactory> listenerFactory ) {$/;"	f	namespace:Catch::Detail
 registerMonad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerMonad(Type it, Type io, Type f, Storage (*m)(const Storage&))$/;"	f	class:Noun
 registerMonadicAdverb	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&)) {$/;"	f	class:Noun
-registerMonadicSinkEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::registerMonadicSinkEffect(Type it, Type io, Type f, Type e, const std::function<void(Storage)>& m)$/;"	f	class:EffectsRegister
-registerMonadicSourceEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::registerMonadicSourceEffect(Type it, Type io, Type f, Type e, const std::function<Storage(const Storage&)>& m)$/;"	f	class:EffectsRegister
-registerNiladicSinkEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::registerNiladicSinkEffect(Type f, Type e, const std::function<void()>& m)$/;"	f	class:EffectsRegister
-registerNiladicSourceEffect	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^void EffectsRegister::registerNiladicSourceEffect(Type f, Type e, const std::function<Storage()>& m)$/;"	f	class:EffectsRegister
+registerNilad	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::registerNilad(Type f, Storage (*m)())$/;"	f	class:Noun
 registerReporter	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    void ReporterRegistry::registerReporter( std::string const& name,$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::ReporterRegistry
 registerReporter	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_reporter_registry.cpp	/^    void ReporterRegistry::registerReporter( std::string const& name,$/;"	f	class:Catch::ReporterRegistry
 registerReporterImpl	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^        void registerReporterImpl( std::string const& name,$/;"	f	namespace:Catch::Benchmark::Detail::Catch::Catch::Catch::Detail
@@ -6469,6 +6487,9 @@ resultDisposition	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/
 resultType	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_assertion_result.hpp	/^        ResultWas::OfType resultType;$/;"	m	struct:Catch::AssertionResultData
 ret	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelReporter.py	/^    ret = subprocess.run($/;"	v
 ret	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelSharding.py	/^    ret = subprocess.run($/;"	v
+retrieve	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int retrieve = 73;$/;"	m	class:Dyads
+retrieve	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage retrieve = Dyad::make(Dyads::retrieve);$/;"	m	namespace:iota
+retrieve_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/lens.cpp	/^Storage Lens::retrieve_impl(const Storage& i, const Storage& x)$/;"	f	class:Lens
 retrieve_r	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/eval_register.cpp	/^maybe<bytes> EvalRegister::retrieve_r() const$/;"	f	class:EvalRegister
 returnsConstNull	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Condition.tests.cpp	/^    static const char* returnsConstNull() { return nullptr; }$/;"	f	namespace:__anon52
 returnsNull	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Condition.tests.cpp	/^    static char* returnsNull() { return nullptr; }$/;"	f	namespace:__anon52
@@ -6499,7 +6520,7 @@ rngSeed	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src
 roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);$/;"	m	namespace:iota
 roll	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int roll = 2;$/;"	m	namespace:effects::random
 roll_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::roll_impl(const Storage& i)$/;"	f	class:Random
-rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage rolls = MonadicEffect::make(effects::families::random, effects::random::rolls);$/;"	m	namespace:iota
+rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage rolls = DyadicEffect::make(effects::families::random, effects::random::rolls);$/;"	m	namespace:iota
 rolls	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/random/random_symbols.h	/^  static constexpr int rolls = 3;$/;"	m	namespace:effects::random
 rolls_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/random/random.cpp	/^Storage Random::rolls_impl(const Storage& i, const Storage& x)$/;"	f	class:Random
 rootPath	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approvalTests.py	/^rootPath = os.path.join(catchPath, 'tests\/SelfTest\/Baselines')$/;"	v
@@ -6665,6 +6686,7 @@ settings	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-sr
 shape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int shape = 14;$/;"	m	class:Monads
 shape	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage shape = Monad::make(Monads::shape);$/;"	m	namespace:iota
 shape_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::shape_impl(const Storage& i)$/;"	f	class:List
+shape_mismatch	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int shape_mismatch = SHAPE_MISMATCH;$/;"	m	class:Error
 shape_scalar	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^Storage Noun::shape_scalar(const Storage& i)$/;"	f	class:Noun
 shardCount	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            unsigned int shardIndex, shardCount;$/;"	m	struct:Catch::Benchmark::Detail::Catch::__anon116::bazelShardingOptions	file:
 shardCount	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    unsigned int Config::shardCount() const            { return m_data.shardCount; }$/;"	f	class:Catch::Benchmark::Detail::Catch::Config
@@ -6807,6 +6829,10 @@ startsWith	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-
 startsWith	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_string_manip.cpp	/^    bool startsWith( StringRef s, char prefix ) {$/;"	f	namespace:Catch
 startsWith	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_string_manip.cpp	/^    bool startsWith( std::string const& s, std::string const& prefix ) {$/;"	f	namespace:Catch
 starts_with	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/misc/coverage-helper.cpp	/^bool starts_with(std::string const& str, std::string const& pref) {$/;"	f
+state	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effect_symbols.h	/^  static constexpr int state = 4;$/;"	m	namespace:effects::families
+state	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/state/state_symbols.h	/^namespace effects::state$/;"	n	class:effects
+state	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.cpp	/^maybe<Storage> State::state;$/;"	m	class:State	file:
+state	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/state/state.h	/^    static maybe<Storage> state;$/;"	m	class:State
 stats	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    AssertionStats const& stats;$/;"	m	class:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon142::ConsoleAssertionPrinter	file:
 stats	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_console.cpp	/^    AssertionStats const& stats;$/;"	m	class:Catch::__anon101::ConsoleAssertionPrinter	file:
 stats	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_cumulative_base.hpp	/^            SectionStats stats;$/;"	m	struct:Catch::CumulativeReporterBase::SectionNode
@@ -7035,6 +7061,7 @@ testStringForMatching	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_d
 testStringForMatching2	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Matchers.tests.cpp	/^    static const char* testStringForMatching2() {$/;"	f	namespace:__anon50
 test_count	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Generators.tests.cpp	/^    size_t test_count = 0;$/;"	m	namespace:__anon26	file:
 test_error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage test_error()$/;"	f
+test_error	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int test_error = TEST_ERROR;$/;"	m	class:Error
 test_generator	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Generators.tests.cpp	/^        [[noreturn]] explicit test_generator() {$/;"	f	class:__anon27::test_generator
 test_generator	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Generators.tests.cpp	/^    class test_generator : public Catch::Generators::IGenerator<int> {$/;"	c	namespace:__anon27	file:
 test_passing	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelReporter.py	/^        test_passing = False$/;"	v
@@ -7048,7 +7075,7 @@ tests	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/s
 testsOrTags	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.hpp	/^        std::vector<std::string> testsOrTags;$/;"	m	struct:Catch::ConfigData
 then	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int then = 70;$/;"	m	class:Dyads
 then	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage then = Dyad::make(Dyads::then);$/;"	m	namespace:iota
-then_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_register.cpp	/^Storage EffectsRegister::then_impl(const Storage& i, const Storage& x)$/;"	f	class:EffectsRegister
+then_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects_provider.cpp	/^Storage EffectsProvider::then_impl(const Storage& i, const Storage& x)$/;"	f	class:EffectsProvider
 thisDoesntThrow	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Exception.tests.cpp	/^    int thisDoesntThrow() {$/;"	f	namespace:__anon25
 thisThrows	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Exception.tests.cpp	/^    int thisThrows() {$/;"	f	namespace:__anon25
 this_doesnt_throw	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/ExtraTests/X01-PrefixedMacros.cpp	/^    void this_doesnt_throw() {}$/;"	f	namespace:__anon62
@@ -7094,8 +7121,8 @@ times_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp
 times_real	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^Storage Real::times_real(const Storage& i, const Storage& x)$/;"	f	class:Real
 times_reals	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::times_reals(const Storage& i, const Storage& x)$/;"	f	class:List
 timestamp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage timestamp = MonadicEffect::make(effects::families::log, effects::log::timestamp);$/;"	m	namespace:iota
-timestamp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int timestamp = 7;$/;"	m	namespace:effects::log
-timestamp_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::timestamp_impl()$/;"	f	class:Log
+timestamp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int timestamp = 1;$/;"	m	namespace:effects::log
+timestamp_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::timestamp_impl()$/;"	f	class:Log
 timestamps	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^ints Log::timestamps;$/;"	m	class:Log	file:
 timestamps	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^    static ints timestamps;$/;"	m	class:Log
 timestampsParser	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/approvalTests.py	/^timestampsParser = re.compile(r'\\d{4}-\\d{2}-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}Z')$/;"	v
@@ -7149,9 +7176,9 @@ totals	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/
 totals	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_reporter.hpp	/^        Totals totals;$/;"	m	struct:Catch::TestCaseStats
 totals	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/interfaces/catch_interfaces_reporter.hpp	/^        Totals totals;$/;"	m	struct:Catch::TestRunStats
 trace	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage trace = MonadicEffect::make(effects::families::log, effects::log::trace);$/;"	m	namespace:iota
-trace	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int trace = 5;$/;"	m	namespace:effects::log
+trace	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int trace = 8;$/;"	m	namespace:effects::log
 trace	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^        static constexpr int trace = 5;$/;"	m	class:Log::Levels
-trace_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::trace_impl(const Storage& i)$/;"	f	class:Log
+trace_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::trace_impl(const Storage& i)$/;"	f	class:Log
 trailingBytes	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    size_t trailingBytes(unsigned char c) {$/;"	f	namespace:Catch::Benchmark::Detail::Catch::Catch::Catch::__anon139
 trailingBytes	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_xmlwriter.cpp	/^    size_t trailingBytes(unsigned char c) {$/;"	f	namespace:Catch::__anon80
 trailing_whitespace	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp	/^static const char * const trailing_whitespace = "There is no extra whitespace here \\t \\n \\r ";$/;"	v	file:
@@ -7210,6 +7237,7 @@ undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/storage
 undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    static constexpr int undefined = 67;$/;"	m	class:Monads
 undefined	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage undefined = Monad::make(Monads::undefined);$/;"	m	namespace:iota
 undefined_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/quoted_symbol.cpp	/^Storage QuotedSymbol::undefined_impl(const Storage& i)$/;"	f	class:QuotedSymbol
+unequal_array_lengths	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int unequal_array_lengths = UNEQUAL_ARRAY_LENGTHS;$/;"	m	class:Error
 unexpectedExceptions	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_junit.hpp	/^        unsigned int unexpectedExceptions = 0;$/;"	m	class:Catch::final
 uniform_floating_point_distribution	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_uniform_floating_point_distribution.hpp	/^    uniform_floating_point_distribution( FloatType a, FloatType b ):$/;"	f	class:Catch::uniform_floating_point_distribution
 uniform_floating_point_distribution	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_uniform_floating_point_distribution.hpp	/^class uniform_floating_point_distribution {$/;"	c	namespace:Catch
@@ -7234,10 +7262,13 @@ unitsAsString	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catc
 unitsAsString	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/reporters/catch_reporter_console.cpp	/^    StringRef unitsAsString() const {$/;"	f	class:Catch::__anon101::Duration
 universal_newlines	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelReporter.py	/^        universal_newlines=True,$/;"	v
 universal_newlines	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/TestScripts/testBazelSharding.py	/^        universal_newlines=True,$/;"	v
+unknown_key	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int unknown_key = UNKNOWN_KEY;$/;"	m	class:Error
 unprintableString	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_tostring.hpp	/^        constexpr StringRef unprintableString = "{?}"_sr;$/;"	m	namespace:Catch::Detail
 unrelated	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp	/^    struct unrelated {};$/;"	s	namespace:__anon14	file:
 unrelated	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/helpers/range_test_helpers.hpp	/^namespace unrelated {$/;"	n
 unscoped_info	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tests/SelfTest/UsageTests/Message.tests.cpp	/^static void unscoped_info( T msg ) {$/;"	f	file:
+unsupported_object	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int unsupported_object = UNSUPPORTED_OBJECT;$/;"	m	class:Error
+unsupported_subject	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/error.h	/^    static constexpr int unsupported_subject = UNSUPPORTED_SUBJECT;$/;"	m	class:Error
 updateCmakeFile	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/releaseCommon.py	/^def updateCmakeFile(version):$/;"	f
 updateDocumentToC	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/updateDocumentToC.py	/^def updateDocumentToC(paths, min_toc_len, verbose):$/;"	f
 updateDocumentToCMain	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/tools/scripts/updateDocumentToC.py	/^def updateDocumentToCMain():$/;"	f
@@ -7315,9 +7346,9 @@ warnAboutMissingAssertions	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-deb
 warnAboutUnmatchedTestSpecs	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    bool Config::warnAboutUnmatchedTestSpecs() const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Config
 warnAboutUnmatchedTestSpecs	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.cpp	/^    bool Config::warnAboutUnmatchedTestSpecs() const {$/;"	f	class:Catch::Config
 warning	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/effects.h	/^  inline Storage warning = MonadicEffect::make(effects::families::log, effects::log::warning);$/;"	m	namespace:iota
-warning	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int warning = 2;$/;"	m	namespace:effects::log
+warning	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/log/log_symbols.h	/^  static constexpr int warning = 5;$/;"	m	namespace:effects::log
 warning	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.h	/^        static constexpr int warning = 2;$/;"	m	class:Log::Levels
-warning_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^void Log::warning_impl(const Storage& i)$/;"	f	class:Log
+warning_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/effects/testing/log/log.cpp	/^Storage Log::warning_impl(const Storage& i)$/;"	f	class:Log
 warnings	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/catch_config.hpp	/^        WarnAbout::What warnings = WarnAbout::Nothing;$/;"	m	struct:Catch::ConfigData
 weighted_average_quantile	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^            double weighted_average_quantile( int k,$/;"	f	namespace:Catch::Benchmark::Detail
 weighted_average_quantile	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/benchmark/detail/catch_stats.cpp	/^            double weighted_average_quantile( int k,$/;"	f	namespace:Catch::Benchmark::Detail

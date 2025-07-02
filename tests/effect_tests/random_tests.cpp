@@ -7,17 +7,14 @@
 
 #include "api.h"
 
-#include "../../libraries/iota-cpp/src/effects/testing/testing_effects_register.h"
+#include "../../libraries/iota-cpp/src/effects/testing/testing_effects_provider.h"
 
 TEST_CASE("random", "[effect]")
 {
   using namespace iota;
   using namespace std::string_literals;
 
-  auto effects_register = TestingEffectsRegister();
-  cppValue result = evalExpressionWithEffects({{iota::random}, bind, iota::floor}, &effects_register);
-
-  REQUIRE(result == 0); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(evalExpression({iota::random, iota::floor}) == 0); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }
 
 TEST_CASE("roll", "[effect]")
@@ -25,10 +22,7 @@ TEST_CASE("roll", "[effect]")
   using namespace iota;
   using namespace std::string_literals;
 
-  auto effects_register = TestingEffectsRegister();
-  cppValue result = evalExpressionWithEffects({{10, roll}, bind, negate}, &effects_register);
-
-  REQUIRE(result == -9); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(evalExpression({10, roll, negate}) == -9); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }
 
 TEST_CASE("rolls", "[effect]")
@@ -36,10 +30,7 @@ TEST_CASE("rolls", "[effect]")
   using namespace iota;
   using namespace std::string_literals;
 
-  auto effects_register = TestingEffectsRegister();
-  cppValue result = evalExpressionWithEffects({{10, rolls, 2}, bind, negate}, &effects_register);
-
-  REQUIRE(result == a{-9, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(evalExpression({10, rolls, 2, negate}) == a{-9, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }
 
 TEST_CASE("deal", "[effect]")
@@ -47,8 +38,5 @@ TEST_CASE("deal", "[effect]")
   using namespace iota;
   using namespace std::string_literals;
 
-  auto effects_register = TestingEffectsRegister();
-  cppValue result = evalExpressionWithEffects({{{1, 2, 3}, deal, 0}, bind, negate}, &effects_register);
-
-  REQUIRE(result == a{-1, -1, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(evalExpression({{1, 2, 3}, deal, 0, negate}) == a{-1, -1, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }

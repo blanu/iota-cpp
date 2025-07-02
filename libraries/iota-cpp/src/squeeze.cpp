@@ -11,35 +11,35 @@
 // int
 
 // Encode an integer in the fewest number of bytes, plus a 1-byte length to tell us how many bytes that is.
-bytes squeeze_int(int integer)
+bytes squeeze_int(int value)
 {
   // Allocate the result
   bytes r;
 
   // The only case where the length can be zero is for the number 0.
-  if(integer == 0)
+  if(value == 0)
   {
     r.push_back(0);
     return r;
   }
 
   // Remember if the integer was positive or negative. If negative, we will make the length negative later.
-  // Regardless, we end up with a positive integer for the purpose of encoding.
+  // Regardless, we end up with a positive integer for encoding.
   // Positive integers are more straightforward to encode.
   int negative = 0;
-  if(integer < 0)
+  if(value < 0)
   {
     negative = 1;
-    integer = -integer;
+    value = -value;
   }
 
   // Determine how many bytes we need to encode the integer by removing zero bytes from the top end.
   // Note that this algorithm does not care about endianness and accommodates any word size.
-  while(integer != 0)
+  while(value != 0)
   {
     // Get each byte of the integer separately so that we can count how many bytes we need.
-    r.insert(r.begin(), static_cast<char>(integer & 0xFF));
-    integer = integer >> 8;
+    r.insert(r.begin(), static_cast<char>(value & 0xFF));
+    value = value >> 8;
   }
 
   char length = static_cast<char>(r.size());
@@ -56,22 +56,22 @@ bytes squeeze_int(int integer)
   return r;
 }
 
-bytes squeeze_bigint(ints integers)
+bytes squeeze_bigint(ints value)
 {
   // Allocate the result
   bytes r;
 
   // Remember if the integer was positive or negative. If negative, we will make the length negative later.
-  // Regardless, we end up with a positive integer for the purpose of encoding.
+  // Regardless, we end up with a positive integer for encoding.
   // Positive integers are more straightforward to encode.
-  int negative = integers.at(0);
-  integers.erase(integers.begin());
+  const int negative = value.at(0);
+  value.erase(value.begin());
 
-  for(int signedInteger : integers)
+  for(const int signedInteger : value)
   {
     auto unsignedInteger = static_cast<unsigned int>(signedInteger);
 
-    bytes integerBytes = bytes();
+    auto integerBytes = bytes();
     for(int offset=0; offset<sizeof(unsignedInteger); offset++)
     {
       // Get each byte of the integer separately, encoding all bytes, including zeros
@@ -96,35 +96,35 @@ bytes squeeze_bigint(ints integers)
   return r;
 }
 
-bytes squeeze_varint(const varint &i)
+bytes squeeze_varint(const varint &value)
 {
-  if(std::holds_alternative<int>(i))
+  if(std::holds_alternative<int>(value))
   {
-    int integer = std::get<int>(i);
+    const int integer = std::get<int>(value);
     return squeeze_int(integer);
   }
   else
   {
-    ints integers = std::get<ints>(i);
+    const auto integers = std::get<ints>(value);
     return squeeze_ints(integers);
   }
 }
 
-std::tuple<varint, bytes> expand_int(bytes data)
+std::tuple<varint, bytes> expand_int(bytes value)
 {
   // If input vector is empty, we have nothing to parse
-  if(data.empty())
+  if(value.empty())
   {
     return std::make_tuple(0, bytes());
   }
 
   // The first byte of the input array is the length at the beginning of the array with the integer for us to parse, the rest of the array is extra
-  int integerLength = static_cast<unsigned char>(data.front());
+  int integerLength = static_cast<unsigned char>(value.front());
 
   // The only case where the length can be zero is for the number 0.
   if(integerLength == 0)
   {
-    bytes rest(data.begin() + 1, data.end());
+    bytes rest(value.begin() + 1, value.end());
     return std::make_tuple(0, rest);
   }
 
@@ -136,25 +136,25 @@ std::tuple<varint, bytes> expand_int(bytes data)
     integerLength = integerLength & 0x7F; // Clear the sign bit & 0b01111111
   }
 
-  if(data.size() < 1 + integerLength)
+  if(value.size() < 1 + integerLength)
   {
     return std::make_tuple(0, bytes());
   }
 
-  bytes integerData(data.begin() + 1, data.begin() + 1 + integerLength);
-  bytes rest(data.begin() + 1 + integerLength, data.end());
+  const bytes integerData(value.begin() + 1, value.begin() + 1 + integerLength);
+  bytes rest(value.begin() + 1 + integerLength, value.end());
 
   varint i = expand_int_from_bytes(integerData);
   if(negative)
   {
     if(std::holds_alternative<int>(i))
     {
-      int integer = std::get<int>(i);
+      const int integer = std::get<int>(i);
       i = varint(-integer);
     }
     else
     {
-      ints integers = std::get<ints>(i);
+      auto integers = std::get<ints>(i);
       integers.at(0) = -integers.at(0);
       i = varint(integers);
     }
@@ -179,7 +179,7 @@ varint expand_conn(const Connection& conn)
     negative = 1;
   }
 
-  bytes integerBytes = conn.read(length);
+  const bytes integerBytes = conn.read(length);
 
   varint i = expand_int_from_bytes(integerBytes);
 
@@ -187,13 +187,13 @@ varint expand_conn(const Connection& conn)
   {
     if(negative)
     {
-      int integer = std::get<int>(i);
+      const int integer = std::get<int>(i);
       i = varint(-integer);
     }
   }
   else
   {
-    ints integers = std::get<ints>(i);
+    auto integers = std::get<ints>(i);
 
     if(negative)
     {
@@ -214,7 +214,7 @@ varint expand_int_from_bytes(const bytes &bytes)
 {
   // We have to use an unsigned int here because in the base that we end up with a bigint, all the limbs should be unsigned.
   // If we use a (signed) int, we will lose the top bit.
-  ints integers = ints();
+  auto integers = ints();
   for(int count = 1; count <= bytes.size(); count++)
   {
     // We ran out of bytes in the queued integers
@@ -232,11 +232,11 @@ varint expand_int_from_bytes(const bytes &bytes)
       }
       else
       {
-        auto current = static_cast<unsigned int>(integers.at(index));
-        auto next = static_cast<unsigned int>(integers.at(index + 1));
+        const auto current = static_cast<unsigned int>(integers.at(index));
+        const auto next = static_cast<unsigned int>(integers.at(index + 1));
 
-        int shift = (sizeof(int) - 1) * 8;
-        unsigned int nextHighByte = (next >> shift) & 0xFF;
+        constexpr int shift = (sizeof(int) - 1) * 8;
+        const unsigned int nextHighByte = (next >> shift) & 0xFF;
 
         integers.at(index) = static_cast<int>((current << 8) | nextHighByte);
       }
@@ -245,8 +245,8 @@ varint expand_int_from_bytes(const bytes &bytes)
 
   // In this special case, we might have a valid max size (signed) int, or we might have a max size unsigned int that is too big to fit into a signed int because of the sign bit.
   if(integers.size() == 1)
-  {    
-    auto unsignedInteger = static_cast<unsigned int>(integers.at(0));
+  {
+    const auto unsignedInteger = static_cast<unsigned int>(integers.at(0)); // NOLINT
 
     if(unsignedInteger <= std::numeric_limits<int>::max())
     {
@@ -262,24 +262,24 @@ varint expand_int_from_bytes(const bytes &bytes)
 bool isLittleEndian()
 {
     int num = 0x1; // A number where the least significant byte is non-zero
-    char* bytePtr = reinterpret_cast<char*>(&num);
+    const char* bytePtr = reinterpret_cast<char*>(&num);
 
     // Check the value of the first byte
     return (*bytePtr == 0x1);
 }
 
-bytes squeeze_floating(std::variant<float, double> value)
+bytes squeeze_floating(const std::variant<float, double> value)
 {
   if(std::holds_alternative<float>(value))
   {
-    float f = std::get<float>(value);
+    const float f = std::get<float>(value);
 
     if(f == 0.0)
     {
       return bytes({0});
     }
 
-    bytes result = bytes();
+    auto result = bytes();
     result.insert(result.end(), (char)sizeof(float));
 
     bytes floatBytes(sizeof(float));
@@ -296,14 +296,14 @@ bytes squeeze_floating(std::variant<float, double> value)
   }
   else
   {
-    double d = std::get<double>(value);
+    const double d = std::get<double>(value);
 
     if(d == 0.0)
     {
       return bytes({0});
     }
 
-    bytes result = bytes();
+    auto result = bytes();
     result.insert(result.end(), (char)sizeof(double));
 
     bytes floatBytes(sizeof(double));
@@ -322,7 +322,7 @@ bytes squeeze_floating(std::variant<float, double> value)
 
 maybe<floating> expand_floating(bytes value)
 {
-  int length = static_cast<unsigned char>(value.at(0));
+  const int length = static_cast<unsigned char>(value.at(0));
 
   if(length == 0)
   {
@@ -356,7 +356,7 @@ maybe<floating> expand_floating(bytes value)
 
 maybe<floating> expand_conn_floating(const Connection& conn)
 {
-  int length = static_cast<unsigned char>(conn.readOne());
+  const int length = static_cast<unsigned char>(conn.readOne());
 
   if(length == 0)
   {
@@ -396,49 +396,49 @@ maybe<floating> expand_conn_floating(const Connection& conn)
 // ints
 
 // Encode an array of integers in the fewest number of bytes, plus an encoded integer length to tell us how many bytes that is.
-bytes squeeze_ints(const ints &values)
+bytes squeeze_ints(const ints &value)
 {
   // The only case where the length can be zero is for the number 0.
-  if(values.empty())
+  if(value.empty())
   {
     return bytes({0});
   }
 
   // Allocate the result
-  bytes r = bytes();
+  auto r = bytes();
 
-  int size = static_cast<int>(values.size());
+  const int size = static_cast<int>(value.size());
   bytes sizeBytes = squeeze_int(size);
 
   r.insert(r.begin(), sizeBytes.begin(), sizeBytes.end());
 
-  for(int value : values)
+  for(const int integer : value)
   {    
-    bytes valueBytes = squeeze_int(value);
+    bytes valueBytes = squeeze_int(integer);
     r.insert(r.end(), valueBytes.begin(), valueBytes.end());
   }
 
   return r;
 }
 
-std::tuple<ints, bytes> expand_ints(const bytes& data)
+std::tuple<ints, bytes> expand_ints(const bytes& value)
 {
   // If input vector is empty, we have nothing to parse
-  if(data.empty())
+  if(value.empty())
   {
-    return std::make_tuple(ints(), data);
+    return std::make_tuple(ints(), value);
   }
 
-  ints integers = ints();
+  auto integers = ints();
 
   // The first byte of the input array is the length at the beginning of the array with the integer for us to parse, the rest of the array is extra
-  std::tuple<varint, bytes> sizeResult = expand_int(data);
-  varint varsize = std::get<0>(sizeResult);
+  const std::tuple<varint, bytes> sizeResult = expand_int(value);
+  const varint varsize = std::get<0>(sizeResult);
   bytes rest = std::get<1>(sizeResult);
 
   if(std::holds_alternative<int>(varsize))
   {
-    int size = std::get<int>(varsize);
+    const int size = std::get<int>(varsize);
 
     // The only case where the length can be zero is for empty array [].
     if(size == 0)
@@ -476,25 +476,25 @@ std::tuple<ints, bytes> expand_ints(const bytes& data)
 // floats
 
 // Encode an array of floats in the fewest number of bytes, plus an encoded integer length to tell us how many bytes that is.
-bytes squeeze_floats(const floats& values)
+bytes squeeze_floats(const floats& value)
 {
   // The only case where the length can be zero is for the number 0.
-  if(values.empty())
+  if(value.empty())
   {
     return bytes({0});
   }
 
   // Allocate the result
-  bytes r=bytes();
+  auto r = bytes();
 
-  int size = static_cast<int>(values.size());
+  const int size = static_cast<int>(value.size());
   bytes sizeBytes = squeeze_int(size);
 
   r.insert(r.begin(), sizeBytes.begin(), sizeBytes.end());
 
-  for(float value : values)
+  for(float f : value)
   {
-    bytes valueBytes = squeeze_floating(floating(value));
+    bytes valueBytes = squeeze_floating(floating(f));
     r.insert(r.end(), valueBytes.begin(), valueBytes.end());
   }
 

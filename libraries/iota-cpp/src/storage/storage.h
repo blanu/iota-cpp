@@ -52,6 +52,11 @@ class NounType
     static constexpr int SEQUENCE = 25;
     static constexpr int DEPENDENCY = 26;
     static constexpr int EFFECT_EXPRESSION = 27;
+    static constexpr int LENS = 28;
+    static constexpr int EFFECT_CHAIN = 29;
+    static constexpr int NILADIC_EFFECT = 30;
+    static constexpr int MONADIC_EFFECT = 31;
+    static constexpr int DYADIC_EFFECT = 32;
     static constexpr int ANY = 255;
 };
 
@@ -81,6 +86,8 @@ class Storage
 
     static Storage identity(const Storage& i);
 
+    bool operator==(const Storage& other) const;
+
     // Be careful with this constructor, it moves the i value, so only use it as the final use of the i.
     Storage(int o, int t, I i) : o(o), t(t), i(std::move(i)) {}
 
@@ -89,8 +96,7 @@ class Storage
     Storage(const Storage& x) = default; // o(x.o), t(x.t), i(x.i)
 
     [[nodiscard]] int truth() const;
-
-    bool operator==(const Storage& other) const;
+    void print();
 };
 
 template<>

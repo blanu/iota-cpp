@@ -6,12 +6,12 @@
 
 #include "storage/word.h"
 
-Storage MonadicAdverb::make(int i)
+Storage MonadicAdverb::make(const int i)
 {
   return Word::make(i, NounType::MONADIC_ADVERB);
 }
 
-Storage DyadicAdverb::make(int i)
+Storage DyadicAdverb::make(const int i)
 {
   return Word::make(i, NounType::DYADIC_ADVERB);
 }

@@ -18,7 +18,6 @@ void setup()
   }
 
   EvalRegister::initialize();
-  EffectsRegister::initialize();
 }
 
 void loop()

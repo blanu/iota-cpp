@@ -4,42 +4,17 @@
 #include <variant>
 #include <vector>
 #include <string>
-#include <unordered_map>
-#include <optional>
 #include <type_traits>
-
-#include "storage/storage.h"
-#include "storage/word.h"
-#include "storage/word_array.h"
 
 #include "verbs.h" // NOLINT, included for convenience for users of api.h
 #include "adverbs.h" // NOLINT, included for convenience for users of api.h
 #include "effects/effects.h" // NOLINT, included for convenience for users of api.h
-#include "types.h"
-#include "effects/effects_register.h"
+
+#include "storage/storage.h"
+#include "storage/word.h"
 #include "storage/iota_float.h"
 
-class Error
-{
-  public:
-    int code;
-
-    bool operator==(const Error& rhs) const
-    {
-      return code == rhs.code; // Compare member variables
-    }
-
-    [[nodiscard]] std::string string() const;
-};
-
-template<>
-struct std::hash<Error>
-{
-  std::size_t operator()(const Error& i) const noexcept
-  {
-    return std::hash<int>()(i.code);
-  }
-};
+#include "nouns/error.h"
 
 struct cppValue;
 using cppValueVariant = std::variant<std::vector<cppValue>, int, float, char, std::string, Error, Storage>;
@@ -130,7 +105,7 @@ T variant_cast(const cppValue& value) {
 }
 
 template <typename T>
-typename std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
+std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
 operator==(const cppValue& left, const T& right) {
   if (std::holds_alternative<T>(left)) {
     return std::get<T>(left) == right;
@@ -139,7 +114,7 @@ operator==(const cppValue& left, const T& right) {
 }
 
 template <typename T>
-typename std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
+std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
 operator==(const T& left, const cppValue& right) {
   return right == left; // Use the overload above
 }
@@ -175,7 +150,13 @@ class Object
     static cppValue to_cpp(Storage i);
 };
 
-Storage e();
+template<typename... Args>
+Storage e(Args&&... values)
+{
+  const cppValues es{static_cast<cppValue>(std::forward<Args>(values))...};
+  return Object::from_cpp_expression(es);
+}
+
 Storage c();
 
 Storage test_error();
@@ -186,8 +167,8 @@ Storage eval(const mixed& e);
 cppValue evalNoun(const cppValue& i);
 
 cppValue evalExpression(const cppValues& values);
-void evalExpressionForEffects(const cppValues& values, EffectsRegister* effects_register);
-cppValue evalExpressionWithEffects(const cppValues& values, EffectsRegister* effects_register);
+
+Storage evaluateExpression(const Storage& values);
 
 namespace iota
 {
