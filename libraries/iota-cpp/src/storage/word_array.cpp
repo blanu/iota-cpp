@@ -24,7 +24,7 @@ Storage WordArray::nil2(const Storage& i, const Storage& x)
 }
 
 // Storage::from_bytes decodes a byte array into a WordArray object
-maybe<Storage> WordArray::from_bytes(const bytes& x, int o)
+maybe<Storage> WordArray::from_bytes(const bytes& data, int o)
 {
   // FIXME
   return {Storage(0, StorageType::WORD, 0)};
@@ -32,20 +32,20 @@ maybe<Storage> WordArray::from_bytes(const bytes& x, int o)
 
 // Encodes a WordArray into a byte array
 // Format: {((size x) squeeze) join x} (i each {x squeeze} over join)
-bytes WordArray::to_bytes(const Storage &x)
+bytes WordArray::to_bytes(const Storage &storage)
 {
-  if(std::holds_alternative<ints>(x.i))
+  if(std::holds_alternative<ints>(storage.i))
   {
-    bytes result = bytes();
+    auto result = bytes();
 
-    ints i = std::get<ints>(x.i);
+    const auto i = std::get<ints>(storage.i);
 
-    int length = static_cast<int>(i.size());
+    const int length = static_cast<int>(i.size());
     bytes lengthBytes = squeeze_int(length);
 
     result.insert(result.begin(), lengthBytes.begin(), lengthBytes.end());
 
-    for(int integer : i)
+    for(const int integer : i)
     {
       bytes integerBytes = squeeze_int(integer);
       result.insert(result.end(), integerBytes.begin(), integerBytes.end());
@@ -59,18 +59,18 @@ bytes WordArray::to_bytes(const Storage &x)
   }
 }
 
-maybe<Storage> WordArray::from_conn(const Connection& conn, int o)
+maybe<Storage> WordArray::from_conn(const Connection& conn, const int objectType)
 {
-  varint varsize = expand_conn(conn);
+  varint varsize = expand_conn(conn); // NOLINT
   if(std::holds_alternative<int>(varsize))
   {
-    int size = std::get<int>(varsize);
+    const int size = std::get<int>(varsize);
 
-    ints i = ints();
+    auto i = ints();
 
     for(int y=0; y<size; y++)
     {
-      varint varinteger = expand_conn(conn);
+      varint varinteger = expand_conn(conn); // NOLINT
       if(std::holds_alternative<int>(varinteger))
       {
         int integer = std::get<int>(varinteger);
@@ -83,7 +83,7 @@ maybe<Storage> WordArray::from_conn(const Connection& conn, int o)
       }
     }
 
-    return WordArray::make(i, o);
+    return WordArray::make(i, objectType);
   }
   else
   {
@@ -99,16 +99,16 @@ void WordArray::to_conn(const Connection& conn, const Storage& i)
     // Always include type in to_conn implementation
     conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
 
-    ints integers = std::get<ints>(i.i);
+    const auto integers = std::get<ints>(i.i);
 
-    int length = static_cast<int>(integers.size());
-    bytes lengthBytes = squeeze_int(length);
+    const int length = static_cast<int>(integers.size());
+    const bytes lengthBytes = squeeze_int(length);
 
     conn.write(lengthBytes);
 
-    for(int integer : integers)
+    for(const int integer : integers)
     {
-      bytes integerBytes = squeeze_int(integer);
+      const bytes integerBytes = squeeze_int(integer);
       conn.write(integerBytes);
     }
   }

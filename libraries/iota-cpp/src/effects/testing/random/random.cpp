@@ -23,13 +23,13 @@ void Random::initialize(EffectsProvider* effects_register)
   //std::random_device rd;
   //generator = std::mt19937(rd());
 
-  generator = std::mt19937(123456789); // Use a static seed for the testing version of the random number generator. Obviously, do not do this in the production random number generator.
+  generator = std::mt19937(123456789); // NOLINT, Use a static seed for the testing version of the random number generator. Obviously, do not do this in the production random number generator.
 }
 
 Storage Random::random_impl()
 {
   std::uniform_real_distribution<float> dist(0.0f, 1.0f);
-  float result = dist(generator);
+  const float result = dist(generator);
   return Real::make(result);
 }
 
@@ -37,20 +37,20 @@ Storage Random::roll_impl(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
     if(ii > 0)
     {
       if(ii == 1)
       {
         std::uniform_real_distribution<float> dist(0.0f, 1.0f);
-        float result = dist(generator);
+        const float result = dist(generator);
         return Real::make(result);
       }
       else
       {
         std::uniform_int_distribution<int> dist(1, ii);
-        int result = dist(generator);
+        const int result = dist(generator);
         return Integer::make(result);
       }
     }
@@ -63,11 +63,11 @@ Storage Random::rolls_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<int>(x.i))
   {
-    int xi = std::get<int>(x.i);
+    const int xi = std::get<int>(x.i);
 
     if(std::holds_alternative<int>(i.i))
     {
-      ints results = ints();
+      auto results = ints();
 
       for(int offset = 0; offset < xi; offset++)
       {
@@ -82,7 +82,7 @@ Storage Random::rolls_impl(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<float>(i.i))
     {
-      floats results = floats();
+      auto results = floats();
 
       for(int offset = 0; offset < xi; offset++)
       {
@@ -120,7 +120,7 @@ Storage Random::deal_impl(const Storage& i, const Storage& x)
     }
     else if(is > 0)
     {
-      mixed results = mixed();
+      auto results = mixed();
 
       for(int offset = 0; offset < is; offset++)
       {
@@ -136,4 +136,4 @@ Storage Random::deal_impl(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-std::mt19937 Random::generator;
+std::mt19937 Random::generator; // NOLINT

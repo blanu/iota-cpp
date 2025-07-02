@@ -15,7 +15,7 @@
 #include "../squeeze.h"
 
 // FloatArray
-maybe<Storage> FloatArray::from_bytes(const bytes& x, int o)
+maybe<Storage> FloatArray::from_bytes(const bytes& data, int o)
 {
   // FIXME
   return std::nullopt;
@@ -27,11 +27,11 @@ bytes FloatArray::to_bytes(const Storage& i)
 {
   if(std::holds_alternative<floats>(i.i))
   {
-    bytes result = bytes();
+    auto result = bytes();
 
-    floats fs = std::get<floats>(i.i);
+    const floats fs = std::get<floats>(i.i);
 
-    int length = static_cast<int>(fs.size());
+    const int length = static_cast<int>(fs.size());
     bytes lengthBytes = squeeze_int(length);
 
     result.insert(result.begin(), lengthBytes.begin(), lengthBytes.end());
@@ -50,14 +50,14 @@ bytes FloatArray::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> FloatArray::from_conn(const Connection& conn, int o)
+maybe<Storage> FloatArray::from_conn(const Connection& conn, const int objectType)
 {
-  varint varsize = expand_conn(conn);
+  varint varsize = expand_conn(conn); // NOLINT
   if(std::holds_alternative<int>(varsize))
   {
-    int size = std::get<int>(varsize);
+    const int size = std::get<int>(varsize);
 
-    floats fs = floats();
+    auto fs = floats();
 
     for(int y=0; y<size; y++)
     {
@@ -70,7 +70,7 @@ maybe<Storage> FloatArray::from_conn(const Connection& conn, int o)
         }
         else
         {
-          double d = std::get<double>(*maybeFloating);
+          const double d = std::get<double>(*maybeFloating);
           fs.push_back(static_cast<float>(d));
         }
       }
@@ -80,7 +80,7 @@ maybe<Storage> FloatArray::from_conn(const Connection& conn, int o)
       }
     }
 
-    return FloatArray::make(fs, o);
+    return FloatArray::make(fs, objectType);
   }
   else
   {
@@ -93,19 +93,19 @@ void FloatArray::to_conn(const Connection& conn, const Storage& i)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    ints integers = std::get<ints>(i.i);
+    const ints integers = std::get<ints>(i.i);
 
     // Always include type in to_conn implementation
     conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
 
-    int length = static_cast<int>(integers.size());
-    bytes lengthBytes = squeeze_int(length);
+    const int length = static_cast<int>(integers.size());
+    const bytes lengthBytes = squeeze_int(length);
 
     conn.write(lengthBytes);
 
-    for(int integer : integers)
+    for(const int integer : integers)
     {
-      bytes integerBytes = squeeze_int(integer);
+      const bytes integerBytes = squeeze_int(integer);
       conn.write(integerBytes);
     }
   }

@@ -20,11 +20,11 @@ std::unordered_map<int, Log::Table*> Log::tables;
 
 int Log::Table::nextId = 1;
 
-Log::Table::Table(const mixed& i)
+Log::Table::Table(const mixed& names)
 {
   rowSize = 0;
 
-  for(Storage y : i)
+  for(const Storage& y : names)
   {
     nameSet[y] = rowSize++;
     nameOrder.push_back(y);
@@ -32,23 +32,23 @@ Log::Table::Table(const mixed& i)
 }
 
 // Copy constructor
-Log::Table::Table(Table *x)
+Log::Table::Table(const Table *x)
 {
   rowSize = 0;
 
-  for(auto name : x->nameOrder)
+  for(const auto& name : x->nameOrder)
   {
     nameSet[name] = rowSize++;
     nameOrder.push_back(name);
   }
 
-  for(auto pair : x->rows)
+  for(const auto& [fst, snd] : x->rows)
   {
     // Add new row to rows and columns
-    rows[pair.first] = columnSize;
+    rows[fst] = columnSize;
     for(int columnIndex = 0; columnIndex < rowSize; columnIndex++)
     {
-      columns[columnIndex].push_back(pair.first[columnIndex]);
+      columns[columnIndex].push_back(fst[columnIndex]);
     }
 
     columnSize++;
@@ -60,16 +60,16 @@ Storage Log::Table::nextIdStorage()
   return makeReference(nextId);
 }
 
-Storage Log::Table::makeReference(int id)
+Storage Log::Table::makeReference(const int id)
 {
   return Word::make(id, NounType::RESOURCE);
 }
 
-Log::Table *Log::findTable(Storage i)
+Log::Table *Log::findTable(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
     if(tables.find(ii) == tables.end())
     {
@@ -92,11 +92,11 @@ Storage Log::makeTable(const Storage& i)
 {
   if(std::holds_alternative<mixed>(i.i))
   {
-    mixed mis = std::get<mixed>(i.i);
+    const mixed mis = std::get<mixed>(i.i);
 
     // New table
     // This moves i.i.
-    int id = Table::nextId++;
+    const int id = Table::nextId++;
     tables[id] = new Table(mis);
     return Table::makeReference(id);
   }
@@ -106,7 +106,7 @@ Storage Log::makeTable(const Storage& i)
 
 Storage Log::copyTable(const Storage& i)
 {
-  Table *oldTable = findTable(i);
+  const Table *oldTable = findTable(i);
   if(oldTable == nullptr)
   {
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
@@ -115,7 +115,7 @@ Storage Log::copyTable(const Storage& i)
   Table newTable(oldTable);
   Table* newTablePointer = &newTable;
 
-  int newId = Table::nextId++;
+  const int newId = Table::nextId++;
   tables[newId] = newTablePointer;
   return Table::makeReference(newId);
 }
@@ -124,11 +124,11 @@ Storage Log::freeTable(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
     if(tables.find(ii) == tables.end())
     {
-      Table* table = tables[ii];
+      const Table* table = tables[ii];
       tables.erase(ii);
       delete table;
 
@@ -141,16 +141,16 @@ Storage Log::freeTable(const Storage& i)
 
 Storage Log::flatten(const Storage& i)
 {
-  Table *oldTable = findTable(i);
+  const Table *oldTable = findTable(i);
   if(oldTable == nullptr)
   {
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  mixed results = mixed();
-  for(auto pair : oldTable->rows)
+  auto results = mixed();
+  for(const auto& [fst, snd] : oldTable->rows)
   {
-    results.push_back(MixedArray::make(pair.first));
+    results.push_back(MixedArray::make(fst));
   }
 
   return MixedArray::make(results);
@@ -167,7 +167,7 @@ Storage Log::insert(const Storage& i, const Storage& x)
 
   Storage mx = Noun::mix(x);
 
-  mixed mis = std::get<mixed>(x.i);
+  const mixed mis = std::get<mixed>(x.i);
 
   // Check size of new row
   if(mis.size() != oldTable->rowSize)
@@ -175,7 +175,7 @@ Storage Log::insert(const Storage& i, const Storage& x)
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  // Check if new row is a duplicate
+  // Check if the new row is a duplicate
   if(oldTable->rows.find(mis) != oldTable->rows.end())
   {
     // Idempotent
@@ -202,10 +202,10 @@ Storage Log::remove(const Storage& i, const Storage& x)
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  Storage mx = Noun::mix(x);
-  mixed mis = std::get<mixed>(mx.i);
+  const Storage mx = Noun::mix(x);
+  const mixed mis = std::get<mixed>(mx.i);
 
-  auto rowIndex = oldTable->rows.find(mis);
+  const auto rowIndex = oldTable->rows.find(mis);
   if(rowIndex == oldTable->rows.end())
   {
     // Idempotent
@@ -232,7 +232,7 @@ Storage Log::iunion(const Storage& i, const Storage& x)
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  Table *xTable = findTable(x);
+  const Table *xTable = findTable(x);
   if(xTable == nullptr)
   {
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
@@ -251,14 +251,14 @@ Storage Log::iunion(const Storage& i, const Storage& x)
   const auto flattenedNames = mixed(iTable->nameOrder);
   const Storage temp = makeTable(MixedArray::make(flattenedNames));
 
-  for(const auto& pair : iTable->rows)
+  for(const auto& [fst, snd] : iTable->rows)
   {
-    insert(temp, MixedArray::make(pair.first));
+    insert(temp, MixedArray::make(fst));
   }
 
-  for(const auto& pair : xTable->rows)
+  for(const auto& [fst, snd] : xTable->rows)
   {
-    insert(temp, MixedArray::make(pair.first));
+    insert(temp, MixedArray::make(fst));
   }
 
   return temp;
@@ -276,9 +276,9 @@ Storage Log::project(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<mixed>(x.i))
   {
-    mixed mis = std::get<mixed>(x.i);
+    auto mis = std::get<mixed>(x.i);
 
-    ints columnIndices = ints();
+    auto columnIndices = ints();
     for(int columnIndex = 0; columnIndex < columnIndices.size(); columnIndex++)
     {
       if(eval({iTable->nameOrder[columnIndex], match, mis[columnIndex]}).truth())
@@ -288,12 +288,12 @@ Storage Log::project(const Storage& i, const Storage& x)
     }
 
     const Storage temp = makeTable(x);
-    for(const auto& pair : iTable->rows)
+    for(const auto& [fst, snd] : iTable->rows)
     {
-      mixed row = pair.first;
-      mixed newRow = mixed();
+      mixed row = fst;
+      auto newRow = mixed();
 
-      for(int columnIndex : columnIndices)
+      for(const int columnIndex : columnIndices)
       {
         newRow.push_back(row[columnIndex]);
       }
@@ -315,7 +315,7 @@ Storage Log::difference(const Storage& i, const Storage& x)
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  Table *xTable = findTable(x);
+  const Table *xTable = findTable(x);
   if(xTable == nullptr)
   {
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
@@ -334,14 +334,14 @@ Storage Log::difference(const Storage& i, const Storage& x)
   const auto flattenedNames = mixed(iTable->nameOrder);
   const Storage temp = makeTable(MixedArray::make(flattenedNames));
 
-  for(const auto& pair : iTable->rows)
+  for(const auto& [fst, snd] : iTable->rows)
   {
-    insert(temp, MixedArray::make(pair.first));
+    insert(temp, MixedArray::make(fst));
   }
 
-  for(const auto& pair : xTable->rows)
+  for(const auto& [fst, snd] : xTable->rows)
   {
-    remove(temp, MixedArray::make(pair.first));
+    remove(temp, MixedArray::make(fst));
   }
 
   return temp;
@@ -360,28 +360,28 @@ Storage Log::rename(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<mixed>(x.i))
   {
-    mixed mis = std::get<mixed>(x.i);
+    const auto mis = std::get<mixed>(x.i);
 
     for(Storage y : mis)
     {
       if(std::holds_alternative<mixed>(y.i))
       {
-        mixed pair = std::get<mixed>(y.i);
+        auto pair = std::get<mixed>(y.i);
 
         if(pair.size() != 2)
         {
           return Word::make(INVALID_ARGUMENT, NounType::ERROR);
         }
 
-        Storage oldName = pair[0];
-        Storage newName = pair[1];
+        const Storage& oldName = pair[0];
+        const Storage& newName = pair[1];
 
         if(oldTable->nameSet.find(oldName) == oldTable->nameSet.end())
         {
           return Word::make(INVALID_ARGUMENT, NounType::ERROR);
         }
 
-        int nameIndex = oldTable->nameSet[oldName];
+        const int nameIndex = oldTable->nameSet[oldName];
         newTable->nameOrder[nameIndex] = newName;
         newTable->nameSet[newName] = nameIndex;
       }
@@ -411,7 +411,7 @@ Storage Log::crossProduct(const Storage& i, const Storage& x)
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  for(auto iname : iTable->nameOrder)
+  for(const auto& iname : iTable->nameOrder)
   {
     if(xTable->nameSet.find(iname) != xTable->nameSet.end())
     {
@@ -427,12 +427,12 @@ Storage Log::crossProduct(const Storage& i, const Storage& x)
 
   const Storage temp = makeTable(MixedArray::make(newNames));
 
-  for(const auto& iPair : iTable->rows)
+  for(const auto& [first, _] : iTable->rows)
   {
-    for(const auto& xPair : xTable->rows)
+    for(const auto& [first, _] : xTable->rows)
     {
-      mixed newRow = mixed(iPair.first);
-      newRow.insert(newRow.end(), xPair.first.begin(), xPair.first.end());
+      auto newRow = mixed(first);
+      newRow.insert(newRow.end(), first.begin(), first.end());
 
       insert(temp, MixedArray::make(newRow));
     }
@@ -453,7 +453,7 @@ Storage Log::restrict(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<mixed>(x.i))
   {
-    mixed mis = std::get<mixed>(x.i);
+    auto mis = std::get<mixed>(x.i);
 
     Storage newTableReference = copyTable(i);
 
@@ -461,14 +461,14 @@ Storage Log::restrict(const Storage& i, const Storage& x)
     {
       if(std::holds_alternative<mixed>(y.i))
       {
-        mixed pair = std::get<mixed>(y.i);
+        auto pair = std::get<mixed>(y.i);
 
         if(pair.size() != 2)
         {
           return Word::make(INVALID_ARGUMENT, NounType::ERROR);
         }
 
-        Storage matchName = pair[0];
+        const Storage& matchName = pair[0];
         Storage matchValue = pair[1];
 
         if(iTable->nameSet.find(matchName) == iTable->nameSet.end())
@@ -478,11 +478,11 @@ Storage Log::restrict(const Storage& i, const Storage& x)
 
         int columnIndex = iTable->nameSet[matchName];
         mixed column = iTable->columns[columnIndex];
-        for(auto pair : iTable->rows)
+        for(const auto& [first, second] : iTable->rows)
         {
-          if(eval({pair.first[columnIndex], match, matchValue}).truth())
+          if(eval({first[columnIndex], match, matchValue}).truth())
           {
-            insert(newTableReference, MixedArray::make(pair.first));
+            insert(newTableReference, MixedArray::make(first));
           }
         }
       }
@@ -525,11 +525,11 @@ Storage Log::intersection(const Storage& i, const Storage& x)
   const auto flattenedNames = mixed(iTable->nameOrder);
   const Storage temp = makeTable(MixedArray::make(flattenedNames));
 
-  for(const auto& pair : iTable->rows)
+  for(const auto& [first, second] : iTable->rows)
   {
-    if(xTable->rows.find(pair.first) != xTable->rows.end())
+    if(xTable->rows.find(first) != xTable->rows.end())
     {
-      insert(temp, MixedArray::make(pair.first));
+      insert(temp, MixedArray::make(first));
     }
   }
 

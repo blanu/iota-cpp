@@ -59,7 +59,7 @@ TestingEffectsProvider::TestingEffectsProvider() : EffectsProvider()
 
 Storage TestingEffectsProvider::getEffectState()
 {
-  mixed results = mixed();
+  auto results = mixed();
 
   // Effects: Log
   Storage logEffects = Log::getEffectState();

@@ -18,7 +18,6 @@ class List
     // Monads
     static Storage atom_impl(const Storage& i);
     static Storage char_impl(const Storage& i);
-    static Storage enclose_impl(const Storage& i);
     static Storage expand_impl(const Storage& i);
     static Storage first_impl(const Storage& i);
     static Storage floor_impl(const Storage& i);

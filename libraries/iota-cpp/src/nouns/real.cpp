@@ -193,7 +193,7 @@ void Real::initialize() {
   Noun::registerDyadicAdverb(StorageType::FLOAT, NounType::REAL, DyadicAdverbs::whileOne, StorageType::WORD, NounType::USER_MONAD, Noun::whileOne_impl);
 }
 
-Storage Real::make(float i)
+Storage Real::make(const float i)
 {
   return Float::make(i, NounType::REAL);
 }
@@ -225,8 +225,8 @@ Storage Real::floor_impl(const Storage& i)
 {
   if (std::holds_alternative<float>(i.i))
   {
-    float f = std::get<float>(i.i);
-    int result = static_cast<int>(std::floor(f));
+    const float f = std::get<float>(i.i);
+    const int result = static_cast<int>(std::floor(f));
 
     return Word::make(result, NounType::INTEGER);
   }
@@ -240,17 +240,17 @@ Storage Real::format_impl(const Storage& i)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     // This code prints a float with the minimum number of digits necessary to not lose precision
-    std::vector<char> buffer = std::vector<char>(256);
-    int formattedLength = std::snprintf(buffer.data(), buffer.size(), "%.*g", std::numeric_limits<double>::max_digits10, fi);
+    auto buffer = std::vector<char>(256);
+    const int formattedLength = std::snprintf(buffer.data(), buffer.size(), "%.*g", std::numeric_limits<double>::max_digits10, fi);
     buffer.resize(formattedLength);
-    std::string s = std::string(buffer.data());
+    const auto s = std::string(buffer.data());
 
-    ints results = ints();
+    auto results = ints();
     int needDecimal = 1;
-    for(char c : s)
+    for(const char c : s)
     {
       results.push_back(static_cast<int>(c));
       if(c == '.')
@@ -273,7 +273,7 @@ Storage Real::format_impl(const Storage& i)
 
 Storage Real::negate_impl(const Storage& i) {
   if (std::holds_alternative<float>(i.i)) {
-    float f = std::get<float>(i.i);
+    const float f = std::get<float>(i.i);
     return Float::make(-f, NounType::REAL);
   } else {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -284,7 +284,7 @@ Storage Real::not_impl(const Storage& i)
 {
   if (std::holds_alternative<float>(i.i))
   {
-    float f = std::get<float>(i.i);
+    const float f = std::get<float>(i.i);
 
     if(abs(f) < Float::tolerance)
     {
@@ -303,7 +303,7 @@ Storage Real::not_impl(const Storage& i)
 
 Storage Real::reciprocal_impl(const Storage& i) {
   if (std::holds_alternative<float>(i.i)) {
-    float f = std::get<float>(i.i);
+    const float f = std::get<float>(i.i);
     return Float::make(1.0f / f, NounType::REAL);
   } else {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -312,7 +312,7 @@ Storage Real::reciprocal_impl(const Storage& i) {
 
 Storage Real::size_impl(const Storage& i) {
   if (std::holds_alternative<float>(i.i)) {
-    float f = std::get<float>(i.i);
+    const float f = std::get<float>(i.i);
     return Float::make(abs(f), NounType::REAL);
   } else {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -325,18 +325,18 @@ Storage Real::divide_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
+      const int xi = std::get<int>(x.i);
 
       if(xi == 0)
       {
         return QuotedSymbol::undefined();
       }
 
-      auto fx = static_cast<float>(xi);
+      const auto fx = static_cast<float>(xi);
 
       return Float::make(fi / fx, NounType::REAL);
     }
@@ -350,11 +350,11 @@ Storage Real::divide_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       if(fx < Float::tolerance)
       {
@@ -372,16 +372,16 @@ Storage Real::divide_integers(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      const ints xis = std::get<ints>(x.i);
 
-      floats results = floats();
-      mixed mixedResults = mixed();
+      auto results = floats();
+      auto mixedResults = mixed();
 
-      for(int y : xis)
+      for(const int y : xis)
       {
         if(y == 0)
         {
@@ -389,7 +389,7 @@ Storage Real::divide_integers(const Storage& i, const Storage& x)
         }
         else
         {
-          auto fy = static_cast<float>(y);
+          const auto fy = static_cast<float>(y);
           float result = fi / fy;
           results.push_back(result);
           mixedResults.push_back(Real::make(result));
@@ -414,16 +414,16 @@ Storage Real::divide_reals(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<floats>(x.i))
     {
-      floats fis = std::get<floats>(x.i);
+      const floats fis = std::get<floats>(x.i);
 
-      floats results = floats();
-      mixed mixedResults = mixed();
+      auto results = floats();
+      auto mixedResults = mixed();
 
-      for(float fy : fis)
+      for(const float fy : fis)
       {
         if(fy < Float::tolerance)
         {
@@ -461,10 +461,10 @@ Storage Real::divide_mixed(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<mixed>(x.i))
     {
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      floats results = floats();
-      mixed mixedResults = mixed();
+      auto results = floats();
+      auto mixedResults = mixed();
 
       for(const Storage& y : xis)
       {
@@ -509,11 +509,11 @@ Storage Real::equal_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float ii = std::get<float>(i.i);
+    const float ii = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float xi = std::get<float>(x.i);
+      const float xi = std::get<float>(x.i);
 
       if(abs(ii - xi) < Float::tolerance)
       {
@@ -547,7 +547,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
     {
       if(std::holds_alternative<ints>(formatted.i))
       {
-        ints characters = std::get<ints>(formatted.i);
+        auto characters = std::get<ints>(formatted.i);
 
         if(xi <= characters.size())
         {
@@ -555,7 +555,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
         }
         else
         {
-          int difference = static_cast<int>(xi - characters.size());
+          const int difference = static_cast<int>(xi - characters.size());
           for(int index = 0; index < difference; index++)
           {
             characters.push_back((int)' ');
@@ -571,7 +571,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
 
       if(std::holds_alternative<ints>(formatted.i))
       {
-        ints characters = std::get<ints>(formatted.i);
+        auto characters = std::get<ints>(formatted.i);
 
         if(xi <= characters.size())
         {
@@ -579,7 +579,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
         }
         else
         {
-          int difference = static_cast<int>(xi - characters.size());
+          const int difference = static_cast<int>(xi - characters.size());
           for(int index = 0; index < difference; index++)
           {
             characters.insert(characters.begin(), (int)' ');
@@ -602,7 +602,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
       negative = 1;
     }
 
-    int integerPartTarget = static_cast<int>(fi);
+    const int integerPartTarget = static_cast<int>(fi);
     int fractionalPartTarget = static_cast<int>((fi - static_cast<float>(integerPartTarget)) * powf(10.0f, Float::precision));
     while((fractionalPartTarget != 0) && (fractionalPartTarget % 10 == 0))
     {
@@ -627,12 +627,12 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(formatted.i))
     {
-      ints characters = std::get<ints>(formatted.i);
+      auto characters = std::get<ints>(formatted.i);
 
       int decimalIndex = -1;
       for(int index = 0; index < characters.size(); index++)
       {
-        int character = characters[index];
+        const int character = characters[index];
         if(character == static_cast<int>('.'))
         {
           decimalIndex = index;
@@ -645,12 +645,12 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
         return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
       }
 
-      ints integerPart = ints(characters.begin(), characters.begin() + decimalIndex);
-      ints fractionalPart = ints(characters.begin() + decimalIndex + 1, characters.end());
+      auto integerPart = ints(characters.begin(), characters.begin() + decimalIndex);
+      auto fractionalPart = ints(characters.begin() + decimalIndex + 1, characters.end());
 
       if(integerPart.size() < integerPartTarget)
       {
-        int difference = static_cast<int>(integerPartTarget - integerPart.size());
+        const int difference = static_cast<int>(integerPartTarget - integerPart.size());
         for(int index = 0; index < difference; index++)
         {
           integerPart.insert(integerPart.begin(), static_cast<int>(' '));
@@ -659,14 +659,14 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
 
       if(fractionalPart.size() < fractionalPartTarget)
       {
-        int difference = fractionalPartTarget - static_cast<int>(fractionalPart.size());
+        const int difference = fractionalPartTarget - static_cast<int>(fractionalPart.size());
         for(int index = 0; index < difference; index++)
         {
           fractionalPart.push_back(static_cast<int>('0'));
         }
       }
 
-      ints results = ints();
+      auto results = ints();
       results.insert(results.end(), integerPart.begin(), integerPart.end());
       results.insert(results.end(), static_cast<int>('.'));
       results.insert(results.end(), fractionalPart.begin(), fractionalPart.end());
@@ -689,7 +689,7 @@ Storage Real::join_real(const Storage& i, const Storage& x)
     {
       float xi = std::get<float>(x.i);
 
-      floats results = floats({ii, xi});
+      const auto results = floats({ii, xi});
 
       return FloatArray::make(results, NounType::LIST);
     }
@@ -702,11 +702,11 @@ Storage Real::prepend_to_reals(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float ii = std::get<float>(i.i);
+    const float ii = std::get<float>(i.i);
 
     if(std::holds_alternative<floats>(x.i))
     {
-      floats xi = std::get<floats>(x.i);
+      const floats xi = std::get<floats>(x.i);
 
       floats results(xi);
       results.insert(results.begin(), ii);
@@ -722,16 +722,16 @@ Storage Real::less_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       if(fi < fx)
       {
-        float difference = fx - fi;
+        const float difference = fx - fi;
         if(difference > Float::tolerance)
         {
           return Noun::true0();
@@ -747,15 +747,15 @@ Storage Real::less_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       if(fi < fx)
       {
-        float difference = fx - fi;
+        const float difference = fx - fi;
         if(difference > Float::tolerance)
         {
           return Noun::true0();
@@ -777,9 +777,9 @@ Storage Real::less_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      ints results = ints();
+      auto results = ints();
 
       for(int y : xis)
       {
@@ -799,9 +799,9 @@ Storage Real::less_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      ints results = ints();
+      auto results = ints();
 
       for(float fy : xis)
       {
@@ -820,9 +820,9 @@ Storage Real::less_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      ints results = ints();
+      auto results = ints();
 
       for(const Storage& y : xis)
       {
@@ -853,12 +853,12 @@ Storage Real::max_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       if((fi < fx) && ((fx - fi) > Float::tolerance))
       {
@@ -878,11 +878,11 @@ Storage Real::max_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       if((fi < fx) && ((fx - fi) > Float::tolerance))
       {
@@ -908,9 +908,9 @@ Storage Real::max_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(int y : xis)
       {
@@ -930,9 +930,9 @@ Storage Real::max_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(float fy : xis)
       {
@@ -951,9 +951,9 @@ Storage Real::max_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(const Storage& y : xis)
       {
@@ -984,12 +984,12 @@ Storage Real::min_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       if((fi > fx) && ((fi - fx) > Float::tolerance))
       {
@@ -1009,11 +1009,11 @@ Storage Real::min_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       if((fi > fx) && ((fi - fx) > Float::tolerance))
       {
@@ -1039,9 +1039,9 @@ Storage Real::min_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(int y : xis)
       {
@@ -1061,9 +1061,9 @@ Storage Real::min_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(float fy : xis)
       {
@@ -1082,9 +1082,9 @@ Storage Real::min_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(const Storage& y : xis)
       {
@@ -1115,12 +1115,12 @@ Storage Real::minus_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       return Float::make(fi - fx);
     }
@@ -1133,11 +1133,11 @@ Storage Real::minus_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       return Float::make(fi - fx);
     }
@@ -1156,9 +1156,9 @@ Storage Real::minus_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(int y : xis)
       {
@@ -1171,9 +1171,9 @@ Storage Real::minus_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(float fy : xis)
       {
@@ -1185,9 +1185,9 @@ Storage Real::minus_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(const Storage& y : xis)
       {
@@ -1211,12 +1211,12 @@ Storage Real::match_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       if(abs(fi - fx) < Float::tolerance)
       {
@@ -1229,7 +1229,7 @@ Storage Real::match_impl(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       if(abs(fi - fx) < Float::tolerance)
       {
@@ -1249,16 +1249,16 @@ Storage Real::more_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       if(fi > fx)
       {
-        float difference = fi - fx;
+        const float difference = fi - fx;
         if(difference > Float::tolerance)
         {
           return Noun::true0();
@@ -1274,15 +1274,15 @@ Storage Real::more_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       if(fi > fx)
       {
-        float difference = fi - fx;
+        const float difference = fi - fx;
         if(difference > Float::tolerance)
         {
           return Noun::true0();
@@ -1304,9 +1304,9 @@ Storage Real::more_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      ints results = ints();
+      auto results = ints();
 
       for(int y : xis)
       {
@@ -1326,9 +1326,9 @@ Storage Real::more_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      ints results = ints();
+      auto results = ints();
 
       for(float fy : xis)
       {
@@ -1347,9 +1347,9 @@ Storage Real::more_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      ints results = ints();
+      auto results = ints();
 
       for(const Storage& y : xis)
       {
@@ -1380,12 +1380,12 @@ Storage Real::plus_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       return Float::make(fi + fx);
     }
@@ -1398,11 +1398,11 @@ Storage Real::plus_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       return Float::make(fi + fx);
     }
@@ -1421,9 +1421,9 @@ Storage Real::plus_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(int y : xis)
       {
@@ -1436,9 +1436,9 @@ Storage Real::plus_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(float fy : xis)
       {
@@ -1450,9 +1450,9 @@ Storage Real::plus_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(const Storage& y : xis)
       {
@@ -1476,12 +1476,12 @@ Storage Real::power_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       return Float::make(powf(fi, fx));
     }
@@ -1494,11 +1494,11 @@ Storage Real::power_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       return Float::make(powf(fi, fx));
     }
@@ -1517,9 +1517,9 @@ Storage Real::power_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(int y : xis)
       {
@@ -1532,9 +1532,9 @@ Storage Real::power_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(float fy : xis)
       {
@@ -1546,9 +1546,9 @@ Storage Real::power_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(const Storage& y : xis)
       {
@@ -1572,12 +1572,12 @@ Storage Real::times_integer(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
-      auto fx = static_cast<float>(xi);
+      const int xi = std::get<int>(x.i);
+      const auto fx = static_cast<float>(xi);
 
       return Float::make(fi * fx);
     }
@@ -1590,11 +1590,11 @@ Storage Real::times_real(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<float>(i.i))
   {
-    float fi = std::get<float>(i.i);
+    const float fi = std::get<float>(i.i);
 
     if(std::holds_alternative<float>(x.i))
     {
-      float fx = std::get<float>(x.i);
+      const float fx = std::get<float>(x.i);
 
       return Float::make(fi * fx);
     }
@@ -1613,9 +1613,9 @@ Storage Real::times_list(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(int y : xis)
       {
@@ -1628,9 +1628,9 @@ Storage Real::times_list(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<floats>(x.i))
     {
-      floats xis = std::get<floats>(x.i);
+      auto xis = std::get<floats>(x.i);
 
-      floats results = floats();
+      auto results = floats();
 
       for(float fy : xis)
       {
@@ -1642,9 +1642,9 @@ Storage Real::times_list(const Storage& i, const Storage& x)
     else if(std::holds_alternative<mixed>(x.i))
     {
       Storage si = Float::make(fi);
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
-      mixed results = mixed();
+      auto results = mixed();
 
       for(const Storage& y : xis)
       {
@@ -1665,7 +1665,7 @@ Storage Real::times_list(const Storage& i, const Storage& x)
 }
 
 // Serialization
-maybe<Storage> Real::from_bytes(const bytes &bs, int t) {
+maybe<Storage> Real::from_bytes(const bytes &bs, const int t) {
   if(t == StorageType::FLOAT)
   {
     return Float::from_bytes(bs, NounType::REAL);
@@ -1690,7 +1690,7 @@ maybe<bytes> Real::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> Real::from_conn(const Connection& conn, int t) {
+maybe<Storage> Real::from_conn(const Connection& conn, const int t) {
   if(t == StorageType::FLOAT)
   {
     return Float::from_conn(conn, NounType::REAL);

@@ -7,9 +7,7 @@
 #include "../types.h"
 #include "storage.h"
 
-#include "word.h"
-
-bool Storage::operator==(const Storage& other) const
+bool Storage::operator==(const Storage& other) const // NOLINT
 {
   if(o != other.o)
   {
@@ -25,8 +23,8 @@ bool Storage::operator==(const Storage& other) const
   {
     if(std::holds_alternative<int>(other.i))
     {
-      int x = std::get<int>(i);
-      int y = std::get<int>(other.i);
+      const int x = std::get<int>(i);
+      const int y = std::get<int>(other.i);
 
       return x == y;
     }
@@ -39,8 +37,8 @@ bool Storage::operator==(const Storage& other) const
   {
     if(std::holds_alternative<float>(other.i))
     {
-      float x = std::get<float>(i);
-      float y = std::get<float>(other.i);
+      const float x = std::get<float>(i);
+      const float y = std::get<float>(other.i);
 
       return x == y;
     }
@@ -53,8 +51,8 @@ bool Storage::operator==(const Storage& other) const
   {
     if(std::holds_alternative<ints>(other.i))
     {
-      ints xs = std::get<ints>(i);
-      ints ys = std::get<ints>(other.i);
+      const ints xs = std::get<ints>(i);
+      const ints ys = std::get<ints>(other.i);
 
       if(xs.size() != ys.size())
       {
@@ -80,8 +78,8 @@ bool Storage::operator==(const Storage& other) const
   {
     if(std::holds_alternative<floats>(other.i))
     {
-      floats xs = std::get<floats>(i);
-      floats ys = std::get<floats>(other.i);
+      const floats xs = std::get<floats>(i);
+      const floats ys = std::get<floats>(other.i);
 
       if(xs.size() != ys.size())
       {
@@ -107,8 +105,8 @@ bool Storage::operator==(const Storage& other) const
   {
     if(std::holds_alternative<mixed>(other.i))
     {
-      mixed xs = std::get<mixed>(i);
-      mixed ys = std::get<mixed>(other.i);
+      const mixed xs = std::get<mixed>(i);
+      const mixed ys = std::get<mixed>(other.i);
 
       if(xs.size() != ys.size())
       {
@@ -155,7 +153,7 @@ int Storage::truth() const
         case StorageType::WORD:
           if(std::holds_alternative<int>(i))
           {
-            int integer = std::get<int>(i);
+            const int integer = std::get<int>(i);
 
             return integer != 0;
           }
@@ -175,7 +173,7 @@ int Storage::truth() const
   }
 }
 
-void Storage::print()
+void Storage::print() // NOLINT
 {
   switch(t)
   {
@@ -197,7 +195,7 @@ void Storage::print()
 
       for(int index = 0; index < std::get<ints>(i).size(); index++)
       {
-        int integer = std::get<ints>(i)[index];
+        const int integer = std::get<ints>(i)[index];
         printf("%d", integer);
         if(index < std::get<ints>(i).size() - 1)
         {
@@ -214,7 +212,7 @@ void Storage::print()
 
       for(int index = 0; index < std::get<floats>(i).size(); index++)
       {
-        float f = std::get<floats>(i)[index];
+        const float f = std::get<floats>(i)[index];
         printf("%.1f", f);
         if(index < std::get<floats>(i).size() - 1)
         {

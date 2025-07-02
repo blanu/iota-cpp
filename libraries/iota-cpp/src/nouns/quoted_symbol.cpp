@@ -45,17 +45,17 @@ Storage QuotedSymbol::make(const ints &i)
 
 Storage QuotedSymbol::undefined()
 {
-  ints name = Symbol::integerToString[SymbolType::undefined];
+  const ints name = Symbol::integerToString[SymbolType::undefined];
   return QuotedSymbol::make(name);
 }
 
 Storage QuotedSymbol::format_impl(const Storage& i)
 {
-  int unicode_colon = static_cast<int>(':');
+  constexpr int unicode_colon = static_cast<int>(':');
 
   if(std::holds_alternative<ints>(i.i))
   {
-    ints result = ints(std::get<ints>(i.i));
+    auto result = ints(std::get<ints>(i.i));
     result.insert(result.begin(), unicode_colon);
     return IotaString::make(result);
   }
@@ -67,9 +67,9 @@ Storage QuotedSymbol::undefined_impl(const Storage& i)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    ints integers = std::get<ints>(i.i);
+    const ints integers = std::get<ints>(i.i);
 
-    ints name = Symbol::integerToString[SymbolType::undefined];
+    const ints name = Symbol::integerToString[SymbolType::undefined];
 
     if(integers == name)
     {

@@ -27,7 +27,6 @@ class Real
     static Storage negate_impl(const Storage& i);
     static Storage not_impl(const Storage& i);
     static Storage reciprocal_impl(const Storage& i);
-    static Storage reverse_impl(const Storage& i);
     static Storage size_impl(const Storage& i);
 
     // Dyads
@@ -62,9 +61,6 @@ class Real
     static Storage power_integer(const Storage& i, const Storage& x);
     static Storage power_real(const Storage& i, const Storage& x);
     static Storage power_list(const Storage& i, const Storage& x);
-    static Storage reshape_integer(const Storage& i, const Storage& x);
-    static Storage reshape_integers(const Storage& i, const Storage& x);
-    static Storage reshape_mixed(const Storage& i, const Storage& x);
     static Storage times_integer(const Storage& i, const Storage& x);
     static Storage times_real(const Storage& i, const Storage& x);
     static Storage times_list(const Storage& i, const Storage& x);

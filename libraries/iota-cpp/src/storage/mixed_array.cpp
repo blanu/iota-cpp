@@ -19,20 +19,20 @@
 
 // MixedArray
 // Storage::from_bytes decodes a byte array into a MixedArray object
-maybe<Storage> MixedArray::from_bytes(const bytes& x, int o)
+maybe<Storage> MixedArray::from_bytes(const bytes& data, const int o)
 {
   return {Storage(o, StorageType::WORD, 0)};
 }
 
 // Encodes a MixedArray into a byte array
 // Format: {((size x) squeeze) join x} (i each {x to_bytes} over join)
-maybe<bytes> MixedArray::to_bytes(const Storage& i) {
-  if (std::holds_alternative<mixed>(i.i)) {
-    mixed ii = std::get<mixed>(i.i);
+maybe<bytes> MixedArray::to_bytes(const Storage& storage) {
+  if (std::holds_alternative<mixed>(storage.i)) {
+    const mixed ii = std::get<mixed>(storage.i);
 
-    bytes r = bytes();
+    auto r = bytes();
 
-    int size = static_cast<int>(ii.size());
+    const int size = static_cast<int>(ii.size());
     bytes sizeBytes = squeeze_int(size);
 
     r.insert(r.begin(), sizeBytes.begin(), sizeBytes.end());
@@ -50,18 +50,18 @@ maybe<bytes> MixedArray::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> MixedArray::from_conn(const Connection& conn, int o)
+maybe<Storage> MixedArray::from_conn(const Connection& conn, const int objectType)
 {
-  varint varsize = expand_conn(conn);
+  varint varsize = expand_conn(conn); // NOLINT
   if (std::holds_alternative<int>(varsize))
   {
-    int size = std::get<int>(varsize);
+    const int size = std::get<int>(varsize);
 
-    mixed i = mixed();
+    auto i = mixed();
 
-    for (int y = 0; y < size; y++)
+    for(int y = 0; y < size; y++)
     {
-      if (maybe<Storage> maybeStorage = Noun::from_conn(conn))
+      if(maybe<Storage> maybeStorage = Noun::from_conn(conn))
       {
         i.push_back(*maybeStorage);
       }
@@ -71,8 +71,9 @@ maybe<Storage> MixedArray::from_conn(const Connection& conn, int o)
       }
     }
 
-    return MixedArray::make(i, o);
+    return MixedArray::make(i, objectType);
   }
+
   else
   {
     // Varint sizes not yet fully implemented
@@ -80,21 +81,21 @@ maybe<Storage> MixedArray::from_conn(const Connection& conn, int o)
   }
 }
 
-void MixedArray::to_conn(const Connection& conn, const Storage& x)
+void MixedArray::to_conn(const Connection& conn, const Storage& i)
 {
-  if (std::holds_alternative<mixed>(x.i))
+  if (std::holds_alternative<mixed>(i.i))
   {
-    mixed i = std::get<mixed>(x.i);
+    const mixed ms = std::get<mixed>(i.i);
 
     // Always include type in to_conn implementation
-    conn.write({ static_cast<char>(x.t), static_cast<char>(x.o) });
+    conn.write({ static_cast<char>(i.t), static_cast<char>(i.o) });
 
-    int length = static_cast<int>(i.size());
-    bytes lengthBytes = squeeze_int(static_cast<int>(length));
+    const int length = static_cast<int>(ms.size());
+    const bytes lengthBytes = squeeze_int(static_cast<int>(length));
 
     conn.write(lengthBytes);
 
-    for (const Storage& y : i)
+    for (const Storage& y : ms)
     {
       Noun::to_conn(conn, y);
     }

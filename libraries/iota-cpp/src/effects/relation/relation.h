@@ -57,7 +57,7 @@ class Log
         explicit Table(const mixed& names);
 
         // Copy constructor
-        explicit Table(Table *x);
+        explicit Table(const Table *x);
 
         // Header
         std::unordered_map<Storage, int> nameSet;
@@ -74,7 +74,7 @@ class Log
 
     static std::unordered_map<int, Table*> tables;
 
-    static Table *findTable(Storage i);
+    static Table *findTable(const Storage& i);
 };
 
 #endif //RELATION_H

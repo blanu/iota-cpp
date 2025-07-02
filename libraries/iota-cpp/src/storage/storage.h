@@ -89,7 +89,7 @@ class Storage
     bool operator==(const Storage& other) const;
 
     // Be careful with this constructor, it moves the i value, so only use it as the final use of the i.
-    Storage(int o, int t, I i) : o(o), t(t), i(std::move(i)) {}
+    Storage(const int o, const int t, I i) : o(o), t(t), i(std::move(i)) {}
 
     // Copy constructor
     // Be careful with this constructor, it moves the x.i value, so only use it as the final use of the x.
@@ -102,36 +102,36 @@ class Storage
 template<>
 struct std::hash<Storage>
 {
-  std::size_t operator()(const Storage& i) const noexcept
+  std::size_t operator()(const Storage& i) const noexcept // NOLINT
   {
-    std::size_t ht = std::hash<int>()(i.t);
-    std::size_t ho = std::hash<int>()(i.o);
+    const std::size_t ht = std::hash<int>()(i.t);
+    const std::size_t ho = std::hash<int>()(i.o);
     std::size_t hi = 0;
 
     if(std::holds_alternative<int>(i.i))
     {
-      int ii = std::get<int>(i.i);
+      const int ii = std::get<int>(i.i);
       hi = std::hash<int>()(ii);
     }
     else if(std::holds_alternative<float>(i.i))
     {
-      float ii = std::get<float>(i.i);
+      const float ii = std::get<float>(i.i);
       hi = std::hash<float>()(ii);
     }
     else if(std::holds_alternative<ints>(i.i))
     {
-      ints ii = std::get<ints>(i.i);
+      const ints ii = std::get<ints>(i.i);
       hi = ii.size();
-      for(int y : ii)
+      for(const int y : ii)
       {
         hi ^= std::hash<int>()(y) + 0x9e3779b9 + (hi << 6) + (hi >> 2);
       }
     }
     else if(std::holds_alternative<floats>(i.i))
     {
-      floats ii = std::get<floats>(i.i);
+      const floats ii = std::get<floats>(i.i);
       hi = ii.size();
-      for(float y : ii)
+      for(const float y : ii)
       {
         hi ^= std::hash<float>()(y) + 0x9e3779b9 + (hi << 6) + (hi >> 2);
       }

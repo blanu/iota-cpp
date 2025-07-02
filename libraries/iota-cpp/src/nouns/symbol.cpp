@@ -52,9 +52,9 @@ Storage Symbol::evaluate_impl(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
-    auto pair = values.find(ii);
+    const auto pair = values.find(ii);
     if(pair == values.end())
     {
       return Word::make(INVALID_ARGUMENT, NounType::ERROR);
@@ -64,16 +64,16 @@ Storage Symbol::evaluate_impl(const Storage& i)
   }
   else if(std::holds_alternative<ints>(i.i))
   {
-    ints iis = std::get<ints>(i.i);
+    const ints iis = std::get<ints>(i.i);
 
     if(stringToInteger.find(iis) == stringToInteger.end())
     {
       return Word::make(INVALID_ARGUMENT, NounType::ERROR);
     }
 
-    int integer = stringToInteger[iis];
+    const int integer = stringToInteger[iis];
 
-    auto pair = values.find(integer);
+    const auto pair = values.find(integer);
     if(pair == values.end())
     {
       return Word::make(INVALID_ARGUMENT, NounType::ERROR);
@@ -94,9 +94,9 @@ Storage Symbol::truth_impl(const Storage& i)
 
 ints Symbol::asciiToUTF32(const std::string& ascii)
 {
-  ints results = ints();
+  auto results = ints();
 
-  for(char y : ascii)
+  for(const char y : ascii)
   {
     results.push_back(static_cast<int>(y));
   }

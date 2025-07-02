@@ -19,9 +19,9 @@
 // Float
 // Storage::from_bytes decodes a byte array into a Float object
 // Be careful with this function, it moves x.
-maybe<Storage> Float::from_bytes(bytes x, int o)
+maybe<Storage> Float::from_bytes(bytes x, const int o)
 {
-  if(maybe<floating> maybeFloating = expand_floating(std::move(x)))
+  if(const maybe<floating> maybeFloating = expand_floating(std::move(x)))
   {
     float f;
     if(std::holds_alternative<float>(*maybeFloating))
@@ -30,7 +30,7 @@ maybe<Storage> Float::from_bytes(bytes x, int o)
     }
     else
     {
-      double d = static_cast<float>(std::get<double>(*maybeFloating));
+      const double d = static_cast<float>(std::get<double>(*maybeFloating));
       f = static_cast<float>(d);
     }
 
@@ -58,21 +58,21 @@ maybe<bytes> Float::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> Float::from_conn(const Connection& conn, int o)
+maybe<Storage> Float::from_conn(const Connection& conn, const int objectType)
 {
-  if(maybe<floating> maybeFloating = expand_conn_floating(conn))
+  if(const maybe<floating> maybeFloating = expand_conn_floating(conn))
   {
     if(std::holds_alternative<float>(*maybeFloating))
     {
-      float f = std::get<float>(*maybeFloating);
+      const float f = std::get<float>(*maybeFloating);
 
-      return {Float::make(f, o)};
+      return {Float::make(f, objectType)};
     }
     else
     {
-      double d = std::get<double>(*maybeFloating);
+      const double d = std::get<double>(*maybeFloating);
 
-      return {Float::make(static_cast<float>(d), o)};
+      return {Float::make(static_cast<float>(d), objectType)};
     }
   }
   else
@@ -90,7 +90,7 @@ void Float::to_conn(const Connection& conn, const Storage& i)
 
     float f = std::get<float>(i.i);
 
-    bytes result = squeeze_floating(floating(f));
+    const bytes result = squeeze_floating(floating(f));
     conn.write(result);
   }
 }

@@ -22,8 +22,8 @@ void Log::initialize(EffectsProvider* effects_provider)
 // Nilad Sinks
 Storage Log::timestamp_impl()
 {
-  auto now = std::chrono::system_clock::now();
-  int integer = static_cast<int>(std::chrono::system_clock::to_time_t(now));
+  const auto now = std::chrono::system_clock::now();
+  const int integer = static_cast<int>(std::chrono::system_clock::to_time_t(now));
   timestamps.push_back(integer);
 
   return WordArray::nil();
@@ -34,7 +34,7 @@ Storage Log::level_impl(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int newLevel = std::get<int>(i.i);
+    const int newLevel = std::get<int>(i.i);
     logLevel = newLevel;
   }
 

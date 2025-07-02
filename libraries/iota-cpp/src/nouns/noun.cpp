@@ -49,7 +49,7 @@ Storage Noun::dispatchNilad(const Storage& f)
 
   int fi = std::get<int>(f.i);
 
-  Specialization1 specialization = Specialization1(fi);
+  auto specialization = Specialization1(fi);
   if (niladSources.find(specialization) == niladSources.end()) {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
@@ -385,7 +385,7 @@ Storage Noun::identity1(const Storage& i)
 }
 
 // Extension Monads - Implementations
-Storage Noun::evaluate_expression(const Storage& e)
+Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 {
   if (std::holds_alternative<mixed>(e.i))
   {
@@ -398,7 +398,7 @@ Storage Noun::evaluate_expression(const Storage& e)
 
     Storage i = items[0];
 
-    // First item might be a nilad effect
+    // The first item might be a nilad effect
     if(i.o == NounType::NILADIC_EFFECT)
     {
       Storage result = dispatchNiladicEffect(i);
@@ -422,7 +422,9 @@ Storage Noun::evaluate_expression(const Storage& e)
       return i;
     }
 
-    // If there is more than one item, and the first item is not a nilad effect, then the first item is a value and the second item is a function or non-nilad effect.
+    // If there is more than one item, and the first item is not a nilad effect, then
+    // - the first item is a value
+    // - the second item is a function or non-nilad effect
     Storage f = items[1];
 
     mixed rest(items.begin() + 2, items.end());
@@ -594,17 +596,19 @@ Storage Noun::mix(const Storage& i)
   }
 }
 
-Storage Noun::simplify(const Storage& i)
+Storage Noun::simplify(const Storage& i) // NOLINT
 {
   if(std::holds_alternative<int>(i.i) || std::holds_alternative<float>(i.i))
   {
     return i;
   }
-  else if(std::holds_alternative<ints>(i.i) || std::holds_alternative<floats>(i.i))
+
+  if(std::holds_alternative<ints>(i.i) || std::holds_alternative<floats>(i.i))
   {
     return i;
   }
-  else if(std::holds_alternative<mixed>(i.i))
+
+  if(std::holds_alternative<mixed>(i.i))
   {
     mixed iis = std::get<mixed>(i.i);
 
@@ -867,7 +871,7 @@ Storage Noun::converge_impl(const Storage& i, const Storage& f)
     Storage next = dispatchMonad(previous, f);
     if(next.o == NounType::ERROR)
     {
-      return next;
+      return next; // FIXME, clang-tidy warning about address escaping function
     }
 
     equivalence = eval({next, match, previous});
@@ -875,7 +879,7 @@ Storage Noun::converge_impl(const Storage& i, const Storage& f)
 
     if(equivalence.truth())
     {
-      return next;
+      return next; // FIXME, also here
     }
   }
 
@@ -896,7 +900,7 @@ Storage Noun::scanConverging_impl(const Storage& i, const Storage& f)
     Storage next = dispatchMonad(previous, f);
     if(next.o == NounType::ERROR)
     {
-      return next;
+      return next; // FIXME - also here
     }
 
     equivalence = eval({next, match, previous});
@@ -1135,7 +1139,7 @@ Storage Noun::scanWhileOne_impl(const Storage& i, const Storage& f, const Storag
 
   if(t.o == NounType::ERROR)
   {
-    return t;
+    return t; // FIXME - also here
   }
 
   while(t.truth())
@@ -1145,13 +1149,13 @@ Storage Noun::scanWhileOne_impl(const Storage& i, const Storage& f, const Storag
     current = dispatchMonad(current, g);
     if(current.o == NounType::ERROR)
     {
-      return t;
+      return t; // FIXME - also here
     }
 
     t = dispatchMonad(current, f);
     if(t.o == NounType::ERROR)
     {
-      return t;
+      return t; // FIXME - also here
     }
   }
 
@@ -1165,7 +1169,7 @@ Storage Noun::whileOne_impl(const Storage& i, const Storage& f, const Storage& g
 
   if(t.o == NounType::ERROR)
   {
-    return t;
+    return t; // FIXME - also here
   }
 
   while(t.truth())
@@ -1173,14 +1177,14 @@ Storage Noun::whileOne_impl(const Storage& i, const Storage& f, const Storage& g
     current = dispatchMonad(current, g);
     if(current.o == NounType::ERROR)
     {
-      return t;
+      return t; // FIXME - also here
     }
 
 
     t = dispatchMonad(current, f);
     if(t.o == NounType::ERROR)
     {
-      return t;
+      return t; // FIXME - also here
     }
   }
 

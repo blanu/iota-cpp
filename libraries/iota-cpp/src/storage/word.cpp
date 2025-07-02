@@ -18,12 +18,12 @@
 
 // Word
 // Storage::from_bytes decodes a byte array into a Word object
-maybe<Storage> Word::from_bytes(const bytes& x, int o)
+maybe<Storage> Word::from_bytes(const bytes& data, const int o)
 {
-  varint varinteger = expand_int_from_bytes(x);
+  varint varinteger = expand_int_from_bytes(data); // NOLINT
   if(std::holds_alternative<int>(varinteger))
   {
-    int integer = std::get<int>(varinteger);
+    const int integer = std::get<int>(varinteger);
     return Word::make(integer, o);
   }
   else
@@ -39,7 +39,7 @@ bytes Word::to_bytes(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int integer = std::get<int>(i.i);
+    const int integer = std::get<int>(i.i);
     bytes result = squeeze_int(integer);
     return result;
   }
@@ -49,19 +49,19 @@ bytes Word::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> Word::from_conn(const Connection& conn, int o)
+maybe<Storage> Word::from_conn(const Connection& conn, const int objectType)
 {
-  varint varinteger = expand_conn(conn);
+  varint varinteger = expand_conn(conn); // NOLINT
 
   if(std::holds_alternative<int>(varinteger))
   {
-    int integer = std::get<int>(varinteger);
-    return {Word::make(integer, o)};
+    const int integer = std::get<int>(varinteger);
+    return {Word::make(integer, objectType)};
   }
   else
   {
-    ints integers = std::get<ints>(varinteger);
-    return {WordArray::make(integers, o)};
+    const ints integers = std::get<ints>(varinteger);
+    return {WordArray::make(integers, objectType)};
   }
 }
 
@@ -72,8 +72,8 @@ void Word::to_conn(const Connection& conn, const Storage& i)
     // Always include type in to_conn implementation
     conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
 
-    int integer = std::get<int>(i.i);
-    bytes result = squeeze_int(integer);
+    const int integer = std::get<int>(i.i);
+    const bytes result = squeeze_int(integer);
 
     conn.write(result);
   }
