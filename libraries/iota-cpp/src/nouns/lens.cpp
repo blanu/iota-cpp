@@ -33,29 +33,29 @@ Storage Lens::make(int i)
   return results;
 }
 
-Storage Lens::make(ints i)
+Storage Lens::make(const ints& i)
 {
   Storage results = Noun::mix(WordArray::make(i));
   results.o = NounType::LENS;
   return results;
 }
 
-Storage Lens::make(mixed i)
+Storage Lens::make(const mixed& i)
 {
   return MixedArray::make(i, NounType::LENS);
 }
 
-Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
+Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
 {
   using namespace iota;
 
   if(std::holds_alternative<ints>(i.i))
   {
-    ints iis = std::get<ints>(i.i);
+    auto iis = std::get<ints>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
       if(xis.empty())
       {
@@ -77,7 +77,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
       else
       {
         int firstIndex = xis[0];
-        ints rest = ints(xis.begin() + 1, xis.end());
+        auto rest = ints(xis.begin() + 1, xis.end());
 
         maybe<Storage> nextLevel = eval({i, iota::index, Integer::make(firstIndex)});
         if(nextLevel)
@@ -93,7 +93,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<mixed>(x.i))
     {
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
       if(xis.empty())
       {
@@ -123,7 +123,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
       else
       {
         Storage firstIndex = xis[0];
-        mixed rest = mixed(xis.begin() + 1, xis.end());
+        auto rest = mixed(xis.begin() + 1, xis.end());
 
         maybe<Storage> nextLevel = eval({i, iota::index, firstIndex});
         if(nextLevel)
@@ -140,11 +140,11 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
   }
   else if(std::holds_alternative<floats>(i.i))
   {
-    floats iis = std::get<floats>(i.i);
+    auto iis = std::get<floats>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
       if(xis.empty())
       {
@@ -166,7 +166,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
       else
       {
         int firstIndex = xis[0];
-        ints rest = ints(xis.begin() + 1, xis.end());
+        auto rest = ints(xis.begin() + 1, xis.end());
 
         maybe<Storage> nextLevel = eval({i, iota::index, Integer::make(firstIndex)});
         if(nextLevel)
@@ -182,7 +182,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<mixed>(x.i))
     {
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
       if(xis.empty())
       {
@@ -212,7 +212,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
       else
       {
         Storage firstIndex = xis[0];
-        mixed rest = mixed(xis.begin() + 1, xis.end());
+        auto rest = mixed(xis.begin() + 1, xis.end());
 
         maybe<Storage> nextLevel = eval({i, iota::index, firstIndex});
         if(nextLevel)
@@ -229,11 +229,11 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
   }
   else if(std::holds_alternative<mixed>(i.i))
   {
-    mixed iis = std::get<mixed>(i.i);
+    auto iis = std::get<mixed>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      auto xis = std::get<ints>(x.i);
 
       if(xis.empty())
       {
@@ -255,7 +255,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
       else
       {
         int firstIndex = xis[0];
-        ints rest = ints(xis.begin() + 1, xis.end());
+        auto rest = ints(xis.begin() + 1, xis.end());
 
         maybe<Storage> nextLevel = eval({i, iota::index, Integer::make(firstIndex)});
         if(nextLevel)
@@ -271,7 +271,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<mixed>(x.i))
     {
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
       if(xis.empty())
       {
@@ -285,8 +285,8 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
           int xii = std::get<int>(xi.i);
           if(xii >= 1 && xii <= iis.size())
           {
-            Storage result = iis[xii - 1];
-            return result;
+            const Storage& result = iis[xii - 1];
+            return result; // FIXME - variable reference may escape scope warning
           }
           else
           {
@@ -301,7 +301,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x)
       else
       {
         Storage firstIndex = xis[0];
-        mixed rest = mixed(xis.begin() + 1, xis.end());
+        auto rest = mixed(xis.begin() + 1, xis.end());
 
         maybe<Storage> nextLevel = eval({i, iota::index, firstIndex});
         if(nextLevel)

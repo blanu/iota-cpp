@@ -9,6 +9,7 @@
 #include "verbs.h" // NOLINT, included for convenience for users of api.h
 #include "adverbs.h" // NOLINT, included for convenience for users of api.h
 #include "effects/effects.h" // NOLINT, included for convenience for users of api.h
+#include "conjunctions/conjunctions.h" // NOLINT, included for convenience for users of api.h
 
 #include "storage/storage.h"
 #include "storage/word.h"

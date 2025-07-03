@@ -42,13 +42,13 @@ Storage Conditional::make(const mixed &i)
   return MixedArray::make(i, NounType::CONDITIONAL);
 }
 
-Storage Conditional::evaluate_impl(const Storage& e)
+Storage Conditional::evaluate_impl(const Storage& i)
 {
   using namespace iota;
 
-  if(std::holds_alternative<mixed>(e.i))
+  if(std::holds_alternative<mixed>(i.i))
   {
-    mixed mis = std::get<mixed>(e.i);
+    const mixed mis = std::get<mixed>(i.i);
 
     if(mis.size() != 3)
     {

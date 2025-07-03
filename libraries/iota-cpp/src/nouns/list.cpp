@@ -1532,6 +1532,8 @@ Storage List::reverse_impl(const Storage& i)
   {
     floats fs = std::get<floats>(i.i);
 
+
+
     if(fs.empty())
     {
       return i;
@@ -1793,7 +1795,7 @@ Storage List::transpose_impl(const Storage& i)
 
         Storage first = ms.front();
 
-        int columnSize = ms.size();
+        int columnSize = static_cast<int>(ms.size());
         int rowSize = getInteger(eval({first, size}));
 
         for(int rowOffset = 0; rowOffset < rowSize; ++rowOffset)
@@ -1864,7 +1866,7 @@ Storage List::unique_impl(const Storage& i)
     std::unordered_set<Storage> set = std::unordered_set<Storage>();
     mixed results = mixed();
 
-    for(Storage y : ms)
+    for(const Storage& y : ms)
     {
       if(set.find(y) == set.end())
       {
@@ -2479,7 +2481,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
     {
       ints list = std::get<ints>(i.i);
 
-      // Indices are non-empty, so source list must also be non-empty
+      // Indices are non-empty, so the source list must also be non-empty
       if(!list.empty())
       {
         mixed results = mixed();
@@ -2520,7 +2522,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
               ints slice = ints(list.begin() + last, list.end());
               results.insert(results.end(), WordArray::make(slice, NounType::LIST));
 
-              // Also insert a nil
+              // Also insert nil
               results.insert(results.end(), WordArray::nil());
             }
             else if(last == 0) // slice list[last:y]
@@ -2549,7 +2551,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
     {
       floats list = std::get<floats>(i.i);
 
-      // Indices are non-empty, so source list must also be non-empty
+      // Indices are non-empty, so the source list must also be non-empty
       if(!list.empty())
       {
         mixed results = mixed();
@@ -2590,7 +2592,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
               floats slice = floats(list.begin() + last, list.end());
               results.insert(results.end(), FloatArray::make(slice, NounType::LIST));
 
-              // Also insert a nil
+              // Also insert nil
               results.insert(results.end(), WordArray::nil());
             }
             else if(last == 0) // slice list[last:y]
@@ -2619,7 +2621,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
     {
       mixed list = std::get<mixed>(i.i);
 
-      // Indices are non-empty, so source list must also be non-empty
+      // Indices are non-empty, so the source list must also be non-empty
       if(!list.empty())
       {
         mixed results = mixed();
@@ -2660,7 +2662,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
               mixed slice = mixed(list.begin() + last, list.end());
               results.insert(results.end(), MixedArray::make(slice, NounType::LIST));
 
-              // Also insert a nil
+              // Also insert nil
               results.insert(results.end(), WordArray::nil());
             }
             else if(last == 0) // slice list[last:y]
@@ -3917,6 +3919,7 @@ Storage List::less_integer(const Storage& i, const Storage& x)
       ints iis = std::get<ints>(i.i);
 
       ints results = ints();
+
 
       for(int y : iis)
       {
@@ -6283,6 +6286,7 @@ Storage List::minus_real(const Storage& i, const Storage& x)
   {
     float fx = std::get<float>(x.i);
 
+
     if(std::holds_alternative<ints>(i.i))
     {
       ints iis = std::get<ints>(i.i);
@@ -6852,6 +6856,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
 
       floats results = floats();
 
+
       for(int index = 0; index < iis.size(); index++)
       {
         float fx = xis[index];
@@ -7181,6 +7186,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
 
       mixed results = mixed();
 
+
       for(int index = 0; index < iis.size(); index++)
       {
         int xi = xis[index];
@@ -7399,6 +7405,7 @@ Storage List::remainder_integer(const Storage& i, const Storage& x)
     if(std::holds_alternative<ints>(i.i))
     {
       ints iis = std::get<ints>(i.i);
+
 
       ints results = ints();
 
@@ -8593,7 +8600,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<mixed>(i.i))
     {
-      mixed iis = std::get<mixed>(i.i);
+      auto iis = std::get<mixed>(i.i);
 
       if(iis.size() != xis.size())
       {

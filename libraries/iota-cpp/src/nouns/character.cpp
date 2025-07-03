@@ -79,7 +79,7 @@ void Character::initialize() {
   Noun::registerDyadicAdverb(StorageType::WORD, NounType::CHARACTER, DyadicAdverbs::whileOne, StorageType::WORD, NounType::USER_MONAD, Noun::whileOne_impl);
 }
 
-Storage Character::make(int i)
+Storage Character::make(const int i)
 {
   return Word::make(i, NounType::CHARACTER);
 }
@@ -88,11 +88,11 @@ Storage Character::equal_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
+      const int xi = std::get<int>(x.i);
 
       return Word::make(ii == xi, NounType::INTEGER);
     }
@@ -114,7 +114,7 @@ Storage Character::size_impl(const Storage& i)
 {
   if (std::holds_alternative<int>(i.i))
   {
-    int integer = std::get<int>(i.i);
+    const int integer = std::get<int>(i.i);
     return Word::make(std::abs(integer), NounType::INTEGER);
   }
   else
@@ -129,7 +129,7 @@ Storage Character::size_impl(const Storage& i)
 // Join
 Storage Character::join_scalar(const Storage& i, const Storage& x)
 {
-  mixed results = mixed({i, x});
+  const auto results = mixed({i, x});
 
   return MixedArray::make(results, NounType::LIST);
 }
@@ -144,7 +144,7 @@ Storage Character::join_character(const Storage& i, const Storage& x)
     {
       int xi = std::get<int>(x.i);
 
-      ints results = ints({ii, xi});
+      const auto results = ints({ii, xi});
 
       return WordArray::make(results, NounType::STRING);
     }
@@ -155,10 +155,10 @@ Storage Character::join_character(const Storage& i, const Storage& x)
 
 Storage Character::join_list(const Storage& i, const Storage& x)
 {
-  Storage mx = Noun::mix(x);
+  const Storage mx = Noun::mix(x);
   if(std::holds_alternative<mixed>(mx.i))
   {
-    mixed results = std::get<mixed>(mx.i);
+    auto results = std::get<mixed>(mx.i);
     results.insert(results.begin(), i);
 
     return MixedArray::make(results, NounType::LIST);
@@ -171,11 +171,11 @@ Storage Character::prepend_string(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      ints xis = std::get<ints>(x.i);
+      const ints xis = std::get<ints>(x.i);
 
       ints results(xis);
       results.insert(results.begin(), ii);
@@ -191,11 +191,11 @@ Storage Character::match_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<int>(i.i))
   {
-    int ii = std::get<int>(i.i);
+    const int ii = std::get<int>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
-      int xi = std::get<int>(x.i);
+      const int xi = std::get<int>(x.i);
 
       if(ii == xi)
       {
@@ -212,7 +212,7 @@ Storage Character::match_impl(const Storage& i, const Storage& x)
 }
 
 // Serialization
-maybe<Storage> Character::from_bytes(const bytes& bs, int t) {
+maybe<Storage> Character::from_bytes(const bytes& bs, const int t) {
   if(t == StorageType::WORD)
   {
     return Word::from_bytes(bs, NounType::CHARACTER);
@@ -234,7 +234,7 @@ maybe<bytes> Character::to_bytes(const Storage& i) {
 
     case StorageType::WORD_ARRAY:
       if (std::holds_alternative<ints>(i.i)) {
-        ints integers = std::get<ints>(i.i);
+        const ints integers = std::get<ints>(i.i);
         return squeeze_bigint(integers);
       } else {
         return std::nullopt;
@@ -245,7 +245,7 @@ maybe<bytes> Character::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> Character::from_conn(const Connection& conn, int t) {
+maybe<Storage> Character::from_conn(const Connection& conn, const int t) {
   if(t == StorageType::WORD)
   {
     return Word::from_conn(conn, NounType::CHARACTER);
@@ -273,8 +273,8 @@ void Character::to_conn(const Connection& conn, const Storage& i) {
     case StorageType::WORD_ARRAY:
       {
         if (std::holds_alternative<ints>(i.i)) {
-          ints integers = std::get<ints>(i.i);
-          bytes intBytes = squeeze_bigint(integers);
+          const ints integers = std::get<ints>(i.i);
+          const bytes intBytes = squeeze_bigint(integers);
 
           // Note that we always send NounType::INTEGER and StorageType::WORD, even if we internally represent them as StorageType::WORD_ARRAYs.
           conn.write({ static_cast<char>(StorageType::WORD), static_cast<char>(i.o) });

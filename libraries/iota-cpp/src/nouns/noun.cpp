@@ -17,6 +17,7 @@
 #include "../storage/float_array.h"
 #include "../storage/mixed_array.h"
 
+#include "../conjunctions/conjunctions.h"
 
 std::map<Specialization1, NiladicSourceFunction> Noun::niladSources;
 std::map<Specialization3, MonadicSourceFunction> Noun::monadSources;
@@ -24,6 +25,7 @@ std::map<Specialization5, DyadicSourceFunction> Noun::dyadSources;
 std::map<Specialization5, TriadicSourceFunction> Noun::triadSources;
 std::map<Specialization3, MonadicAdverbFunction> Noun::monadicAdverbs;
 std::map<Specialization5, DyadicAdverbFunction> Noun::dyadicAdverbs;
+std::map<Specialization1, ConjunctionFunction> Noun::conjunctions;
 
 void Noun::initialize()
 {
@@ -38,6 +40,7 @@ void Noun::initialize()
   Symbol::initialize();
   QuotedSymbol::initialize();
   Lens::initialize();
+  Conjunctions::initialize();
 }
 
 // Dispatch
@@ -256,13 +259,25 @@ Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
     return Word::make(BAD_OPERATION, NounType::ERROR);
   }
 
-  Specialization3 specialization = Specialization3(i.t, i.o, fis[0] << 8 | fis[1]);
-  if (monadSources.find(specialization) == monadSources.end()) {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  int fi = fis[0] << 8 | fis[1];
+
+  const std::vector<Specialization3> specializations = {
+    Specialization3(i.t, i.o, fi),
+    Specialization3(i.t, NounType::ANY, fi),
+    Specialization3(NounType::ANY, i.o, fi),
+    Specialization3(NounType::ANY, NounType::ANY, fi),
+  };
+
+  for(auto specialization : specializations)
+  {
+    if (monadSources.find(specialization) != monadSources.end())
+    {
+      const MonadicSourceFunction verb = monadSources[specialization];
+      return verb(i);
+    }
   }
 
-  MonadicSourceFunction verb = monadSources[specialization];
-  return verb(i);
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
 Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x)
@@ -328,6 +343,25 @@ Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Sto
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
+Storage Noun::dispatchConjunction(const Storage& i, const Storage& f, const Storage& x)
+{
+  if (f.t != StorageType::WORD)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  int fi = std::get<int>(f.i);
+
+  const auto specialization = Specialization1(fi);
+  if (conjunctions.find(specialization) == conjunctions.end())
+  {
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  }
+
+  const ConjunctionFunction verb = conjunctions[specialization];
+  return verb(i, x);
+}
+
 // Registration
 void Noun::registerNilad(Type f, Storage (*m)())
 {
@@ -353,6 +387,11 @@ void Noun::registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const St
 
 void Noun::registerDyadicAdverb(Type it, Type io, Type f, Type xt, Type xo, Storage (*a)(const Storage&, const Storage&, const Storage&)) {
   Noun::dyadicAdverbs[Specialization5(it, io, f, xt, xo)] = a;
+}
+
+void Noun::registerConjunction(Type f, Storage (*c)(const Storage&, const Storage&))
+{
+  Noun::conjunctions[Specialization1(f)] = c;
 }
 
 Storage Noun::true0() {
@@ -552,6 +591,16 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 
           return result;
         }
+      }
+
+      case NounType::CONJUNCTION:
+      {
+        rest = mixed(items.begin() + 2, items.end());
+        Storage x = MixedArray::make(rest, NounType::EXPRESSION);
+
+        Storage next_e = dispatchConjunction(i, f, x);
+
+        return evaluate_expression(next_e);
       }
 
       default:

@@ -38,7 +38,7 @@ namespace iota // Effects
   inline Storage info = MonadicEffect::make(effects::families::log, effects::log::info);
   inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);
   inline Storage trace = MonadicEffect::make(effects::families::log, effects::log::trace);
-  inline Storage timestamp = MonadicEffect::make(effects::families::log, effects::log::timestamp);
+  inline Storage timestamp = NiladicEffect::make(effects::families::log, effects::log::timestamp);
 
   // Effect: Random
   // Effect: Random: Nilads
@@ -71,10 +71,10 @@ namespace iota // Effects
 
   // Effect: State
   // Effect: State: Nilads
-  inline Storage put = NiladicEffect::make(effects::families::state, effects::state::put);
+  inline Storage get =  NiladicEffect::make(effects::families::state, effects::state::get);
 
   // Effect: State: Monads
-  inline Storage get = MonadicEffect::make(effects::families::state, effects::state::get);
+  inline Storage put = MonadicEffect::make(effects::families::state, effects::state::put);
   inline Storage modify = MonadicEffect::make(effects::families::state, effects::state::modify);
 
 } // namespace iota

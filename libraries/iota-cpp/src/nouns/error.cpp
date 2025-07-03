@@ -7,7 +7,7 @@
 #include "../storage/storage.h"
 #include "../storage/word.h"
 
-Storage Error::make(int i)
+Storage Error::make(const int i)
 {
   return Word::make(i, NounType::ERROR);
 }

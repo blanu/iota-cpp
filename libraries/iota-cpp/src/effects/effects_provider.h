@@ -5,14 +5,10 @@
 #ifndef EFFECTS_PROVIDER_H
 #define EFFECTS_PROVIDER_H
 
-#include "../storage/storage.h"
-
 class EffectsProvider
 {
   public:
-    static Storage then_impl(const Storage& i, const Storage& x);
-
-    EffectsProvider();
+    EffectsProvider() = default;
 };
 
 #endif //EFFECTS_PROVIDER_H

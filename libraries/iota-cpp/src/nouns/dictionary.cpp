@@ -73,18 +73,18 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<mixed>(i.i))
   {
-    mixed ms = std::get<mixed>(i.i);
+    const mixed ms = std::get<mixed>(i.i);
 
     if(ms.size() == 2)
     {
       const Storage& keys = ms[0];
       const Storage& values = ms[1];
 
-      Storage indices = eval({keys, find, x});
+      const Storage indices = eval({keys, find, x});
 
       if(std::holds_alternative<ints>(indices.i))
       {
-        ints integerIndices = std::get<ints>(indices.i);
+        const ints integerIndices = std::get<ints>(indices.i);
 
         if(integerIndices.empty())
         {
@@ -92,7 +92,7 @@ Storage Dictionary::find_impl(const Storage& i, const Storage& x)
         }
         else if(integerIndices.size() == 1)
         {
-          int valueIndex = integerIndices.front();
+          const int valueIndex = integerIndices.front();
 
           Storage result = eval({values, iota::index, Integer::make(valueIndex)});
 
@@ -116,11 +116,11 @@ Storage Dictionary::match_impl(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<mixed>(i.i))
   {
-    mixed iis = std::get<mixed>(i.i);
+    auto iis = std::get<mixed>(i.i);
 
     if(std::holds_alternative<mixed>(x.i))
     {
-      mixed xis = std::get<mixed>(x.i);
+      auto xis = std::get<mixed>(x.i);
 
       if(iis.size() != xis.size())
       {
@@ -147,7 +147,7 @@ Storage Dictionary::match_impl(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-maybe<Storage> Dictionary::from_bytes(const bytes& bs, int t)
+maybe<Storage> Dictionary::from_bytes(const bytes& bs, const int t)
 {
   if(t == StorageType::MIXED_ARRAY)
   {
@@ -168,7 +168,7 @@ maybe<bytes> Dictionary::to_bytes(const Storage& i)
     return std::nullopt;
   }
 
-  bytes result = bytes();
+  auto result = bytes();
 
   switch (i.t)
   {
@@ -182,7 +182,7 @@ maybe<bytes> Dictionary::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> Dictionary::from_conn(const Connection& conn, int t)
+maybe<Storage> Dictionary::from_conn(const Connection& conn, const int t)
 {
   if(t == StorageType::MIXED_ARRAY)
   {

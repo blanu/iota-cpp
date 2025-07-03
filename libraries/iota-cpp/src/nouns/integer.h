@@ -23,12 +23,10 @@ class Integer
     static Storage enclose_impl(const Storage& i);
     static Storage enumerate_impl(const Storage& i);
     static Storage expand_impl(const Storage& i);
-    static Storage floor_impl(const Storage& i);
     static Storage format_impl(const Storage& i);
     static Storage negate_impl(const Storage& i);
     static Storage not_impl(const Storage& i);
     static Storage reciprocal_impl(const Storage& i);
-    static Storage reverse_impl(const Storage& i);
     static Storage size_impl(const Storage& i);
 
     // Dyads

@@ -7,7 +7,6 @@
 
 #include "api.h"
 
-#include "../../libraries/iota-cpp/src/effects/testing/testing_effects_provider.h"
 #include "effects/testing/log/log.h"
 
 TEST_CASE("timestamp", "[effect]")

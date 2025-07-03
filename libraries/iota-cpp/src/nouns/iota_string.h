@@ -22,9 +22,7 @@ class IotaString
 
     // Monads
     static Storage atom_impl(const Storage& i);
-    static Storage enclose_impl(const Storage& i);
     static Storage first_impl(const Storage& i);
-    static Storage format_impl(const Storage& i);
     static Storage gradeDown_impl(const Storage& i);
     static Storage gradeUp_impl(const Storage& i);
     static Storage group_impl(const Storage& i);
@@ -33,7 +31,6 @@ class IotaString
     static Storage size_impl(const Storage& i);
 
     // Dyads
-    static Storage amend_impl(const Storage& i, const Storage& x);
     static Storage equal_impl(const Storage& i, const Storage& x);
 
     static Storage find_character(const Storage& i, const Storage& x);
@@ -45,7 +42,6 @@ class IotaString
     static Storage form_character(const Storage& i, const Storage& x);
     static Storage form_quoted_symbol(const Storage& i, const Storage& x);
 
-    static Storage less_string(const Storage& i, const Storage& x);
     static Storage index_impl(const Storage& i, const Storage& x);
 
     // Join
@@ -53,7 +49,6 @@ class IotaString
     static Storage join_string(const Storage& i, const Storage& x);
 
     static Storage match_impl(const Storage& i, const Storage& x);
-    static Storage more_string(const Storage& i, const Storage& x);
     static Storage rotate_integer(const Storage& i, const Storage& x);
 
     static Storage split_integer(const Storage& i, const Storage& x);
@@ -62,9 +57,6 @@ class IotaString
 
     // Monadic Adverbs
     static Storage each_impl(const Storage& i, const Storage& f);
-    static Storage eachPair_impl(const Storage& i, const Storage& f);
-    static Storage over_impl(const Storage& i, const Storage& f);
-    static Storage scanOver_impl(const Storage& i, const Storage& f);
 
     // Dyadic Adverbs
 

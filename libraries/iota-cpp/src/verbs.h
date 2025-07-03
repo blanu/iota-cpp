@@ -80,14 +80,6 @@ namespace iota
   inline Storage split = Dyad::make(Dyads::split);
   inline Storage take = Dyad::make(Dyads::take);
   inline Storage times = Dyad::make(Dyads::times);
-
-  // Extension Dyads
-  inline Storage causes = Dyad::make(Dyads::causes);
-  inline Storage because = Dyad::make(Dyads::because);
-  inline Storage then = Dyad::make(Dyads::then);
-  inline Storage bind = Dyad::make(Dyads::bind);
-  inline Storage retrieve = Dyad::make(Dyads::retrieve);
-  inline Storage mutate = Dyad::make(Dyads::mutate);
 }
 
 #endif //VERBS_H

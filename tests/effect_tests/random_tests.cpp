@@ -22,7 +22,7 @@ TEST_CASE("roll", "[effect]")
   using namespace iota;
   using namespace std::string_literals;
 
-  REQUIRE(evalExpression({10, roll, negate}) == -9); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(evalExpression({10, roll, negate}) == -8); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }
 
 TEST_CASE("rolls", "[effect]")
@@ -30,7 +30,7 @@ TEST_CASE("rolls", "[effect]")
   using namespace iota;
   using namespace std::string_literals;
 
-  REQUIRE(evalExpression({10, rolls, 2, negate}) == a{-9, -3}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
+  REQUIRE(evalExpression({10, rolls, 2, negate}) == a{-5, -4}); // For the TESTING random number generator, a static seed is used, so we will always get the same number. A different test is required for production.
 }
 
 TEST_CASE("deal", "[effect]")

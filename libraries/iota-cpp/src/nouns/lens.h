@@ -14,8 +14,8 @@ class Lens
     static void initialize();
 
     static Storage make(int i);
-    static Storage make(ints i);
-    static Storage make(mixed i);
+    static Storage make(const ints& i);
+    static Storage make(const mixed& i);
 
     // Monads
     static Storage retrieve_impl(const Storage& i, const Storage& x);

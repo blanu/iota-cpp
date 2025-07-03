@@ -16,7 +16,7 @@
 #include "random/random.h"
 #include "state/state.h"
 
-TestingEffectsProvider::TestingEffectsProvider() : EffectsProvider()
+TestingEffectsProvider::TestingEffectsProvider()
 {
   Log::initialize(this);
   Random::initialize(this);
@@ -24,7 +24,7 @@ TestingEffectsProvider::TestingEffectsProvider() : EffectsProvider()
   // Initialize system effects
   // Random
   // Log: Nilads
-  Noun::registerNilad(effects::log::timestamp, Log::timestamp_impl);
+  Noun::registerNilad((effects::families::log << 8) | effects::log::timestamp, Log::timestamp_impl);
 
   // Log: Monads
   Noun::registerMonad(StorageType::WORD, NounType::INTEGER, (effects::families::log << 8) | effects::log::level, Log::level_impl);
@@ -50,11 +50,11 @@ TestingEffectsProvider::TestingEffectsProvider() : EffectsProvider()
 
   // State
   // State: Nilads
-  Noun::registerNilad((effects::families::random << 8) | effects::state::get, State::get_impl);
+  Noun::registerNilad((effects::families::state << 8) | effects::state::get, State::get_impl);
 
   // State: Monads
-  Noun::registerMonad(StorageType::ANY, NounType::ANY, (effects::families::random << 8) | effects::state::put, State::put_impl);
-  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, (effects::families::random << 8) | effects::state::modify, State::modify_impl);
+  Noun::registerMonad(StorageType::ANY, NounType::ANY, (effects::families::state << 8) | effects::state::put, State::put_impl);
+  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, (effects::families::state << 8) | effects::state::modify, State::modify_impl);
 }
 
 Storage TestingEffectsProvider::getEffectState()
