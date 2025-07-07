@@ -1373,7 +1373,7 @@ bytes Noun::to_bytes(const Storage& x) {
   return result;
 }
 
-maybe<Storage> Noun::from_conn(const Connection& conn) {
+maybe<Storage> Noun::from_conn(Connection& conn) {
   int storageType = static_cast<unsigned char>(conn.readOne());
 
   switch (int objectType = static_cast<unsigned char>(conn.readOne())) {
@@ -1425,7 +1425,7 @@ maybe<Storage> Noun::from_conn(const Connection& conn) {
   }
 }
 
-void Noun::to_conn(const Connection& conn, const Storage& x) {
+void Noun::to_conn(Connection& conn, const Storage& x) {
   // Storage.to_conn does not include type information, always include it in the specific to_conn implementation
   switch (x.o) {
     case NounType::INTEGER:

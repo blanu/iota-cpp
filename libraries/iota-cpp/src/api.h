@@ -128,7 +128,7 @@ bool operator==(const std::vector<T>& left, const std::vector<T>& right)
     return false;
   }
 
-  for(int i = 0; i < left.size(); i++)
+  for(int i = 0; i < static_cast<int>(left.size()); i++)
   {
     if(left[i] == right[i])
     {

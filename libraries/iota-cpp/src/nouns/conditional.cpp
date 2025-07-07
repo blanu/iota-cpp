@@ -50,7 +50,7 @@ Storage Conditional::evaluate_impl(const Storage& i)
   {
     const mixed mis = std::get<mixed>(i.i);
 
-    if(mis.size() != 3)
+    if(static_cast<int>(static_cast<int>(mis.size())) != 3)
     {
       return Word::make(SHAPE_MISMATCH, NounType::ERROR);
     }

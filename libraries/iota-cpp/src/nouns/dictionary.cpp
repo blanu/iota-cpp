@@ -122,12 +122,12 @@ Storage Dictionary::match_impl(const Storage& i, const Storage& x)
     {
       auto xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage matched = eval({iis[index], match, xis[index]});
         if(matched.truth())
@@ -182,7 +182,7 @@ maybe<bytes> Dictionary::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> Dictionary::from_conn(const Connection& conn, const int t)
+maybe<Storage> Dictionary::from_conn(Connection& conn, const int t)
 {
   if(t == StorageType::MIXED_ARRAY)
   {
@@ -194,7 +194,7 @@ maybe<Storage> Dictionary::from_conn(const Connection& conn, const int t)
   }
 }
 
-void Dictionary::to_conn(const Connection& conn, const Storage& i)
+void Dictionary::to_conn(Connection& conn, const Storage& i)
 {
   if (i.o != NounType::LIST)
   {

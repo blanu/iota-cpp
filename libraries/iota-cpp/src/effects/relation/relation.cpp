@@ -170,7 +170,7 @@ Storage Log::insert(const Storage& i, const Storage& x)
   const mixed mis = std::get<mixed>(x.i);
 
   // Check size of new row
-  if(mis.size() != oldTable->rowSize)
+  if(static_cast<int>(static_cast<int>(mis.size())) != oldTable->rowSize)
   {
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
@@ -214,7 +214,7 @@ Storage Log::remove(const Storage& i, const Storage& x)
 
   // Remove selected row from rows and columns
   oldTable->rows.erase(rowIndex);
-  for(int columnIndex = 0; columnIndex < mis.size(); columnIndex++)
+  for(int columnIndex = 0; columnIndex < static_cast<int>(static_cast<int>(mis.size())); columnIndex++)
   {
     oldTable->columns[columnIndex].erase(oldTable->columns[columnIndex].begin() + rowIndex->second);
   }
@@ -279,7 +279,7 @@ Storage Log::project(const Storage& i, const Storage& x)
     auto mis = std::get<mixed>(x.i);
 
     auto columnIndices = ints();
-    for(int columnIndex = 0; columnIndex < columnIndices.size(); columnIndex++)
+    for(int columnIndex = 0; columnIndex < static_cast<int>(columnIndices.size()); columnIndex++)
     {
       if(eval({iTable->nameOrder[columnIndex], match, mis[columnIndex]}).truth())
       {

@@ -7,7 +7,6 @@
 #include <tuple>
 #include <vector>
 
-#include "../Connection.h"
 #include "error.h"
 #include "../squeeze.h"
 #include "../symbols.h"
@@ -28,6 +27,8 @@
 #include "noun.h"
 #include "quoted_symbol.h"
 #include "real.h"
+
+#include <Connection.h>
 
 // Integer
 void Integer::initialize()
@@ -396,7 +397,7 @@ Storage Integer::cut_integers(const Storage& i, const Storage& x)
           return MixedArray::make(results, NounType::LIST);
         }
       }
-      else if(integer > 0 && integer <= integers.size())
+      else if(integer > 0 && integer <= static_cast<int>(integers.size()))
       {
         ints left = ints(integers.begin(), integers.begin() + integer);
         ints right = ints(integers.begin() + integer, integers.end());
@@ -440,7 +441,7 @@ Storage Integer::cut_reals(const Storage& i, const Storage& x)
           return MixedArray::make(results, NounType::LIST);
         }
       }
-      else if(integer > 0 && integer <= list.size())
+      else if(integer > 0 && integer <= static_cast<int>(list.size()))
       {
         floats left = floats(list.begin(), list.begin() + integer);
         floats right = floats(list.begin() + integer, list.end());
@@ -484,7 +485,7 @@ Storage Integer::cut_mixed(const Storage& i, const Storage& x)
           return MixedArray::make(results, NounType::LIST);
         }
       }
-      else if(integer > 0 && integer <= list.size())
+      else if(integer > 0 && integer <= static_cast<int>(list.size()))
       {
         mixed left = mixed(list.begin(), list.begin() + integer);
         mixed right = mixed(list.begin() + integer, list.end());
@@ -729,7 +730,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
     {
       ints characters = std::get<ints>(formatted.i);
 
-      if(xi <= characters.size())
+      if(xi <= static_cast<int>(characters.size()))
       {
         return formatted;
       }
@@ -753,7 +754,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
     {
       ints characters = std::get<ints>(formatted.i);
 
-      if(xi <= characters.size())
+      if(xi <= static_cast<int>(characters.size()))
       {
         return formatted;
       }
@@ -2036,7 +2037,7 @@ maybe<bytes> Integer::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> Integer::from_conn(const Connection& conn, int t) {
+maybe<Storage> Integer::from_conn(Connection& conn, int t) {
   if(t == NounType::INTEGER)
   {
     return Word::from_conn(conn, NounType::INTEGER);
@@ -2047,7 +2048,7 @@ maybe<Storage> Integer::from_conn(const Connection& conn, int t) {
   }
 }
 
-void Integer::to_conn(const Connection& conn, const Storage& i) {
+void Integer::to_conn(Connection& conn, const Storage& i) {
   if (i.o != NounType::INTEGER) {
     return;
   }
@@ -2066,7 +2067,8 @@ void Integer::to_conn(const Connection& conn, const Storage& i) {
           bytes intBytes = squeeze_bigint(integers);
 
           // Note that we always send NounType::INTEGER and StorageType::WORD, even if we internally represent them as StorageType::WORD_ARRAYs.
-          conn.write({ static_cast<char>(StorageType::WORD), static_cast<char>(i.o) });
+          std::vector<char> typeBytes = { static_cast<char>(StorageType::WORD), static_cast<char>(i.o) };
+          conn.write(typeBytes);
           conn.write(intBytes);
         } else {
           return;

@@ -1690,7 +1690,7 @@ maybe<bytes> Real::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> Real::from_conn(const Connection& conn, const int t) {
+maybe<Storage> Real::from_conn(Connection& conn, const int t) {
   if(t == StorageType::FLOAT)
   {
     return Float::from_conn(conn, NounType::REAL);
@@ -1701,7 +1701,7 @@ maybe<Storage> Real::from_conn(const Connection& conn, const int t) {
   }
 }
 
-void Real::to_conn(const Connection& conn, const Storage& i) {
+void Real::to_conn(Connection& conn, const Storage& i) {
   if (i.o != NounType::REAL) {
     return;
   }

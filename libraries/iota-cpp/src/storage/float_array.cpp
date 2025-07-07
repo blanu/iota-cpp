@@ -10,9 +10,10 @@
 
 #include "float_array.h"
 
-#include "../Connection.h"
 #include "../types.h"
 #include "../squeeze.h"
+
+#include <Connection.h>
 
 // FloatArray
 maybe<Storage> FloatArray::from_bytes(const bytes& data, int o)
@@ -50,7 +51,7 @@ bytes FloatArray::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> FloatArray::from_conn(const Connection& conn, const int objectType)
+maybe<Storage> FloatArray::from_conn(Connection& conn, const int objectType)
 {
   varint varsize = expand_conn(conn); // NOLINT
   if(std::holds_alternative<int>(varsize))
@@ -89,14 +90,15 @@ maybe<Storage> FloatArray::from_conn(const Connection& conn, const int objectTyp
   }
 }
 
-void FloatArray::to_conn(const Connection& conn, const Storage& i)
+void FloatArray::to_conn(Connection& conn, const Storage& i)
 {
   if(std::holds_alternative<ints>(i.i))
   {
     const ints integers = std::get<ints>(i.i);
 
     // Always include type in to_conn implementation
-    conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
+    std::vector<char> typeBytes = {static_cast<char>(i.t), static_cast<char>(i.o)};
+    conn.write(typeBytes);
 
     const int length = static_cast<int>(integers.size());
     const bytes lengthBytes = squeeze_int(length);

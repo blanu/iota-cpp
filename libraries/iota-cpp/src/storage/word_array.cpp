@@ -59,7 +59,7 @@ bytes WordArray::to_bytes(const Storage &storage)
   }
 }
 
-maybe<Storage> WordArray::from_conn(const Connection& conn, const int objectType)
+maybe<Storage> WordArray::from_conn(Connection& conn, const int objectType)
 {
   varint varsize = expand_conn(conn); // NOLINT
   if(std::holds_alternative<int>(varsize))
@@ -92,12 +92,13 @@ maybe<Storage> WordArray::from_conn(const Connection& conn, const int objectType
   }
 }
 
-void WordArray::to_conn(const Connection& conn, const Storage& i)
+void WordArray::to_conn(Connection& conn, const Storage& i)
 {
   if(std::holds_alternative<ints>(i.i))
   {
     // Always include type in to_conn implementation
-    conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
+    std::vector<char> typeBytes = {static_cast<char>(i.t), static_cast<char>(i.o)};
+    conn.write(typeBytes);
 
     const auto integers = std::get<ints>(i.i);
 

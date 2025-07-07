@@ -10,7 +10,7 @@ SerialConnection conn = SerialConnection::make();
 
 void setup()
 {
-  pinMode(D13, OUTPUT);
+  pinMode(13, OUTPUT);
   while(!Serial)
   {
     blink(255, 255, 255, 1, 200, 200);
@@ -35,10 +35,10 @@ void blink(byte r, byte g, byte b, int count, int onTime, int offTime)
 {
   for(int x=0; x<count; x++)
   {
-    digitalWrite(D13, HIGH);
+    digitalWrite(13, HIGH);
     delay(onTime);
 
-    digitalWrite(D13, LOW);
+    digitalWrite(13, LOW);
     delay(offTime);
   }
 }

@@ -1,0 +1,3 @@
+[submodule "lib/TransmissionArduino"]
+	path = lib/TransmissionArduino
+	url = https://github.com/OperatorFoundation/TransmissionArduino.git

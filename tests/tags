@@ -3594,8 +3594,8 @@ expand	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/symbols.h	/^    st
 expand	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/verbs.h	/^  inline Storage expand = Monad::make(Monads::expand);$/;"	m	namespace:iota
 expandAliases	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/extras/catch_amalgamated.cpp	/^    std::string TagAliasRegistry::expandAliases( std::string const& unexpandedTestSpec ) const {$/;"	f	class:Catch::Benchmark::Detail::Catch::Catch::TagAliasRegistry
 expandAliases	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_tag_alias_registry.cpp	/^    std::string TagAliasRegistry::expandAliases( std::string const& unexpandedTestSpec ) const {$/;"	f	class:Catch::TagAliasRegistry
-expand_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^varint expand_conn(const Connection& conn)$/;"	f
-expand_conn_floating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_conn_floating(const Connection& conn)$/;"	f
+expand_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^varint expand_conn(Connection& conn)$/;"	f
+expand_conn_floating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_conn_floating(Connection& conn)$/;"	f
 expand_floating	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/squeeze.cpp	/^maybe<floating> expand_floating(bytes value)$/;"	f
 expand_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^Storage Integer::expand_impl(const Storage& i)$/;"	f	class:Integer
 expand_impl	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^Storage List::expand_impl(const Storage& i)$/;"	f	class:List
@@ -3847,18 +3847,18 @@ from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_f
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_bytes(const bytes& data, const int o)$/;"	f	class:MixedArray
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_bytes(const bytes& data, const int o)$/;"	f	class:Word
 from_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^maybe<Storage> WordArray::from_bytes(const bytes& data, int o)$/;"	f	class:WordArray
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^maybe<Storage> Character::from_conn(const Connection& conn, const int t) {$/;"	f	class:Character
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^maybe<Storage> Dictionary::from_conn(const Connection& conn, const int t)$/;"	f	class:Dictionary
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^maybe<Storage> Integer::from_conn(const Connection& conn, int t) {$/;"	f	class:Integer
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^maybe<Storage> IotaString::from_conn(const Connection& conn, const int t) {$/;"	f	class:IotaString
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^maybe<Storage> List::from_conn(const Connection& conn, int t) {$/;"	f	class:List
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^maybe<Storage> Noun::from_conn(const Connection& conn) {$/;"	f	class:Noun
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^maybe<Storage> Real::from_conn(const Connection& conn, const int t) {$/;"	f	class:Real
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^maybe<Storage> FloatArray::from_conn(const Connection& conn, const int objectType)$/;"	f	class:FloatArray
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^maybe<Storage> Float::from_conn(const Connection& conn, const int objectType)$/;"	f	class:Float
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_conn(const Connection& conn, const int objectType)$/;"	f	class:MixedArray
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_conn(const Connection& conn, const int objectType)$/;"	f	class:Word
-from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^maybe<Storage> WordArray::from_conn(const Connection& conn, const int objectType)$/;"	f	class:WordArray
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^maybe<Storage> Character::from_conn(Connection& conn, const int t) {$/;"	f	class:Character
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^maybe<Storage> Dictionary::from_conn(Connection& conn, const int t)$/;"	f	class:Dictionary
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^maybe<Storage> Integer::from_conn(Connection& conn, int t) {$/;"	f	class:Integer
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^maybe<Storage> IotaString::from_conn(Connection& conn, const int t) {$/;"	f	class:IotaString
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^maybe<Storage> List::from_conn(Connection& conn, int t) {$/;"	f	class:List
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^maybe<Storage> Noun::from_conn(Connection& conn) {$/;"	f	class:Noun
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^maybe<Storage> Real::from_conn(Connection& conn, const int t) {$/;"	f	class:Real
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^maybe<Storage> FloatArray::from_conn(Connection& conn, const int objectType)$/;"	f	class:FloatArray
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^maybe<Storage> Float::from_conn(Connection& conn, const int objectType)$/;"	f	class:Float
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<Storage> MixedArray::from_conn(Connection& conn, const int objectType)$/;"	f	class:MixedArray
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^maybe<Storage> Word::from_conn(Connection& conn, const int objectType)$/;"	f	class:Word
+from_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^maybe<Storage> WordArray::from_conn(Connection& conn, const int objectType)$/;"	f	class:WordArray
 from_cpp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage Object::from_cpp(const cppValue& i) \/\/ NOLINT$/;"	f	class:Object
 from_cpp_expression	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^Storage Object::from_cpp_expression(const cppValues& i)$/;"	f	class:Object
 from_range	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/generators/catch_generators_range.hpp	/^GeneratorWrapper<ResultType> from_range(InputIterator from, InputSentinel to) {$/;"	f	namespace:Catch::Generators
@@ -7152,18 +7152,18 @@ to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_flo
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^maybe<bytes> MixedArray::to_bytes(const Storage& storage) {$/;"	f	class:MixedArray
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^bytes Word::to_bytes(const Storage& i)$/;"	f	class:Word
 to_bytes	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^bytes WordArray::to_bytes(const Storage &storage)$/;"	f	class:WordArray
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^void Character::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Character
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^void Dictionary::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Dictionary
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^void Integer::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Integer
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^void IotaString::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:IotaString
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^void List::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:List
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::to_conn(const Connection& conn, const Storage& x) {$/;"	f	class:Noun
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^void Real::to_conn(const Connection& conn, const Storage& i) {$/;"	f	class:Real
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^void FloatArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:FloatArray
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^void Float::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Float
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^void MixedArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:MixedArray
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^void Word::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:Word
-to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^void WordArray::to_conn(const Connection& conn, const Storage& i)$/;"	f	class:WordArray
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/character.cpp	/^void Character::to_conn(Connection& conn, const Storage& i) {$/;"	f	class:Character
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/dictionary.cpp	/^void Dictionary::to_conn(Connection& conn, const Storage& i)$/;"	f	class:Dictionary
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/integer.cpp	/^void Integer::to_conn(Connection& conn, const Storage& i) {$/;"	f	class:Integer
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/iota_string.cpp	/^void IotaString::to_conn(Connection& conn, const Storage& i) {$/;"	f	class:IotaString
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/list.cpp	/^void List::to_conn(Connection& conn, const Storage& i) {$/;"	f	class:List
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/noun.cpp	/^void Noun::to_conn(Connection& conn, const Storage& x) {$/;"	f	class:Noun
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/nouns/real.cpp	/^void Real::to_conn(Connection& conn, const Storage& i) {$/;"	f	class:Real
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/float_array.cpp	/^void FloatArray::to_conn(Connection& conn, const Storage& i)$/;"	f	class:FloatArray
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/iota_float.cpp	/^void Float::to_conn(Connection& conn, const Storage& i)$/;"	f	class:Float
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/mixed_array.cpp	/^void MixedArray::to_conn(Connection& conn, const Storage& i)$/;"	f	class:MixedArray
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word.cpp	/^void Word::to_conn(Connection& conn, const Storage& i)$/;"	f	class:Word
+to_conn	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/storage/word_array.cpp	/^void WordArray::to_conn(Connection& conn, const Storage& i)$/;"	f	class:WordArray
 to_cpp	/Users/dr.brandonwiley/iota-cpp/libraries/iota-cpp/src/api.cpp	/^cppValue Object::to_cpp(Storage i) \/\/ NOLINT$/;"	f	class:Object
 to_string	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_to_string.hpp	/^    std::string to_string(T const& t) {$/;"	f	namespace:Catch
 token	/Users/dr.brandonwiley/iota-cpp/tests/cmake-build-debug/_deps/catch2-src/src/catch2/internal/catch_clara.hpp	/^                StringRef token;$/;"	m	struct:Catch::Clara::Detail::Token

@@ -56,8 +56,46 @@ add_executable(tests main.cpp
   effect_tests/log_tests.cpp
   effect_tests/random_tests.cpp
   effect_tests/state_tests.cpp
+  squeeze_tests/int_tests.cpp
+  squeeze_tests/float_tests.cpp
 )
 target_link_libraries(tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  option(ENABLE_COVERAGE "Enable coverage reporting" ON)
+
+  target_compile_options(tests PRIVATE --coverage -O0 -g)
+  target_link_options(tests PRIVATE --coverage)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
+
+  find_program(GCOV_PATH gcov)
+  find_program(LCOV_PATH lcov)
+  find_program(GENHTML_PATH genhtml)
+
+  if(LCOV_PATH AND GCOV_PATH AND GENHTML_PATH)
+    add_custom_target(coverage
+      COMMAND ${LCOV_PATH} --directory . --zerocounters
+      COMMAND tests
+      COMMAND ${LCOV_PATH} --directory . --capture --output-file coverage.info
+      COMMAND ${LCOV_PATH} --extract coverage.info
+      '${CMAKE_SOURCE_DIR}/libraries/iota-cpp/*'
+      --output-file coverage.filtered.info
+      COMMAND ${GENHTML_PATH} coverage.filtered.info --output-directory coverage_html
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      COMMENT "Generating coverage report"
+    )
+  else()
+    # Fallback to gcov directly
+    add_custom_target(coverage
+      COMMAND ${CMAKE_COMMAND} -E remove_directory coverage
+      COMMAND ${CMAKE_COMMAND} -E make_directory coverage
+      COMMAND tests
+      COMMAND ${CMAKE_COMMAND} -E chdir coverage ${GCOV_PATH} -abcfu ${CMAKE_SOURCE_DIR}/src/*.cpp
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      COMMENT "Running gcov"
+    )
+  endif()
+endif()
 
 # Generate ctags for vim
 set(TAGS_FILE ${IOTA_CPP_LIB_TEST_DIR}/tags)

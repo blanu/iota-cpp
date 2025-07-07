@@ -163,7 +163,7 @@ std::tuple<varint, bytes> expand_int(bytes value)
   return std::make_tuple(i, rest);
 }
 
-varint expand_conn(const Connection& conn)
+varint expand_conn(Connection& conn)
 {
   int length = static_cast<unsigned char>(conn.readOne());
 
@@ -224,7 +224,7 @@ varint expand_int_from_bytes(const bytes &bytes)
     }
 
     // Shift all the integers one byte left
-    for(int index = 0; index < integers.size(); index++)
+    for(int index = 0; index < static_cast<int>(integers.size()); index++)
     {
       if(index == integers.size() - 1)
       {
@@ -354,7 +354,7 @@ maybe<floating> expand_floating(bytes value)
   }
 }
 
-maybe<floating> expand_conn_floating(const Connection& conn)
+maybe<floating> expand_conn_floating(Connection& conn)
 {
   const int length = static_cast<unsigned char>(conn.readOne());
 

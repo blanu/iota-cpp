@@ -6,9 +6,10 @@
 #define FLOAT_H
 
 #include "../types.h"
-#include "../Connection.h"
 
 #include "../storage/storage.h"
+
+#include <Connection.h>
 
 class Float
 {
@@ -19,8 +20,8 @@ class Float
     static maybe<Storage> from_bytes(bytes x, int o);
     static maybe<bytes> to_bytes(const Storage& i);
 
-    static maybe<Storage> from_conn(const Connection& conn, int objectType);
-    static void to_conn(const Connection& conn, const Storage& i);
+    static maybe<Storage> from_conn(Connection& conn, int objectType);
+    static void to_conn(Connection& conn, const Storage& i);
 
     static Storage make(float x, int o = NounType::REAL);
 };

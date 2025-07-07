@@ -6,9 +6,10 @@
 #define FLOAT_ARRAY_H
 
 #include "../types.h"
-#include "../Connection.h"
 
 #include "../storage/storage.h"
+
+#include <Connection.h>
 
 class FloatArray
 {
@@ -16,8 +17,8 @@ public:
   static maybe<Storage> from_bytes(const bytes& data, int o);
   static bytes to_bytes(const Storage& i);
 
-  static maybe<Storage> from_conn(const Connection& conn, int objectType);
-  static void to_conn(const Connection& conn, const Storage& i);
+  static maybe<Storage> from_conn(Connection& conn, int objectType);
+  static void to_conn(Connection& conn, const Storage& i);
 
   static Storage make(floats x, int o = NounType::LIST);
 };

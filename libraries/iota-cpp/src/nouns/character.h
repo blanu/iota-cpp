@@ -8,7 +8,8 @@
 #include <vector>
 
 #include "../storage/storage.h"
-#include "../Connection.h"
+
+#include <Connection.h>
 
 class Character
 {
@@ -40,8 +41,8 @@ public:
   // Serialization
   static maybe<bytes> to_bytes(const Storage& i);
   static maybe<Storage> from_bytes(const bytes& bs, int t);
-  static void to_conn(const Connection& conn, const Storage& i);
-  static maybe<Storage> from_conn(const Connection& conn, int t);
+  static void to_conn(Connection& conn, const Storage& i);
+  static maybe<Storage> from_conn(Connection& conn, int t);
 };
 
 #endif //CHARACTER_H

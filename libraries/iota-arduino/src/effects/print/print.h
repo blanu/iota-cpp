@@ -12,7 +12,7 @@
 class PrintEffect
 {
   public:
-    PrintEffect(Storage message, maybe<Storage>completionHandler = nullptr) : message(message), completionHandler(completionHandler) {};
+    PrintEffect(Storage message, maybe<Storage>completionHandler = std::nullopt) : message(message), completionHandler(completionHandler) {};
 
   private:
     Storage message;

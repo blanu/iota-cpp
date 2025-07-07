@@ -11,11 +11,12 @@
 #include "mixed_array.h"
 #include "storage.h"
 
-#include "../Connection.h"
 #include "../types.h"
 #include "../squeeze.h"
 
 #include "../nouns/noun.h"
+
+#include <Connection.h>
 
 // MixedArray
 // Storage::from_bytes decodes a byte array into a MixedArray object
@@ -50,7 +51,7 @@ maybe<bytes> MixedArray::to_bytes(const Storage& storage) {
   }
 }
 
-maybe<Storage> MixedArray::from_conn(const Connection& conn, const int objectType)
+maybe<Storage> MixedArray::from_conn(Connection& conn, const int objectType)
 {
   varint varsize = expand_conn(conn); // NOLINT
   if (std::holds_alternative<int>(varsize))
@@ -81,14 +82,15 @@ maybe<Storage> MixedArray::from_conn(const Connection& conn, const int objectTyp
   }
 }
 
-void MixedArray::to_conn(const Connection& conn, const Storage& i)
+void MixedArray::to_conn(Connection& conn, const Storage& i)
 {
   if (std::holds_alternative<mixed>(i.i))
   {
     const mixed ms = std::get<mixed>(i.i);
 
     // Always include type in to_conn implementation
-    conn.write({ static_cast<char>(i.t), static_cast<char>(i.o) });
+    std::vector<char> typeBytes = { static_cast<char>(i.t), static_cast<char>(i.o) };
+    conn.write(typeBytes);
 
     const int length = static_cast<int>(ms.size());
     const bytes lengthBytes = squeeze_int(static_cast<int>(length));

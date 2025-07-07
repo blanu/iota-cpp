@@ -245,7 +245,7 @@ maybe<bytes> Character::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> Character::from_conn(const Connection& conn, const int t) {
+maybe<Storage> Character::from_conn(Connection& conn, const int t) {
   if(t == StorageType::WORD)
   {
     return Word::from_conn(conn, NounType::CHARACTER);
@@ -258,7 +258,7 @@ maybe<Storage> Character::from_conn(const Connection& conn, const int t) {
   }
 }
 
-void Character::to_conn(const Connection& conn, const Storage& i) {
+void Character::to_conn(Connection& conn, const Storage& i) {
   if (i.o != NounType::CHARACTER) {
     return;
   }
@@ -277,7 +277,8 @@ void Character::to_conn(const Connection& conn, const Storage& i) {
           const bytes intBytes = squeeze_bigint(integers);
 
           // Note that we always send NounType::INTEGER and StorageType::WORD, even if we internally represent them as StorageType::WORD_ARRAYs.
-          conn.write({ static_cast<char>(StorageType::WORD), static_cast<char>(i.o) });
+          std::vector<char> typeBytes = { static_cast<char>(StorageType::WORD), static_cast<char>(i.o) };
+          conn.write(typeBytes);
           conn.write(intBytes);
         } else {
           return;

@@ -7,7 +7,8 @@
 #include <tuple>
 
 #include "../storage/storage.h"
-#include "../Connection.h"
+
+#include <Connection.h>
 
 using Type = int;
 using Specialization1 = std::tuple<Type>;
@@ -106,8 +107,8 @@ class Noun
     // General serialization
     static maybe<Storage> from_bytes(bytes data);
     static bytes to_bytes(const Storage& i);
-    static maybe<Storage> from_conn(const Connection& conn);
-    static void to_conn(const Connection& conn, const Storage& x);
+    static maybe<Storage> from_conn(Connection& conn);
+    static void to_conn(Connection& conn, const Storage& x);
 
     private:
       static std::map<Specialization1, NiladicSourceFunction> niladSources;

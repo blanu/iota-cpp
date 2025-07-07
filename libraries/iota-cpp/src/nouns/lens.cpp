@@ -64,7 +64,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
       else if(xis.size() == 1)
       {
         int xi = xis[0];
-        if(xi >= 1 && xi <= iis.size())
+        if(xi >= 1 && xi <= static_cast<int>(iis.size()))
         {
           int result = iis[xi - 1];
           return Integer::make(result);
@@ -105,7 +105,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
         if(std::holds_alternative<int>(xi.i))
         {
           int xii = std::get<int>(xi.i);
-          if(xii >= 1 && xii <= iis.size())
+          if(xii >= 1 && xii <= static_cast<int>(iis.size()))
           {
             int result = iis[xii - 1];
             return Integer::make(result);
@@ -153,7 +153,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
       else if(xis.size() == 1)
       {
         int xi = xis[0];
-        if(xi >= 1 && xi <= iis.size())
+        if(xi >= 1 && xi <= static_cast<int>(iis.size()))
         {
           float result = iis[xi - 1];
           return Real::make(result);
@@ -194,7 +194,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
         if(std::holds_alternative<int>(xi.i))
         {
           int xii = std::get<int>(xi.i);
-          if(xii >= 1 && xii <= iis.size())
+          if(xii >= 1 && xii <= static_cast<int>(iis.size()))
           {
             float result = iis[xii - 1];
             return Real::make(result);
@@ -242,7 +242,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
       else if(xis.size() == 1)
       {
         int xi = xis[0];
-        if(xi >= 1 && xi <= iis.size())
+        if(xi >= 1 && xi <= static_cast<int>(iis.size()))
         {
           Storage result = iis[xi - 1];
           return Noun::simplify(MixedArray::make({result}));
@@ -283,7 +283,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
         if(std::holds_alternative<int>(xi.i))
         {
           int xii = std::get<int>(xi.i);
-          if(xii >= 1 && xii <= iis.size())
+          if(xii >= 1 && xii <= static_cast<int>(iis.size()))
           {
             const Storage& result = iis[xii - 1];
             return result; // FIXME - variable reference may escape scope warning

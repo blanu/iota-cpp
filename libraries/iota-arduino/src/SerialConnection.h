@@ -6,14 +6,14 @@
 #include "storage/storage.h"
 #include "StorageConnection.h"
 
-#include "ReliableConnection.h"
+#include <ReliableConnectionUsbCdc.h>
 
 class SerialConnection : public StorageConnection
 {
   public:
     static SerialConnection make();
 
-    explicit SerialConnection(const ReliableConnection &reliable) : reliable(reliable) {}
+    explicit SerialConnection(const ReliableConnectionUsbCdc &reliable) : reliable(reliable) {}
 
     ~SerialConnection() {}
 
@@ -21,7 +21,7 @@ class SerialConnection : public StorageConnection
     void write_storage(Storage x);
 
   private:
-    ReliableConnection reliable;
+    ReliableConnectionUsbCdc reliable;
 };
 
 #endif

@@ -11,8 +11,9 @@
 #include "word_array.h"
 #include "storage.h"
 
-#include "../Connection.h"
 #include "../types.h"
+
+#include <Connection.h>
 
 class WordArray
 {
@@ -24,8 +25,8 @@ public:
   static maybe<Storage> from_bytes(const bytes& data, int o);
   static bytes to_bytes(const Storage &storage);
 
-  static maybe<Storage> from_conn(const Connection& conn, int objectType);
-  static void to_conn(const Connection& conn, const Storage& i);
+  static maybe<Storage> from_conn(Connection& conn, int objectType);
+  static void to_conn(Connection& conn, const Storage& i);
 
   static Storage make(ints x, int o = NounType::LIST);
 };

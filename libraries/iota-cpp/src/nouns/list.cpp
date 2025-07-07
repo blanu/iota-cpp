@@ -693,7 +693,7 @@ Storage List::expand_impl(const Storage& i)
 
     ints results = ints();
 
-    for(int index = 0; index < integers.size(); index++)
+    for(int index = 0; index < static_cast<int>(integers.size()); index++)
     {
       int count = integers[index];
 
@@ -865,7 +865,7 @@ Storage List::gradeDown_impl(const Storage& i)
 
     ints results(integers.size());
 
-    for (int index = 0; index < results.size(); ++index)
+    for (int index = 0; index < static_cast<int>(results.size()); ++index)
     {
         results[index] = index;
     }
@@ -892,7 +892,7 @@ Storage List::gradeDown_impl(const Storage& i)
 
     ints results(fs.size());
 
-    for (int resultsIndex = 0; resultsIndex < results.size(); ++resultsIndex)
+    for (int resultsIndex = 0; resultsIndex < static_cast<int>(results.size()); ++resultsIndex)
     {
         results[resultsIndex] = resultsIndex;
     }
@@ -934,7 +934,7 @@ Storage List::gradeDown_impl(const Storage& i)
 
     ints results(ms.size());
 
-    for (int resultsIndex = 0; resultsIndex < results.size(); ++resultsIndex)
+    for (int resultsIndex = 0; resultsIndex < static_cast<int>(results.size()); ++resultsIndex)
     {
         results[resultsIndex] = resultsIndex;
     }
@@ -984,7 +984,7 @@ Storage List::gradeUp_impl(const Storage& i)
 
     ints results(integers.size());
 
-    for (int index = 0; index < results.size(); ++index)
+    for (int index = 0; index < static_cast<int>(results.size()); ++index)
     {
         results[index] = index;
     }
@@ -1011,7 +1011,7 @@ Storage List::gradeUp_impl(const Storage& i)
 
     ints results(fs.size());
 
-    for (int resultsIndex = 0; resultsIndex < results.size(); ++resultsIndex)
+    for (int resultsIndex = 0; resultsIndex < static_cast<int>(results.size()); ++resultsIndex)
     {
         results[resultsIndex] = resultsIndex;
     }
@@ -1053,7 +1053,7 @@ Storage List::gradeUp_impl(const Storage& i)
 
     ints results(ms.size());
 
-    for (int resultsIndex = 0; resultsIndex < results.size(); ++resultsIndex)
+    for (int resultsIndex = 0; resultsIndex < static_cast<int>(results.size()); ++resultsIndex)
     {
         results[resultsIndex] = resultsIndex;
     }
@@ -1106,7 +1106,7 @@ Storage List::group_impl(const Storage& i)
     // Groups sorted by the first index in each group
     std::map<int, ints> groups=std::map<int, ints>();
 
-    for (int index = 0; index < items.size(); index++)
+    for (int index = 0; index < static_cast<int>(items.size()); index++)
     {
       // Get each item in the list
       int item = items[index];
@@ -1166,7 +1166,7 @@ Storage List::group_impl(const Storage& i)
     // Groups sorted by the first index in each group
     std::map<int, ints> groups=std::map<int, ints>();
 
-    for (int index = 0; index < items.size(); index++)
+    for (int index = 0; index < static_cast<int>(items.size()); index++)
     {
       // Get each item in the list
       float item = items[index];
@@ -1226,7 +1226,7 @@ Storage List::group_impl(const Storage& i)
     // Groups sorted by the first index in each group
     std::map<int, ints> groups=std::map<int, ints>();
 
-    for (int index = 0; index < items.size(); index++)
+    for (int index = 0; index < static_cast<int>(items.size()); index++)
     {
       // Get each item in the list
       Storage item = items[index];
@@ -1915,7 +1915,7 @@ Storage List::unique_impl(const Storage& i)
 //           return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //         }
 //
-//         if(index < results.size())
+//         if(index < static_cast<int>(results.size()))
 //         {
 //           results[index] = replacement;
 //         }
@@ -1969,7 +1969,7 @@ Storage List::unique_impl(const Storage& i)
 //           return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //         }
 //
-//         if(index < results.size())
+//         if(index < static_cast<int>(results.size()))
 //         {
 //           results[index] = replacement;
 //         }
@@ -2025,7 +2025,7 @@ Storage List::unique_impl(const Storage& i)
 //             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //           }
 //
-//           if(index < results.size())
+//           if(index < static_cast<int>(results.size()))
 //           {
 //             results[index] = replacement;
 //           }
@@ -2053,7 +2053,7 @@ Storage List::unique_impl(const Storage& i)
 //               return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //             }
 //
-//             if(index < results.size())
+//             if(index < static_cast<int>(results.size()))
 //             {
 //               results[index] = mixedReplacement;
 //             }
@@ -2110,7 +2110,7 @@ Storage List::unique_impl(const Storage& i)
 //             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //           }
 //
-//           if(index < results.size())
+//           if(index < static_cast<int>(results.size()))
 //           {
 //             results[index] = replacement;
 //           }
@@ -2138,7 +2138,7 @@ Storage List::unique_impl(const Storage& i)
 //               return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //             }
 //
-//             if(index < results.size())
+//             if(index < static_cast<int>(results.size()))
 //             {
 //               results[index] = mixedReplacement;
 //             }
@@ -2195,7 +2195,7 @@ Storage List::unique_impl(const Storage& i)
 //             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //           }
 //
-//           if(index < results.size())
+//           if(index < static_cast<int>(results.size()))
 //           {
 //             results[index] = replacement;
 //           }
@@ -2223,7 +2223,7 @@ Storage List::unique_impl(const Storage& i)
 //               return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //             }
 //
-//             if(index < results.size())
+//             if(index < static_cast<int>(results.size()))
 //             {
 //               results[index] = mixedReplacement;
 //             }
@@ -2280,7 +2280,7 @@ Storage List::unique_impl(const Storage& i)
 //             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //           }
 //
-//           if(index < results.size())
+//           if(index < static_cast<int>(results.size()))
 //           {
 //             results[index] = replacement;
 //           }
@@ -2308,7 +2308,7 @@ Storage List::unique_impl(const Storage& i)
 //               return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
 //             }
 //
-//             if(index < results.size())
+//             if(index < static_cast<int>(results.size()))
 //             {
 //               results[index] = mixedReplacement;
 //             }
@@ -2358,7 +2358,7 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
           return MixedArray::make(results, NounType::LIST);
         }
       }
-      else if(integer == list.size())
+      else if(integer == static_cast<int>(list.size()))
       {
           mixed results = mixed();
           results.insert(results.end(), i);
@@ -2366,7 +2366,7 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
 
           return MixedArray::make(results, NounType::LIST);
       }
-      else if(integer > 0 && integer < list.size())
+      else if(integer > 0 && integer < static_cast<int>(list.size()))
       {
         ints left = ints(list.begin(), list.begin() + integer);
         ints right = ints(list.begin() + integer, list.end());
@@ -2399,7 +2399,7 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
           return MixedArray::make(results, NounType::LIST);
         }
       }
-      else if(integer == list.size())
+      else if(integer == static_cast<int>(list.size()))
       {
           mixed results = mixed();
           results.insert(results.end(), i);
@@ -2407,7 +2407,7 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
 
           return MixedArray::make(results, NounType::LIST);
       }
-      else if(integer > 0 && integer < list.size())
+      else if(integer > 0 && integer < static_cast<int>(list.size()))
       {
         floats left = floats(list.begin(), list.begin() + integer);
         floats right = floats(list.begin() + integer, list.end());
@@ -2440,7 +2440,7 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
           return Noun::simplify(MixedArray::make(results, NounType::LIST));
         }
       }
-      else if(integer == list.size())
+      else if(integer == static_cast<int>(list.size()))
       {
           mixed results = mixed();
           results.push_back(i);
@@ -2448,7 +2448,7 @@ Storage List::cut_integer(const Storage& i, const Storage& x)
 
           return Noun::simplify(MixedArray::make(results, NounType::LIST));
       }
-      else if(integer > 0 && integer < list.size())
+      else if(integer > 0 && integer < static_cast<int>(list.size()))
       {
         mixed left = mixed(list.begin(), list.begin() + integer);
         mixed right = mixed(list.begin() + integer, list.end());
@@ -2496,7 +2496,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
           // - negative index
           // - non-monotonic sequence
           // - out of bounds
-          if(y < 0 || y < last || y > list.size())
+          if(y < 0 || y < last || y > static_cast<int>(list.size()))
           {
             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
           }
@@ -2516,7 +2516,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
             // list.size() also or out of bounds
             // The duplicate index check above means that this is the first time
             // that y has been list.size()
-            if(y == list.size())
+            if(y == static_cast<int>(list.size()))
             {
               // Capture the rest of the list that wasn't in any previous slice
               ints slice = ints(list.begin() + last, list.end());
@@ -2538,7 +2538,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
         // We never had an index where y was list.size()
         // So we need to capture the rest of the list that wasn't in any previous slice
         // If y had been list.size(), this would have happened above
-        if(last < list.size())
+        if(last < static_cast<int>(list.size()))
         {
           ints slice = ints(list.begin() + last, list.end());
           results.insert(results.end(), WordArray::make(slice, NounType::LIST));
@@ -2566,7 +2566,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
           // - negative index
           // - non-monotonic sequence
           // - out of bounds
-          if(y < 0 || y < last || y > list.size())
+          if(y < 0 || y < last || y > static_cast<int>(list.size()))
           {
             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
           }
@@ -2586,7 +2586,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
             // list.size() also or out of bounds
             // The duplicate index check above means that this is the first time
             // that y has been list.size()
-            if(y == list.size())
+            if(y == static_cast<int>(list.size()))
             {
               // Capture the rest of the list that wasn't in any previous slice
               floats slice = floats(list.begin() + last, list.end());
@@ -2608,7 +2608,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
         // We never had an index where y was list.size()
         // So we need to capture the rest of the list that wasn't in any previous slice
         // If y had been list.size(), this would have happened above
-        if(last < list.size())
+        if(last < static_cast<int>(list.size()))
         {
           ints slice = ints(list.begin() + last, list.end());
           results.insert(results.end(), WordArray::make(slice, NounType::LIST));
@@ -2636,7 +2636,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
           // - negative index
           // - non-monotonic sequence
           // - out of bounds
-          if(y < 0 || y < last || y > list.size())
+          if(y < 0 || y < last || y > static_cast<int>(list.size()))
           {
             return Word::make(OUT_OF_BOUNDS, NounType::ERROR);
           }
@@ -2656,7 +2656,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
             // list.size() also or out of bounds
             // The duplicate index check above means that this is the first time
             // that y has been list.size()
-            if(y == list.size())
+            if(y == static_cast<int>(list.size()))
             {
               // Capture the rest of the list that wasn't in any previous slice
               mixed slice = mixed(list.begin() + last, list.end());
@@ -2678,7 +2678,7 @@ Storage List::cut_integers(const Storage& i, const Storage& x)
         // We never had an index where y was list.size()
         // So we need to capture the rest of the list that wasn't in any previous slice
         // If y had been list.size(), this would have happened above
-        if(last < list.size())
+        if(last < static_cast<int>(list.size()))
         {
           mixed slice = mixed(list.begin() + last, list.end());
           results.insert(results.end(), MixedArray::make(slice, NounType::LIST));
@@ -2880,7 +2880,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
     {
       ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
@@ -2888,7 +2888,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
       floats results = floats();
       mixed mixedResults = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(xis[index] == 0)
         {
@@ -2923,7 +2923,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
     {
       ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
@@ -2931,7 +2931,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
       floats results = floats();
       mixed mixedResults = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(xis[index] == 0)
         {
@@ -2966,13 +2966,13 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
     {
       ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         Storage sx = Word::make(xis[index], NounType::INTEGER);
@@ -3005,7 +3005,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
@@ -3013,7 +3013,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
       floats results = floats();
       mixed mixedResults = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(xis[index] < Float::tolerance)
         {
@@ -3048,7 +3048,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
@@ -3056,7 +3056,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
       floats results = floats();
       mixed mixedResults = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(xis[index] < Float::tolerance)
         {
@@ -3091,13 +3091,13 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         Storage sx = Float::make(xis[index], NounType::REAL);
@@ -3130,13 +3130,13 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         const Storage& sx = xis[index];
@@ -3161,13 +3161,13 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Float::make(iis[index], NounType::REAL);
         const Storage& sx = xis[index];
@@ -3192,13 +3192,13 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -3237,7 +3237,7 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           return WordArray::nil();
         }
@@ -3249,7 +3249,7 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           return WordArray::nil();
         }
@@ -3274,7 +3274,7 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           return WordArray::nil();
         }
@@ -3286,7 +3286,7 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           return WordArray::nil();
         }
@@ -3311,7 +3311,7 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           return WordArray::nil();
         }
@@ -3323,7 +3323,7 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
       {
         xi = -xi;
 
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           return WordArray::nil();
         }
@@ -3380,7 +3380,7 @@ Storage List::find_integers_integer(const Storage& i, const Storage& x)
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         Storage sx = Word::make(xi, NounType::INTEGER);
@@ -3417,7 +3417,7 @@ Storage List::find_integers_real(const Storage& i, const Storage& x)
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         Storage sx = Float::make(fx, NounType::REAL);
@@ -3455,7 +3455,7 @@ Storage List::find_reals_integer(const Storage& i, const Storage& x)
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Float::make(iis[index], NounType::REAL);
 
@@ -3492,7 +3492,7 @@ Storage List::find_reals_real(const Storage& i, const Storage& x)
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Float::make(iis[index], NounType::REAL);
         Storage sx = Float::make(xi, NounType::REAL);
@@ -3525,7 +3525,7 @@ Storage List::find_mixed(const Storage& i, const Storage& x)
 
     ints results = ints();
 
-    for(int index = 0; index < iis.size(); index++)
+    for(int index = 0; index < static_cast<int>(iis.size()); index++)
     {
       const Storage& si = iis[index];
         Storage matched = eval({si, match, x});
@@ -3583,7 +3583,7 @@ Storage List::index_impl(const Storage& i, const Storage& x)
     {
       int xi = std::get<int>(x.i);
 
-      if(xi > 0 && xi <= iis.size())
+      if(xi > 0 && xi <= static_cast<int>(iis.size()))
       {
         int result = iis[xi - 1];
         return Word::make(result, NounType::INTEGER);
@@ -3600,7 +3600,7 @@ Storage List::index_impl(const Storage& i, const Storage& x)
       ints results = ints();
       for(int xi : xis)
       {
-        if(xi > 0 && xi <= iis.size())
+        if(xi > 0 && xi <= static_cast<int>(iis.size()))
         {
           int result = iis[xi - 1];
           results.push_back(result);
@@ -3622,7 +3622,7 @@ Storage List::index_impl(const Storage& i, const Storage& x)
     {
       int xi = std::get<int>(x.i);
 
-      if(xi > 0 && xi <= iis.size())
+      if(xi > 0 && xi <= static_cast<int>(iis.size()))
       {
         float result = iis[xi - 1];
         return Float::make(result, NounType::REAL);
@@ -3635,7 +3635,7 @@ Storage List::index_impl(const Storage& i, const Storage& x)
       floats results = floats();
       for(int xi : xis)
       {
-        if(xi > 0 && xi <= iis.size())
+        if(xi > 0 && xi <= static_cast<int>(iis.size()))
         {
           float result = iis[xi - 1];
           results.push_back(result);
@@ -3657,7 +3657,7 @@ Storage List::index_impl(const Storage& i, const Storage& x)
     {
       int xi = std::get<int>(x.i);
 
-      if(xi > 0 && xi <= iis.size())
+      if(xi > 0 && xi <= static_cast<int>(iis.size()))
       {
         return iis[xi - 1];
       }
@@ -3673,7 +3673,7 @@ Storage List::index_impl(const Storage& i, const Storage& x)
       mixed results = mixed();
       for(int xi : xis)
       {
-        if(xi > 0 && xi <= iis.size())
+        if(xi > 0 && xi <= static_cast<int>(iis.size()))
         {
           results.push_back(iis[xi - 1]);
         }
@@ -4082,14 +4082,14 @@ Storage List::less_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -4110,14 +4110,14 @@ Storage List::less_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -4140,14 +4140,14 @@ Storage List::less_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -4190,14 +4190,14 @@ Storage List::less_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -4220,14 +4220,14 @@ Storage List::less_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -4248,14 +4248,14 @@ Storage List::less_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -4298,14 +4298,14 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -4335,14 +4335,14 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -4372,14 +4372,14 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -4583,14 +4583,14 @@ Storage List::more_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -4611,14 +4611,14 @@ Storage List::more_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -4641,14 +4641,14 @@ Storage List::more_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -4691,14 +4691,14 @@ Storage List::more_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -4721,14 +4721,14 @@ Storage List::more_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -4749,14 +4749,14 @@ Storage List::more_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -4799,14 +4799,14 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -4836,14 +4836,14 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -4873,14 +4873,14 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -4921,12 +4921,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(iis[index] != xis[index])
         {
@@ -4940,12 +4940,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         auto fi = static_cast<float>(iis[index]);
         float fx = xis[index];
@@ -4961,12 +4961,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         Storage si = Word::make(iis[index], NounType::INTEGER);
         const Storage& sx = xis[index];
@@ -4993,12 +4993,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       ints xis = std::get<ints>(x.i);
 
-      if(fs.size() != xis.size())
+      if(static_cast<int>(fs.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < fs.size(); index++)
+      for(int index = 0; index < static_cast<int>(fs.size()); index++)
       {
         Storage si = Real::make(fs[index]);
         Storage sx = Integer::make(xis[index]);
@@ -5020,12 +5020,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(fs.size() != xis.size())
+      if(static_cast<int>(fs.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < fs.size(); index++)
+      for(int index = 0; index < static_cast<int>(fs.size()); index++)
       {
         Storage si = Real::make(fs[index]);
         Storage sx = Real::make(xis[index]);
@@ -5047,12 +5047,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(fs.size() != xis.size())
+      if(static_cast<int>(fs.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < fs.size(); index++)
+      for(int index = 0; index < static_cast<int>(fs.size()); index++)
       {
         Storage si = Real::make(fs[index]);
         const Storage& sx = xis[index];
@@ -5079,12 +5079,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         Storage sx = Word::make(xis[index], NounType::INTEGER);
@@ -5106,12 +5106,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       floats xis = std::get<floats>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         Storage sx = Float::make(xis[index], NounType::REAL);
@@ -5133,12 +5133,12 @@ Storage List::match_impl(const Storage& i, const Storage& x)
     {
       mixed xis = std::get<mixed>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -5334,14 +5334,14 @@ Storage List::max_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -5362,14 +5362,14 @@ Storage List::max_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -5392,14 +5392,14 @@ Storage List::max_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -5448,14 +5448,14 @@ Storage List::max_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -5478,14 +5478,14 @@ Storage List::max_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -5506,14 +5506,14 @@ Storage List::max_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -5562,14 +5562,14 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -5605,14 +5605,14 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -5648,14 +5648,14 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -5863,14 +5863,14 @@ Storage List::min_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -5891,14 +5891,14 @@ Storage List::min_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -5921,14 +5921,14 @@ Storage List::min_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -5977,14 +5977,14 @@ Storage List::min_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -6007,14 +6007,14 @@ Storage List::min_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -6035,14 +6035,14 @@ Storage List::min_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -6091,14 +6091,14 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -6134,14 +6134,14 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -6177,14 +6177,14 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -6351,14 +6351,14 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -6372,14 +6372,14 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -6395,14 +6395,14 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -6437,14 +6437,14 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -6460,14 +6460,14 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -6481,14 +6481,14 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -6523,14 +6523,14 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -6552,14 +6552,14 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -6581,14 +6581,14 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -6740,14 +6740,14 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -6761,14 +6761,14 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -6784,14 +6784,14 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -6826,14 +6826,14 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -6849,7 +6849,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
@@ -6857,7 +6857,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
       floats results = floats();
 
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -6871,14 +6871,14 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -6913,14 +6913,14 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -6942,14 +6942,14 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -6971,14 +6971,14 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -7132,14 +7132,14 @@ Storage List::power_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         int xi = xis[index];
@@ -7156,14 +7156,14 @@ Storage List::power_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fi = iis[index];
 
@@ -7179,7 +7179,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
@@ -7187,7 +7187,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
       mixed results = mixed();
 
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -7222,14 +7222,14 @@ Storage List::power_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -7245,14 +7245,14 @@ Storage List::power_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -7266,14 +7266,14 @@ Storage List::power_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -7308,14 +7308,14 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -7337,14 +7337,14 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -7366,14 +7366,14 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -7450,14 +7450,14 @@ Storage List::remainder_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         int xi = xis[index];
@@ -7471,14 +7471,14 @@ Storage List::remainder_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -7511,14 +7511,14 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -7540,14 +7540,14 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -7704,14 +7704,14 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -7733,14 +7733,14 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -7893,7 +7893,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           mixed results = mixed();
           results.push_back(i);
@@ -7908,7 +7908,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
         {
           result.push_back(ii);
 
-          if(result.size() == xi)
+          if(static_cast<int>(result.size()) == xi)
           {
             results.push_back(WordArray::make(result));
             result = ints();
@@ -7929,7 +7929,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           mixed results = mixed();
           results.push_back(i);
@@ -7944,7 +7944,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
         {
           result.push_back(ii);
 
-          if(result.size() == xi)
+          if(static_cast<int>(result.size()) == xi)
           {
             results.push_back(FloatArray::make(result));
             result = floats();
@@ -7965,7 +7965,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           mixed results = mixed();
           results.push_back(i);
@@ -7980,7 +7980,7 @@ Storage List::split_integer(const Storage& i, const Storage& x)
         {
           result.push_back(ii);
 
-          if(result.size() == xi)
+          if(static_cast<int>(result.size()) == xi)
           {
             results.push_back(MixedArray::make(result));
             result = mixed();
@@ -8019,11 +8019,11 @@ Storage List::split_integers(const Storage& i, const Storage& x)
 
       int count = 0;
       int index = 0;
-      while(count < iis.size())
+      while(count < static_cast<int>(iis.size()))
       {
-        int y = xis[index++ % xis.size()]; // cycle
+        int y = xis[index++ % static_cast<int>(xis.size())]; // cycle
 
-        if(count + y > iis.size())
+        if(count + y > static_cast<int>(iis.size()))
         {
           ints result(iis.begin() + count, iis.end());
           results.push_back(WordArray::make(result));
@@ -8048,11 +8048,11 @@ Storage List::split_integers(const Storage& i, const Storage& x)
 
       int count = 0;
       int index = 0;
-      while(count < iis.size())
+      while(count < static_cast<int>(iis.size()))
       {
-        int y = xis[index++ % xis.size()]; // cycle
+        int y = xis[index++ % static_cast<int>(xis.size())]; // cycle
 
-        if(count + y > iis.size())
+        if(count + y > static_cast<int>(iis.size()))
         {
           floats result(iis.begin(), iis.end());
           results.push_back(FloatArray::make(result));
@@ -8067,7 +8067,7 @@ Storage List::split_integers(const Storage& i, const Storage& x)
         count = count + y;
       }
 
-      if(count < iis.size())
+      if(count < static_cast<int>(iis.size()))
       {
           floats result(iis.begin() + count, iis.end());
           results.push_back(FloatArray::make(result));
@@ -8082,11 +8082,11 @@ Storage List::split_integers(const Storage& i, const Storage& x)
 
       int count = 0;
       int index = 0;
-      while(count < iis.size())
+      while(count < static_cast<int>(iis.size()))
       {
-        int y = xis[index++ % xis.size()]; // cycle
+        int y = xis[index++ % static_cast<int>(xis.size())]; // cycle
 
-        if(count + y > iis.size())
+        if(count + y > static_cast<int>(static_cast<int>(iis.size())))
         {
           mixed result(iis.begin(), iis.end());
           results.push_back(MixedArray::make(result));
@@ -8101,7 +8101,7 @@ Storage List::split_integers(const Storage& i, const Storage& x)
         count = count + y;
       }
 
-      if(count < iis.size())
+      if(count < static_cast<int>(iis.size()))
       {
           mixed result(iis.begin() + count, iis.end());
           results.push_back(MixedArray::make(result));
@@ -8138,7 +8138,7 @@ Storage List::take_integer(const Storage& i, const Storage& x)
         ints results = ints();
         for(int index = 0; index < xi; index++)
         {
-          results.push_back(iis[index % iis.size()]); // cycle through iis
+          results.push_back(iis[index % static_cast<int>(iis.size())]); // cycle through iis
         }
 
         return WordArray::make(results);
@@ -8177,7 +8177,7 @@ Storage List::take_integer(const Storage& i, const Storage& x)
         floats results = floats();
         for(int index = 0; index < xi; index++)
         {
-          results.push_back(iis[index % iis.size()]); // cycle through iis
+          results.push_back(iis[index % static_cast<int>(iis.size())]); // cycle through iis
         }
 
         return FloatArray::make(results);
@@ -8216,7 +8216,7 @@ Storage List::take_integer(const Storage& i, const Storage& x)
         mixed results = mixed();
         for(int index = 0; index < xi; index++)
         {
-          results.push_back(iis[index % iis.size()]); // cycle through iis
+          results.push_back(iis[index % static_cast<int>(iis.size())]); // cycle through iis
         }
 
         return MixedArray::make(results);
@@ -8372,14 +8372,14 @@ Storage List::times_integers(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       ints results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         int ii = iis[index];
@@ -8393,14 +8393,14 @@ Storage List::times_integers(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         auto fx = static_cast<float>(xi);
@@ -8416,14 +8416,14 @@ Storage List::times_integers(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int xi = xis[index];
         Storage sx = Word::make(xi);
@@ -8458,14 +8458,14 @@ Storage List::times_reals(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         auto fi = static_cast<float>(ii);
@@ -8481,14 +8481,14 @@ Storage List::times_reals(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       floats results = floats();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float fx = xis[index];
         float fi = iis[index];
@@ -8502,14 +8502,14 @@ Storage List::times_reals(const Storage& i, const Storage& x)
     {
       mixed iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float xi = xis[index];
         Storage sx = Float::make(xi);
@@ -8544,14 +8544,14 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
     {
       ints iis = std::get<ints>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int ii = iis[index];
         Storage si = Word::make(ii);
@@ -8573,14 +8573,14 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
     {
       floats iis = std::get<floats>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         float ii = iis[index];
         Storage si = Float::make(ii);
@@ -8602,14 +8602,14 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
     {
       auto iis = std::get<mixed>(i.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
       }
 
       mixed results = mixed();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         const Storage& si = iis[index];
         const Storage& sx = xis[index];
@@ -8713,7 +8713,7 @@ Storage List::eachPair_integers(const Storage& i, const Storage& f)
     ints iis = std::get<ints>(i.i);
 
     mixed results = mixed();
-    for(int index = 0; index < iis.size() - 1; index++)
+    for(int index = 0; index < static_cast<int>(iis.size()) - 1; index++)
     {
       int y = iis[index];
       int z = iis[index+1];
@@ -8740,7 +8740,7 @@ Storage List::eachPair_reals(const Storage& i, const Storage& f)
     floats iis = std::get<floats>(i.i);
 
     mixed results = mixed();
-    for(int index = 0; index < iis.size() - 1; index++)
+    for(int index = 0; index < static_cast<int>(iis.size()) - 1; index++)
     {
       float y = iis[index];
       float z = iis[index+1];
@@ -8767,7 +8767,7 @@ Storage List::eachPair_mixed(const Storage& i, const Storage& f)
     mixed iis = std::get<mixed>(i.i);
 
     mixed results = mixed();
-    for(int index = 0; index < iis.size() - 1; index++)
+    for(int index = 0; index < static_cast<int>(iis.size()) - 1; index++)
     {
       const Storage& y = iis[index];
       const Storage& z = iis[index+1];
@@ -8798,17 +8798,17 @@ Storage List::over_integers(const Storage& i, const Storage& f)
       return i;
     }
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       int result = iis[0];
       return Word::make(result);
     }
 
-    // else iis.size() > 1
+    // else static_cast<int>(iis.size()) > 1
 
     Storage y = Word::make(iis[0]);
 
-    for(int index = 1; index < iis.size(); index++)
+    for(int index = 1; index < static_cast<int>(iis.size()); index++)
     {
       Storage z = Word::make(iis[index]);
 
@@ -8839,17 +8839,17 @@ Storage List::over_reals(const Storage& i, const Storage& f)
       return i;
     }
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       float result = iis[0];
       return Float::make(result);
     }
 
-    // else iis.size() > 1
+    // else static_cast<int>(iis.size()) > 1
 
     Storage y = Float::make(iis[0]);
 
-    for(int index = 1; index < iis.size(); index++)
+    for(int index = 1; index < static_cast<int>(iis.size()); index++)
     {
       Storage z = Float::make(iis[index]);
 
@@ -8880,16 +8880,16 @@ Storage List::over_mixed(const Storage& i, const Storage& f)
       return i;
     }
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       return iis[0];
     }
 
-    // else iis.size() > 1
+    // else static_cast<int>(iis.size()) > 1
 
     Storage y = iis[0];
 
-    for(int index = 1; index < iis.size(); index++)
+    for(int index = 1; index < static_cast<int>(iis.size()); index++)
     {
       const Storage& z = iis[index];
 
@@ -8920,17 +8920,17 @@ Storage List::scanOver_integers(const Storage& i, const Storage& f)
       return i;
     }
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       return i;
     }
 
-    // else iis.size() > 1
+    // else static_cast<int>(iis.size()) > 1
 
     Storage y = Word::make(iis[0]);
     mixed results = mixed({y});
 
-    for(int index = 1; index < iis.size(); index++)
+    for(int index = 1; index < static_cast<int>(iis.size()); index++)
     {
       Storage z = Word::make(iis[index]);
 
@@ -8963,17 +8963,17 @@ Storage List::scanOver_reals(const Storage& i, const Storage& f)
       return i;
     }
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       return i;
     }
 
-    // else iis.size() > 1
+    // else static_cast<int>(iis.size()) > 1
 
     Storage y = Float::make(iis[0]);
     mixed results = mixed({y});
 
-    for(int index = 1; index < iis.size(); index++)
+    for(int index = 1; index < static_cast<int>(iis.size()); index++)
     {
       Storage z = Float::make(iis[index]);
 
@@ -9006,17 +9006,17 @@ Storage List::scanOver_mixed(const Storage& i, const Storage& f)
       return i;
     }
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       return i;
     }
 
-    // else iis.size() > 1
+    // else static_cast<int>(iis.size()) > 1
 
     Storage y = iis[0];
     mixed results = mixed({y});
 
-    for(int index = 1; index < iis.size(); index++)
+    for(int index = 1; index < static_cast<int>(iis.size()); index++)
     {
       const Storage& z = iis[index];
 
@@ -9094,7 +9094,7 @@ maybe<bytes> List::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> List::from_conn(const Connection& conn, int t) {
+maybe<Storage> List::from_conn(Connection& conn, int t) {
   switch (t) {
     case StorageType::WORD_ARRAY:
       return WordArray::from_conn(conn, NounType::LIST);
@@ -9110,7 +9110,7 @@ maybe<Storage> List::from_conn(const Connection& conn, int t) {
   }
 }
 
-void List::to_conn(const Connection& conn, const Storage& i) {
+void List::to_conn(Connection& conn, const Storage& i) {
   if (i.o != NounType::LIST) {
     return;
   }
@@ -9120,7 +9120,8 @@ void List::to_conn(const Connection& conn, const Storage& i) {
       {
         if (std::holds_alternative<ints>(i.i)) {
           // Always include type in to_conn implementation
-          conn.write({ static_cast<char>(i.t), static_cast<char>(i.o) });
+          std::vector<char> typeBytes = { static_cast<char>(i.t), static_cast<char>(i.o) };
+          conn.write(typeBytes);
 
           ints integers = std::get<ints>(i.i);
           bytes bs = squeeze_ints(integers);
@@ -9133,7 +9134,8 @@ void List::to_conn(const Connection& conn, const Storage& i) {
     case StorageType::FLOAT_ARRAY:
       {
         // Always include type in to_conn implementation
-        conn.write({ static_cast<char>(i.t), static_cast<char>(i.o) });
+        std::vector<char> typeBytes = { static_cast<char>(i.t), static_cast<char>(i.o) };
+        conn.write(typeBytes);
 
         floats fs = std::get<floats>(i.i);
         bytes bs = squeeze_floats(fs);

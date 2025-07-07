@@ -10,11 +10,12 @@
 
 #include "iota_float.h"
 
-#include "../Connection.h"
 #include "../types.h"
 #include "../squeeze.h"
 
 #include "../storage/storage.h"
+
+#include <Connection.h>
 
 // Float
 // Storage::from_bytes decodes a byte array into a Float object
@@ -58,7 +59,7 @@ maybe<bytes> Float::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> Float::from_conn(const Connection& conn, const int objectType)
+maybe<Storage> Float::from_conn(Connection& conn, const int objectType)
 {
   if(const maybe<floating> maybeFloating = expand_conn_floating(conn))
   {
@@ -81,12 +82,13 @@ maybe<Storage> Float::from_conn(const Connection& conn, const int objectType)
   }
 }
 
-void Float::to_conn(const Connection& conn, const Storage& i)
+void Float::to_conn(Connection& conn, const Storage& i)
 {
   if(std::holds_alternative<float>(i.i))
   {
     // Always include type in to_conn implementation
-    conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
+    std::vector<char> typeBytes = {static_cast<char>(i.t), static_cast<char>(i.o)};
+    conn.write(typeBytes);
 
     float f = std::get<float>(i.i);
 

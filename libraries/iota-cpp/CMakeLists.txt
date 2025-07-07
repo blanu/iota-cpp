@@ -12,3 +12,8 @@ file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp)
 add_library(iota-cpp-lib STATIC ${IOTA_FILES})
 
 target_include_directories(iota-cpp-lib PUBLIC ${IOTA_LIB_SOURCE_DIR})
+
+if(ENABLE_COVERAGE AND (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+  target_compile_options(iota-cpp-lib PRIVATE --coverage -O0 -g)
+  target_link_options(iota-cpp-lib PRIVATE --coverage)
+endif()

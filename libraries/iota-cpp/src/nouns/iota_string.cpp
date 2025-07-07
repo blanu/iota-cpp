@@ -176,7 +176,7 @@ Storage IotaString::gradeDown_impl(const Storage& i)
 
     ints results(integers.size());
 
-    for (int index = 0; index < results.size(); ++index)
+    for (int index = 0; index < static_cast<int>(results.size()); ++index)
     {
       results[index] = index;
     }
@@ -211,7 +211,7 @@ Storage IotaString::gradeUp_impl(const Storage& i)
 
     ints results(integers.size());
 
-    for (int index = 0; index < results.size(); ++index)
+    for (int index = 0; index < static_cast<int>(results.size()); ++index)
     {
       results[index] = index;
     }
@@ -308,7 +308,7 @@ Storage IotaString::group_impl(const Storage& i)
     // Groups sorted by the first index in each group
     auto groups=std::map<int, ints>();
 
-    for (int index = 0; index < items.size(); index++)
+    for (int index = 0; index < static_cast<int>(items.size()); index++)
     {
       // Get each item in the list
       int item = items[index];
@@ -371,12 +371,12 @@ Storage IotaString::equal_impl(const Storage& i, const Storage& x)
     {
       const ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(iis[index] != xis[index])
         {
@@ -401,7 +401,7 @@ Storage IotaString::find_character(const Storage& i, const Storage& x)
 
     auto results = ints();
 
-    for(int index = 0; index < iis.size(); index++)
+    for(int index = 0; index < static_cast<int>(iis.size()); index++)
     {
       Storage si = Character::make(iis[index]);
       Storage matched = eval({si, match, x});
@@ -442,13 +442,13 @@ Storage IotaString::find_string(const Storage& i, const Storage& x)
 
       auto results = ints();
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         int found = true;
-        for(int xindex = 0; xindex < xis.size(); xindex++)
+        for(int xindex = 0; xindex < static_cast<int>(xis.size()); xindex++)
         {
           int offset = index + xindex;
-          if(offset >= iis.size())
+          if(offset >= static_cast<int>(iis.size()))
           {
             found = false;
             break;
@@ -625,7 +625,7 @@ Storage IotaString::form_character(const Storage& i, const Storage& x)
   {
     const ints iis = std::get<ints>(i.i);
 
-    if(iis.size() == 1)
+    if(static_cast<int>(iis.size()) == 1)
     {
       const int result = iis[0];
       return Character::make(result);
@@ -667,7 +667,7 @@ Storage IotaString::index_impl(const Storage& i, const Storage& x)
     {
       const int xi = std::get<int>(x.i);
 
-      if(xi > 0 && xi <= iis.size())
+      if(xi > 0 && xi <= static_cast<int>(iis.size()))
       {
         const int result = iis[xi - 1];
         return Word::make(result, NounType::CHARACTER);
@@ -684,7 +684,7 @@ Storage IotaString::index_impl(const Storage& i, const Storage& x)
       auto results = ints();
       for(const int xi : xis)
       {
-        if(xi > 0 && xi <= iis.size())
+        if(xi > 0 && xi <= static_cast<int>(iis.size()))
         {
           int result = iis[xi - 1];
           results.push_back(result);
@@ -753,12 +753,12 @@ Storage IotaString::match_impl(const Storage& i, const Storage& x)
     {
       const ints xis = std::get<ints>(x.i);
 
-      if(iis.size() != xis.size())
+      if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
         return Noun::false0();
       }
 
-      for(int index = 0; index < iis.size(); index++)
+      for(int index = 0; index < static_cast<int>(iis.size()); index++)
       {
         if(iis[index] != xis[index])
         {
@@ -829,7 +829,7 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
 
       if(xi > 0)
       {
-        if(xi >= iis.size())
+        if(xi >= static_cast<int>(iis.size()))
         {
           auto results = mixed();
           results.push_back(i);
@@ -878,11 +878,11 @@ Storage IotaString::split_integers(const Storage& i, const Storage& x)
 
       int count = 0;
       int index = 0;
-      while(count < iis.size())
+      while(count < static_cast<int>(iis.size()))
       {
-        const int y = xis[index++ % xis.size()]; // cycle
+        const int y = xis[index++ % static_cast<int>(xis.size())]; // cycle
 
-        if(count + y > iis.size())
+        if(count + y > static_cast<int>(iis.size()))
         {
           const ints result(iis.begin(), iis.end());
           results.push_back(IotaString::make(result));
@@ -897,7 +897,7 @@ Storage IotaString::split_integers(const Storage& i, const Storage& x)
         count = count + y;
       }
 
-      if(count < iis.size())
+      if(count < static_cast<int>(iis.size()))
       {
         const ints result(iis.begin() + count, iis.end());
         results.push_back(IotaString::make(result));
@@ -935,7 +935,7 @@ Storage IotaString::take_integer(const Storage& i, const Storage& x)
         auto results = ints();
         for(int index = 0; index < xi; index++)
         {
-          results.push_back(iis[index % iis.size()]); // cycle through iis
+          results.push_back(iis[index % static_cast<int>(iis.size())]); // cycle through iis
         }
 
         return IotaString::make(results);
@@ -1012,7 +1012,7 @@ maybe<bytes> IotaString::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> IotaString::from_conn(const Connection& conn, const int t) {
+maybe<Storage> IotaString::from_conn(Connection& conn, const int t) {
   if(t == StorageType::WORD_ARRAY)
   {
     return WordArray::from_conn(conn, NounType::STRING);
@@ -1023,7 +1023,7 @@ maybe<Storage> IotaString::from_conn(const Connection& conn, const int t) {
   }
 }
 
-void IotaString::to_conn(const Connection& conn, const Storage& i) {
+void IotaString::to_conn(Connection& conn, const Storage& i) {
   if (i.o != NounType::STRING) {
     return;
   }

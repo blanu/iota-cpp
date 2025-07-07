@@ -7,12 +7,12 @@
 
 #include "nouns/noun.h"
 
-#include "ReliableConnection.h"
+#include <ReliableConnectionUsbCdc.h>
 
 SerialConnection SerialConnection::make()
 {
   Serial.begin(115200);
-  return SerialConnection(ReliableConnection(Serial));
+  return SerialConnection(ReliableConnectionUsbCdc());
 }
 
 maybe<Storage> SerialConnection::read_storage()

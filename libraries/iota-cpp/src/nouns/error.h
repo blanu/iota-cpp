@@ -1,6 +1,8 @@
 #ifndef ERROR_H_
 #define ERROR_H_
 
+#include <string>
+
 #include "../storage/storage.h"
 
 #define BAD_INDEX_TYPE 0

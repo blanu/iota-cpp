@@ -13,8 +13,9 @@
 #include "word_array.h"
 
 #include "../squeeze.h"
-#include "../Connection.h"
 #include "../types.h"
+
+#include <Connection.h>
 
 // Word
 // Storage::from_bytes decodes a byte array into a Word object
@@ -49,7 +50,7 @@ bytes Word::to_bytes(const Storage& i)
   }
 }
 
-maybe<Storage> Word::from_conn(const Connection& conn, const int objectType)
+maybe<Storage> Word::from_conn(Connection& conn, const int objectType)
 {
   varint varinteger = expand_conn(conn); // NOLINT
 
@@ -65,12 +66,13 @@ maybe<Storage> Word::from_conn(const Connection& conn, const int objectType)
   }
 }
 
-void Word::to_conn(const Connection& conn, const Storage& i)
+void Word::to_conn(Connection& conn, const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))
   {
     // Always include type in to_conn implementation
-    conn.write({static_cast<char>(i.t), static_cast<char>(i.o)});
+    std::vector<char> typeBytes = {static_cast<char>(i.t), static_cast<char>(i.o)};
+    conn.write(typeBytes);
 
     const int integer = std::get<int>(i.i);
     const bytes result = squeeze_int(integer);
