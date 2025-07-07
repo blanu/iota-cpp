@@ -23,6 +23,8 @@ class Symbol
     // Initialize dispatch table and symbol tables
     static void initialize();
 
+    static Storage make(int i);
+
     static Storage evaluate_impl(const Storage& i);
     static Storage truth_impl(const Storage& i);
 

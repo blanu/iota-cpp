@@ -17,7 +17,10 @@ set(PORT "/dev/cu.usbmodem1101")
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/arduino/rp2350/iota-arduino)
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp ${IOTA_ARDUINO_SOURCE_DIR}/*.cpp ${IOTA_ARDUINO_SOURCE_DIR}/*.ino)
 
-add_executable(iota-arduino ${IOTA_FILES})
+add_executable(iota-arduino ${IOTA_FILES}
+  ../iota-teensy/src/effects/audio/audio.h
+  ../iota-teensy/src/IotaTeensy.h
+  ../iota-teensy/src/effects/audio/audio.cpp)
 add_dependencies(iota-arduino build_iota_arduino)
 target_link_libraries(iota-arduino PRIVATE iota-cpp)
 

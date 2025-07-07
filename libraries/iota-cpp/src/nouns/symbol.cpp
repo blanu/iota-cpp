@@ -48,6 +48,11 @@ void Symbol::initialize()
   stringToInteger[asciiToUTF32("undefined")] = SymbolType::undefined;
 }
 
+Storage Symbol::make(int i)
+{
+  return Word::make(i, NounType::USER_SYMBOL);
+}
+
 Storage Symbol::evaluate_impl(const Storage& i)
 {
   if(std::holds_alternative<int>(i.i))

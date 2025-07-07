@@ -1,3 +1,9 @@
 [submodule "lib/TransmissionArduino"]
 	path = lib/TransmissionArduino
 	url = https://github.com/OperatorFoundation/TransmissionArduino.git
+[submodule "lib/Audio-core"]
+	path = lib/Audio-core
+	url = https://github.com/blanu/Audio-core
+[submodule "lib/Audio-Teensy4"]
+	path = lib/Audio-Teensy4
+	url = https://github.com/blanu/Audio-Teensy4
