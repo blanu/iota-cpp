@@ -9,48 +9,16 @@
 
 #include <map>
 
+#include <types.h>
+#include <effects/effects.h>
+#include <effects/effect_symbols.h>
 #include <storage/storage.h>
-
 #include <nouns/symbol.h>
 
-class TeensyAudio
+namespace effects::families
 {
-  public:
-    // Input
-    AudioInputI2S *input_i2s;
-
-    // Output
-    AudioOutputI2S *output_i2s;
-
-    // Synth
-    std::vector<AudioSynthToneSweep *> synths_sweep;
-
-    // Effect
-    std::vector<AudioEffectReverb *> effects_reverb;
-
-    // Filter
-    std::vector<AudioFilterLadder *> filters_ladder;
-
-    // Analyze
-    std::vector<AudioAnalyzeFFT1024 *> analyzers_fft1024;
-
-    // Control
-    AudioControlSGTL5000 *control_sgtl5000;
-
-    // Play
-    std::vector<AudioPlayMemory *> plays_memory;
-
-    // Record
-    std::vector<AudioRecordQueue *> records_queue;
-
-    // Mixer
-    std::vector<AudioMixer4 *> mixers;
-
-    // Connections
-    static std::map<int, AudioConnection *> edges;
-
-    static void initialize();
-};
+  static constexpr int audio = 5;
+}
 
 namespace effects::audio
 {
@@ -72,6 +40,7 @@ namespace effects::audio
   static constexpr int stop    = 16;
   static constexpr int clear   = 17;
   static constexpr int channel = 18;
+  static constexpr int memory  = 19;
 }
 
 namespace effects::audio::ios
@@ -204,13 +173,90 @@ namespace effects::audio::outputPort
   static constexpr int line      = 2;
 }
 
+class AudioIO
+{
+  public:
+    static Storage make(int i);
+};
+
+class AudioNode
+{
+  public:
+    static Storage make(int i);
+};
+
+class AudioLink
+{
+  public:
+    static Storage make(int i, int ic, int x, int xc);
+    static Storage make(int i, int x);
+    static Storage make(Storage i, Storage x);
+    static Storage make(Storage i, int ic, Storage x, int xc);
+};
+
 namespace iota
 {
-  inline Storage input = Monad::make(effects::audio::input);
-  inline Storage output = Monad::make(effects::audio::output);
-  inline Storage to = Dyad::make(effects::audio::to);
+  inline Storage input = MonadicEffect::make(effects::families::audio, effects::audio::input);
+  inline Storage output = MonadicEffect::make(effects::families::audio, effects::audio::output);
+  inline Storage to = DyadicEffect::make(effects::families::audio, effects::audio::to);
 
-  inline Storage i2s = Symbol::make(effects::audio::ios::i2s);
+  inline Storage i2s = AudioIO::make(effects::audio::ios::i2s);
 }
+
+class Audio
+{
+  public:
+    // New effect-specific value types
+    static constexpr int AUDIO_NODE = (effects::families::audio << 8) | 1;
+    static constexpr int AUDIO_LINK = (effects::families::audio << 8) | 2;
+    static constexpr int AUDIO_IO   = (effects::families::audio << 8) | 3;
+
+    static constexpr int input_i2s_id = 1;
+    static constexpr int output_i2s_id = 2;
+    static constexpr int control_sgtl5000_id = 3;
+    static constexpr int nextNodeId = 4;
+
+    // Control
+    static AudioControlSGTL5000 *control_sgtl5000;
+
+    // Input
+    static AudioInputI2S *input_i2s;
+
+    // Output
+    static AudioOutputI2S *output_i2s;
+
+    // Synth
+    static std::vector<AudioSynthToneSweep *> synths_sweep;
+
+    // Effect
+    static std::vector<AudioEffectReverb *> effects_reverb;
+
+    // Filter
+    static std::vector<AudioFilterLadder *> filters_ladder;
+
+    // Analyze
+    static std::vector<AudioAnalyzeFFT1024 *> analyzers_fft1024;
+
+    // Play
+    static std::vector<AudioPlayMemory *> plays_memory;
+
+    // Record
+    static std::vector<AudioRecordQueue *> records_queue;
+
+    // Mixer
+    static std::vector<AudioMixer4 *> mixers;
+
+    // Connections
+    static std::vector<AudioConnection *> edges;
+
+    static void initialize();
+
+    static Storage input_impl(const Storage& i);
+    static Storage output_impl(const Storage& i);
+    static Storage to_impl(const Storage& i, const Storage& x);
+
+  private:
+    static AudioStream *findNode(Storage i);
+};
 
 #endif //AUDIO_H

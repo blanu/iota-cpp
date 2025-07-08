@@ -19,8 +19,10 @@ file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp ${IOTA_ARDUINO_SOURCE_
 
 add_executable(iota-arduino ${IOTA_FILES}
   ../iota-teensy/src/effects/audio/audio.h
-  ../iota-teensy/src/IotaTeensy.h
-  ../iota-teensy/src/effects/audio/audio.cpp)
+  ../iota-teensy/src/teensy_effects_provider.h
+  ../iota-teensy/src/effects/audio/audio.cpp
+  ../iota-teensy/src/teensy_effects_provider.cpp
+  ../iota-teensy/src/iota-teensy.h)
 add_dependencies(iota-arduino build_iota_arduino)
 target_link_libraries(iota-arduino PRIVATE iota-cpp)
 

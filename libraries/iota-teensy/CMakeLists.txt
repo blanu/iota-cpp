@@ -22,8 +22,8 @@ set(LOOPBACK_SKETCH_FILE ${LOOPBACK_DIR}/loopback.ino)
 # Define your sketch file
 set(SKETCH_FILE ${IOTA_TEENSY_PROTOCOL_SERVER_DIR}/iota-teensy-protocol-server.ino)
 
-set(BOARD "teensy:avr:teensy41")
-set(PORT "/dev/cu.usbmodem1101")
+set(BOARD "teensy:avr:teensy40")
+set(PORT "/dev/cu.usbmodem22302")
 
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/teensy/rp2350/iota-teensy)
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp ${IOTA_TEENSY_SOURCE_DIR}/*.cpp ${IOTA_TEENSY_SOURCE_DIR}/*.ino)
@@ -56,8 +56,6 @@ add_custom_target(build_loopback ALL
   --library ${IOTA_LIB_DIR}
   --library ${IOTA_ARDUINO_DIR}
   --library ${IOTA_TEENSY_DIR}
-  --library ${AUDIO_ARDUINO_DIR}
-  --library ${AUDIO_TEENSY_DIR}
   --library ${TRANSMISSION_LIB_DIR}
   --library ${TRANSMISSION_TEENSY_DIR}
   ${LOOPBACK_SKETCH_FILE}
