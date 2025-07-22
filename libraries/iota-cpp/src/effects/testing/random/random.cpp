@@ -8,13 +8,14 @@
 #include "../../../nouns/error.h"
 #include "../../../verbs.h"
 
-#include "../../../storage/storage.h"
-#include "../../../storage/word.h"
-#include "../../../storage/word_array.h"
-#include "../../../storage/float_array.h"
-#include "../../../storage/mixed_array.h"
+#include "../../../nouns/noun.h" // Include noun.h before mixed_array.h for advanced serialization
 
-#include "../../../nouns/noun.h"
+#include <storage/storage.h>
+#include <storage/word.h>
+#include <storage/word_array.h>
+#include <storage/float_array.h>
+#include <storage/mixed_array.h>
+
 #include "../../../nouns/integer.h"
 #include "../../../nouns/real.h"
 

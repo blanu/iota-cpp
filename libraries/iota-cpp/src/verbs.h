@@ -7,7 +7,7 @@
 
 #include "symbols.h"
 
-#include "storage/storage.h"
+#include <storage/storage.h>
 
 int getInteger(const Storage& i);
 

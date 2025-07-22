@@ -12,8 +12,8 @@
 #include "../verbs.h"
 #include "../api.h"
 
-#include "../storage/word.h"
-#include "../storage/mixed_array.h"
+#include <storage/word.h>
+#include <storage/mixed_array.h>
 
 // Conditional
 void Conditional::initialize()

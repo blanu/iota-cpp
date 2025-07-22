@@ -7,7 +7,7 @@
 
 #include <vector>
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 #include <Connection.h>
 

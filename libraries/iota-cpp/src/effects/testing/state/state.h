@@ -5,11 +5,11 @@
 #ifndef TESTING_STATE_H
 #define TESTING_STATE_H
 
-#include "../../../types.h"
+#include <types.h>
 
 #include "../../effects_provider.h"
 
-#include "../../../storage/storage.h"
+#include <storage/storage.h>
 
 class State
 {

@@ -5,7 +5,7 @@
 #ifndef CONDITIONAL_H
 #define CONDITIONAL_H
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 class Conditional
 {

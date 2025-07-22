@@ -4,7 +4,7 @@
 
 #include "conjunctions.h"
 
-#include "../storage/word.h"
+#include <storage/word.h>
 
 #include "../nouns/noun.h"
 

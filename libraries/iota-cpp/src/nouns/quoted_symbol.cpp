@@ -11,8 +11,8 @@
 #include "../symbols.h"
 #include "error.h"
 
-#include "../storage/word.h"
-#include "../storage/word_array.h"
+#include <storage/word.h>
+#include <storage/word_array.h>
 
 void QuotedSymbol::initialize()
 {

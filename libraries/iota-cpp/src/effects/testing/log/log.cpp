@@ -6,9 +6,9 @@
 
 #include <chrono>
 
-#include "../../../storage/storage.h"
-#include "../../../storage/word_array.h"
-#include "../../../storage/mixed_array.h"
+#include <storage/storage.h>
+#include <storage/word_array.h>
+#include <storage/mixed_array.h>
 
 #include "../../../nouns/integer.h"
 

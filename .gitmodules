@@ -7,3 +7,6 @@
 [submodule "lib/Audio-Teensy4"]
 	path = lib/Audio-Teensy4
 	url = https://github.com/blanu/Audio-Teensy4
+[submodule "lib/ion-cpp"]
+	path = lib/ion-cpp
+	url = https://github.com/OperatorFoundation/ion-cpp

@@ -9,9 +9,9 @@
 #include <string>
 #include <unordered_map>
 
-#include "../types.h"
+#include <types.h>
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 class Symbol
 {

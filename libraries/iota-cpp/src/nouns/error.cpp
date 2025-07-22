@@ -4,8 +4,8 @@
 
 #include "error.h"
 
-#include "../storage/storage.h"
-#include "../storage/word.h"
+#include <storage/storage.h>
+#include <storage/word.h>
 
 Storage Error::make(const int i)
 {

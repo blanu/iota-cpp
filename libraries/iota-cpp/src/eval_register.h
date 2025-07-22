@@ -1,10 +1,10 @@
 #ifndef REGISTER_H_
 #define REGISTER_H_
 
-#include "types.h"
+#include <types.h>
 
 #include "effects/effects_provider.h"
-#include "storage/storage.h"
+#include <storage/storage.h>
 #include "storage/word.h"
 
 class EvalRegister;

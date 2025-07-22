@@ -6,9 +6,9 @@
 
 #include "../nouns/noun.h"
 
-#include "../storage/storage.h"
-#include "../storage/word.h"
-#include "../storage/word_array.h"
+#include <storage/storage.h>
+#include <storage/word.h>
+#include <storage/word_array.h>
 
 Storage NiladicEffect::make(const int f, const int e)
 {

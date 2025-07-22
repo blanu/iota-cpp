@@ -10,8 +10,8 @@
 #include "../verbs.h"
 #include "../api.h"
 
-#include "../storage/storage.h"
-#include "../storage/word.h"
+#include <storage/storage.h>
+#include <storage/word.h>
 
 // Symbol
 std::unordered_map<int, ints> Symbol::integerToString;

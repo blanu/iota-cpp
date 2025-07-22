@@ -7,7 +7,7 @@
 
 #include "effect_symbols.h"
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 class NiladicEffect
 {

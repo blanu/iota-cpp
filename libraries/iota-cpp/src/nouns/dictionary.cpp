@@ -10,15 +10,15 @@
 #include "list.h"
 #include "quoted_symbol.h"
 
-#include "../squeeze.h"
+#include <squeeze.h>
 #include "../symbols.h"
 #include "error.h"
 #include "../verbs.h"
 #include "../api.h"
 
-#include "../storage/storage.h"
-#include "../storage/word.h"
-#include "../storage/mixed_array.h"
+#include <storage/storage.h>
+#include <storage/word.h>
+#include <storage/mixed_array.h>
 
 // Dictionary
 void Dictionary::initialize()

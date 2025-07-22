@@ -5,7 +5,7 @@
 #ifndef QUOTED_SYMBOL_H
 #define QUOTED_SYMBOL_H
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 class QuotedSymbol
 {

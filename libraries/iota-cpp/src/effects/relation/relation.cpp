@@ -10,11 +10,11 @@
 #include "../../nouns/error.h"
 #include "../../api.h"
 
-#include "../../storage/word.h"
-#include "../../storage/word_array.h"
+#include <storage/word.h>
+#include <storage/word_array.h>
 
 #include "../../nouns/noun.h"
-#include "../../storage/mixed_array.h"
+#include <storage/mixed_array.h>
 
 std::unordered_map<int, Log::Table*> Log::tables;
 

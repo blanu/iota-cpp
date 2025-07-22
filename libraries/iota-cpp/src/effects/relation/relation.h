@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "../../storage/storage.h"
+#include <storage/storage.h>
 
 template <>
 struct std::hash<std::vector<Storage>>

@@ -7,9 +7,9 @@
 #include "../api.h"
 #include "error.h"
 
-#include "../storage/storage.h"
-#include "../storage/word_array.h"
-#include "../storage/mixed_array.h"
+#include <storage/storage.h>
+#include <storage/word_array.h>
+#include <storage/mixed_array.h>
 
 #include "../nouns/noun.h"
 #include "../nouns/integer.h"

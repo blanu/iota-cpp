@@ -7,12 +7,12 @@
 
 #include "log/log.h"
 
-#include "../../storage/storage.h"
+#include <storage/storage.h>
 
 #include "../../nouns/noun.h"
 #include "../effects.h"
-#include "../../storage/mixed_array.h"
-#include "../../storage/word_array.h"
+#include <storage/mixed_array.h>
+#include <storage/word_array.h>
 #include "random/random.h"
 #include "state/state.h"
 

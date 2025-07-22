@@ -2,18 +2,18 @@
 
 #include <utility>
 #include "nouns/error.h"
-#include "types.h"
+#include <types.h>
 #include "eval_register.h"
 
-#include "storage/storage.h"
+#include <storage/storage.h>
 #include "storage/word_array.h"
-#include "storage/float_array.h"
+#include <storage/float_array.h>
 
 #include "storage/word.h"
 
 #include "nouns/nouns.h"
 #include "nouns/expression.h"
-#include "storage/mixed_array.h"
+#include <storage/mixed_array.h>
 
 cppValue CppValue::t = 1;
 cppValue CppValue::f = 0;

@@ -22,7 +22,7 @@ set(IOTA_CPP_LIB_TEST_DIR ${CMAKE_SOURCE_DIR}/tests)
 set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(tests main.cpp
+add_executable(iota-tests main.cpp
   monad_tests/noun_tests.cpp
   monad_tests/atom_tests.cpp
   monad_tests/char_tests.cpp
@@ -56,16 +56,14 @@ add_executable(tests main.cpp
   effect_tests/log_tests.cpp
   effect_tests/random_tests.cpp
   effect_tests/state_tests.cpp
-  squeeze_tests/int_tests.cpp
-  squeeze_tests/float_tests.cpp
 )
-target_link_libraries(tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
+target_link_libraries(iota-tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   option(ENABLE_COVERAGE "Enable coverage reporting" ON)
 
-  target_compile_options(tests PRIVATE --coverage -O0 -g)
-  target_link_options(tests PRIVATE --coverage)
+  target_compile_options(iota-tests PRIVATE --coverage -O0 -g)
+  target_link_options(iota-tests PRIVATE --coverage)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 
   find_program(GCOV_PATH gcov)
@@ -73,7 +71,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   find_program(GENHTML_PATH genhtml)
 
   if(LCOV_PATH AND GCOV_PATH AND GENHTML_PATH)
-    add_custom_target(coverage
+    add_custom_target(iota-coverage
       COMMAND ${LCOV_PATH} --directory . --zerocounters
       COMMAND tests
       COMMAND ${LCOV_PATH} --directory . --capture --output-file coverage.info
@@ -86,7 +84,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     )
   else()
     # Fallback to gcov directly
-    add_custom_target(coverage
+    add_custom_target(iota-coverage
       COMMAND ${CMAKE_COMMAND} -E remove_directory coverage
       COMMAND ${CMAKE_COMMAND} -E make_directory coverage
       COMMAND tests
@@ -96,16 +94,3 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     )
   endif()
 endif()
-
-# Generate ctags for vim
-set(TAGS_FILE ${IOTA_CPP_LIB_TEST_DIR}/tags)
-add_custom_target(
-  GenerateTestTags
-  COMMAND ctags -R -f ${TAGS_FILE} ${IOTA_CPP_LIB_TEST_DIR} ${IOTA_LIB_DIR}
-  WORKING_DIRECTORY ${IOTA_CPP_LIB_TEST_DIR}
-  COMMENT "Generating ctags"
-)
-add_dependencies(tests GenerateTestTags)
-
-include(CTest)
-add_test(NAME "small words" COMMAND tests)

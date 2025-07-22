@@ -5,7 +5,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 #include <Connection.h>
 

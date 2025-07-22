@@ -5,7 +5,7 @@
 #ifndef LENS_H
 #define LENS_H
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 class Lens
 {

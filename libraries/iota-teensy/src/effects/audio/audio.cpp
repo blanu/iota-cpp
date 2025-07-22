@@ -12,57 +12,60 @@
 #include "../../../../iota-cpp/src/nouns/error.h"
 
 // Input
-AudioInputI2S *Audio::input_i2s;
+AudioInputI2S Audio::input_i2s;
+AudioInputUSB Audio::input_usb;
 
 // Output
-AudioOutputI2S *Audio::output_i2s;
+AudioOutputI2S Audio::output_i2s;
+AudioOutputUSB Audio::output_usb;
 
 // Control
-AudioControlSGTL5000 *Audio::control_sgtl5000;
+AudioControlSGTL5000* Audio::control_sgtl5000;
 
 // Synth
-std::vector<AudioSynthToneSweep *> Audio::synths_sweep;
+std::vector<AudioSynthToneSweep*> Audio::synths_sweep;
+AudioSynthNoiseWhite Audio::synth_noise;
 
 // Effect
-std::vector<AudioEffectReverb *> Audio::effects_reverb;
+std::vector<AudioEffectReverb*> Audio::effects_reverb;
 
 // Filter
-std::vector<AudioFilterLadder *> Audio::filters_ladder;
+std::vector<AudioFilterLadder*> Audio::filters_ladder;
 
 // Analyze
-std::vector<AudioAnalyzeFFT1024 *> Audio::analyzers_fft1024;
+std::vector<AudioAnalyzeFFT1024*> Audio::analyzers_fft1024;
 
 // Play
-std::vector<AudioPlayMemory *> Audio::plays_memory;
+std::vector<AudioPlayMemory*> Audio::plays_memory;
 
 // Record
-std::vector<AudioRecordQueue *> Audio::records_queue;
+std::vector<AudioRecordQueue*> Audio::records_queue;
 
 // Mixer
-std::vector<AudioMixer4 *> Audio::mixers;
+std::vector<AudioMixer4*> Audio::mixers;
 
 // Connections
-std::vector<AudioConnection *> Audio::edges;
+std::vector<AudioConnection*> Audio::edges;
+AudioConnection Audio::noiseToI2S(synth_noise, 0, output_i2s, 0);
 
 void Audio::initialize()
 {
-  input_i2s = nullptr;
-  output_i2s = nullptr;
   control_sgtl5000 = new AudioControlSGTL5000();
 
-  synths_sweep = std::vector<AudioSynthToneSweep *>();
-  effects_reverb = std::vector<AudioEffectReverb *>();
-  filters_ladder = std::vector<AudioFilterLadder *>();
-  analyzers_fft1024 = std::vector<AudioAnalyzeFFT1024 *>();
-  plays_memory = std::vector<AudioPlayMemory *>();
-  records_queue = std::vector<AudioRecordQueue *>();
-  mixers = std::vector<AudioMixer4 *>();
-  edges = std::vector<AudioConnection *>();
+  synths_sweep = std::vector<AudioSynthToneSweep*>();
+  effects_reverb = std::vector<AudioEffectReverb*>();
+  filters_ladder = std::vector<AudioFilterLadder*>();
+  analyzers_fft1024 = std::vector<AudioAnalyzeFFT1024*>();
+  plays_memory = std::vector<AudioPlayMemory*>();
+  records_queue = std::vector<AudioRecordQueue*>();
+  mixers = std::vector<AudioMixer4*>();
+  edges = std::vector<AudioConnection*>();
 
-  AudioMemory(40);
   control_sgtl5000->enable();
   control_sgtl5000->inputSelect(AUDIO_INPUT_MIC);
   control_sgtl5000->volume(0.5);
+
+  synth_noise.amplitude(0.0f);
 }
 
 Storage Audio::input_impl(const Storage& i)
@@ -75,12 +78,12 @@ Storage Audio::input_impl(const Storage& i)
     {
       case effects::audio::ios::i2s:
       {
-        if(input_i2s)
-        {
-          input_i2s = new AudioInputI2S();
-        }
-
         return AudioNode::make(input_i2s_id);
+      }
+
+      case effects::audio::ios::usb:
+      {
+        return AudioNode::make(input_usb_id);
       }
 
       default:
@@ -101,12 +104,12 @@ Storage Audio::output_impl(const Storage& i)
     {
       case effects::audio::ios::i2s:
       {
-        if(output_i2s)
-        {
-          output_i2s = new AudioOutputI2S();
-        }
-
         return AudioNode::make(output_i2s_id);
+      }
+
+      case effects::audio::ios::usb:
+      {
+        return AudioNode::make(output_usb_id);
       }
 
       default:
@@ -119,16 +122,18 @@ Storage Audio::output_impl(const Storage& i)
 
 Storage Audio::to_impl(const Storage& i, const Storage& x)
 {
-  AudioStream *a = Audio::findNode(i);
-  AudioStream *b = Audio::findNode(x);
+  AudioStream* a = Audio::findNode(i);
+  AudioStream* b = Audio::findNode(x);
 
   if(a == nullptr || b == nullptr)
   {
     return Word::make(INVALID_ARGUMENT, NounType::ERROR);
   }
 
-  AudioConnection *conn0 = new AudioConnection(*a, 0, *b, 0);
-  AudioConnection *conn1 = new AudioConnection(*b, 1, *a, 1);
+  AudioNoInterrupts();
+  AudioConnection* conn0 = new AudioConnection(*a, 0, *b, 0);
+  AudioConnection* conn1 = new AudioConnection(*b, 1, *a, 1);
+  AudioInterrupts();
 
   edges.push_back(conn0);
   edges.push_back(conn1);
@@ -137,7 +142,7 @@ Storage Audio::to_impl(const Storage& i, const Storage& x)
 }
 
 // Audio private
-AudioStream *Audio::findNode(Storage i)
+AudioStream* Audio::findNode(Storage i)
 {
   if(i.o != Audio::AUDIO_NODE)
   {
@@ -151,10 +156,10 @@ AudioStream *Audio::findNode(Storage i)
     switch(ii)
     {
       case Audio::input_i2s_id:
-        return input_i2s;
+        return &input_i2s;
 
       case Audio::output_i2s_id:
-        return output_i2s;
+        return &output_i2s;
 
       default:
         return nullptr;
@@ -163,6 +168,7 @@ AudioStream *Audio::findNode(Storage i)
 
   return nullptr;
 }
+
 // end Audio private
 
 Storage AudioIO::make(int i)

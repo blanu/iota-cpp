@@ -6,7 +6,7 @@
 
 #include "symbols.h"
 
-#include "storage/storage.h"
+#include <storage/storage.h>
 #include "storage/word_array.h"
 
 #include "nouns/noun.h"

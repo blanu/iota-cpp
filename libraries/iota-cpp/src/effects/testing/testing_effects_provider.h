@@ -7,7 +7,7 @@
 
 #include "../effects_provider.h"
 
-#include "../../storage/storage.h"
+#include <storage/storage.h>
 
 class TestingEffectsProvider : public EffectsProvider
 {

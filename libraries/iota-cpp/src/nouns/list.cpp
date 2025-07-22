@@ -16,17 +16,17 @@
 #include "real.h"
 
 #include "error.h"
-#include "../squeeze.h"
+#include <squeeze.h>
 #include "../symbols.h"
 #include "../verbs.h"
 #include "../adverbs.h"
 #include "../api.h"
 
-#include "../storage/float_array.h"
-#include "../storage/iota_float.h"
-#include "../storage/mixed_array.h"
-#include "../storage/word.h"
-#include "../storage/word_array.h"
+#include <storage/float_array.h>
+#include <storage/ion_float.h>
+#include <storage/mixed_array.h>
+#include <storage/word.h>
+#include <storage/word_array.h>
 
 // List
 void List::initialize() {

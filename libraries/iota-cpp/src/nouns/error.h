@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../storage/storage.h"
+#include <storage/storage.h>
 
 #define BAD_INDEX_TYPE 0
 #define BAD_INITIALIZATION 1

@@ -14,17 +14,17 @@
 #include "character.h"
 #include "quoted_symbol.h"
 
-#include "../squeeze.h"
+#include <squeeze.h>
 #include "../symbols.h"
 #include "error.h"
 #include "../verbs.h"
 #include "../api.h"
 #include "../adverbs.h"
 
-#include "../storage/word.h"
-#include "../storage/iota_float.h"
-#include "../storage/word_array.h"
-#include "../storage/mixed_array.h"
+#include <storage/word.h>
+#include <storage/ion_float.h>
+#include <storage/word_array.h>
+#include <storage/mixed_array.h>
 
 // String
 void IotaString::initialize() {

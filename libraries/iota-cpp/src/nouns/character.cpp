@@ -11,12 +11,12 @@
 #include "noun.h"
 
 #include "error.h"
-#include "../squeeze.h"
+#include <squeeze.h>
 #include "../symbols.h"
 
-#include "../storage/mixed_array.h"
-#include "../storage/word.h"
-#include "../storage/word_array.h"
+#include <storage/mixed_array.h>
+#include <storage/word.h>
+#include <storage/word_array.h>
 
 // Character
 void Character::initialize() {

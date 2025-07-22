@@ -52,6 +52,7 @@ namespace effects::audio::ios
   static constexpr int spdif =  8;
   static constexpr int tdm   =  9;
   static constexpr int tdm2  = 10;
+  static constexpr int usb  = 11;
 }
 
 namespace effects::audio::inputs
@@ -201,6 +202,7 @@ namespace iota
   inline Storage to = DyadicEffect::make(effects::families::audio, effects::audio::to);
 
   inline Storage i2s = AudioIO::make(effects::audio::ios::i2s);
+  inline Storage usb = AudioIO::make(effects::audio::ios::usb);
 }
 
 class Audio
@@ -214,18 +216,23 @@ class Audio
     static constexpr int input_i2s_id = 1;
     static constexpr int output_i2s_id = 2;
     static constexpr int control_sgtl5000_id = 3;
-    static constexpr int nextNodeId = 4;
+    static constexpr int input_usb_id = 4;
+    static constexpr int output_usb_id = 5;
+    static constexpr int nextNodeId = 6;
 
     // Control
     static AudioControlSGTL5000 *control_sgtl5000;
 
     // Input
-    static AudioInputI2S *input_i2s;
+    static AudioInputI2S input_i2s;
+    static AudioInputUSB input_usb;
 
     // Output
-    static AudioOutputI2S *output_i2s;
+    static AudioOutputI2S output_i2s;
+    static AudioOutputUSB output_usb;
 
     // Synth
+    static AudioSynthNoiseWhite synth_noise;
     static std::vector<AudioSynthToneSweep *> synths_sweep;
 
     // Effect
@@ -248,6 +255,7 @@ class Audio
 
     // Connections
     static std::vector<AudioConnection *> edges;
+    static AudioConnection noiseToI2S;
 
     static void initialize();
 

@@ -5,17 +5,17 @@
 #include "noun.h"
 #include "nouns.h"
 
-#include "../squeeze.h"
+#include <squeeze.h>
 #include "../verbs.h"
 #include "error.h"
 #include "../api.h"
 #include "../adverbs.h"
 
-#include "../storage/word.h"
-#include "../storage/word_array.h"
-#include "../storage/iota_float.h"
-#include "../storage/float_array.h"
-#include "../storage/mixed_array.h"
+#include <storage/word.h>
+#include <storage/word_array.h>
+#include <storage/ion_float.h>
+#include <storage/float_array.h>
+#include <storage/mixed_array.h>
 
 #include "../conjunctions/conjunctions.h"
 

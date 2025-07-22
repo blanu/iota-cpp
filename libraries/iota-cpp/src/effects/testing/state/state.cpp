@@ -7,9 +7,9 @@
 #include "../../../api.h"
 #include "../../../nouns/error.h"
 
-#include "../../../storage/storage.h"
-#include "../../../storage/word.h"
-#include "../../../storage/word_array.h"
+#include <storage/storage.h>
+#include <storage/word.h>
+#include <storage/word_array.h>
 
 void State::initialize(EffectsProvider* effects_register)
 {
