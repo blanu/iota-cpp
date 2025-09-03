@@ -41,9 +41,12 @@ endif()
 include(arduino-cli.cmake)
 include(teensy41.cmake)
 
-add_subdirectory("iota-stdio")
+add_subdirectory("libraries/transmission-cpp")
 add_subdirectory("libraries/ion-cpp")
 add_subdirectory("libraries/iota-cpp")
+
+add_subdirectory("iota-stdio")
+add_subdirectory("iota-tests")
+
 add_subdirectory("libraries/iota-arduino")
 add_subdirectory("libraries/iota-teensy")
-add_subdirectory("iota-tests/")
