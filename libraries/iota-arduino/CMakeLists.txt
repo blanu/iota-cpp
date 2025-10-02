@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.31)
 project(iota-arduino)
 
 set(CMAKE_CXX_STANDARD 17)
+set(ION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/ion-cpp)
+set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
+set(TRANSMISSION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-cpp)
+set(TRANSMISSION_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-arduino)
+set(AUDIO_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/audio-arduino)
 set(IOTA_LIB_SOURCE_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp/src)
 set(IOTA_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-arduino)
 set(IOTA_ARDUINO_SOURCE_DIR ${IOTA_ARDUINO_DIR}/src)
@@ -17,12 +22,7 @@ set(PORT "/dev/cu.usbmodem1101")
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/arduino/rp2350/iota-arduino)
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp ${IOTA_ARDUINO_SOURCE_DIR}/*.cpp ${IOTA_ARDUINO_SOURCE_DIR}/*.ino)
 
-add_executable(iota-arduino ${IOTA_FILES}
-  ../iota-teensy/src/effects/audio/audio.h
-  ../iota-teensy/src/teensy_effects_provider.h
-  ../iota-teensy/src/effects/audio/audio.cpp
-  ../iota-teensy/src/teensy_effects_provider.cpp
-  ../iota-teensy/src/iota-teensy.h)
+add_executable(iota-arduino ${IOTA_FILES})
 add_dependencies(iota-arduino build_iota_arduino)
 target_link_libraries(iota-arduino PRIVATE iota-cpp)
 
@@ -31,8 +31,13 @@ add_custom_target(build_iota_arduino ALL
             --fqbn ${BOARD}
             --output-dir ${OUTPUT_DIR}
             --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE"
-            --libraries ${CMAKE_SOURCE_DIR}/libraries
-            ${SKETCH_FILE}
+            --library ${ION_LIB_DIR}
+            --library ${IOTA_LIB_DIR}
+            --library ${IOTA_ARDUINO_DIR}
+            --library ${TRANSMISSION_LIB_DIR}
+            --library ${TRANSMISSION_ARDUINO_DIR}
+            --library ${AUDIO_ARDUINO_DIR}
+  ${SKETCH_FILE}
         WORKING_DIRECTORY ${IOTA_ARDUINO_SOURCE_DIR}
         COMMENT "Building iota-arduino with arduino-cli"
 )
