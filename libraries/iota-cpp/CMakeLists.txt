@@ -12,7 +12,8 @@ set(ION_LIB_SOURCE_DIR ${ION_LIB_DIR}/src)
 
 include_directories(${IOTA_LIB_SOURCE_DIR} ${ION_LIB_SOURCE_DIR})
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp)
-add_library(iota-cpp-lib STATIC ${IOTA_FILES})
+add_library(iota-cpp-lib STATIC ${IOTA_FILES}
+  src/iota-cpp.h)
 
 target_include_directories(iota-cpp-lib PUBLIC ${IOTA_LIB_SOURCE_DIR} ${ION_LIB_SOURCE_DIR})
 target_link_libraries(iota-cpp-lib PUBLIC ion-cpp)
