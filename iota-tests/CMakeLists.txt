@@ -56,6 +56,8 @@ add_executable(iota-tests main.cpp
   effect_tests/log_tests.cpp
   effect_tests/random_tests.cpp
   effect_tests/state_tests.cpp
+  noun_tests/integer_tests.cpp
+  noun_tests/list_tests.cpp
 )
 target_link_libraries(iota-tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
 

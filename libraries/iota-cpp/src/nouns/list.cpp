@@ -619,6 +619,145 @@ void List::initialize() {
   Noun::registerDyadicAdverb(StorageType::MIXED_ARRAY, NounType::LIST, DyadicAdverbs::whileOne, StorageType::WORD, NounType::USER_MONAD, Noun::whileOne_impl);
 }
 
+Storage List::make(const ints& i)
+{
+  return WordArray::make(i, NounType::LIST);  // Changed from NounType::INTEGER to NounType::LIST
+}
+
+Storage List::make(const std::vector<uint64_t>& i)
+{
+  // Convert each uint64_t to Storage
+  std::vector<Storage> storageList;
+  storageList.reserve(i.size());
+
+  for (uint64_t value : i)
+  {
+    storageList.push_back(Integer::make(value));
+  }
+
+  // Check if all are Words (can use WordArray) or if any are WordArrays (need MixedArray)
+  bool allWords = true;
+  for (const Storage& storage : storageList)
+  {
+    if (!std::holds_alternative<int>(storage.i))
+    {
+      allWords = false;
+      break;
+    }
+  }
+
+  if (allWords)
+  {
+    // All are Words, extract the int values and use WordArray
+    ints intList;
+    intList.reserve(storageList.size());
+
+    for (const Storage& storage : storageList)
+    {
+      intList.push_back(std::get<int>(storage.i));
+    }
+
+    return WordArray::make(intList, NounType::LIST);
+  }
+  else
+  {
+    // At least one is a WordArray, use MixedArray
+    return Storage(NounType::LIST, StorageType::MIXED_ARRAY, storageList);
+  }
+}
+
+ints List::toInts(const Storage& i)
+{
+    // Verify it's a LIST type
+    if (i.o != NounType::LIST)
+    {
+        return {}; // Return empty vector for invalid type
+    }
+
+    if (std::holds_alternative<ints>(i.i))
+    {
+        // WordArray case - direct return
+        return std::get<ints>(i.i);
+    }
+    else if (std::holds_alternative<mixed>(i.i))
+    {
+        // MixedArray case - convert each Storage element to int
+        const mixed& list = std::get<mixed>(i.i);
+        ints result;
+        result.reserve(list.size());
+
+        for (const Storage& storage : list)
+        {
+            if (std::holds_alternative<int>(storage.i))
+            {
+                result.push_back(std::get<int>(storage.i));
+            }
+            else
+            {
+                return {}; // Return empty if any element can't convert to int
+            }
+        }
+
+        return result;
+    }
+    else
+    {
+        return {}; // Invalid storage type
+    }
+}
+
+std::vector<uint64_t> List::toUInt64s(const Storage& i)
+{
+    // Verify it's a LIST type
+    if (i.o != NounType::LIST)
+    {
+        return {}; // Return empty vector for invalid type
+    }
+
+    if (std::holds_alternative<ints>(i.i))
+    {
+        // WordArray case - convert each int to uint64_t
+        const ints& list = std::get<ints>(i.i);
+        std::vector<uint64_t> result;
+        result.reserve(list.size());
+
+        for (int value : list)
+        {
+            if (value < 0)
+            {
+                return {}; // Return empty for negative values
+            }
+            result.push_back(static_cast<uint64_t>(value));
+        }
+
+        return result;
+    }
+    else if (std::holds_alternative<mixed>(i.i))
+    {
+        // MixedArray case - convert each Storage element to uint64_t
+        const mixed& list = std::get<mixed>(i.i);
+        std::vector<uint64_t> result;
+        result.reserve(list.size());
+
+        for (const Storage& storage : list)
+        {
+            uint64_t* value = Integer::toUInt64(storage);
+            if (value == nullptr)
+            {
+                return {}; // Return empty if any element can't convert
+            }
+            result.push_back(*value);
+            delete value;
+        }
+
+        return result;
+    }
+    else
+    {
+        return {}; // Invalid storage type
+    }
+}
+
 Storage List::atom_impl(const Storage& i) {
   if (std::holds_alternative<ints>(i.i)) {
     ints integers = std::get<ints>(i.i);

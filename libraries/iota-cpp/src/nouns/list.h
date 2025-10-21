@@ -15,6 +15,12 @@ class List
     // Initialize dispatch table
     static void initialize();
 
+    static Storage make(const ints& i);
+    static Storage make(const std::vector<uint64_t>& i);
+
+    static ints toInts(const Storage& i);
+    static std::vector<uint64_t> toUInt64s(const Storage& i);
+
     // Monads
     static Storage atom_impl(const Storage& i);
     static Storage char_impl(const Storage& i);

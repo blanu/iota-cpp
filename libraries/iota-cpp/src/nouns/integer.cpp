@@ -6,6 +6,7 @@
 #include <numeric>
 #include <tuple>
 #include <vector>
+#include <climits>
 
 #include "error.h"
 #include <squeeze.h>
@@ -212,6 +213,42 @@ Storage Integer::make(int i)
   return Word::make(i, NounType::INTEGER);
 }
 
+Storage Integer::make(uint64_t i)
+{
+  // Check if it fits in int range (signed 32-bit)
+  if (i <= static_cast<uint64_t>(INT_MAX))
+  {
+    return Word::make(static_cast<int>(i), NounType::INTEGER);
+  }
+
+  // Convert to WordArray representation
+  // Determine how many 32-bit chunks we need
+  ints chunks;
+
+  // Sign bit (always 0 for unsigned)
+  chunks.push_back(0);
+
+  // Extract 32-bit chunks in big-endian order
+  if (i > 0xFFFFFFFF)
+  {
+    // Need 2 chunks (high and low 32 bits)
+    uint32_t high = static_cast<uint32_t>(i >> 32);
+    uint32_t low = static_cast<uint32_t>(i & 0xFFFFFFFF);
+
+    // Reinterpret unsigned as signed to preserve bit pattern
+    chunks.push_back(static_cast<int>(high));
+    chunks.push_back(static_cast<int>(low));
+  }
+  else
+  {
+    // Only need 1 chunk (low 32 bits)
+    uint32_t low = static_cast<uint32_t>(i);
+    chunks.push_back(static_cast<int>(low));
+  }
+
+  return WordArray::make(chunks, NounType::INTEGER);
+}
+
 Storage Integer::zero()
 {
   return Integer::make(0);
@@ -220,6 +257,66 @@ Storage Integer::zero()
 Storage Integer::one()
 {
   return Integer::make(1);
+}
+
+uint64_t* Integer::toUInt64(const Storage& i)
+{
+  if (std::holds_alternative<int>(i.i))
+  {
+    // Word case - convert int to uint64_t
+    int value = std::get<int>(i.i);
+    if (value < 0)
+    {
+      return nullptr; // Cannot convert negative Word to uint64_t
+    }
+
+    auto* result = new uint64_t;
+    *result = static_cast<uint64_t>(value);
+    return result;
+  }
+  else if (std::holds_alternative<ints>(i.i))
+  {
+    // WordArray case - reconstruct from 32-bit chunks
+    const ints& list = std::get<ints>(i.i);
+
+    if (list.empty())
+    {
+      return nullptr; // Empty WordArray
+    }
+
+    // First element is sign bit
+    bool isNegative = (list[0] == 1);
+    if (isNegative)
+    {
+      return nullptr; // Cannot convert negative WordArray to uint64_t
+    }
+
+    // Check we don't have too many chunks for uint64_t
+    // Need at most 2 chunks (plus sign bit) = 3 elements total
+    if (list.size() > 3)
+    {
+      return nullptr; // Too many chunks for uint64_t
+    }
+
+    uint64_t result = 0;
+
+    // Process subsequent items as 32-bit chunks in big-endian order
+    for (size_t idx = 1; idx < list.size(); idx++)
+    {
+      // Reinterpret signed int as unsigned to preserve bit pattern
+      uint32_t chunk = static_cast<uint32_t>(list[idx]);
+
+      result = (result << 32) | static_cast<uint64_t>(chunk);
+    }
+
+    auto* ptr = new uint64_t;
+    *ptr = result;
+    return ptr;
+  }
+  else
+  {
+    return nullptr; // Cannot convert to uint64_t: invalid storage type
+  }
 }
 
 // Monads

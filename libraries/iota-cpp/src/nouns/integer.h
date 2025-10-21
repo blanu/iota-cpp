@@ -16,8 +16,12 @@ class Integer
     static void initialize();
 
     static Storage make(int i);
+    static Storage make(uint64_t i);
+
     static Storage zero();
     static Storage one();
+
+    static uint64_t* toUInt64(const Storage& i);
 
     // Monads
     static Storage char_impl(const Storage& i);
