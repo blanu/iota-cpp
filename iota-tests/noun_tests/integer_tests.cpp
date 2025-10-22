@@ -5,7 +5,9 @@
 #include <catch2/catch_all.hpp>
 #include <cstdint>
 
+#include <transmission-cpp.h>
 #include "nouns/integer.h"
+#include "nouns/noun.h"
 #include "storage/storage.h"
 
 TEST_CASE("int to storage and back", "[integer]")
@@ -271,4 +273,151 @@ TEST_CASE("invalid storage type returns null", "[integer]")
 
     uint64_t* result = Integer::toUInt64(storage);
     REQUIRE(result == nullptr); // Should return null for invalid storage type
+}
+
+TEST_CASE("long small golden value conn", "[integer][conn]")
+{
+    Pipe pipe;
+    int64_t value = 123456789012345LL; // 0x70488600DF79 in encoding
+
+    // Expected bytes: type bytes + length (8) + 8 bytes
+    std::vector<char> expected = {
+        0x00, 0x00, 0x08, 0x00, 0x00, 0x70, 0x48, static_cast<char>(0x86),
+        0x0D, static_cast<char>(0xDF), 0x79
+    };
+
+    pipe.getEndA().write(expected);
+    maybe<Storage> decoded = Noun::from_conn(pipe.getEndB());
+    REQUIRE(decoded.has_value());
+
+    // For int64_t, we need to check if it fits in int or use WordArray
+    // Since this value is larger than INT_MAX, it will be a WordArray
+    REQUIRE(std::holds_alternative<ints>(decoded->i));
+
+    // Test reverse direction
+    Storage storage = Integer::make(static_cast<uint64_t>(value));
+    Noun::to_conn(pipe.getEndA(), storage);
+
+    std::vector<char> bytes = pipe.getEndB().read(expected.size());
+    REQUIRE(bytes == expected);
+}
+
+TEST_CASE("radio frequency golden value conn", "[integer][conn]")
+{
+    Pipe pipe;
+    uint64_t frequency = 1400000061ULL; // Encodes as 0x53724E3D
+
+    // Expected bytes: type bytes + length (4) + 4 bytes
+    std::vector<char> expected = {
+        0x00, 0x00, 0x04, 0x53, 0x72, 0x4E, 0x3D
+    };
+
+    pipe.getEndA().write(expected);
+    maybe<Storage> decoded = Noun::from_conn(pipe.getEndB());
+    REQUIRE(decoded.has_value());
+
+    uint64_t* result = Integer::toUInt64(*decoded);
+    REQUIRE(result != nullptr);
+    REQUIRE(*result == frequency);
+    delete result;
+
+    // Test reverse direction
+    Storage storage = Integer::make(frequency);
+    Noun::to_conn(pipe.getEndA(), storage);
+
+    std::vector<char> bytes = pipe.getEndB().read(expected.size());
+    REQUIRE(bytes == expected);
+}
+
+TEST_CASE("BigInteger small golden value conn", "[integer][conn][bigint]")
+{
+    Pipe pipe;
+    uint64_t value = 123456789012345ULL;
+
+    // Expected bytes: type bytes + length (8) + 8 bytes
+    std::vector<char> expected = {
+        0x00, 0x00, 0x08, 0x00, 0x00, 0x70, 0x48, static_cast<char>(0x86),
+        0x0D, static_cast<char>(0xDF), 0x79
+    };
+
+    pipe.getEndA().write(expected);
+    maybe<Storage> decoded = Noun::from_conn(pipe.getEndB());
+    REQUIRE(decoded.has_value());
+
+    // Verify the value can be converted to uint64
+    uint64_t* result = Integer::toUInt64(*decoded);
+    REQUIRE(result != nullptr);
+    REQUIRE(*result == value);
+    delete result;
+}
+
+TEST_CASE("BigInteger power of 2 golden value conn", "[integer][conn][bigint]")
+{
+    Pipe pipe;
+    // 2^100 = 1267650600228229401496703205376
+
+    // Expected bytes: type bytes + length (16) + 16 bytes
+    std::vector<char> expected = {
+        0x00, 0x00, 0x10,
+        0x00, 0x00, 0x00, 0x10,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00
+    };
+
+    pipe.getEndA().write(expected);
+    maybe<Storage> decoded = Noun::from_conn(pipe.getEndB());
+    REQUIRE(decoded.has_value());
+
+    // Verify it's a WordArray (too large for uint64)
+    REQUIRE(std::holds_alternative<ints>(decoded->i));
+}
+
+TEST_CASE("BigInteger large golden value conn", "[integer][conn][bigint]")
+{
+    Pipe pipe;
+    // 123456789012345678901234567890 = 0x18EE90FF6C373E0EE4E3F0AD2
+
+    // Expected bytes: type bytes + length (16) + 16 bytes
+    std::vector<char> expected = {
+        0x00, 0x00, 0x10,
+        0x00, 0x00, 0x00, 0x01, static_cast<char>(0x8E), static_cast<char>(0xE9),
+        0x0F, static_cast<char>(0xF6), static_cast<char>(0xC3), 0x73,
+        static_cast<char>(0xE0), static_cast<char>(0xEE), 0x4E,
+        0x3F, 0x0A, static_cast<char>(0xD2)
+    };
+
+    pipe.getEndA().write(expected);
+    maybe<Storage> decoded = Noun::from_conn(pipe.getEndB());
+    REQUIRE(decoded.has_value());
+
+    // Verify it's a WordArray (too large for uint64)
+    REQUIRE(std::holds_alternative<ints>(decoded->i));
+}
+
+TEST_CASE("BigInteger negative golden value conn", "[integer][conn][bigint]")
+{
+    Pipe pipe;
+    // -987654321098765432109876543210
+    // Absolute value in hex: 0xC7748819DFFB62438D1C67EEA
+
+    // Expected bytes: type bytes + length with sign (0x90) + 16 bytes
+    std::vector<char> expected = {
+        0x00, 0x00, static_cast<char>(0x90),
+        0x00, 0x00, 0x00, 0x0C, 0x77,
+        0x48, static_cast<char>(0x81), static_cast<char>(0x9D), static_cast<char>(0xFF),
+        static_cast<char>(0xB6), 0x24, 0x38, static_cast<char>(0xD1),
+        static_cast<char>(0xC6), 0x7E, static_cast<char>(0xEA)
+    };
+
+    pipe.getEndA().write(expected);
+    maybe<Storage> decoded = Noun::from_conn(pipe.getEndB());
+    REQUIRE(decoded.has_value());
+
+    // Verify it's a WordArray (large negative number)
+    REQUIRE(std::holds_alternative<ints>(decoded->i));
+
+    // Verify sign bit is set (negative)
+    const ints& chunks = std::get<ints>(decoded->i);
+    REQUIRE(chunks.size() > 0);
+    REQUIRE(chunks[0] == 1); // Sign bit = 1 for negative
 }

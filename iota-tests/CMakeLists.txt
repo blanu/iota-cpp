@@ -59,7 +59,7 @@ add_executable(iota-tests main.cpp
   noun_tests/integer_tests.cpp
   noun_tests/list_tests.cpp
 )
-target_link_libraries(iota-tests PRIVATE iota-cpp-lib Catch2::Catch2WithMain)
+target_link_libraries(iota-tests PRIVATE iota-cpp-lib transmission-cpp-lib Catch2::Catch2WithMain)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   option(ENABLE_COVERAGE "Enable coverage reporting" ON)
