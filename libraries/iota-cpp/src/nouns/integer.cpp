@@ -249,14 +249,124 @@ Storage Integer::make(uint64_t i)
   return WordArray::make(chunks, NounType::INTEGER);
 }
 
-Storage Integer::zero()
+// In integer.cpp
+Storage Integer::make(unsigned long i)
 {
-  return Integer::make(0);
+  // Convert unsigned long to uint64_t and use existing logic
+  return Integer::make(static_cast<uint64_t>(i));
 }
 
-Storage Integer::one()
+Storage Integer::makeHex(std::string s)
 {
-  return Integer::make(1);
+  if(s.empty())
+  {
+    return Word::make(INVALID_ARGUMENT, NounType::ERROR);
+  }
+
+  // Handle negative sign
+  bool negative = (s[0] == '-');
+  size_t start = negative ? 1 : 0;
+
+  // Remove 0x or 0X prefix if present
+  if(s.length() > start + 2 && s[start] == '0' &&
+      (s[start + 1] == 'x' || s[start + 1] == 'X'))
+  {
+    start += 2;
+  }
+
+  if(start >= s.length())
+  {
+    return Word::make(INVALID_ARGUMENT, NounType::ERROR);
+  }
+
+  std::string hex = s.substr(start);
+
+  // Convert hex string to array of nibbles (4-bit values)
+  std::vector<uint8_t> nibbles;
+  for(char c : hex)
+  {
+    uint8_t value;
+    if(c >= '0' && c <= '9')
+    {
+      value = c - '0';
+    }
+    else if(c >= 'A' && c <= 'F')
+    {
+      value = c - 'A' + 10;
+    }
+    else if(c >= 'a' && c <= 'f')
+    {
+      value = c - 'a' + 10;
+    }
+    else
+    {
+      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
+    }
+    nibbles.push_back(value);
+  }
+
+  // Determine how many nibbles fit in a platform int
+  // Each nibble is 4 bits, int has sizeof(int) * 8 bits
+  const int nibbles_per_chunk = (sizeof(int) * 8) / 4;
+
+  // Group nibbles into int-sized chunks
+  // Process from right to left to maintain big-endian word order
+  typedef unsigned int uint_t;
+  std::vector<uint_t> chunks;
+
+  int num_nibbles = static_cast<int>(nibbles.size());
+  for(int i = num_nibbles; i > 0; i -= nibbles_per_chunk)
+  {
+    uint_t chunk = 0;
+    int start_idx = (i >= nibbles_per_chunk) ? (i - nibbles_per_chunk) : 0;
+    int count = i - start_idx;
+
+    // Build chunk from nibbles using arithmetic (no bit operations)
+    for(int j = 0; j < count; j++)
+    {
+      chunk = chunk * 16 + nibbles[start_idx + j];
+    }
+
+    chunks.insert(chunks.begin(), chunk); // Insert at front for big-endian order
+  }
+
+  // Check if the result fits in a platform int
+  if(chunks.size() == 1)
+  {
+    uint_t value = chunks[0];
+
+    // Check if it fits in the platform's int type
+    if(!negative && value <= static_cast<uint_t>(INT_MAX))
+    {
+      return Word::make(static_cast<int>(value), NounType::INTEGER);
+    }
+    else if(negative && value <= static_cast<uint_t>(-(static_cast<int64_t>(INT_MIN))))
+    {
+      if(value == static_cast<uint_t>(-(static_cast<int64_t>(INT_MIN))))
+      {
+        return Word::make(INT_MIN, NounType::INTEGER);
+      }
+      else
+      {
+        return Word::make(-static_cast<int>(value), NounType::INTEGER);
+      }
+    }
+  }
+
+  // Build WordArray (bigint representation)
+  ints result;
+
+  // First element: sign bit (0 = positive, 1 = negative)
+  result.push_back(negative ? 1 : 0);
+
+  // Remaining elements: int-sized chunks in big-endian word order
+  // Reinterpret uint_t as int to preserve bit pattern
+  for(uint_t chunk : chunks)
+  {
+    result.push_back(static_cast<int>(chunk));
+  }
+
+  return WordArray::make(result, NounType::INTEGER);
 }
 
 uint64_t* Integer::toUInt64(const Storage& i)
@@ -317,6 +427,176 @@ uint64_t* Integer::toUInt64(const Storage& i)
   {
     return nullptr; // Cannot convert to uint64_t: invalid storage type
   }
+}
+
+unsigned long* Integer::toUnsignedLong(const Storage& i)
+{
+  uint64_t* result64 = Integer::toUInt64(i);
+
+  if (result64 == nullptr)
+  {
+    return nullptr;
+  }
+
+  uint64_t value = *result64;
+  delete result64;
+
+  // Check if it fits in unsigned long
+  if (value > static_cast<uint64_t>(ULONG_MAX))
+  {
+    return nullptr; // Value too large for unsigned long
+  }
+
+  auto* result = new unsigned long;
+  *result = static_cast<unsigned long>(value);
+  return result;
+}
+
+std::string Integer::toHexString(const Storage& i)
+{
+  // Handle regular int (WORD)
+  if(std::holds_alternative<int>(i.i))
+  {
+    int value = std::get<int>(i.i);
+    bool negative = (value < 0);
+
+    // Convert to unsigned to handle negative values safely
+    typedef unsigned int uint_t;
+    uint_t abs_value;
+    if(negative)
+    {
+      // Careful handling of INT_MIN
+      if(value == INT_MIN)
+      {
+        abs_value = static_cast<uint_t>(-(static_cast<long long>(INT_MIN)));
+      }
+      else
+      {
+        abs_value = static_cast<uint_t>(-value);
+      }
+    }
+    else
+    {
+      abs_value = static_cast<uint_t>(value);
+    }
+
+    // Convert to hex using arithmetic (no bit operations)
+    if(abs_value == 0)
+    {
+      return "0";
+    }
+
+    std::string result;
+    const char hex_digits[] = "0123456789ABCDEF";
+
+    while(abs_value > 0)
+    {
+      uint_t digit = abs_value % 16;
+      result = hex_digits[digit] + result;
+      abs_value = abs_value / 16;
+    }
+
+    return negative ? ("-" + result) : result;
+  }
+
+  // Handle bigint (WORD_ARRAY)
+  if(std::holds_alternative<ints>(i.i))
+  {
+    const ints& bigint = std::get<ints>(i.i);
+
+    if(bigint.empty())
+    {
+      return "0";
+    }
+
+    // First element is sign bit
+    bool negative = (bigint[0] == 1);
+
+    // Check if all chunks are zero
+    bool all_zero = true;
+    for(size_t idx = 1; idx < bigint.size(); idx++)
+    {
+      if(bigint[idx] != 0)
+      {
+        all_zero = false;
+        break;
+      }
+    }
+
+    if(all_zero)
+    {
+      return "0";
+    }
+
+    std::string result;
+    const char hex_digits[] = "0123456789ABCDEF";
+
+    // Calculate how many hex digits per chunk based on platform int size
+    const int nibbles_per_chunk = (sizeof(int) * 8) / 4;
+
+    // Process each int-sized chunk in big-endian word order
+    bool started = false; // Skip leading zeros
+
+    for(size_t idx = 1; idx < bigint.size(); idx++)
+    {
+      // Reinterpret int as unsigned int to preserve bit pattern
+      typedef unsigned int uint_t;
+      uint_t chunk = static_cast<uint_t>(bigint[idx]);
+
+      // Convert chunk to hex digits using arithmetic
+      char chunk_hex[17]; // Max 16 hex digits for 64-bit int + null terminator
+      for(int pos = nibbles_per_chunk - 1; pos >= 0; pos--)
+      {
+        uint_t digit = chunk % 16;
+        chunk_hex[pos] = hex_digits[digit];
+        chunk = chunk / 16;
+      }
+      chunk_hex[nibbles_per_chunk] = '\0';
+
+      if(!started)
+      {
+        // First non-zero chunk - skip leading zeros
+        if(static_cast<uint_t>(bigint[idx]) == 0)
+        {
+          continue;
+        }
+
+        // Find first non-zero digit
+        int first_nonzero = 0;
+        while(first_nonzero < nibbles_per_chunk && chunk_hex[first_nonzero] == '0')
+        {
+          first_nonzero++;
+        }
+
+        result += &chunk_hex[first_nonzero];
+        started = true;
+      }
+      else
+      {
+        // Subsequent chunks - include all digits (with leading zeros)
+        result += chunk_hex;
+      }
+    }
+
+    if(result.empty())
+    {
+      return "0";
+    }
+
+    return negative ? ("-" + result) : result;
+  }
+
+  return "";
+}
+
+Storage Integer::zero()
+{
+  return Integer::make(0);
+}
+
+Storage Integer::one()
+{
+  return Integer::make(1);
 }
 
 // Monads

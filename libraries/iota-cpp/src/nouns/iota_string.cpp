@@ -117,6 +117,113 @@ Storage IotaString::make(ints i)
   return WordArray::make(std::move(i), NounType::STRING);
 }
 
+// Add to iota_string.cpp
+
+Storage IotaString::makeString(std::string s)
+{
+  // Convert UTF-8 string to array of UTF-32 codepoints
+  ints codepoints;
+
+  size_t i = 0;
+  while(i < s.length())
+  {
+    uint32_t codepoint = 0;
+    unsigned char c = static_cast<unsigned char>(s[i]);
+
+    if((c & 0x80) == 0)
+    {
+      // 1-byte UTF-8 (ASCII)
+      codepoint = c;
+      i += 1;
+    }
+    else if((c & 0xE0) == 0xC0)
+    {
+      // 2-byte UTF-8
+      if(i + 1 >= s.length()) break;
+      codepoint = ((c & 0x1F) << 6) | (s[i + 1] & 0x3F);
+      i += 2;
+    }
+    else if((c & 0xF0) == 0xE0)
+    {
+      // 3-byte UTF-8
+      if(i + 2 >= s.length()) break;
+      codepoint = ((c & 0x0F) << 12) |
+                  ((s[i + 1] & 0x3F) << 6) |
+                  (s[i + 2] & 0x3F);
+      i += 3;
+    }
+    else if((c & 0xF8) == 0xF0)
+    {
+      // 4-byte UTF-8
+      if(i + 3 >= s.length()) break;
+      codepoint = ((c & 0x07) << 18) |
+                  ((s[i + 1] & 0x3F) << 12) |
+                  ((s[i + 2] & 0x3F) << 6) |
+                  (s[i + 3] & 0x3F);
+      i += 4;
+    }
+    else
+    {
+      // Invalid UTF-8 sequence, skip byte
+      i += 1;
+      continue;
+    }
+
+    // Store codepoint as int (UTF-32 or UTF-64 depending on platform)
+    codepoints.push_back(static_cast<int>(codepoint));
+  }
+
+  return WordArray::make(codepoints, NounType::STRING);
+}
+
+std::string IotaString::toString(const Storage& i)
+{
+  if(!std::holds_alternative<ints>(i.i))
+  {
+    return "";
+  }
+
+  const ints& codepoints = std::get<ints>(i.i);
+  std::string result;
+
+  for(int cp_int : codepoints)
+  {
+    // Reinterpret as unsigned to handle the full codepoint range
+    uint32_t codepoint = static_cast<uint32_t>(cp_int);
+
+    // Convert UTF-32 codepoint to UTF-8
+    if(codepoint <= 0x7F)
+    {
+      // 1-byte UTF-8 (ASCII)
+      result += static_cast<char>(codepoint);
+    }
+    else if(codepoint <= 0x7FF)
+    {
+      // 2-byte UTF-8
+      result += static_cast<char>(0xC0 | (codepoint >> 6));
+      result += static_cast<char>(0x80 | (codepoint & 0x3F));
+    }
+    else if(codepoint <= 0xFFFF)
+    {
+      // 3-byte UTF-8
+      result += static_cast<char>(0xE0 | (codepoint >> 12));
+      result += static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F));
+      result += static_cast<char>(0x80 | (codepoint & 0x3F));
+    }
+    else if(codepoint <= 0x10FFFF)
+    {
+      // 4-byte UTF-8
+      result += static_cast<char>(0xF0 | (codepoint >> 18));
+      result += static_cast<char>(0x80 | ((codepoint >> 12) & 0x3F));
+      result += static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F));
+      result += static_cast<char>(0x80 | (codepoint & 0x3F));
+    }
+    // Silently skip invalid codepoints (> 0x10FFFF)
+  }
+
+  return result;
+}
+
 Storage IotaString::makeEmpty()
 {
   return WordArray::make(ints(), NounType::STRING);
@@ -844,7 +951,7 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
         {
           result.push_back(ii);
 
-          if(result.size() == xi)
+          if(static_cast<int>(result.size()) == xi)
           {
             results.push_back(IotaString::make(result));
             result = ints();

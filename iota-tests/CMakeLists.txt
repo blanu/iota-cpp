@@ -18,8 +18,15 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-set(IOTA_CPP_LIB_TEST_DIR ${CMAKE_SOURCE_DIR}/tests)
 set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
+set(IOTA_LIB_SOURCE_DIR ${IOTA_LIB_DIR}/src)
+set(ION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/ion-cpp)
+set(ION_LIB_SOURCE_DIR ${ION_LIB_DIR}/src)
+set(TRANSMISSION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-cpp)
+set(TRANSMISSION_LIB_SOURCE_DIR ${TRANSMISSION_LIB_DIR}/src)
+set(BIGNUMBER_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/bignumber-cpp)
+set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER_LIB_DIR}/src)
+
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(iota-tests main.cpp
@@ -59,7 +66,19 @@ add_executable(iota-tests main.cpp
   noun_tests/integer_tests.cpp
   noun_tests/list_tests.cpp
 )
-target_link_libraries(iota-tests PRIVATE iota-cpp-lib transmission-cpp-lib Catch2::Catch2WithMain)
+target_include_directories(iota-tests PRIVATE
+  ${IOTA_LIB_SOURCE_DIR}
+  ${ION_LIB_SOURCE_DIR}
+  ${TRANSMISSION_LIB_SOURCE_DIR}
+  ${BIGNUMBER_LIB_SOURCE_DIR}
+)
+
+target_link_libraries(iota-tests PRIVATE
+  iota-cpp-lib
+  transmission-cpp-lib
+  bignumber-cpp-lib
+  Catch2::Catch2WithMain
+)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   option(ENABLE_COVERAGE "Enable coverage reporting" ON)

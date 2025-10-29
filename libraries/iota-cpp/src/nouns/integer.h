@@ -17,11 +17,15 @@ class Integer
 
     static Storage make(int i);
     static Storage make(uint64_t i);
+    static Storage make(unsigned long i);
+    static Storage makeHex(std::string i);
+
+    static uint64_t* toUInt64(const Storage& i);
+    static unsigned long* toUnsignedLong(const Storage& i);
+    static std::string toHexString(const Storage &i);
 
     static Storage zero();
     static Storage one();
-
-    static uint64_t* toUInt64(const Storage& i);
 
     // Monads
     static Storage char_impl(const Storage& i);

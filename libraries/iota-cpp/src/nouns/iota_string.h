@@ -5,7 +5,7 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include <vector>
+#include <string>
 
 #include <storage/storage.h>
 
@@ -18,7 +18,10 @@ class IotaString
     static void initialize();
 
     static Storage make(ints i);
+    static Storage makeString(std::string i);
     static Storage makeEmpty();
+
+    static std::string toString(const Storage& i);
 
     // Monads
     static Storage atom_impl(const Storage& i);

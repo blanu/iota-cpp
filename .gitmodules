@@ -10,3 +10,6 @@
 [submodule "lib/ion-cpp"]
 	path = lib/ion-cpp
 	url = https://github.com/OperatorFoundation/ion-cpp
+[submodule "lib/BigNumber"]
+	path = lib/BigNumber
+	url = https://github.com/OperatorFoundation/BigNumber.git

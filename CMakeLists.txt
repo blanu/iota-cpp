@@ -44,6 +44,7 @@ include(teensy41.cmake)
 add_subdirectory("libraries/transmission-cpp")
 add_subdirectory("libraries/ion-cpp")
 add_subdirectory("libraries/iota-cpp")
+add_subdirectory("libraries/bignumber-cpp")
 
 add_subdirectory("iota-stdio")
 add_subdirectory("iota-tests")

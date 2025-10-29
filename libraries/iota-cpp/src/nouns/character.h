@@ -18,6 +18,11 @@ public:
   static void initialize();
 
   static Storage make(int i);
+  static Storage make(char c);
+  static Storage make(std::string i); // string must contain a single UTF-8 character
+
+  static maybe<char> to_char(const Storage& i);
+  static maybe<std::string> to_string(const Storage& i);
 
   // Monads
   static Storage enclose_impl(const Storage& i);

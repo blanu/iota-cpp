@@ -3,9 +3,9 @@
 
 #include <types.h>
 
+#include <ion-cpp.h>
+
 #include "effects/effects_provider.h"
-#include <storage/storage.h>
-#include "storage/word.h"
 
 class EvalRegister;
 class EffectsProvider;

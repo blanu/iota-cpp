@@ -4,7 +4,7 @@
 
 #include <catch2/catch_all.hpp>
 
-#include "api.h"
+#include <api.h>
 
 TEST_CASE("char integer", "[monad]")
 {

@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "api.h"
+#include <api.h>
 
 TEST_CASE("small words", "[monad]")
 {

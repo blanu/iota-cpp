@@ -549,7 +549,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
       {
         auto characters = std::get<ints>(formatted.i);
 
-        if(xi <= characters.size())
+        if(xi <= static_cast<int>(characters.size()))
         {
           return formatted;
         }
@@ -573,7 +573,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
       {
         auto characters = std::get<ints>(formatted.i);
 
-        if(xi <= characters.size())
+        if(xi <= static_cast<int>(characters.size()))
         {
           return formatted;
         }
@@ -630,7 +630,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
       auto characters = std::get<ints>(formatted.i);
 
       int decimalIndex = -1;
-      for(int index = 0; index < characters.size(); index++)
+      for(int index = 0; index < static_cast<int>(characters.size()); index++)
       {
         const int character = characters[index];
         if(character == static_cast<int>('.'))
@@ -648,7 +648,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
       auto integerPart = ints(characters.begin(), characters.begin() + decimalIndex);
       auto fractionalPart = ints(characters.begin() + decimalIndex + 1, characters.end());
 
-      if(integerPart.size() < integerPartTarget)
+      if(static_cast<int>(integerPart.size()) < integerPartTarget)
       {
         const int difference = static_cast<int>(integerPartTarget - integerPart.size());
         for(int index = 0; index < difference; index++)
@@ -657,7 +657,7 @@ Storage Real::format2_impl(const Storage& i, const Storage& x)
         }
       }
 
-      if(fractionalPart.size() < fractionalPartTarget)
+      if(static_cast<int>(fractionalPart.size()) < fractionalPartTarget)
       {
         const int difference = fractionalPartTarget - static_cast<int>(fractionalPart.size());
         for(int index = 0; index < difference; index++)

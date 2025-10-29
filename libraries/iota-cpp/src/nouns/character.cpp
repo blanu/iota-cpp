@@ -84,6 +84,83 @@ Storage Character::make(const int i)
   return Word::make(i, NounType::CHARACTER);
 }
 
+Storage Character::make(char c)
+{
+  return Word::make(static_cast<int>(c), NounType::CHARACTER);
+}
+
+Storage Character::make(std::string i) {
+  // Parse UTF-8 string to get the UTF-32 codepoint
+  if (i.empty()) {
+    // Handle error - empty string
+    return WordArray::nil(); // or however you want to handle errors
+  }
+
+  uint32_t codepoint = 0;
+  const unsigned char* bytes = reinterpret_cast<const unsigned char*>(i.c_str());
+
+  if ((bytes[0] & 0x80) == 0) {
+    // 1-byte UTF-8 (ASCII)
+    codepoint = bytes[0];
+  }
+  else if ((bytes[0] & 0xE0) == 0xC0) {
+    // 2-byte UTF-8
+    codepoint = ((bytes[0] & 0x1F) << 6) | (bytes[1] & 0x3F);
+  }
+  else if ((bytes[0] & 0xF0) == 0xE0) {
+    // 3-byte UTF-8
+    codepoint = ((bytes[0] & 0x0F) << 12) |
+                ((bytes[1] & 0x3F) << 6) |
+                (bytes[2] & 0x3F);
+  }
+  else if ((bytes[0] & 0xF8) == 0xF0) {
+    // 4-byte UTF-8
+    codepoint = ((bytes[0] & 0x07) << 18) |
+                ((bytes[1] & 0x3F) << 12) |
+                ((bytes[2] & 0x3F) << 6) |
+                (bytes[3] & 0x3F);
+  }
+
+  return Word::make(static_cast<int>(codepoint), NounType::CHARACTER);
+}
+
+maybe<std::string> Character::to_string(const Storage& i) {
+  if(std::holds_alternative<int>(i.i))
+  {
+    // Get the UTF-32 codepoint from storage
+    uint32_t codepoint = static_cast<uint32_t>(std::get<int>(i.i));
+
+    std::string result;
+
+    if (codepoint <= 0x7F) {
+      // 1-byte UTF-8 (ASCII range)
+      result += static_cast<char>(codepoint);
+    }
+    else if (codepoint <= 0x7FF) {
+      // 2-byte UTF-8
+      result += static_cast<char>(0xC0 | (codepoint >> 6));
+      result += static_cast<char>(0x80 | (codepoint & 0x3F));
+    }
+    else if (codepoint <= 0xFFFF) {
+      // 3-byte UTF-8
+      result += static_cast<char>(0xE0 | (codepoint >> 12));
+      result += static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F));
+      result += static_cast<char>(0x80 | (codepoint & 0x3F));
+    }
+    else if (codepoint <= 0x10FFFF) {
+      // 4-byte UTF-8
+      result += static_cast<char>(0xF0 | (codepoint >> 18));
+      result += static_cast<char>(0x80 | ((codepoint >> 12) & 0x3F));
+      result += static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F));
+      result += static_cast<char>(0x80 | (codepoint & 0x3F));
+    }
+
+    return result;
+  }
+
+  return std::nullopt;
+}
+
 Storage Character::equal_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<int>(i.i))

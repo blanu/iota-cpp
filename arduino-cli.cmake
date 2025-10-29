@@ -47,53 +47,38 @@ if(NOT ARDUINO_CLI_FOUND)
   else()
     message(STATUS "arduino-cli installed successfully")
   endif()
+
+  # Only do initial setup after fresh install
+  execute_process(
+    COMMAND arduino-cli config init
+    OUTPUT_QUIET
+    ERROR_QUIET
+  )
+
+  # ESP32 official URL
+  execute_process(
+    COMMAND arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+    OUTPUT_QUIET
+    ERROR_QUIET
+  )
+
+  # Adafruit board manager URL
+  execute_process(
+    COMMAND arduino-cli config add board_manager.additional_urls https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+    OUTPUT_QUIET
+    ERROR_QUIET
+  )
+
+  # Update the core index only after fresh install
+  message(STATUS "Updating arduino-cli core index...")
+  execute_process(
+    COMMAND arduino-cli core update-index
+    OUTPUT_QUIET
+    ERROR_QUIET
+  )
 else()
   message(STATUS "arduino-cli is already installed")
 endif()
-
-# Initialize arduino-cli configuration if needed
-execute_process(
-  COMMAND arduino-cli config init
-  RESULT_VARIABLE INIT_RESULT
-  OUTPUT_QUIET
-  ERROR_QUIET
-)
-
-# ESP32 official URL
-execute_process(
-  COMMAND arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-  OUTPUT_QUIET
-  ERROR_QUIET
-)
-
-
-# Adafruit board manager URL
-execute_process(
-  COMMAND arduino-cli config add board_manager.additional_urls https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
-  OUTPUT_QUIET
-  ERROR_QUIET
-)
-
-# Update the core index
-message(STATUS "Updating arduino-cli core index...")
-execute_process(
-  COMMAND arduino-cli core update-index
-  RESULT_VARIABLE UPDATE_RESULT
-  OUTPUT_VARIABLE UPDATE_OUTPUT
-  ERROR_VARIABLE UPDATE_ERROR
-)
-
-if(NOT UPDATE_RESULT EQUAL 0)
-  message(WARNING "Failed to update core index: ${UPDATE_ERROR}")
-endif()
-
-# Display installed cores
-message(STATUS "Installed Arduino cores:")
-execute_process(
-  COMMAND arduino-cli core list
-  OUTPUT_VARIABLE INSTALLED_CORES
-)
-message(STATUS "${INSTALLED_CORES}")
 
 # Set useful variables for the rest of your CMake project
 set(ARDUINO_CLI_EXECUTABLE arduino-cli)

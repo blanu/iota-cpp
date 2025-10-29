@@ -3,17 +3,28 @@ project(iota-teensy)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
+set(TEENSY_CORE_PATH "$ENV{HOME}/Library/Arduino15/packages/teensy/hardware/avr/1.59.0")
+get_filename_component(PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+
+set(IOTA_LIB_DIR ${PROJECT_ROOT}/libraries/iota-cpp)
 set(IOTA_LIB_SOURCE_DIR ${IOTA_LIB_DIR}/src)
-set(IOTA_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-arduino)
+set(IOTA_ARDUINO_DIR ${PROJECT_ROOT}/libraries/iota-arduino)
 set(IOTA_ARDUINO_SOURCE_DIR ${IOTA_ARDUINO_DIR}/src)
 set(IOTA_TEENSY_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-teensy)
-set(ION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/ion-cpp)
+set(ION_LIB_DIR ${PROJECT_ROOT}/libraries/ion-cpp)
 set(ION_LIB_SOURCE_DIR ${ION_LIB_DIR}/src)
-set(AUDIO_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/audio-arduino)
-set(AUDIO_TEENSY_DIR ${CMAKE_SOURCE_DIR}/libraries/audio-teensy)
-set(TRANSMISSION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-cpp)
-set(TRANSMISSION_TEENSY_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-teensy)
+set(AUDIO_ARDUINO_DIR ${PROJECT_ROOT}/libraries/audio-arduino)
+set(AUDIO_ARDUINO_SOURCE_DIR ${AUDIO_ARDUINO_DIR}/src)
+set(AUDIO_TEENSY_DIR ${PROJECT_ROOT}/libraries/audio-teensy)
+set(AUDIO_TEENSY_SOURCE_DIR ${AUDIO_TEENSY_DIR}/src)
+set(TRANSMISSION_LIB_DIR ${PROJECT_ROOT}/libraries/transmission-cpp)
+set(TRANSMISSION_LIB_SOURCE_DIR ${TRANSMISSION_LIB_DIR}/src)
+set(TRANSMISSION_TEENSY_DIR ${PROJECT_ROOT}/libraries/transmission-teensy)
+set(TRANSMISSION_TEENSY_SOURCE_DIR ${TRANSMISSION_TEENSY_DIR}/src)
+set(BIGNUMBER_LIB_DIR ${PROJECT_ROOT}/libraries/bignumber-cpp)
+set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER_LIB_DIR}/src)
+set(BIGNUMBER_ARDUINO_DIR ${PROJECT_ROOT}/libraries/bignumber-arduino)
+set(BIGNUMBER_ARDUINO_SOURCE_DIR ${BIGNUMBER_ARDUINO_DIR}/src)
 
 set(IOTA_TEENSY_SOURCE_DIR ${IOTA_TEENSY_DIR}/src)
 set(IOTA_TEENSY_EXAMPLES_DIR ${IOTA_TEENSY_DIR}/examples)
@@ -28,7 +39,45 @@ set(BOARD "teensy:avr:teensy40")
 set(PORT "/dev//dev/cu.usbmodem159402501")
 
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/teensy/rp2350/iota-teensy)
-file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp ${IOTA_TEENSY_SOURCE_DIR}/*.cpp ${IOTA_TEENSY_SOURCE_DIR}/*.ino)
+
+include_directories(
+  "${TEENSY_CORE_PATH}/cores/teensy4"
+  "${TEENSY_CORE_PATH}/libraries"
+
+  ${ION_LIB_SOURCE_DIR}
+
+  ${IOTA_LIB_SOURCE_DIR}
+  ${IOTA_ARDUINO_SOURCE_DIR}
+  ${IOTA_TEENSY_DIR}
+
+  ${AUDIO_ARDUINO_SOURCE_DIR}
+  ${AUDIO_TEENSY_SOURCE_DIR}
+
+  ${TRANSMISSION_ARDUINO_SOURCE_DIR}
+  ${TRANSMISSION_TEENSY_SOURCE_DIR}
+
+  ${BIGNUMBER_LIB_SOURCE_DIR}
+  ${BIGNUMBER_ARDUINO_SOURCE_DIR}
+)
+
+file(GLOB_RECURSE IOTA_FILES
+  ${ION_LIB_SOURCE_DIR}/*.cpp
+
+  ${IOTA_LIB_SOURCE_DIR}/*.cpp
+  ${IOTA_ARDUINO_SOURCE_DIR}/*.cpp
+  ${IOTA_TEENSY_SOURCE_DIR}/*.cpp ${IOTA_TEENSY_SOURCE_DIR}/*.ino
+
+  ${AUDIO_ARDUINO_SOURCE_DIR}/*.cpp
+  ${AUDIO_TEENSY_SOURCE_DIR}/*.cpp
+
+  ${TRANSMISSION_LIB_SOURCE_DIR}/*.cpp
+  ${TRANSMISSION_TEENSY_SOURCE_DIR}/*.cpp
+
+  ${BIGNUMBER_LIB_SOURCE_DIR}/*.cpp
+  ${BIGNUMBER_ARDUINO_SOURCE_DIR}/*.cpp
+)
+
+add_executable(iota-teensy ${IOTA_FILES})
 
 add_custom_target(build_iota_teensy ALL
         COMMAND arduino-cli compile
@@ -36,7 +85,7 @@ add_custom_target(build_iota_teensy ALL
             --output-dir ${OUTPUT_DIR}
             --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE"
             --build-property "build.usbtype=USB_MIDI_AUDIO_SERIAL"
-            --libraries ${CMAKE_SOURCE_DIR}/libraries
+            --libraries ${PROJECT_ROOT}/libraries
             ${SKETCH_FILE}
         WORKING_DIRECTORY ${IOTA_TEENSY_SOURCE_DIR}
         COMMENT "Building iota-teensy with teensy-cli"
@@ -55,13 +104,15 @@ add_custom_target(build_loopback ALL
   COMMAND arduino-cli compile
   --fqbn teensy:avr:teensy40:usb=serialmidiaudio
   --output-dir ${OUTPUT_DIR}
-  --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE"
+  --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE -Wno-psabi"
   --build-property "menu.usb=serialmidiaudio"
   --library ${IOTA_LIB_DIR}
   --library ${IOTA_ARDUINO_DIR}
   --library ${IOTA_TEENSY_DIR}
   --library ${TRANSMISSION_LIB_DIR}
   --library ${TRANSMISSION_TEENSY_DIR}
+  --library ${BIGNUMBER_LIB_DIR}
+  --library ${BIGNUMBER_ARDUINO_DIR}
   #--verbose
   ${LOOPBACK_SKETCH_FILE}
   WORKING_DIRECTORY ${IOTA_TEENSY_SOURCE_DIR}

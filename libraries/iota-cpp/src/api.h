@@ -105,42 +105,45 @@ T variant_cast(const cppValue& value) {
   return std::get<T>(value);
 }
 
-template <typename T>
-std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
-operator==(const cppValue& left, const T& right) {
-  if (std::holds_alternative<T>(left)) {
-    return std::get<T>(left) == right;
-  }
-  return false;
-}
-
-template <typename T>
-std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
-operator==(const T& left, const cppValue& right) {
-  return right == left; // Use the overload above
-}
-
-template <typename T>
-bool operator==(const std::vector<T>& left, const std::vector<T>& right)
+namespace iota
 {
-  if(left.size() != right.size())
-  {
+  template <typename T>
+  std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
+  operator==(const cppValue& left, const T& right) {
+    if (std::holds_alternative<T>(left)) {
+      return std::get<T>(left) == right;
+    }
     return false;
   }
 
-  for(int i = 0; i < static_cast<int>(left.size()); i++)
+  template <typename T>
+  std::enable_if_t<!std::is_same_v<T, cppValue>, bool>
+  operator==(const T& left, const cppValue& right) {
+    return right == left; // Use the overload above
+  }
+
+  template <typename T>
+  bool operator==(const std::vector<T>& left, const std::vector<T>& right)
   {
-    if(left[i] == right[i])
-    {
-      continue;
-    }
-    else
+    if(left.size() != right.size())
     {
       return false;
     }
-  }
 
-  return true;
+    for(int i = 0; i < static_cast<int>(left.size()); i++)
+    {
+      if(left[i] == right[i])
+      {
+        continue;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 class Object

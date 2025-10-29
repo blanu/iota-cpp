@@ -421,3 +421,323 @@ TEST_CASE("BigInteger negative golden value conn", "[integer][conn][bigint]")
     REQUIRE(chunks.size() > 0);
     REQUIRE(chunks[0] == 1); // Sign bit = 1 for negative
 }
+
+TEST_CASE("makeHex simple positive", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("2A");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == 42);
+}
+
+TEST_CASE("makeHex with 0x prefix", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("0x2A");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == 42);
+}
+
+TEST_CASE("makeHex with 0X prefix uppercase", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("0X2A");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == 42);
+}
+
+TEST_CASE("makeHex lowercase", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("deadbeef");
+    REQUIRE(std::holds_alternative<ints>(storage.i));  // WordArray, not int
+
+    const ints& chunks = std::get<ints>(storage.i);
+    REQUIRE(chunks[0] == 0); // Positive
+    REQUIRE(static_cast<uint32_t>(chunks[1]) == 0xDEADBEEF);
+}
+
+TEST_CASE("makeHex mixed case", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("DeAdBeEf");
+    REQUIRE(std::holds_alternative<ints>(storage.i));  // WordArray, not int
+
+    const ints& chunks = std::get<ints>(storage.i);
+    REQUIRE(chunks[0] == 0); // Positive
+    REQUIRE(static_cast<uint32_t>(chunks[1]) == 0xDEADBEEF);
+}
+
+TEST_CASE("makeHex zero", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("0");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == 0);
+}
+
+TEST_CASE("makeHex negative simple", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("-2A");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == -42);
+}
+
+TEST_CASE("makeHex negative with prefix", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("-0x2A");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == -42);
+}
+
+TEST_CASE("makeHex INT_MAX boundary", "[integer][hex]")
+{
+    // INT_MAX is 0x7FFFFFFF on 32-bit systems
+    Storage storage = Integer::makeHex("7FFFFFFF");
+    REQUIRE(std::holds_alternative<int>(storage.i));
+    REQUIRE(std::get<int>(storage.i) == INT_MAX);
+}
+
+TEST_CASE("makeHex just above INT_MAX", "[integer][hex]")
+{
+    // 0x80000000 is INT_MAX + 1 on 32-bit systems
+    Storage storage = Integer::makeHex("80000000");
+
+    // Should be WordArray since it doesn't fit in signed int
+    REQUIRE(std::holds_alternative<ints>(storage.i));
+
+    const ints& chunks = std::get<ints>(storage.i);
+    REQUIRE(chunks[0] == 0); // Positive
+    REQUIRE(chunks.size() == 2);
+    REQUIRE(static_cast<uint32_t>(chunks[1]) == 0x80000000);
+}
+
+TEST_CASE("makeHex large value requiring WordArray", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("123456789ABCDEF0");
+
+    REQUIRE(std::holds_alternative<ints>(storage.i));
+
+    const ints& chunks = std::get<ints>(storage.i);
+    REQUIRE(chunks[0] == 0); // Positive
+    REQUIRE(chunks.size() == 3); // Sign + 2 chunks
+    REQUIRE(static_cast<uint32_t>(chunks[1]) == 0x12345678);
+    REQUIRE(static_cast<uint32_t>(chunks[2]) == 0x9ABCDEF0);
+}
+
+TEST_CASE("makeHex very large value", "[integer][hex]")
+{
+    // 96-bit value
+    Storage storage = Integer::makeHex("FEDCBA9876543210ABCDEF01");
+
+    REQUIRE(std::holds_alternative<ints>(storage.i));
+
+    const ints& chunks = std::get<ints>(storage.i);
+    REQUIRE(chunks[0] == 0); // Positive
+    REQUIRE(chunks.size() == 4); // Sign + 3 chunks
+    REQUIRE(static_cast<uint32_t>(chunks[1]) == 0xFEDCBA98);
+    REQUIRE(static_cast<uint32_t>(chunks[2]) == 0x76543210);
+    REQUIRE(static_cast<uint32_t>(chunks[3]) == 0xABCDEF01);
+}
+
+TEST_CASE("makeHex negative large value", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("-123456789ABCDEF0");
+
+    REQUIRE(std::holds_alternative<ints>(storage.i));
+
+    const ints& chunks = std::get<ints>(storage.i);
+    REQUIRE(chunks[0] == 1); // Negative
+    REQUIRE(chunks.size() == 3);
+    REQUIRE(static_cast<uint32_t>(chunks[1]) == 0x12345678);
+    REQUIRE(static_cast<uint32_t>(chunks[2]) == 0x9ABCDEF0);
+}
+
+TEST_CASE("makeHex empty string", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("");
+    REQUIRE(storage.o == NounType::ERROR);
+}
+
+TEST_CASE("makeHex invalid characters", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("12G4");
+    REQUIRE(storage.o == NounType::ERROR);
+}
+
+TEST_CASE("makeHex only prefix", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("0x");
+    REQUIRE(storage.o == NounType::ERROR);
+}
+
+TEST_CASE("makeHex only negative", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("-");
+    REQUIRE(storage.o == NounType::ERROR);
+}
+
+TEST_CASE("toHexString simple positive", "[integer][hex]")
+{
+    Storage storage = Integer::make(42);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "2A");
+}
+
+TEST_CASE("toHexString zero", "[integer][hex]")
+{
+    Storage storage = Integer::make(0);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "0");
+}
+
+TEST_CASE("toHexString negative", "[integer][hex]")
+{
+    Storage storage = Integer::make(-42);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "-2A");
+}
+
+TEST_CASE("toHexString INT_MAX", "[integer][hex]")
+{
+    Storage storage = Integer::make(INT_MAX);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "7FFFFFFF");
+}
+
+TEST_CASE("toHexString INT_MIN", "[integer][hex]")
+{
+    Storage storage = Integer::make(INT_MIN);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "-80000000");
+}
+
+TEST_CASE("toHexString large WordArray", "[integer][hex]")
+{
+    ints chunks = {0, static_cast<int>(0x12345678), static_cast<int>(0x9ABCDEF0)};
+    Storage storage(NounType::INTEGER, StorageType::WORD_ARRAY, chunks);
+
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "123456789ABCDEF0");
+}
+
+TEST_CASE("toHexString negative WordArray", "[integer][hex]")
+{
+    ints chunks = {1, static_cast<int>(0x12345678), static_cast<int>(0x9ABCDEF0)};
+    Storage storage(NounType::INTEGER, StorageType::WORD_ARRAY, chunks);
+
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "-123456789ABCDEF0");
+}
+
+TEST_CASE("toHexString WordArray with leading zeros", "[integer][hex]")
+{
+    // First chunk has leading zeros
+    ints chunks = {0, static_cast<int>(0x00001234), static_cast<int>(0x56789ABC)};
+    Storage storage(NounType::INTEGER, StorageType::WORD_ARRAY, chunks);
+
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "123456789ABC");
+}
+
+TEST_CASE("toHexString WordArray all chunks need padding", "[integer][hex]")
+{
+    // After first chunk, subsequent chunks should show all 8 digits
+    ints chunks = {0, static_cast<int>(0x12), static_cast<int>(0x00000034)};
+    Storage storage(NounType::INTEGER, StorageType::WORD_ARRAY, chunks);
+
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "1200000034");
+}
+
+TEST_CASE("toHexString WordArray zero value", "[integer][hex]")
+{
+    ints chunks = {0, 0, 0};
+    Storage storage(NounType::INTEGER, StorageType::WORD_ARRAY, chunks);
+
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "0");
+}
+
+TEST_CASE("toHexString empty WordArray", "[integer][hex]")
+{
+    ints chunks = {};
+    Storage storage(NounType::INTEGER, StorageType::WORD_ARRAY, chunks);
+
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "0");
+}
+
+TEST_CASE("makeHex and toHexString round trip positive", "[integer][hex]")
+{
+    std::string original = "DEADBEEF";
+    Storage storage = Integer::makeHex(original);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == original);
+}
+
+TEST_CASE("makeHex and toHexString round trip negative", "[integer][hex]")
+{
+    std::string original = "-DEADBEEF";
+    Storage storage = Integer::makeHex(original);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == original);
+}
+
+TEST_CASE("makeHex and toHexString round trip large positive", "[integer][hex]")
+{
+    std::string original = "123456789ABCDEF0FEDCBA987654321";
+    Storage storage = Integer::makeHex(original);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == original);
+}
+
+TEST_CASE("makeHex and toHexString round trip large negative", "[integer][hex]")
+{
+    std::string original = "-123456789ABCDEF0FEDCBA987654321";
+    Storage storage = Integer::makeHex(original);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == original);
+}
+
+TEST_CASE("makeHex and toHexString round trip with prefix", "[integer][hex]")
+{
+    std::string input = "0xDEADBEEF";
+    Storage storage = Integer::makeHex(input);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "DEADBEEF"); // Prefix not preserved
+}
+
+TEST_CASE("makeHex and toHexString round trip lowercase", "[integer][hex]")
+{
+    std::string input = "deadbeef";
+    Storage storage = Integer::makeHex(input);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "DEADBEEF"); // Output is uppercase
+}
+
+TEST_CASE("makeHex uint64_t max value", "[integer][hex]")
+{
+    Storage storage = Integer::makeHex("FFFFFFFFFFFFFFFF");
+
+    uint64_t* result = Integer::toUInt64(storage);
+    REQUIRE(result != nullptr);
+    REQUIRE(*result == UINT64_MAX);
+    delete result;
+}
+
+TEST_CASE("toHexString from uint64_t", "[integer][hex]")
+{
+    uint64_t value = 0x123456789ABCDEF0ULL;
+    Storage storage = Integer::make(value);
+    std::string result = Integer::toHexString(storage);
+    REQUIRE(result == "123456789ABCDEF0");
+}
+
+TEST_CASE("hex round trip radio frequency", "[integer][hex]")
+{
+    // Test with a radio frequency value
+    uint64_t frequency = 1400000061ULL; // 0x53724E3D
+    Storage storage = Integer::make(frequency);
+    std::string hex = Integer::toHexString(storage);
+    Storage restored = Integer::makeHex(hex);
+
+    uint64_t* result = Integer::toUInt64(restored);
+    REQUIRE(result != nullptr);
+    REQUIRE(*result == frequency);
+    delete result;
+}
