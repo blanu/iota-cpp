@@ -65,6 +65,7 @@ add_executable(iota-tests main.cpp
   effect_tests/state_tests.cpp
   noun_tests/integer_tests.cpp
   noun_tests/list_tests.cpp
+  noun_tests/data_tests.cpp
 )
 target_include_directories(iota-tests PRIVATE
   ${IOTA_LIB_SOURCE_DIR}

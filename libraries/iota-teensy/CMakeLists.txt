@@ -77,7 +77,11 @@ file(GLOB_RECURSE IOTA_FILES
   ${BIGNUMBER_ARDUINO_SOURCE_DIR}/*.cpp
 )
 
-add_executable(iota-teensy ${IOTA_FILES})
+add_executable(iota-teensy ${IOTA_FILES}
+  src/effects/i2c/I2CEffects.cpp
+  src/effects/i2c/I2CEffects.h
+  src/effects/spi/SPIEffects.cpp
+  src/effects/spi/SPIEffects.h)
 
 add_custom_target(build_iota_teensy ALL
         COMMAND arduino-cli compile

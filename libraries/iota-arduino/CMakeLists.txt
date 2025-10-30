@@ -28,7 +28,9 @@ add_executable(iota-arduino ${IOTA_FILES}
   ../iota-teensy/src/effects/serial/SerialEffects.cpp
   ../iota-teensy/src/effects/serial/SerialEffects.h
   src/effects/time/TimeEffects.cpp
-  src/effects/time/TimeEffects.h)
+  src/effects/time/TimeEffects.h
+  src/effects/random/RandomEffects.cpp
+  src/effects/random/RandomEffects.h)
 add_dependencies(iota-arduino build_iota_arduino)
 target_link_libraries(iota-arduino PRIVATE iota-cpp)
 
