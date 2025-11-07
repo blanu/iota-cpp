@@ -18,6 +18,6 @@
 #include "quoted_symbol.h"
 #include "lens.h"
 #include "data.h"
-#include "error.h
+#include "error.h"
 
 #endif //NOUNS_H
