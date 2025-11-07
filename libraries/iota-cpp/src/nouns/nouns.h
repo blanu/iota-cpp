@@ -5,6 +5,7 @@
 #ifndef NOUNS_H
 #define NOUNS_H
 
+#include "noun.h"
 #include "integer.h"
 #include "real.h"
 #include "list.h"
@@ -16,5 +17,7 @@
 #include "symbol.h"
 #include "quoted_symbol.h"
 #include "lens.h"
+#include "data.h"
+#include "error.h
 
 #endif //NOUNS_H
