@@ -28,6 +28,8 @@
 #include <storage/word.h>
 #include <storage/word_array.h>
 
+#include "../../../ion-cpp/src/squeeze.h"
+
 // List
 void List::initialize() {
   // WordArray
@@ -9284,6 +9286,40 @@ void List::to_conn(Connection& conn, const Storage& i) {
 
     case StorageType::MIXED_ARRAY:
       {
+        bool allIntegers = true;
+        if(std::holds_alternative<mixed>(i.i))
+        {
+          mixed ii = std::get<mixed>(i.i);
+
+          for (const Storage& element : ii)
+          {
+            if (element.o != NounType::INTEGER)
+            {
+              allIntegers = false;
+              break;
+            }
+          }
+
+          if (allIntegers)
+          {
+            // Always include type in to_conn implementation
+            std::vector<char> typeBytes = { static_cast<char>(StorageType::WORD_ARRAY), static_cast<char>(i.o) };
+            conn.write(typeBytes);
+
+            int size = static_cast<int>(ii.size());
+            bytes sizeBytes = squeeze_int(size);
+
+            conn.write(sizeBytes);
+
+            for(const Storage& element : ii)
+            {
+              Noun::to_conn(conn, element);
+            }
+
+            return;
+          }
+        }
+
         // No need to include type here, because it is provided by MixedArray::to_conn
         MixedArray::to_conn(conn, i);
       }
