@@ -339,3 +339,35 @@ TEST_CASE("uint64 frequency list encode golden", "[list]")
 
     REQUIRE(result_bytes == expected);
 }
+
+TEST_CASE("uint64 frequency list decode golden", "[list]")
+{
+    Pipe pipe;
+    std::vector<uint8_t> input = {
+        0x02, 0x04, 0x01, 0x02, 0x04, 0x3C, 0x7D, 0x61, 0xD0, 0x04, 0x3C, 0x7D, 0x88, 0xE0
+    };
+
+    const int toneCount = 2;
+    const uint64_t toneA = 1014850000ULL;
+    const uint64_t toneB = 1014860000ULL;
+    std::vector<uint64_t> tones;
+    tones.reserve(toneCount);
+
+    for (int i = 0; i < toneCount; i++)
+    {
+        tones.push_back(i % 2 == 0 ? toneA : toneB);
+    }
+
+    Storage expected = List::make(tones);
+
+    // Convert uint8_t vector to char vector for writing
+    std::vector<char> input_chars(input.begin(), input.end());
+    pipe.getEndA().write(input_chars);
+
+    maybe<Storage> maybeResult = Noun::from_conn(pipe.getEndB());
+    if(maybeResult)
+    {
+        Storage result = *maybeResult;
+        REQUIRE(result == expected);
+    }
+}
