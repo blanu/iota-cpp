@@ -28,8 +28,6 @@
 #include <storage/word.h>
 #include <storage/word_array.h>
 
-#include "../../../ion-cpp/src/squeeze.h"
-
 // List
 void List::initialize() {
   // WordArray
