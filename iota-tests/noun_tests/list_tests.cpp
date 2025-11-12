@@ -6,9 +6,11 @@
 #include <cstdint>
 #include <vector>
 
+#include "nouns/noun.h"
 #include "nouns/list.h"
 #include "nouns/integer.h"
 #include "storage/storage.h"
+#include <transmission-cpp.h>
 
 TEST_CASE("ints list empty", "[list]")
 {
@@ -307,4 +309,33 @@ TEST_CASE("toInts from MixedArray with non-int returns empty", "[list]")
 
     ints result = List::toInts(storage);
     REQUIRE(result.empty());
+}
+
+TEST_CASE("uint64 frequency list encode golden", "[list]")
+{
+    std::vector<uint8_t> expected = {
+        0x02, 0x04, 0x01, 0x02, 0x04, 0x3C, 0x7D, 0x61, 0xD0, 0x04, 0x3C, 0x7D, 0x88, 0xE0
+    };
+
+    Pipe pipe;
+    const int toneCount = 2;
+    const uint64_t toneA = 1014850000ULL;
+    const uint64_t toneB = 1014860000ULL;
+    std::vector<uint64_t> tones;
+    tones.reserve(toneCount);
+
+    for (int i = 0; i < toneCount; i++)
+    {
+        tones.push_back(i % 2 == 0 ? toneA : toneB);
+    }
+
+    Storage value = List::make(tones);
+    Noun::to_conn(pipe.getEndA(), value);
+
+    std::vector<char> result = pipe.getEndB().read(pipe.getEndB().available());
+
+    // Convert char vector to uint8_t vector for comparison
+    std::vector<uint8_t> result_bytes(result.begin(), result.end());
+
+    REQUIRE(result_bytes == expected);
 }
