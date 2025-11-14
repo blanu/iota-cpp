@@ -9,6 +9,7 @@
 #include <storage/storage.h>
 
 #include <Connection.h>
+#include <logger.h>
 
 // Import noun.h before storage/mixed_array.h to get advanced noun serialization override
 #define NOUN_TO_BYTES(i) Noun::to_bytes(i)
@@ -130,6 +131,8 @@ class Noun
       static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;
 
       static std::map<Specialization1, ConjunctionFunction> conjunctions;
+
+      static Logger *logger;
 };
 
 

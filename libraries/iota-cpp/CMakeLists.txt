@@ -16,14 +16,14 @@ set(BIGNUMBER_LIB_DIR ${LIBRARIES_DIR}/bignumber-cpp)
 set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER_LIB_DIR}/src)
 set(BIGNUMBER_ARDUINO_DIR ${LIBRARIES_DIR}/bignumber-arduino)
 set(BIGNUMBER_ARDUINO_SOURCE_DIR ${BIGNUMBER_ARDUINO_DIR}/src)
+set(FLUX_CPP ${LIBRARIES_DIR}/flux-cpp)
+set(FLUX_CPP_SOURCE_DIR ${FLUX_CPP}/src)
 
 file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp)
 message(STATUS "IOTA source dir: ${IOTA_LIB_SOURCE_DIR}")
 message(STATUS "IOTA_FILES found: ${IOTA_FILES}")
 
-add_library(iota-cpp-lib STATIC ${IOTA_FILES}
-  src/nouns/data.cpp
-  src/nouns/data.h)
+add_library(iota-cpp-lib STATIC ${IOTA_FILES})
 
 target_include_directories(iota-cpp-lib PUBLIC
   ${IOTA_LIB_SOURCE_DIR}
@@ -31,12 +31,14 @@ target_include_directories(iota-cpp-lib PUBLIC
   ${TRANSMISSION_LIB_SOURCE_DIR}
   ${BIGNUMBER_LIB_SOURCE_DIR}
   ${BIGNUMBER_ARDUINO_SOURCE_DIR}
+  ${FLUX_CPP_SOURCE_DIR}
 )
 
 target_link_libraries(iota-cpp-lib PUBLIC
   ion-cpp
   transmission-cpp-lib
   bignumber-cpp-lib
+  flux-cpp
 )
 
 if(ENABLE_COVERAGE AND (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CX_COMPILER_ID MATCHES "Clang"))

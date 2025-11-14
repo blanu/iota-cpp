@@ -13,3 +13,6 @@
 [submodule "lib/BigNumber"]
 	path = lib/BigNumber
 	url = https://github.com/OperatorFoundation/BigNumber.git
+[submodule "lib/onda"]
+	path = lib/onda
+	url = https://github.com/OperatorFoundation/onda.git
