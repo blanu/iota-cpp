@@ -16,6 +16,9 @@ maybe<EvalRegister> EvalRegister::instance = std::nullopt;
 
 void EvalRegister::initialize()
 {
+  // Symbol registry must be initialized first
+  Symbol::initialize();
+
   // Intern symbols
   Monads::initialize();
   Dyads::initialize();

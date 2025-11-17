@@ -22,35 +22,29 @@ std::unordered_map<int, Storage> Symbol::values;
 
 void Symbol::initialize()
 {
+  // Put symbol at spot 0, for bootstrapping
+  make("symbol");
+
+  // Variable names and undefined
+  make("x");
+  make("y");
+  make("z");
+  make("f");
+  make("undefined");
+
   // Nilads
-  Noun::registerNilad(Nilads::symbols, Symbol::symbols_impl);
+  Noun::registerNilad(Nilads::symbols, symbols_impl);
 
   // Monads
-  Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_SYMBOL, Monads::evaluate, Symbol::evaluate_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::BUILTIN_SYMBOL, Monads::evaluate, Symbol::evaluate_impl);
-  Noun::registerMonad(StorageType::WORD, NounType::USER_SYMBOL, Monads::evaluate, Symbol::evaluate_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::USER_SYMBOL, Monads::evaluate, Symbol::evaluate_impl);
+  Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_SYMBOL, Monads::evaluate, evaluate_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::BUILTIN_SYMBOL, Monads::evaluate, evaluate_impl);
+  Noun::registerMonad(StorageType::WORD, NounType::USER_SYMBOL, Monads::evaluate, evaluate_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::USER_SYMBOL, Monads::evaluate, evaluate_impl);
 
-  Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_SYMBOL, Monads::truth, Symbol::truth_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::BUILTIN_SYMBOL, Monads::truth, Symbol::truth_impl);
-  Noun::registerMonad(StorageType::WORD, NounType::USER_SYMBOL, Monads::truth, Symbol::truth_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::USER_SYMBOL, Monads::truth, Symbol::truth_impl);
-
-  // Symbol tables
-  integerToString[SymbolType::x] = asciiToUTF32("x");
-  stringToInteger[asciiToUTF32("x")] = SymbolType::x;
-
-  integerToString[SymbolType::y]=asciiToUTF32("y");
-  stringToInteger[asciiToUTF32("y")] = SymbolType::y;
-
-  integerToString[SymbolType::z]=asciiToUTF32("z");
-  stringToInteger[asciiToUTF32("z")] = SymbolType::z;
-
-  integerToString[SymbolType::f]=asciiToUTF32("f");
-  stringToInteger[asciiToUTF32("f")] = SymbolType::f;
-
-  integerToString[SymbolType::undefined]=asciiToUTF32("undefined");
-  stringToInteger[asciiToUTF32("undefined")] = SymbolType::undefined;
+  Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_SYMBOL, Monads::truth, truth_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::BUILTIN_SYMBOL, Monads::truth, truth_impl);
+  Noun::registerMonad(StorageType::WORD, NounType::USER_SYMBOL, Monads::truth, truth_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::USER_SYMBOL, Monads::truth, truth_impl);
 }
 
 Storage Symbol::make(int i)
@@ -115,7 +109,7 @@ std::string Symbol::toString(const Storage& s)
         if(std::holds_alternative<ints>(entry.i))
         {
           ints is = std::get<ints>(entry.i);
-
+          return IotaString::toString(IotaString::make(is));
         }
       }
     }
