@@ -13,6 +13,20 @@
 
 #include <storage/storage.h>
 
+// Simple case: field name matches symbol name
+#define INTERN(name) name = Symbol::make(#name)
+
+// Complex case: field name differs from symbol string
+#define INTERN_AS(symbolName, field) field = Symbol::make(#symbolName)
+
+// Simple case: field name matches symbol name
+#define INTERN_INT(name) name = Symbol::toInteger(Symbol::make(#name))
+
+// Complex case: field name differs from symbol string
+#define INTERN_INT_AS(symbolName, field) field = Symbol::toInteger(Symbol::make(#symbolName))
+
+#define INTERN_VERB(space, type, name) space::name = type::make(Symbol::toInteger(Symbol::make(#name)))
+
 class Symbol
 {
   public:
@@ -24,7 +38,12 @@ class Symbol
     static void initialize();
 
     static Storage make(int i);
+    static Storage make(std::string s);
 
+    static int toInteger(const Storage& s);
+    static std::string toString(const Storage& s);
+
+    static Storage symbols_impl();
     static Storage evaluate_impl(const Storage& i);
     static Storage truth_impl(const Storage& i);
 

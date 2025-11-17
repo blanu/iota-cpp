@@ -5,6 +5,7 @@
 #include "eval_register.h"
 
 #include "symbols.h"
+#include "verbs.h"
 
 #include <storage/storage.h>
 #include "storage/word_array.h"
@@ -15,7 +16,20 @@ maybe<EvalRegister> EvalRegister::instance = std::nullopt;
 
 void EvalRegister::initialize()
 {
+  // Intern symbols
+  Monads::initialize();
+  Dyads::initialize();
+  Triads::initialize();
+  MonadicAdverbs::initialize();
+  DyadicAdverbs::initialize();
+
+  // Intern verbs
+  Monad::initialize();
+  Dyad::initialize();
+
+  // Set up dispatch table
   Noun::initialize();
+
 }
 
 maybe<Storage> EvalRegister::eval(const Storage& i)

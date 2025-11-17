@@ -1,6 +1,11 @@
 #ifndef REGISTER_H_
 #define REGISTER_H_
 
+#include <string>
+#include <map>
+#include <vector>
+#include <tuple>
+
 #include <types.h>
 
 #include <ion-cpp.h>
