@@ -35,8 +35,7 @@
 #include <functional>
 
 #include <iostream> // FIXME - remove, for debugging
-
-#include "../../../bignumber-cpp/src/BigNumber/BigNumber.h"
+#include <BigNumber.h>
 
 // Integer
 void Integer::initialize()
