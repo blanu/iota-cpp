@@ -71,3 +71,64 @@ TEST_CASE("form string", "[dyad]")
 
 
 // FIXME - symbol test case
+
+TEST_CASE("form integer - 32-bit boundaries", "[dyad]")
+{
+  using namespace iota;
+  using namespace std::literals::string_literals;
+
+  // INT_MAX fits in int
+  REQUIRE(evalExpression({"2147483647"s, form, 0}) == 2147483647);
+
+  // INT_MIN requires BigNumber (can't write as literal)
+  auto min_result = evalExpression({"-2147483648"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(min_result));
+}
+
+TEST_CASE("form integer - just beyond 32-bit (BigNumber)", "[dyad]")
+{
+  using namespace iota;
+  using namespace std::literals::string_literals;
+
+  // 2^31 = 2147483648 (one more than INT_MAX)
+  auto result1 = evalExpression({"2147483648"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(result1));
+
+  // -2^31 - 1 = -2147483649 (one less than INT_MIN)
+  auto result2 = evalExpression({"-2147483649"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(result2));
+}
+
+TEST_CASE("form integer - 33-bit values", "[dyad]")
+{
+  using namespace iota;
+  using namespace std::literals::string_literals;
+
+  // 2^33 = 8589934592
+  auto result = evalExpression({"8589934592"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(result));
+}
+
+TEST_CASE("form integer - 64-bit values", "[dyad]")
+{
+  using namespace iota;
+  using namespace std::literals::string_literals;
+
+  // 2^63 - 1 (max signed 64-bit)
+  auto result1 = evalExpression({"9223372036854775807"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(result1));
+
+  // 2^64 - 1 (max unsigned 64-bit)
+  auto result2 = evalExpression({"18446744073709551615"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(result2));
+}
+
+TEST_CASE("form integer - very large values", "[dyad]")
+{
+  using namespace iota;
+  using namespace std::literals::string_literals;
+
+  // The example from the original issue: 29 digits
+  auto result = evalExpression({"10101010101010101001010101010"s, form, 0});
+  REQUIRE(std::holds_alternative<BigNumber>(result));
+}

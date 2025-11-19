@@ -40,8 +40,9 @@ TEST_CASE("first character", "[monad]")
 TEST_CASE("first string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"abc", first}) == 'a');
+  REQUIRE(evalExpression({"abc"s, first}) == 'a');
 }
 
 // FIXME - first dictionary

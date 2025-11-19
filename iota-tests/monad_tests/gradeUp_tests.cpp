@@ -19,6 +19,7 @@ TEST_CASE("gradeUp integers", "[monad]")
 TEST_CASE("gradeUp string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"abac", gradeUp}) == a{1, 3, 2, 4});
+  REQUIRE(evalExpression({"abac"s, gradeUp}) == a{1, 3, 2, 4});
 }

@@ -53,9 +53,10 @@ TEST_CASE("equal character", "[dyad]")
 TEST_CASE("equal string", "[dyad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"a", equal, "a"}) == 1);
-  REQUIRE(evalExpression({"a", equal, "b"}) == 0);
-  REQUIRE(evalExpression({"abc", equal, "abc"}) == 1);
-  REQUIRE(evalExpression({"abc", equal, "abd"}) == 0);
+  REQUIRE(evalExpression({"a"s, equal, "a"s}) == 1);
+  REQUIRE(evalExpression({"a"s, equal, "b"s}) == 0);
+  REQUIRE(evalExpression({"abc"s, equal, "abc"s}) == 1);
+  REQUIRE(evalExpression({"abc"s, equal, "abd"s}) == 0);
 }

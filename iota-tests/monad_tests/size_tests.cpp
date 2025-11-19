@@ -47,8 +47,9 @@ TEST_CASE("size character", "[monad]")
 TEST_CASE("size string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"", size}) == 0);
-  REQUIRE(evalExpression({"a", size}) == 1);
-  REQUIRE(evalExpression({"abc", size}) == 3);
+  REQUIRE(evalExpression({""s, size}) == 0);
+  REQUIRE(evalExpression({"a"s, size}) == 1);
+  REQUIRE(evalExpression({"abc"s, size}) == 3);
 }

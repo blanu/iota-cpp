@@ -54,15 +54,27 @@ Storage Symbol::make(int i)
 
 Storage Symbol::make(std::string s)
 {
-  int nextId = integerToString.size();
-  ints utf32 = asciiToUTF32(s);
+  ints utf32 = IotaString::toIntegers(IotaString::makeString(s));
 
+  // Check if symbol already exists
+  auto it = stringToInteger.find(utf32);
+  if(it != stringToInteger.end())
+  {
+    // Return existing symbol
+    int existingId = it->second;
+    auto valueIt = values.find(existingId);
+    if(valueIt != values.end())
+    {
+      return valueIt->second;
+    }
+  }
+
+  // Create new symbol
+  int nextId = integerToString.size();
   integerToString[nextId] = utf32;
   stringToInteger[utf32] = nextId;
-
   const Storage symbol = MixedArray::make({Integer::make(nextId), IotaString::make(utf32)});
   values.insert({nextId, symbol});
-
   return symbol;
 }
 

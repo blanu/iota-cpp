@@ -167,26 +167,26 @@ TEST_CASE("format2 string", "[dyad]")
   // FIXME - :undefined results
   // REQUIRE(evalExpression({a{}, format2, 0}) == ":undefined"s);
 
-  REQUIRE(evalExpression({"abc", format2, 0}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 1}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, -1}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 2}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, -2}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 3}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, -3}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 4}) == "abc "s);
-  REQUIRE(evalExpression({"abc", format2, -4}) == " abc"s);
-  REQUIRE(evalExpression({"abc", format2, 0.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 1.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, -1.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 2.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, -2.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 3.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, -3.0f}) == "abc"s);
-  REQUIRE(evalExpression({"abc", format2, 4.0f}) == "abc "s);
-  REQUIRE(evalExpression({"abc", format2, -4.0f}) == " abc"s);
-  REQUIRE(evalExpression({"abc", format2, 4.5f}) == "abc "s);
-  REQUIRE(evalExpression({"abc", format2, -4.5f}) == " abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 0}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 1}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, -1}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 2}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, -2}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 3}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, -3}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 4}) == "abc "s);
+  REQUIRE(evalExpression({"abc"s, format2, -4}) == " abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 0.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 1.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, -1.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 2.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, -2.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 3.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, -3.0f}) == "abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 4.0f}) == "abc "s);
+  REQUIRE(evalExpression({"abc"s, format2, -4.0f}) == " abc"s);
+  REQUIRE(evalExpression({"abc"s, format2, 4.5f}) == "abc "s);
+  REQUIRE(evalExpression({"abc"s, format2, -4.5f}) == " abc"s);
 }
 
 // FIXME - symbols

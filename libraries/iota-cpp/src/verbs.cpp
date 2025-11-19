@@ -4,6 +4,7 @@
 
 #include "verbs.h"
 
+#include "nouns/iota_string.h"
 #include "nouns/noun.h"
 #include "nouns/symbol.h"
 #include "storage/word.h"
@@ -77,4 +78,20 @@ void Dyad::initialize()
   INTERN_VERB(iota, Dyad, split);
   INTERN_VERB(iota, Dyad, take);
   INTERN_VERB(iota, Dyad, times);
+}
+
+void Dyad::print(const Storage& i)
+{
+  if(i.o == NounType::BUILTIN_DYAD)
+  {
+    if(std::holds_alternative<int>(i.i))
+    {
+      int integer = std::get<int>(i.i);
+
+      ints integers = Symbol::integerToString[integer];
+      const Storage& is = IotaString::make(integers);
+      std::string s = IotaString::toString(is);
+      printf("%s", s.c_str());
+    }
+  }
 }

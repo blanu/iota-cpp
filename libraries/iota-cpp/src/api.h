@@ -6,19 +6,20 @@
 #include <string>
 #include <type_traits>
 
-#include "verbs.h" // NOLINT, included for convenience for users of api.h
-#include "adverbs.h" // NOLINT, included for convenience for users of api.h
-#include "effects/effects.h" // NOLINT, included for convenience for users of api.h
-#include "conjunctions/conjunctions.h" // NOLINT, included for convenience for users of api.h
+#include "verbs.h" // NOLINT
+#include "adverbs.h" // NOLINT
+#include "effects/effects.h" // NOLINT
+#include "conjunctions/conjunctions.h" // NOLINT
 
 #include <storage/storage.h>
 #include "storage/word.h"
 #include <storage/ion_float.h>
 
 #include "nouns/error.h"
+#include <BigNumber.h>
 
 struct cppValue;
-using cppValueVariant = std::variant<std::vector<cppValue>, int, float, char, std::string, Error, Storage>;
+using cppValueVariant = std::variant<std::vector<cppValue>, int, float, char, std::string, Error, Storage, BigNumber>;
 struct cppValue : cppValueVariant
 {
   using cppValueVariant::cppValueVariant;
@@ -78,12 +79,19 @@ struct cppValue : cppValueVariant
         return std::get<Storage>(*this) == std::get<Storage>(other);
       }
     }
+    else if(std::holds_alternative<BigNumber>(*this))
+    {
+      if(std::holds_alternative<BigNumber>(other))
+      {
+        return std::get<BigNumber>(*this) == std::get<BigNumber>(other);
+      }
+    }
 
     return false;
   }
 
-  cppValue() : cppValueVariant(std::vector<cppValue>()) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
-  cppValue(std::initializer_list<cppValue> values) : cppValueVariant(std::vector<cppValue>(values)) {} // NOLINT, don't mark as explicit because we want an implicit conversion even if clang-tidy doesn't like that
+  cppValue() : cppValueVariant(std::vector<cppValue>()) {} // NOLINT
+  cppValue(std::initializer_list<cppValue> values) : cppValueVariant(std::vector<cppValue>(values)) {} // NOLINT
 };
 
 using cppValues = std::vector<cppValue>;
@@ -172,7 +180,11 @@ cppValue evalNoun(const cppValue& i);
 
 cppValue evalExpression(const cppValues& values);
 
+Storage evalExpressionCppToIota(const cppValues& values);
+
 Storage evaluateExpression(const Storage& values);
+
+bool evalBoolean(const cppValues& values);
 
 namespace iota
 {

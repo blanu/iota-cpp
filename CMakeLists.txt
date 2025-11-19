@@ -48,6 +48,7 @@ add_subdirectory("libraries/bignumber-cpp")
 add_subdirectory("libraries/onda")
 
 add_subdirectory("iota-stdio")
+add_subdirectory("iota-repl")
 add_subdirectory("iota-tests")
 
 add_subdirectory("libraries/iota-arduino")

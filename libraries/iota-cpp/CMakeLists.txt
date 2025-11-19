@@ -22,8 +22,7 @@ file(GLOB_RECURSE IOTA_FILES ${IOTA_LIB_SOURCE_DIR}/*.cpp)
 message(STATUS "IOTA source dir: ${IOTA_LIB_SOURCE_DIR}")
 message(STATUS "IOTA_FILES found: ${IOTA_FILES}")
 
-add_library(iota-cpp-lib STATIC ${IOTA_FILES}
-  src/symbols.cpp)
+add_library(iota-cpp-lib STATIC ${IOTA_FILES})
 
 target_include_directories(iota-cpp-lib PUBLIC
   ${IOTA_LIB_SOURCE_DIR}

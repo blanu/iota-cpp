@@ -40,10 +40,11 @@ TEST_CASE("atom character", "[monad]")
 
 TEST_CASE("atom string", "[monad]")
 {
+  using namespace std::string_literals;
   using namespace iota;
 
-  REQUIRE(evalExpression({"", atom}) == 1);
-  REQUIRE(evalExpression({"abc", atom}) == 0);
+  REQUIRE(evalExpression({""s, atom}) == 1);
+  REQUIRE(evalExpression({"abc"s, atom}) == 0);
 }
 
 // TEST_CASE("atom dictionary", "[monad]")

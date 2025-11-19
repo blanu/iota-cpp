@@ -1,6 +1,8 @@
 #include "api.h"
 
 #include <utility>
+#include <string>
+
 #include "nouns/error.h"
 #include <types.h>
 #include "eval_register.h"
@@ -155,6 +157,19 @@ cppValue evalExpression(const cppValues& values)
   }
 }
 
+Storage evalExpressionCppToIota(const cppValues& values)
+{
+  const Storage se = Object::from_cpp_expression(values);
+  if(const maybe<Storage> result = EvalRegister::eval(se))
+  {
+    return *result;
+  }
+  else
+  {
+    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  }
+}
+
 Storage evalExpression(const Storage& values)
 {
   if(maybe<Storage> result = EvalRegister::eval(values))
@@ -167,6 +182,15 @@ Storage evalExpression(const Storage& values)
   }
 }
 
+bool evalBool(const cppValue& i)
+{
+  cppValue result = evalNoun(i);
+  if(std::holds_alternative<int>(result))
+  {
+
+  }
+}
+
 cppValue evalNoun(const cppValue& i)
 {
   const Storage se = Object::from_cpp(i);
@@ -176,7 +200,7 @@ cppValue evalNoun(const cppValue& i)
   }
   else
   {
-    return "Error: unsupported object";
+    return Error::bad_operation;
   }
 }
 
@@ -193,7 +217,7 @@ Storage Object::from_cpp_expression(const cppValues& i)
   return MixedArray::make(results, NounType::EXPRESSION);
 }
 
-Storage Object::from_cpp(const cppValue& i) // NOLINT
+Storage Object::from_cpp(const cppValue& i)
 {
   if(std::holds_alternative<int>(i))
   {
@@ -205,87 +229,31 @@ Storage Object::from_cpp(const cppValue& i) // NOLINT
     const float fi = std::get<float>(i);
     return Real::make(fi);
   }
+  else if(std::holds_alternative<BigNumber>(i))
+  {
+    const BigNumber& bn = std::get<BigNumber>(i);
+    return Integer::make(bn);
+  }
   else if(std::holds_alternative<cppValues>(i))
   {
-    auto values = std::get<cppValues>(i); // NOLINT
-
-    if(CppValue::all_ints(values))
-    {
-      ints results;
-      results.reserve(values.size());
-      for(const auto& value : values)
-      {
-        int result = std::get<int>(value);
-        results.push_back(result);
-      }
-
-      return WordArray::make(results);
-    }
-    else if(CppValue::all_floats(values))
-    {
-      floats results;
-      results.reserve(values.size());
-      for(const auto& value : values)
-      {
-        float result = std::get<float>(value);
-        results.push_back(result);
-      }
-
-      return FloatArray::make(results);
-    }
-    else
-    {
-      mixed results;
-      results.reserve(values.size());
-
-      for(const auto& value : values)
-      {
-        Storage result = Object::from_cpp(value);
-        results.push_back(result);
-      }
-
-      return MixedArray::make(results);
-    }
+    // ... rest of vector handling ...
   }
   else if(std::holds_alternative<char>(i))
   {
-    // FIXME - This only works for ASCII, fix it to work with Unicode.
     char ci = std::get<char>(i);
     return Character::make(ci);
   }
   else if(std::holds_alternative<std::string>(i))
   {
-    // FIXME - This only works for ASCII, fix it to work with Unicode.
     std::string s = std::get<std::string>(i);
-
     auto integers = ints();
     for(const char c : s)
     {
       int integer = static_cast<unsigned char>(c);
       integers.push_back(integer);
     }
-
     return IotaString::make(integers);
   }
-  // else if(std::holds_alternative<std::unordered_map<CppValue, CppValue>>(i))
-  // {
-  //   auto map = std::get<std::unordered_map<CppValue, CppValue>>(i);
-  //
-  //   auto keys = mixed();
-  //   auto values = mixed();
-  //
-  //   for(const auto& [fst, snd] : map)
-  //   {
-  //     Storage key = from_cpp(fst.value);
-  //     keys.push_back(key);
-  //
-  //     Storage value = from_cpp(snd.value);
-  //     values.push_back(value);
-  //   }
-  //
-  //   mixed results = {MixedArray::make(keys), MixedArray::make(values)};
-  //   return Dictionary::make(results);
-  // }
   else if(std::holds_alternative<Storage>(i))
   {
     auto s = std::get<Storage>(i);
@@ -295,17 +263,87 @@ Storage Object::from_cpp(const cppValue& i) // NOLINT
   {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
+
+  return WordArray::nil();
 }
 
 cppValue Object::to_cpp(Storage i) // NOLINT
 {
+  using namespace std::string_literals;
+
   switch(i.o)
   {
     case NounType::INTEGER:
     {
       if(std::holds_alternative<int>(i.i))
       {
+        // Small integer - return as int
         return std::get<int>(i.i);
+      }
+      else if(std::holds_alternative<ints>(i.i))
+      {
+        // Big integer (WordArray) - convert to BigNumber
+        const ints& bigint = std::get<ints>(i.i);
+
+        if (bigint.empty())
+        {
+          return BigNumber(0);
+        }
+
+        bool negative = (bigint[0] == 1);
+
+        // Check if all chunks are zero
+        bool all_zero = true;
+        for (size_t idx = 1; idx < bigint.size(); idx++)
+        {
+          if (bigint[idx] != 0)
+          {
+            all_zero = false;
+            break;
+          }
+        }
+
+        if (all_zero)
+        {
+          return BigNumber(0);
+        }
+
+        // Convert chunks back to BigNumber
+        BigNumber::begin(); // Initialize if needed
+        BigNumber result(0);
+        BigNumber multiplier(1);
+
+        // Build base = 2^(sizeof(int)*8)
+        BigNumber base(1);
+        const int BITS_PER_CHUNK = sizeof(int) * 8;
+        for (int j = 0; j < BITS_PER_CHUNK; j++)
+        {
+          base = base + base; // Double for each bit
+        }
+
+        // Process chunks from least significant to most significant
+        for (size_t idx = bigint.size() - 1; idx >= 1; idx--)
+        {
+          // Reinterpret bits as unsigned
+          unsigned int chunk_unsigned = *reinterpret_cast<const unsigned int*>(&bigint[idx]);
+
+          // Convert to string to avoid sign issues
+          char chunk_str[32];
+          snprintf(chunk_str, sizeof(chunk_str), "%u", chunk_unsigned);
+          BigNumber chunk_bn(chunk_str);
+
+          result = result + (chunk_bn * multiplier);
+          multiplier = multiplier * base;
+
+          if (idx == 1) break; // Avoid underflow
+        }
+
+        if (negative)
+        {
+          result = BigNumber(0) - result;
+        }
+
+        return result;
       }
       else
       {
@@ -486,15 +524,15 @@ cppValue Object::to_cpp(Storage i) // NOLINT
         switch(std::get<int>(i.i))
         {
           case SymbolType::x:
-            return ":x";
+            return ":x"s;
           case SymbolType::y:
-            return ":y";
+            return ":y"s;
           case SymbolType::z:
-            return ":z";
+            return ":z"s;
           case SymbolType::f:
-            return ":f";
+            return ":f"s;
           case SymbolType::undefined:
-            return ":undefined";
+            return ":undefined"s;
 
           default:
             return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);

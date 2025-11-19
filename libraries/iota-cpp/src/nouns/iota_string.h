@@ -22,6 +22,7 @@ class IotaString
     static Storage makeEmpty();
 
     static std::string toString(const Storage& i);
+    static ints toIntegers(const Storage& i);
 
     // Monads
     static Storage atom_impl(const Storage& i);

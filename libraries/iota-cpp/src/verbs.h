@@ -22,6 +22,7 @@ class Dyad
 {
   public:
     static Storage make(int i);
+    static void print(const Storage &);
 
     static void initialize();
 };

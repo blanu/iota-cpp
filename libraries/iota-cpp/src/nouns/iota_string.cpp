@@ -7,6 +7,7 @@
 #include <variant>
 #include <algorithm>
 
+#include <types.h>
 #include "iota_string.h"
 #include "noun.h"
 #include "list.h"
@@ -28,6 +29,8 @@
 
 // String
 void IotaString::initialize() {
+  auto d = Noun::dyadSources;
+
   // Monads
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::atom, IotaString::atom_impl);
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::enclose, Noun::enclose_impl);
@@ -222,6 +225,16 @@ std::string IotaString::toString(const Storage& i)
   }
 
   return result;
+}
+
+ints IotaString::toIntegers(const Storage& i)
+{
+  if(std::holds_alternative<ints>(i.i))
+  {
+    return std::get<ints>(i.i);
+  }
+
+  return ints{};
 }
 
 Storage IotaString::makeEmpty()
@@ -594,22 +607,32 @@ Storage IotaString::form_integer(const Storage& i, const Storage& x)
   constexpr int unicode_minus = static_cast<int>('-');
   constexpr int unicode_zero = static_cast<int>('0'); // '0' is 48 (decimal) in Unicode, '1' is 49, etc.
 
+  Storage working = Integer::zero();
+
   if(std::holds_alternative<ints>(i.i))
   {
     const ints iis = std::get<ints>(i.i);
 
-    int first = 1;
-    int negative = 0;
-    int result = 0;
+    // Empty string returns undefined symbol
+    if(iis.empty())
+    {
+      return QuotedSymbol::undefined();
+    }
+
+    // Convert to std::string for BigNumber parsing
+    std::string numStr;
+    bool negative = false;
+    bool first = true;
+    int digitCount = 0;
+
     for(const int y : iis)
     {
       if(first)
       {
-        first = 0;
-
+        first = false;
         if(y == unicode_minus)
         {
-          negative = 1;
+          negative = true;
           continue;
         }
       }
@@ -617,23 +640,21 @@ Storage IotaString::form_integer(const Storage& i, const Storage& x)
       const int digit = y - unicode_zero;
       if((digit >= 0) && (digit <= 9))
       {
-        result = result * 10;
-        result = result + digit;
+        working = Integer::times_integer(working, Integer::make(10));
+        working = Integer::plus_integer(working, Integer::make(digit));
       }
       else
       {
-        return Word::make(INVALID_ARGUMENT, NounType::ERROR);
+        return QuotedSymbol::undefined();
       }
     }
 
     if(negative)
     {
-      return Integer::make(-result);
+      working = Integer::times_integer(Integer::make(-1), working);
     }
-    else
-    {
-      return Integer::make(result);
-    }
+
+    return working;
   }
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);

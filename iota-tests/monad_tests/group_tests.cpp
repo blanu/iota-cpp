@@ -19,6 +19,7 @@ TEST_CASE("group list", "[monad]")
 TEST_CASE("group string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"hello foo", group}) == a{{1}, {2}, {3, 4}, {5, 8, 9}, {6}, {7}});
+  REQUIRE(evalExpression({"hello foo"s, group}) == a{{1}, {2}, {3, 4}, {5, 8, 9}, {6}, {7}});
 }

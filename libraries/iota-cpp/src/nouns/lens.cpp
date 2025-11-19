@@ -6,6 +6,7 @@
 
 #include "../api.h"
 #include "error.h"
+#include "../symbols.h"
 
 #include <storage/storage.h>
 #include <storage/word_array.h>

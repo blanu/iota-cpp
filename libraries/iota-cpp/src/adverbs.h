@@ -5,7 +5,7 @@
 #ifndef ADVERBS_H
 #define ADVERBS_H
 
-#include "symbols.h"
+#include <storage/word_array.h>
 
 #include <storage/storage.h>
 
@@ -13,34 +13,38 @@ class MonadicAdverb
 {
   public:
     static Storage make(int i);
+
+    static void initialize();
 };
 
 class DyadicAdverb
 {
   public:
     static Storage make(int i);
+
+    static void initialize();
 };
 
 namespace iota
 {
   // Monadic Adverbs
-  inline Storage converge = MonadicAdverb::make(MonadicAdverbs::converge);
-  inline Storage each = MonadicAdverb::make(MonadicAdverbs::each);
-  inline Storage eachPair = MonadicAdverb::make(MonadicAdverbs::eachPair);
-  inline Storage over = MonadicAdverb::make(MonadicAdverbs::over);
-  inline Storage scanConverging = MonadicAdverb::make(MonadicAdverbs::scanConverging);
-  inline Storage scanOver = MonadicAdverb::make(MonadicAdverbs::scanOver);
+  inline Storage converge = WordArray::nil();
+  inline Storage each = WordArray::nil();
+  inline Storage eachPair = WordArray::nil();
+  inline Storage over = WordArray::nil();
+  inline Storage scanConverging = WordArray::nil();
+  inline Storage scanOver = WordArray::nil();
 
   // Dyadic Adverbs
-  inline Storage each2 = DyadicAdverb::make(DyadicAdverbs::each2);
-  inline Storage eachLeft = DyadicAdverb::make(DyadicAdverbs::eachLeft);
-  inline Storage eachRight = DyadicAdverb::make(DyadicAdverbs::eachRight);
-  inline Storage overNeutral = DyadicAdverb::make(DyadicAdverbs::overNeutral);
-  inline Storage iterate = DyadicAdverb::make(DyadicAdverbs::iterate);
-  inline Storage scanIterating = DyadicAdverb::make(DyadicAdverbs::scanIterating);
-  inline Storage scanOverNeutral = DyadicAdverb::make(DyadicAdverbs::scanOverNeutral);
-  inline Storage scanWhileOne = DyadicAdverb::make(DyadicAdverbs::scanWhileOne);
-  inline Storage whileOne = DyadicAdverb::make(DyadicAdverbs::whileOne);
+  inline Storage each2 = WordArray::nil();
+  inline Storage eachLeft = WordArray::nil();
+  inline Storage eachRight = WordArray::nil();
+  inline Storage overNeutral = WordArray::nil();
+  inline Storage iterate = WordArray::nil();
+  inline Storage scanIterating = WordArray::nil();
+  inline Storage scanOverNeutral = WordArray::nil();
+  inline Storage scanWhileOne = WordArray::nil();
+  inline Storage whileOne = WordArray::nil();
 }
 
 #endif //ADVERBS_H

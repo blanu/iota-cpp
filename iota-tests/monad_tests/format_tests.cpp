@@ -59,7 +59,7 @@ TEST_CASE("format string", "[monad]")
   using namespace iota;
   using namespace std::string_literals;
 
-  REQUIRE(evalExpression(cppValues{"abc", format}) == "abc"s);
+  REQUIRE(evalExpression(cppValues{"abc"s, format}) == "abc"s);
 }
 
 // FIXME - quoted symbol

@@ -53,8 +53,9 @@ TEST_CASE("undefined character", "[monad]")
 TEST_CASE("undefined string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"abc", undefined}) == 0);
+  REQUIRE(evalExpression({"abc"s, undefined}) == 0);
 }
 
 // FIXME - first dictionary

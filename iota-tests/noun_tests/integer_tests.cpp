@@ -9,6 +9,8 @@
 #include "nouns/integer.h"
 #include "nouns/noun.h"
 #include "storage/storage.h"
+#include "verbs.h"
+#include "nouns/symbol.h"
 
 TEST_CASE("int to storage and back", "[integer]")
 {
@@ -547,10 +549,16 @@ TEST_CASE("makeHex negative large value", "[integer][hex]")
     REQUIRE(static_cast<uint32_t>(chunks[2]) == 0x9ABCDEF0);
 }
 
-TEST_CASE("makeHex empty string", "[integer][hex]")
+TEST_CASE("Integer::makeDecimal empty string", "[integer]")
 {
-    Storage storage = Integer::makeHex("");
-    REQUIRE(storage.o == NounType::ERROR);
+    using namespace iota;
+
+    auto result = Integer::makeDecimal("");
+    REQUIRE(result.o == NounType::QUOTED_SYMBOL);  // Should be :undefined, not ERROR
+
+    // Verify it's the undefined symbol
+    std::string symbolStr = Symbol::toString(result);
+    REQUIRE(symbolStr == "undefined");
 }
 
 TEST_CASE("makeHex invalid characters", "[integer][hex]")
@@ -740,4 +748,79 @@ TEST_CASE("hex round trip radio frequency", "[integer][hex]")
     REQUIRE(result != nullptr);
     REQUIRE(*result == frequency);
     delete result;
+}
+
+TEST_CASE("Integer::makeDecimal - small positive integers", "[integer][decimal]")
+{
+    Storage result = Integer::makeDecimal("42");
+    REQUIRE(result.o == NounType::INTEGER);
+    REQUIRE(Integer::toDecimalString(result) == "42");
+}
+
+TEST_CASE("Integer::makeDecimal - small negative integers", "[integer][decimal]")
+{
+    Storage result = Integer::makeDecimal("-123");
+    REQUIRE(result.o == NounType::INTEGER);
+    REQUIRE(Integer::toDecimalString(result) == "-123");
+}
+
+TEST_CASE("Integer::makeDecimal - zero", "[integer][decimal]")
+{
+    Storage result = Integer::makeDecimal("0");
+    REQUIRE(result.o == NounType::INTEGER);
+    REQUIRE(Integer::toDecimalString(result) == "0");
+}
+
+TEST_CASE("Integer::makeDecimal - large positive integers", "[integer][decimal]")
+{
+    std::string big_num = "1010101010100101010101010";
+    Storage result = Integer::makeDecimal(big_num);
+    REQUIRE(result.o == NounType::INTEGER);
+    REQUIRE(Integer::toDecimalString(result) == big_num);
+}
+
+TEST_CASE("Integer::makeDecimal - large negative integers", "[integer][decimal]")
+{
+    std::string big_num = "-999999999999999999999999";
+    Storage result = Integer::makeDecimal(big_num);
+    REQUIRE(result.o == NounType::INTEGER);
+    REQUIRE(Integer::toDecimalString(result) == big_num);
+}
+
+TEST_CASE("Integer::makeDecimal - with leading plus sign", "[integer][decimal]")
+{
+    Storage result = Integer::makeDecimal("+789");
+    REQUIRE(result.o == NounType::INTEGER);
+    REQUIRE(Integer::toDecimalString(result) == "789");
+}
+
+TEST_CASE("Integer::makeDecimal - invalid inputs", "[integer][decimal]")
+{
+    REQUIRE(Integer::makeDecimal("").o == NounType::QUOTED_SYMBOL);
+    REQUIRE(Integer::makeDecimal("-").o == NounType::QUOTED_SYMBOL);
+    REQUIRE(Integer::makeDecimal("+").o == NounType::QUOTED_SYMBOL);
+    REQUIRE(Integer::makeDecimal("12a34").o == NounType::QUOTED_SYMBOL);
+    REQUIRE(Integer::makeDecimal("12.34").o == NounType::QUOTED_SYMBOL);
+    REQUIRE(Integer::makeDecimal("abc").o == NounType::QUOTED_SYMBOL);
+}
+
+TEST_CASE("Integer::makeDecimal - round trip", "[integer][decimal]")
+{
+    std::vector<std::string> test_cases = {
+        "0", "1", "42", "100", "999",
+        "-1", "-42", "-100", "-999",
+        "2147483647",  // max 32-bit int
+        "-2147483648", // min 32-bit int
+        "9223372036854775807",  // max 64-bit int
+        "-9223372036854775808", // min 64-bit int
+        "123456789012345678901234567890",
+        "-987654321098765432109876543210"
+    };
+
+    for (const auto& test : test_cases)
+    {
+        Storage result = Integer::makeDecimal(test);
+        REQUIRE(result.o == NounType::INTEGER);
+        REQUIRE(Integer::toDecimalString(result) == test);
+    }
 }

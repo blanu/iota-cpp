@@ -65,6 +65,8 @@ class Noun
     static void registerDyadicAdverb(Type it, Type io, Type f, Type xt, Type xo, Storage (*a)(const Storage&, const Storage&, const Storage&));
     static void registerConjunction(Type f, Storage (*c)(const Storage&, const Storage&));
 
+    static void printDyad(const Storage &i, const Storage& f, const Storage& x);
+
     // Monads
     static Storage enclose_impl(const Storage& i);
     static Storage shape_scalar(const Storage& i);
@@ -116,10 +118,11 @@ class Noun
     static maybe<Storage> from_conn(Connection& conn);
     static void to_conn(Connection& conn, const Storage& x);
 
+    static std::map<Specialization5, DyadicSourceFunction> dyadSources;
+
     private:
       static std::map<Specialization1, NiladicSourceFunction> niladSources;
       static std::map<Specialization3, MonadicSourceFunction> monadSources;
-      static std::map<Specialization5, DyadicSourceFunction> dyadSources;
       static std::map<Specialization5, TriadicSourceFunction> triadSources;
 
       static std::map<Specialization2, NiladicSourceFunction> niladSinks;

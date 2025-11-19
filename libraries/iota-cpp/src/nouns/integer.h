@@ -8,6 +8,7 @@
 #include <storage/storage.h>
 
 #include <Connection.h>
+#include <BigNumber.h>
 
 class Integer
 {
@@ -19,10 +20,15 @@ class Integer
     static Storage make(uint64_t i);
     static Storage make(unsigned long i);
     static Storage makeHex(std::string i);
+    static Storage makeDecimal(std::string i);
+    static Storage make(const BigNumber& bn);
 
     static uint64_t* toUInt64(const Storage& i);
     static unsigned long* toUnsignedLong(const Storage& i);
     static std::string toHexString(const Storage &i);
+    static std::string toDecimalString(const Storage &i);
+    static BigNumber toBigNumber(const Storage &i);
+    static int toInt(const Storage& i);
 
     static Storage zero();
     static Storage one();

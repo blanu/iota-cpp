@@ -34,6 +34,7 @@ class EvalRegister
     [[nodiscard]] maybe<bytes> retrieve_r() const;
 
     void eval();
+    void advance();
 
     std::vector<std::tuple<Storage, Storage>> getLogs();
     void printLogs();

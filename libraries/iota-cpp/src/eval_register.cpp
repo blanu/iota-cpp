@@ -6,6 +6,7 @@
 
 #include "symbols.h"
 #include "verbs.h"
+#include "adverbs.h"
 
 #include <storage/storage.h>
 #include "storage/word_array.h"
@@ -29,6 +30,10 @@ void EvalRegister::initialize()
   // Intern verbs
   Monad::initialize();
   Dyad::initialize();
+
+  // Intern adverbs
+  MonadicAdverb::initialize();
+  DyadicAdverb::initialize();
 
   // Set up dispatch table
   Noun::initialize();
@@ -97,6 +102,15 @@ void EvalRegister::eval()
   {
     logs.emplace_back(i, WordArray::nil());
     printLog(i, WordArray::nil());
+  }
+}
+
+void EvalRegister::advance()
+{
+  if(r)
+  {
+    i = *r;
+    r = std::nullopt;
   }
 }
 

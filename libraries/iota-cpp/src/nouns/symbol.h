@@ -46,8 +46,6 @@ class Symbol
     static Storage symbols_impl();
     static Storage evaluate_impl(const Storage& i);
     static Storage truth_impl(const Storage& i);
-
-    static ints asciiToUTF32(const std::string& ascii);
 };
 
 #endif //SYMBOL_H

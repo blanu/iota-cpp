@@ -42,9 +42,10 @@ TEST_CASE("not character", "[monad]")
 TEST_CASE("not string", "[monad]")
 {
   using namespace iota;
+  using namespace std::string_literals;
 
-  REQUIRE(evalExpression({"", inot}) == 1);
-  REQUIRE(evalExpression({"a", inot}) == 0);
+  REQUIRE(evalExpression({""s, inot}) == 1);
+  REQUIRE(evalExpression({"a"s, inot}) == 0);
 }
 
 // FIXME

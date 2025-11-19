@@ -119,6 +119,7 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
     Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY)
   };
 
+  auto d = dyadSources;
   for(auto specialization : specializations)
   {
     if (dyadSources.find(specialization) != dyadSources.end())
@@ -128,6 +129,7 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
     }
   }
 
+  Noun::printDyad(i, f, x);
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
@@ -393,6 +395,18 @@ void Noun::registerConjunction(Type f, Storage (*c)(const Storage&, const Storag
 {
   Noun::conjunctions[Specialization1(f)] = c;
 }
+
+void Noun::printDyad(const Storage& i, const Storage& f, const Storage& x)
+{
+  printf("Dyad:");
+  i.print();
+  printf(" ");
+  Dyad::print(f);
+  printf(" ");
+  x.print();
+  printf("\n");
+}
+
 
 Storage Noun::true0() {
   return Word::make(1, NounType::INTEGER);
