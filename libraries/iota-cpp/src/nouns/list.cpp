@@ -666,6 +666,11 @@ Storage List::make(const std::vector<uint64_t>& i)
   }
 }
 
+Storage List::make(const mixed& i)
+{
+  return MixedArray::make(i, NounType::LIST);
+}
+
 ints List::toInts(const Storage& i)
 {
     // Verify it's a LIST type

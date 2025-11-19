@@ -17,6 +17,7 @@ class List
 
     static Storage make(const ints& i);
     static Storage make(const std::vector<uint64_t>& i);
+    static Storage make(const mixed& i);
 
     static ints toInts(const Storage& i);
     static std::vector<uint64_t> toUInt64s(const Storage& i);
