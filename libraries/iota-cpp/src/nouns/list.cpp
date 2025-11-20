@@ -28,6 +28,8 @@
 #include <storage/word.h>
 #include <storage/word_array.h>
 
+Logger* List::logger;
+
 // List
 void List::initialize() {
   // WordArray
@@ -9241,6 +9243,7 @@ maybe<bytes> List::to_bytes(const Storage& i) {
 maybe<Storage> List::from_conn(Connection& conn, int t) {
   switch (t) {
     case StorageType::WORD_ARRAY:
+      if(logger) { logger->debugf("List::from_conn(): WORD_ARRAY"); }
       return WordArray::from_conn(conn, NounType::LIST);
 
     case StorageType::FLOAT_ARRAY:
