@@ -24,6 +24,15 @@ message(STATUS "IOTA_FILES found: ${IOTA_FILES}")
 
 add_library(iota-cpp-lib STATIC ${IOTA_FILES})
 
+include_directories(iota-cpp-lib PUBLIC
+  ${IOTA_LIB_SOURCE_DIR}
+  ${ION_LIB_SOURCE_DIR}
+  ${TRANSMISSION_LIB_SOURCE_DIR}
+  ${BIGNUMBER_LIB_SOURCE_DIR}
+  ${BIGNUMBER_ARDUINO_SOURCE_DIR}
+  ${ONDA}/src
+)
+
 target_include_directories(iota-cpp-lib PUBLIC
   ${IOTA_LIB_SOURCE_DIR}
   ${ION_LIB_SOURCE_DIR}

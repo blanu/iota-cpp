@@ -1519,3 +1519,9 @@ Storage Noun::shape_scalar(const Storage& i)
   return Word::make(0, NounType::INTEGER);
 }
 
+void Noun::setLogger(Logger* newLogger)
+{
+  logger = newLogger;
+  List::logger = logger;
+  WordArray::logger = logger;
+}

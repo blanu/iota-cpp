@@ -120,9 +120,11 @@ class Noun
 
     static std::map<Specialization5, DyadicSourceFunction> dyadSources;
 
-    static Logger *logger;
+    void setLogger(Logger *newLogger);
 
     private:
+      static Logger *logger;
+
       static std::map<Specialization1, NiladicSourceFunction> niladSources;
       static std::map<Specialization3, MonadicSourceFunction> monadSources;
       static std::map<Specialization5, TriadicSourceFunction> triadSources;

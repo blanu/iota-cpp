@@ -41,6 +41,9 @@ endif()
 include(arduino-cli.cmake)
 include(teensy41.cmake)
 
+set(ONDA ${CMAKE_SOURCE_DIR}/lib/onda/src/cpp)
+set(ONDA_ARDUINO ${CMAKE_SOURCE_DIR}/lib/onda/src/arduino)
+
 add_subdirectory("libraries/transmission-cpp")
 add_subdirectory("libraries/ion-cpp")
 add_subdirectory("libraries/iota-cpp")
