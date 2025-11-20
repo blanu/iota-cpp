@@ -120,6 +120,8 @@ class Noun
 
     static std::map<Specialization5, DyadicSourceFunction> dyadSources;
 
+    static Logger *logger;
+
     private:
       static std::map<Specialization1, NiladicSourceFunction> niladSources;
       static std::map<Specialization3, MonadicSourceFunction> monadSources;
@@ -134,8 +136,6 @@ class Noun
       static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;
 
       static std::map<Specialization1, ConjunctionFunction> conjunctions;
-
-      static Logger *logger;
 };
 
 
