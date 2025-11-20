@@ -1391,10 +1391,8 @@ bytes Noun::to_bytes(const Storage& x) {
 
 maybe<Storage> Noun::from_conn(Connection& conn) {
   int storageType = static_cast<unsigned char>(conn.readOne());
-  if(logger) { logger->debugf("Noun::from_conn(): storageType: %d", storageType); }
 
   int objectType = static_cast<unsigned char>(conn.readOne());
-  if(logger) { logger->debugf("Noun::from_conn(): objectType: %d", objectType); }
 
   switch (objectType)
   {
@@ -1405,7 +1403,6 @@ maybe<Storage> Noun::from_conn(Connection& conn) {
       return maybe<Storage>(Real::from_conn(conn, storageType));
 
     case NounType::LIST:
-      if(logger) { logger->debugf("Noun::from_conn(): LIST"); }
       return maybe<Storage>(List::from_conn(conn, storageType));
 
     case NounType::CHARACTER:
