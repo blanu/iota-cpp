@@ -120,7 +120,7 @@ class Noun
 
     static std::map<Specialization5, DyadicSourceFunction> dyadSources;
 
-    void setLogger(Logger *newLogger);
+    static void setLogger(Logger *newLogger);
 
     private:
       static Logger *logger;
