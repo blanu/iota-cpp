@@ -682,7 +682,7 @@ int Integer::toInt(const Storage& i)
     if(list.size() == 2)
     {
       bool isNegative = (list[0] == 1);
-      int value = reinterpret_cast<int>(list[1]);
+      int value = list[1];
       return isNegative ? -value : value;
     }
   }
