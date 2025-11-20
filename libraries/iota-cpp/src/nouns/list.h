@@ -13,6 +13,8 @@
 class List
 {
   public:
+    static Logger* logger;
+
     // Initialize dispatch table
     static void initialize();
 
@@ -155,8 +157,6 @@ class List
     static maybe<Storage> from_bytes(const bytes &bs, int t);
     static void to_conn(Connection& conn, const Storage& i);
     static maybe<Storage> from_conn(Connection& conn, int t);
-
-    static Logger* logger;
 };
 
 #endif //LIST_H
