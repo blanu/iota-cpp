@@ -14,7 +14,7 @@
 // Import noun.h before storage/mixed_array.h to get advanced noun serialization override
 #define NOUN_TO_BYTES(i) Noun::to_bytes(i)
 #define NOUN_FROM_CONN(conn) Noun::from_conn(conn)
-#define NOUN_TO_CONN(conn, i) Noun::to_conn(conn, i)
+#define NOUN_TO_CONN(conn, i, logger) Noun::to_conn(conn, i, logger)
 
 using Type = int;
 using Specialization1 = std::tuple<Type>;

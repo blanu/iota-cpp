@@ -1415,7 +1415,7 @@ maybe<Storage> Noun::from_conn(Connection& conn) {
       switch (storageType) {
         case StorageType::WORD:
           {
-            return maybe<Storage>(Word::from_conn(conn, objectType));
+            return maybe<Storage>(Word::from_conn(conn, objectType, nullptr));
           }
 
         case StorageType::FLOAT:
@@ -1435,7 +1435,7 @@ maybe<Storage> Noun::from_conn(Connection& conn) {
 
         case StorageType::MIXED_ARRAY:
           {
-            return maybe<Storage>(MixedArray::from_conn(conn, objectType));
+            return maybe<Storage>(MixedArray::from_conn(conn, objectType, nullptr));
           }
 
         default:

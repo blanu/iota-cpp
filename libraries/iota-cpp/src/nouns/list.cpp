@@ -9249,7 +9249,7 @@ maybe<Storage> List::from_conn(Connection& conn, int t) {
       return FloatArray::from_conn(conn, NounType::LIST);
 
     case StorageType::MIXED_ARRAY:
-      return MixedArray::from_conn(conn, NounType::LIST);
+      return MixedArray::from_conn(conn, NounType::LIST, nullptr);
 
     default:
       return std::nullopt;

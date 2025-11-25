@@ -186,7 +186,7 @@ maybe<Storage> Dictionary::from_conn(Connection& conn, const int t)
 {
   if(t == StorageType::MIXED_ARRAY)
   {
-    return MixedArray::from_conn(conn, NounType::DICTIONARY);
+    return MixedArray::from_conn(conn, NounType::DICTIONARY, nullptr);
   }
   else
   {

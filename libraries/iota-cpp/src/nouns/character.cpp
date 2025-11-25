@@ -325,7 +325,7 @@ maybe<bytes> Character::to_bytes(const Storage& i) {
 maybe<Storage> Character::from_conn(Connection& conn, const int t) {
   if(t == StorageType::WORD)
   {
-    return Word::from_conn(conn, NounType::CHARACTER);
+    return Word::from_conn(conn, NounType::CHARACTER, nullptr);
 
     // FIXME - add support for StorageType::WORD_ARRAY to represent grapheme clusters
   }

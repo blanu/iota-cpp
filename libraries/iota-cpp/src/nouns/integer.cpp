@@ -117,12 +117,18 @@ void Integer::initialize()
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::match, StorageType::WORD_ARRAY, NounType::STRING, Noun::false2);
 
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::max, StorageType::WORD, NounType::INTEGER, Integer::max_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::max, StorageType::WORD, NounType::INTEGER, Integer::max_integer);
+  Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::max, StorageType::WORD_ARRAY, NounType::INTEGER, Integer::max_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::max, StorageType::WORD_ARRAY, NounType::INTEGER, Integer::max_integer);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::max, StorageType::FLOAT, NounType::REAL, Integer::max_real);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::max, StorageType::WORD_ARRAY, NounType::LIST, Integer::max_list);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::max, StorageType::FLOAT_ARRAY, NounType::LIST, Integer::max_list);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::max, StorageType::MIXED_ARRAY, NounType::LIST, Integer::max_list);
 
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::min, StorageType::WORD, NounType::INTEGER, Integer::min_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::min, StorageType::WORD, NounType::INTEGER, Integer::min_integer);
+  Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::min, StorageType::WORD_ARRAY, NounType::INTEGER, Integer::min_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::min, StorageType::WORD_ARRAY, NounType::INTEGER, Integer::min_integer);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::min, StorageType::FLOAT, NounType::REAL, Integer::min_real);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::min, StorageType::WORD_ARRAY, NounType::LIST, Integer::min_list);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::min, StorageType::FLOAT_ARRAY, NounType::LIST, Integer::min_list);
@@ -497,7 +503,6 @@ Storage Integer::make(const BigNumber& bn)
     // Chunks are in little-endian order, reverse for big-endian
     std::reverse(temp_chunks.begin(), temp_chunks.end());
 
-    // Convert to signed ints (reinterpret bit pattern)
     for (uint32_t chunk : temp_chunks)
     {
         chunks.push_back(static_cast<int>(chunk));
@@ -578,7 +583,7 @@ BigNumber Integer::toBigNumber(const Storage& i)
     for(size_t idx = chunks.size() - 1; idx >= 1; idx--)
     {
       // Reinterpret chunk as unsigned
-      unsigned int chunk_unsigned = *reinterpret_cast<const unsigned int*>(&chunks[idx]);
+      const auto chunk_unsigned = static_cast<const unsigned int>(chunks[idx]);
 
       // Convert to string to avoid sign issues
       char chunk_str[32];
@@ -1684,26 +1689,34 @@ Storage Integer::match_impl(const Storage& i, const Storage& x)
 
 Storage Integer::max_integer(const Storage& i, const Storage& x)
 {
-  if(std::holds_alternative<int>(i.i))
+  // Simple case: both are regular ints
+  if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
   {
     int ii = std::get<int>(i.i);
+    int xi = std::get<int>(x.i);
 
-    if(std::holds_alternative<int>(x.i))
+    if(ii < xi)
     {
-      int xi = std::get<int>(x.i);
-
-      if(ii < xi)
-      {
-        return x;
-      }
-      else
-      {
-        return i;
-      }
+      return x;
+    }
+    else
+    {
+      return i;
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  // Use BigNumber for comparison with bigints
+  BigNumber bn_i = Integer::toBigNumber(i);
+  BigNumber bn_x = Integer::toBigNumber(x);
+
+  if(bn_i < bn_x)
+  {
+    return x;
+  }
+  else
+  {
+    return i;
+  }
 }
 
 Storage Integer::max_real(const Storage& i, const Storage& x)
@@ -1814,26 +1827,34 @@ Storage Integer::max_list(const Storage& i, const Storage& x)
 
 Storage Integer::min_integer(const Storage& i, const Storage& x)
 {
-  if(std::holds_alternative<int>(i.i))
+  // Simple case: both are regular ints
+  if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
   {
     int ii = std::get<int>(i.i);
+    int xi = std::get<int>(x.i);
 
-    if(std::holds_alternative<int>(x.i))
+    if(ii > xi)
     {
-      int xi = std::get<int>(x.i);
-
-      if(ii > xi)
-      {
-        return x;
-      }
-      else
-      {
-        return i;
-      }
+      return x;
+    }
+    else
+    {
+      return i;
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  // Use BigNumber for comparison with bigints
+  BigNumber bn_i = Integer::toBigNumber(i);
+  BigNumber bn_x = Integer::toBigNumber(x);
+
+  if(bn_i > bn_x)
+  {
+    return x;
+  }
+  else
+  {
+    return i;
+  }
 }
 
 Storage Integer::min_real(const Storage& i, const Storage& x)
@@ -1944,7 +1965,7 @@ Storage Integer::min_list(const Storage& i, const Storage& x)
 
 Storage Integer::minus_integer(const Storage& i, const Storage& x)
 {
-  // Simple case: both are regular ints
+  // Simple case: both are regular ints and no overflow
   if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
   {
     int ii = std::get<int>(i.i);
@@ -1962,343 +1983,18 @@ Storage Integer::minus_integer(const Storage& i, const Storage& x)
       return Word::make(result);
     }
 
-    // Overflow - fall through to multi-precision
+    // Overflow - fall through to BigNumber
   }
 
-  // Extract sign and magnitude for both operands
-  bool sign_i = false;
-  std::vector<unsigned int> mag_i;
+  // Use BigNumber for multi-precision subtraction
+  BigNumber bn_i = Integer::toBigNumber(i);
+  BigNumber bn_x = Integer::toBigNumber(x);
 
-  if(std::holds_alternative<int>(i.i))
-  {
-    int ii = std::get<int>(i.i);
-    sign_i = (ii < 0);
+  // Perform subtraction
+  BigNumber result = bn_i - bn_x;
 
-    if(ii == 0)
-    {
-      // mag_i stays empty
-    }
-    else if(ii == INT_MIN)
-    {
-      unsigned int abs_val = static_cast<unsigned int>(INT_MIN);
-      mag_i.push_back(abs_val);
-    }
-    else
-    {
-      unsigned int abs_val = static_cast<unsigned int>(ii < 0 ? -ii : ii);
-      mag_i.push_back(abs_val);
-    }
-  }
-  else if(std::holds_alternative<ints>(i.i))
-  {
-    const ints& chunks = std::get<ints>(i.i);
-    if(chunks.empty())
-    {
-      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
-    }
-
-    sign_i = (chunks[0] == 1);
-
-    for(size_t idx = 1; idx < chunks.size(); idx++)
-    {
-      mag_i.push_back(*reinterpret_cast<const unsigned int*>(&chunks[idx]));
-    }
-  }
-  else
-  {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-  }
-
-  bool sign_x = false;
-  std::vector<unsigned int> mag_x;
-
-  if(std::holds_alternative<int>(x.i))
-  {
-    int xi = std::get<int>(x.i);
-    sign_x = (xi < 0);
-
-    if(xi == 0)
-    {
-      // mag_x stays empty
-    }
-    else if(xi == INT_MIN)
-    {
-      unsigned int abs_val = static_cast<unsigned int>(INT_MIN);
-      mag_x.push_back(abs_val);
-    }
-    else
-    {
-      unsigned int abs_val = static_cast<unsigned int>(xi < 0 ? -xi : xi);
-      mag_x.push_back(abs_val);
-    }
-  }
-  else if(std::holds_alternative<ints>(x.i))
-  {
-    const ints& chunks = std::get<ints>(x.i);
-    if(chunks.empty())
-    {
-      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
-    }
-
-    sign_x = (chunks[0] == 1);
-
-    for(size_t idx = 1; idx < chunks.size(); idx++)
-    {
-      mag_x.push_back(*reinterpret_cast<const unsigned int*>(&chunks[idx]));
-    }
-  }
-  else
-  {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-  }
-
-  // Handle zero cases
-  if(mag_i.empty() && mag_x.empty())
-  {
-    return Integer::make(0);
-  }
-  if(mag_x.empty())
-  {
-    return i;  // i - 0 = i
-  }
-  if(mag_i.empty())
-  {
-    // 0 - x = -x, so negate x
-    sign_x = !sign_x;
-
-    if(mag_x.size() == 1)
-    {
-      unsigned int mag = mag_x[0];
-      unsigned int max_positive = static_cast<unsigned int>(INT_MAX);
-      unsigned int max_negative = static_cast<unsigned int>(INT_MIN);
-
-      if(!sign_x && mag <= max_positive)
-      {
-        return Integer::make(static_cast<int>(mag));
-      }
-      else if(sign_x && mag <= max_negative)
-      {
-        if(mag == max_negative)
-        {
-          return Integer::make(INT_MIN);
-        }
-        else
-        {
-          return Integer::make(-static_cast<int>(mag));
-        }
-      }
-    }
-
-    // Build WordArray
-    ints result_chunks;
-    result_chunks.push_back(sign_x ? 1 : 0);
-    for(unsigned int chunk : mag_x)
-    {
-      result_chunks.push_back(*reinterpret_cast<int*>(&chunk));
-    }
-    return WordArray::make(result_chunks, NounType::INTEGER);
-  }
-
-  // Now we have: i - x = (sign_i, mag_i) - (sign_x, mag_x)
-  // This is the same as: (sign_i, mag_i) + (!sign_x, mag_x)
-  // So we negate x's sign and use addition logic
-
-  bool result_negative;
-  std::vector<unsigned int> result_mag;
-
-  if(sign_i == sign_x)
-  {
-    // Same signs: i - x with same signs means we subtract magnitudes
-    // Example: 5 - 3 = 2, or -5 - (-3) = -5 + 3 = -2
-
-    // Compare magnitudes
-    int cmp = 0;
-    if(mag_i.size() > mag_x.size())
-    {
-      cmp = 1;
-    }
-    else if(mag_i.size() < mag_x.size())
-    {
-      cmp = -1;
-    }
-    else
-    {
-      for(size_t idx = 0; idx < mag_i.size(); idx++)
-      {
-        if(mag_i[idx] > mag_x[idx])
-        {
-          cmp = 1;
-          break;
-        }
-        else if(mag_i[idx] < mag_x[idx])
-        {
-          cmp = -1;
-          break;
-        }
-      }
-    }
-
-    if(cmp == 0)
-    {
-      return Integer::make(0);
-    }
-
-    // Subtract smaller from larger
-    std::vector<unsigned int>* larger;
-    std::vector<unsigned int>* smaller;
-
-    if(cmp > 0)
-    {
-      larger = &mag_i;
-      smaller = &mag_x;
-      result_negative = sign_i;  // Keep sign of i (larger magnitude)
-    }
-    else
-    {
-      larger = &mag_x;
-      smaller = &mag_i;
-      result_negative = !sign_i;  // Flip sign since x is larger
-    }
-
-    result_mag.resize(larger->size(), 0);
-
-    unsigned int borrow = 0;
-    size_t l_idx = larger->size();
-    size_t s_idx = smaller->size();
-    size_t r_idx = result_mag.size();
-
-    while(l_idx > 0)
-    {
-      l_idx--;
-      r_idx--;
-
-      unsigned int large_val = (*larger)[l_idx];
-      unsigned int small_val = (s_idx > 0) ? (*smaller)[--s_idx] : 0;
-
-      unsigned int diff;
-      if(large_val >= small_val + borrow)
-      {
-        diff = large_val - small_val - borrow;
-        borrow = 0;
-      }
-      else
-      {
-        unsigned int max_val = ~0u;
-        diff = (max_val - small_val - borrow) + large_val + 1;
-        borrow = 1;
-      }
-
-      result_mag[r_idx] = diff;
-    }
-
-    // Remove leading zeros
-    while(result_mag.size() > 1 && result_mag[0] == 0)
-    {
-      result_mag.erase(result_mag.begin());
-    }
-  }
-  else
-  {
-    // Different signs: i - x where signs differ means we add magnitudes
-    // Example: 5 - (-3) = 5 + 3 = 8, or -5 - 3 = -5 + (-3) = -8
-
-    result_negative = sign_i;  // Result has same sign as i
-
-    // Make mag_i the longer one
-    if(mag_x.size() > mag_i.size())
-    {
-      std::swap(mag_i, mag_x);
-    }
-
-    result_mag.resize(mag_i.size() + 1, 0);
-
-    unsigned int carry = 0;
-    size_t i_idx = mag_i.size();
-    size_t x_idx = mag_x.size();
-    size_t r_idx = result_mag.size();
-
-    while(i_idx > 0 || x_idx > 0 || carry > 0)
-    {
-      unsigned int sum_low = carry;
-      unsigned int sum_high = 0;
-
-      if(i_idx > 0)
-      {
-        i_idx--;
-        unsigned int val = mag_i[i_idx];
-        unsigned int old_sum = sum_low;
-        sum_low += val;
-        if(sum_low < old_sum) sum_high++;
-      }
-
-      if(x_idx > 0)
-      {
-        x_idx--;
-        unsigned int val = mag_x[x_idx];
-        unsigned int old_sum = sum_low;
-        sum_low += val;
-        if(sum_low < old_sum) sum_high++;
-      }
-
-      r_idx--;
-      result_mag[r_idx] = sum_low;
-      carry = sum_high;
-    }
-
-    // Remove leading zeros
-    while(result_mag.size() > 1 && result_mag[0] == 0)
-    {
-      result_mag.erase(result_mag.begin());
-    }
-  }
-
-  // Check if result is zero
-  if(result_mag.size() == 1 && result_mag[0] == 0)
-  {
-    return Integer::make(0);
-  }
-
-  // Check if result fits in a regular int
-  if(result_mag.size() == 1)
-  {
-    unsigned int mag = result_mag[0];
-
-    const unsigned int INT_MAX_UNSIGNED = static_cast<unsigned int>(INT_MAX);
-    const unsigned int INT_MIN_MAGNITUDE = static_cast<unsigned int>(INT_MIN);
-
-    if(!result_negative)
-    {
-      if(mag <= INT_MAX_UNSIGNED)
-      {
-        return Integer::make(static_cast<int>(mag));
-      }
-    }
-    else
-    {
-      if(mag <= INT_MIN_MAGNITUDE)
-      {
-        if(mag == INT_MIN_MAGNITUDE)
-        {
-          return Integer::make(INT_MIN);
-        }
-        else
-        {
-          return Integer::make(-static_cast<int>(mag));
-        }
-      }
-    }
-  }
-
-  // Build WordArray result
-  ints result_chunks;
-  result_chunks.push_back(result_negative ? 1 : 0);
-
-  for(unsigned int chunk : result_mag)
-  {
-    result_chunks.push_back(*reinterpret_cast<int*>(&chunk));
-  }
-
-  return WordArray::make(result_chunks, NounType::INTEGER);
+  // Convert result back (Integer::make will downgrade to Word if it fits)
+  return Integer::make(result);
 }
 
 Storage Integer::minus_real(const Storage& i, const Storage& x)
@@ -2514,7 +2210,7 @@ Storage Integer::more_list(const Storage& i, const Storage& x)
 
 Storage Integer::plus_integer(const Storage& i, const Storage& x)
 {
-  // Simple case: both are regular ints
+  // Simple case: both are regular ints and no overflow
   if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
   {
     int ii = std::get<int>(i.i);
@@ -2533,308 +2229,18 @@ Storage Integer::plus_integer(const Storage& i, const Storage& x)
       return Word::make(result);
     }
 
-    // Overflow - fall through to multi-precision
+    // Overflow - fall through to BigNumber
   }
 
-  // For portability, we need to work with the actual int size
-  const size_t INT_BITS = sizeof(int) * 8;
+  // Use BigNumber for multi-precision addition
+  BigNumber bn_i = Integer::toBigNumber(i);
+  BigNumber bn_x = Integer::toBigNumber(x);
 
-  // Extract sign and magnitude for both operands
-  bool sign_i = false;
-  std::vector<unsigned int> mag_i;
+  // Perform addition
+  BigNumber result = bn_i + bn_x;
 
-  if(std::holds_alternative<int>(i.i))
-  {
-    int ii = std::get<int>(i.i);
-    sign_i = (ii < 0);
-
-    // Convert to unsigned magnitude
-    if(ii == 0)
-    {
-      // mag_i stays empty, handled below
-    }
-    else if(ii == INT_MIN)
-    {
-      // Special case: INT_MIN cannot be negated
-      // -INT_MIN = 2^(INT_BITS-1)
-      unsigned int abs_val = static_cast<unsigned int>(INT_MIN); // reinterpret bits
-      mag_i.push_back(abs_val);
-    }
-    else
-    {
-      unsigned int abs_val = static_cast<unsigned int>(ii < 0 ? -ii : ii);
-      mag_i.push_back(abs_val);
-    }
-  }
-  else if(std::holds_alternative<ints>(i.i))
-  {
-    const ints& chunks = std::get<ints>(i.i);
-    if(chunks.empty())
-    {
-      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
-    }
-
-    sign_i = (chunks[0] == 1);
-
-    // Extract magnitude chunks (skip sign bit at index 0)
-    for(size_t idx = 1; idx < chunks.size(); idx++)
-    {
-      mag_i.push_back(static_cast<unsigned int>(chunks[idx]));
-    }
-  }
-  else
-  {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-  }
-
-  bool sign_x = false;
-  std::vector<unsigned int> mag_x;
-
-  if(std::holds_alternative<int>(x.i))
-  {
-    int xi = std::get<int>(x.i);
-    sign_x = (xi < 0);
-
-    if(xi == 0)
-    {
-      // mag_x stays empty
-    }
-    else if(xi == INT_MIN)
-    {
-      unsigned int abs_val = static_cast<unsigned int>(INT_MIN);
-      mag_x.push_back(abs_val);
-    }
-    else
-    {
-      unsigned int abs_val = static_cast<unsigned int>(xi < 0 ? -xi : xi);
-      mag_x.push_back(abs_val);
-    }
-  }
-  else if(std::holds_alternative<ints>(x.i))
-  {
-    const ints& chunks = std::get<ints>(x.i);
-    if(chunks.empty())
-    {
-      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
-    }
-
-    sign_x = (chunks[0] == 1);
-
-    for(size_t idx = 1; idx < chunks.size(); idx++)
-    {
-      mag_x.push_back(static_cast<unsigned int>(chunks[idx]));
-    }
-  }
-  else
-  {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-  }
-
-  // Handle zero cases
-  if(mag_i.empty())
-  {
-    return x;
-  }
-  if(mag_x.empty())
-  {
-    return i;
-  }
-
-  bool result_negative;
-  std::vector<unsigned int> result_mag;
-
-  if(sign_i == sign_x)
-  {
-    // Same signs: add magnitudes
-    result_negative = sign_i;
-
-    // Make mag_i the longer one
-    if(mag_x.size() > mag_i.size())
-    {
-      std::swap(mag_i, mag_x);
-    }
-
-    result_mag.resize(mag_i.size() + 1, 0);
-
-    unsigned int carry = 0;
-    size_t i_idx = mag_i.size();
-    size_t x_idx = mag_x.size();
-    size_t r_idx = result_mag.size();
-
-    while(i_idx > 0 || x_idx > 0 || carry > 0)
-    {
-      unsigned int sum_low = carry;
-      unsigned int sum_high = 0;
-
-      // Add from mag_i
-      if(i_idx > 0)
-      {
-        i_idx--;
-        unsigned int val = mag_i[i_idx];
-
-        // Add with carry detection
-        unsigned int old_sum = sum_low;
-        sum_low += val;
-        if(sum_low < old_sum) sum_high++; // carry occurred
-      }
-
-      // Add from mag_x
-      if(x_idx > 0)
-      {
-        x_idx--;
-        unsigned int val = mag_x[x_idx];
-
-        unsigned int old_sum = sum_low;
-        sum_low += val;
-        if(sum_low < old_sum) sum_high++; // carry occurred
-      }
-
-      r_idx--;
-      result_mag[r_idx] = sum_low;
-      carry = sum_high;
-    }
-
-    // Remove leading zeros
-    while(result_mag.size() > 1 && result_mag[0] == 0)
-    {
-      result_mag.erase(result_mag.begin());
-    }
-  }
-  else
-  {
-    // Different signs: subtract magnitudes
-
-    // Compare magnitudes
-    int cmp = 0;
-    if(mag_i.size() > mag_x.size())
-    {
-      cmp = 1;
-    }
-    else if(mag_i.size() < mag_x.size())
-    {
-      cmp = -1;
-    }
-    else
-    {
-      for(size_t idx = 0; idx < mag_i.size(); idx++)
-      {
-        if(mag_i[idx] > mag_x[idx])
-        {
-          cmp = 1;
-          break;
-        }
-        else if(mag_i[idx] < mag_x[idx])
-        {
-          cmp = -1;
-          break;
-        }
-      }
-    }
-
-    if(cmp == 0)
-    {
-      return Integer::make(0);
-    }
-
-    // Subtract smaller from larger
-    std::vector<unsigned int>* larger;
-    std::vector<unsigned int>* smaller;
-
-    if(cmp > 0)
-    {
-      larger = &mag_i;
-      smaller = &mag_x;
-      result_negative = sign_i;
-    }
-    else
-    {
-      larger = &mag_x;
-      smaller = &mag_i;
-      result_negative = sign_x;
-    }
-
-    result_mag.resize(larger->size(), 0);
-
-    unsigned int borrow = 0;
-    size_t l_idx = larger->size();
-    size_t s_idx = smaller->size();
-    size_t r_idx = result_mag.size();
-
-    while(l_idx > 0)
-    {
-      l_idx--;
-      r_idx--;
-
-      unsigned int large_val = (*larger)[l_idx];
-      unsigned int small_val = (s_idx > 0) ? (*smaller)[--s_idx] : 0;
-
-      unsigned int diff;
-      if(large_val >= small_val + borrow)
-      {
-        diff = large_val - small_val - borrow;
-        borrow = 0;
-      }
-      else
-      {
-        // Need to borrow - add full unsigned int range
-        // This is portable: we're adding UINT_MAX + 1 conceptually
-        unsigned int max_val = ~0u; // all bits set
-        diff = (max_val - small_val - borrow) + large_val + 1;
-        borrow = 1;
-      }
-
-      result_mag[r_idx] = diff;
-    }
-
-    // Remove leading zeros
-    while(result_mag.size() > 1 && result_mag[0] == 0)
-    {
-      result_mag.erase(result_mag.begin());
-    }
-  }
-
-  // Check if result is zero
-  if(result_mag.size() == 1 && result_mag[0] == 0)
-  {
-    return Integer::make(0);
-  }
-
-  // Check if result fits in a regular int
-  if(result_mag.size() == 1)
-  {
-    unsigned int mag = result_mag[0];
-
-    // Check if fits in signed int range
-    unsigned int max_positive = static_cast<unsigned int>(INT_MAX);
-    unsigned int max_negative = static_cast<unsigned int>(INT_MIN); // magnitude of INT_MIN
-
-    if(!result_negative && mag <= max_positive)
-    {
-      return Integer::make(static_cast<int>(mag));
-    }
-    else if(result_negative && mag <= max_negative)
-    {
-      if(mag == max_negative)
-      {
-        return Integer::make(INT_MIN);
-      }
-      else
-      {
-        return Integer::make(-static_cast<int>(mag));
-      }
-    }
-  }
-
-  // Build WordArray result
-  ints result_chunks;
-  result_chunks.push_back(result_negative ? 1 : 0);
-
-  for(unsigned int chunk : result_mag)
-  {
-    result_chunks.push_back(static_cast<int>(chunk));
-  }
-
-  return WordArray::make(result_chunks, NounType::INTEGER);
+  // Convert result back (Integer::make will downgrade to Word if it fits)
+  return Integer::make(result);
 }
 
 Storage Integer::plus_real(const Storage& i, const Storage& x)
@@ -3022,36 +2428,80 @@ Storage Integer::power_list(const Storage& i, const Storage& x)
 
 Storage Integer::remainder_integer(const Storage& i, const Storage& x)
 {
-  if(std::holds_alternative<int>(i.i))
+  // Check for division by zero first
+  if(std::holds_alternative<int>(x.i))
   {
-    int ii = std::get<int>(i.i);
-
-    if(std::holds_alternative<int>(x.i))
+    int xi = std::get<int>(x.i);
+    if(xi == 0)
     {
-      int xi = std::get<int>(x.i);
+      return Word::make(DIVISION_BY_ZERO, NounType::ERROR);
+    }
+  }
+  else if(std::holds_alternative<ints>(x.i))
+  {
+    const ints& chunks = std::get<ints>(x.i);
+    if(chunks.empty())
+    {
+      return Word::make(DIVISION_BY_ZERO, NounType::ERROR);
+    }
 
-      return Word::make(ii % xi);
+    bool all_zero = true;
+    for(size_t idx = 1; idx < chunks.size(); idx++)
+    {
+      if(chunks[idx] != 0)
+      {
+        all_zero = false;
+        break;
+      }
+    }
+
+    if(all_zero)
+    {
+      return Word::make(DIVISION_BY_ZERO, NounType::ERROR);
     }
   }
 
-  BigNumber bi = Integer::toBigNumber(i);
-  BigNumber bx = Integer::toBigNumber(x);
-  BigNumber result = bi % bx;
+  // Simple case: both are regular ints
+  if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
+  {
+    int ii = std::get<int>(i.i);
+    int xi = std::get<int>(x.i);
+
+    return Word::make(ii % xi);
+  }
+
+  // Use BigNumber for multi-precision remainder
+  BigNumber bn_i = Integer::toBigNumber(i);
+  BigNumber bn_x = Integer::toBigNumber(x);
+
+  // Perform remainder operation
+  BigNumber result = bn_i % bn_x;
+
+  // Convert result back (Integer::make will downgrade to Word if it fits)
   return Integer::make(result);
 }
 
 Storage Integer::remainder_integers(const Storage& i, const Storage& x)
 {
-  if(std::holds_alternative<int>(i.i))
+  if(std::holds_alternative<ints>(x.i))
   {
-    int ii = std::get<int>(i.i);
+    ints xis = std::get<ints>(x.i);
 
-    if(std::holds_alternative<ints>(x.i))
+    // Check for any zeros in the list
+    for(int y : xis)
     {
-      ints xis = std::get<ints>(x.i);
+      if(y == 0)
+      {
+        return Word::make(DIVISION_BY_ZERO, NounType::ERROR);
+      }
+    }
+
+    // If i is a simple int, we can optimize
+    if(std::holds_alternative<int>(i.i))
+    {
+      int ii = std::get<int>(i.i);
 
       ints results = ints();
-
       for(int y : xis)
       {
         results.push_back(ii % y);
@@ -3059,6 +2509,30 @@ Storage Integer::remainder_integers(const Storage& i, const Storage& x)
 
       return WordArray::make(results, NounType::LIST);
     }
+
+    // Otherwise i is a bigint, use BigNumber for each operation
+    BigNumber bn_i = Integer::toBigNumber(i);
+
+    ints results = ints();
+    for(int y : xis)
+    {
+      BigNumber bn_y(y);
+      BigNumber bn_result = bn_i % bn_y;
+
+      // Convert result back to int (remainder should fit in int if divisor is int)
+      Storage result_storage = Integer::make(bn_result);
+      if(std::holds_alternative<int>(result_storage.i))
+      {
+        results.push_back(std::get<int>(result_storage.i));
+      }
+      else
+      {
+        // Remainder is too large? This shouldn't happen with int divisor
+        return Word::make(INVALID_ARGUMENT, NounType::ERROR);
+      }
+    }
+
+    return WordArray::make(results, NounType::LIST);
   }
 
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -3239,7 +2713,7 @@ Storage Integer::reshape_mixed(const Storage& i, const Storage& x)
 
 Storage Integer::times_integer(const Storage& i, const Storage& x)
 {
-  // Simple case: both are regular ints
+  // Simple case: both are regular ints and no overflow
   if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
   {
     int ii = std::get<int>(i.i);
@@ -3277,234 +2751,18 @@ Storage Integer::times_integer(const Storage& i, const Storage& x)
       return Word::make(ii * xi);
     }
 
-    // Overflow - fall through to multi-precision
+    // Overflow - fall through to BigNumber
   }
 
-  // Extract sign and magnitude for both operands
-  bool sign_i = false;
-  std::vector<unsigned int> mag_i;
+  // Use BigNumber for multi-precision multiplication
+  BigNumber bn_i = Integer::toBigNumber(i);
+  BigNumber bn_x = Integer::toBigNumber(x);
 
-  if(std::holds_alternative<int>(i.i))
-  {
-    int ii = std::get<int>(i.i);
-    sign_i = (ii < 0);
+  // Perform multiplication
+  BigNumber result = bn_i * bn_x;
 
-    if(ii == 0)
-    {
-      // mag_i stays empty
-    }
-    else if(ii == INT_MIN)
-    {
-      unsigned int abs_val = static_cast<unsigned int>(INT_MIN);
-      mag_i.push_back(abs_val);
-    }
-    else
-    {
-      unsigned int abs_val = static_cast<unsigned int>(ii < 0 ? -ii : ii);
-      mag_i.push_back(abs_val);
-    }
-  }
-  else if(std::holds_alternative<ints>(i.i))
-  {
-    const ints& chunks = std::get<ints>(i.i);
-    if(chunks.empty())
-    {
-      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
-    }
-
-    sign_i = (chunks[0] == 1);
-
-    for(size_t idx = 1; idx < chunks.size(); idx++)
-    {
-      mag_i.push_back(static_cast<unsigned int>(chunks[idx]));
-    }
-  }
-  else
-  {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-  }
-
-  bool sign_x = false;
-  std::vector<unsigned int> mag_x;
-
-  if(std::holds_alternative<int>(x.i))
-  {
-    int xi = std::get<int>(x.i);
-    sign_x = (xi < 0);
-
-    if(xi == 0)
-    {
-      // mag_x stays empty
-    }
-    else if(xi == INT_MIN)
-    {
-      unsigned int abs_val = static_cast<unsigned int>(INT_MIN);
-      mag_x.push_back(abs_val);
-    }
-    else
-    {
-      unsigned int abs_val = static_cast<unsigned int>(xi < 0 ? -xi : xi);
-      mag_x.push_back(abs_val);
-    }
-  }
-  else if(std::holds_alternative<ints>(x.i))
-  {
-    const ints& chunks = std::get<ints>(x.i);
-    if(chunks.empty())
-    {
-      return Word::make(INVALID_ARGUMENT, NounType::ERROR);
-    }
-
-    sign_x = (chunks[0] == 1);
-
-    for(size_t idx = 1; idx < chunks.size(); idx++)
-    {
-      mag_x.push_back(static_cast<unsigned int>(chunks[idx]));
-    }
-  }
-  else
-  {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
-  }
-
-  // Handle zero cases
-  if(mag_i.empty() || mag_x.empty())
-  {
-    return Integer::make(0);
-  }
-
-  // Determine result sign
-  bool result_negative = (sign_i != sign_x);
-
-  // Perform multi-precision multiplication
-  // Result can be up to mag_i.size() + mag_x.size() chunks
-  std::vector<unsigned int> result_mag(mag_i.size() + mag_x.size(), 0);
-
-  // Standard long multiplication algorithm
-  // Multiply each chunk of mag_i by each chunk of mag_x
-  for(size_t i_idx = 0; i_idx < mag_i.size(); i_idx++)
-  {
-    unsigned int carry = 0;
-
-    for(size_t x_idx = 0; x_idx < mag_x.size(); x_idx++)
-    {
-      // Position in result array (from right/least significant)
-      size_t result_idx = result_mag.size() - 1 - i_idx - x_idx;
-
-      // Get the two chunks to multiply (from right/least significant)
-      unsigned int chunk_i = mag_i[mag_i.size() - 1 - i_idx];
-      unsigned int chunk_x = mag_x[mag_x.size() - 1 - x_idx];
-
-      // Multiply two unsigned ints portably
-      // Split each into high and low halves
-      const size_t HALF_BITS = (sizeof(unsigned int) * 8) / 2;
-      const unsigned int LOW_MASK = (~0u) >> HALF_BITS;
-
-      unsigned int i_low = chunk_i & LOW_MASK;
-      unsigned int i_high = chunk_i >> HALF_BITS;
-      unsigned int x_low = chunk_x & LOW_MASK;
-      unsigned int x_high = chunk_x >> HALF_BITS;
-
-      // Compute partial products
-      unsigned int low_prod = i_low * x_low;
-      unsigned int mid1_prod = i_low * x_high;
-      unsigned int mid2_prod = i_high * x_low;
-      unsigned int high_prod = i_high * x_high;
-
-      // Combine partial products
-      unsigned int mid_prod_low = mid1_prod & LOW_MASK;
-      unsigned int mid_prod_high = mid1_prod >> HALF_BITS;
-
-      unsigned int mid2_prod_low = mid2_prod & LOW_MASK;
-      unsigned int mid2_prod_high = mid2_prod >> HALF_BITS;
-
-      // Add middle products to low product
-      unsigned int product_low = low_prod;
-      unsigned int product_high = high_prod;
-
-      // Add mid_prod_low shifted
-      unsigned int temp = product_low + (mid_prod_low << HALF_BITS);
-      if(temp < product_low) product_high++; // carry
-      product_low = temp;
-
-      // Add mid2_prod_low shifted
-      temp = product_low + (mid2_prod_low << HALF_BITS);
-      if(temp < product_low) product_high++; // carry
-      product_low = temp;
-
-      // Add mid product high parts
-      product_high += mid_prod_high;
-      product_high += mid2_prod_high;
-
-      // Add to result at result_idx (product_low) and result_idx-1 (product_high)
-      // First add product_low and carry from previous iteration
-      temp = result_mag[result_idx] + product_low + carry;
-      unsigned int new_carry = 0;
-      if(temp < result_mag[result_idx]) new_carry++; // carry occurred
-      if(temp < product_low) new_carry++; // carry occurred
-      result_mag[result_idx] = temp;
-
-      // Carry becomes product_high plus any carry from low addition
-      carry = product_high + new_carry;
-    }
-
-    // Handle final carry for this row
-    if(carry > 0 && i_idx + mag_x.size() < result_mag.size())
-    {
-      size_t carry_idx = result_mag.size() - 1 - i_idx - mag_x.size();
-      unsigned int temp = result_mag[carry_idx] + carry;
-      result_mag[carry_idx] = temp;
-      // Note: we don't propagate further carries here as our result array is sized correctly
-    }
-  }
-
-  // Remove leading zeros
-  while(result_mag.size() > 1 && result_mag[0] == 0)
-  {
-    result_mag.erase(result_mag.begin());
-  }
-
-  // Check if result is zero
-  if(result_mag.size() == 1 && result_mag[0] == 0)
-  {
-    return Integer::make(0);
-  }
-
-  // Check if result fits in a regular int
-  if(result_mag.size() == 1)
-  {
-    unsigned int mag = result_mag[0];
-
-    unsigned int max_positive = static_cast<unsigned int>(INT_MAX);
-    unsigned int max_negative = static_cast<unsigned int>(INT_MIN);
-
-    if(!result_negative && mag <= max_positive)
-    {
-      return Integer::make(static_cast<int>(mag));
-    }
-    else if(result_negative && mag <= max_negative)
-    {
-      if(mag == max_negative)
-      {
-        return Integer::make(INT_MIN);
-      }
-      else
-      {
-        return Integer::make(-static_cast<int>(mag));
-      }
-    }
-  }
-
-  // Build WordArray result
-  ints result_chunks;
-  result_chunks.push_back(result_negative ? 1 : 0);
-
-  for(unsigned int chunk : result_mag)
-  {
-    result_chunks.push_back(*reinterpret_cast<int*>(&chunk));
-  }
-
-  return WordArray::make(result_chunks, NounType::INTEGER);
+  // Convert result back (Integer::make will downgrade to Word if it fits)
+  return Integer::make(result);
 }
 
 Storage Integer::times_real(const Storage& i, const Storage& x)
@@ -3623,7 +2881,7 @@ maybe<bytes> Integer::to_bytes(const Storage& i) {
 maybe<Storage> Integer::from_conn(Connection& conn, int t) {
   if(t == NounType::INTEGER)
   {
-    return Word::from_conn(conn, NounType::INTEGER);
+    return Word::from_conn(conn, NounType::INTEGER, nullptr);
   }
   else
   {
