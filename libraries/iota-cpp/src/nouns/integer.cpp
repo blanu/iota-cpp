@@ -2878,10 +2878,10 @@ maybe<bytes> Integer::to_bytes(const Storage& i) {
   }
 }
 
-maybe<Storage> Integer::from_conn(Connection& conn, int t) {
+maybe<Storage> Integer::from_conn(Connection& conn, int t, Logger* logger) {
   if(t == NounType::INTEGER)
   {
-    return Word::from_conn(conn, NounType::INTEGER, nullptr);
+    return Word::from_conn(conn, NounType::INTEGER, logger);
   }
   else
   {

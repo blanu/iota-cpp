@@ -115,7 +115,7 @@ class Noun
     // General serialization
     static maybe<Storage> from_bytes(bytes data);
     static bytes to_bytes(const Storage& i);
-    static maybe<Storage> from_conn(Connection& conn);
+    static maybe<Storage> from_conn(Connection& conn, Logger* logger = nullptr);
     static void to_conn(Connection& conn, const Storage& x);
 
     static std::map<Specialization5, DyadicSourceFunction> dyadSources;

@@ -9,6 +9,7 @@
 
 #include <Connection.h>
 #include <BigNumber.h>
+#include <logger.h>
 
 class Integer
 {
@@ -94,7 +95,7 @@ class Integer
     static maybe<bytes> to_bytes(const Storage& i);
     static maybe<Storage> from_bytes(const bytes& bs, int t);
     static void to_conn(Connection& conn, const Storage& i);
-    static maybe<Storage> from_conn(Connection& conn, int t);
+    static maybe<Storage> from_conn(Connection& conn, int t, Logger* logger = nullptr);
 };
 
 #endif //INTEGER_H
