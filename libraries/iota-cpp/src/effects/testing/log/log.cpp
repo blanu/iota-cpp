@@ -10,6 +10,7 @@
 #include <storage/word_array.h>
 #include <storage/mixed_array.h>
 
+#include "../../../symbols.h"
 #include "../../../nouns/integer.h"
 
 void Log::initialize(EffectsProvider* effects_provider)
@@ -17,6 +18,14 @@ void Log::initialize(EffectsProvider* effects_provider)
   logLevel = Levels::warning;
   logs = std::queue<Storage>();
   timestamps = ints();
+
+  INTERN_INT(level);
+  INTERN_INT(critical);
+  INTERN_INT(error);
+  INTERN_INT(warning);
+  INTERN_INT(info);
+  INTERN_INT(debug);
+  INTERN_INT(trace);
 }
 
 // Nilad Sinks

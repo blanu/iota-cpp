@@ -20,9 +20,8 @@ using Type = int;
 using Specialization1 = std::tuple<Type>;
 using Specialization2 = std::tuple<Type, Type>;
 using Specialization3 = std::tuple<Type, Type, Type>;
-using Specialization4 = std::tuple<Type, Type, Type, Type>;
 using Specialization5 = std::tuple<Type, Type, Type, Type, Type>;
-using Specialization6 = std::tuple<Type, Type, Type, Type, Type, Type>;
+using Specialization7 = std::tuple<Type, Type, Type, Type, Type, Type, Type>;
 
 using NiladicSourceFunction = std::function<Storage()>;
 using MonadicSourceFunction = std::function<Storage(Storage)>;
@@ -60,7 +59,7 @@ class Noun
     static void registerNilad(Type f, Storage (*m)());
     static void registerMonad(Type it, Type io, Type f, Storage (*m)(const Storage&));
     static void registerDyad(Type it, Type io, Type f, Type xt, Type xo, Storage (*d)(const Storage&, const Storage&));
-    static void registerTriad(Type it, Type io, Type f, Type xt, Type xo, Storage (*t)(const Storage&, const Storage&, const Storage&));
+    static void registerTriad(Type it, Type io, Type f, Type xt, Type xo, Type yt, Type yo, Storage (*t)(const Storage&, const Storage&, const Storage&));
     static void registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&));
     static void registerDyadicAdverb(Type it, Type io, Type f, Type xt, Type xo, Storage (*a)(const Storage&, const Storage&, const Storage&));
     static void registerConjunction(Type f, Storage (*c)(const Storage&, const Storage&));
@@ -127,12 +126,12 @@ class Noun
 
       static std::map<Specialization1, NiladicSourceFunction> niladSources;
       static std::map<Specialization3, MonadicSourceFunction> monadSources;
-      static std::map<Specialization5, TriadicSourceFunction> triadSources;
+      static std::map<Specialization7, TriadicSourceFunction> triadSources;
 
       static std::map<Specialization2, NiladicSourceFunction> niladSinks;
       static std::map<Specialization3, MonadicSourceFunction> monadSinks;
       static std::map<Specialization5, DyadicSourceFunction> dyadSinks;
-      static std::map<Specialization5, TriadicSourceFunction> triadSinks;
+      static std::map<Specialization7, TriadicSourceFunction> triadSinks;
 
       static std::map<Specialization3, MonadicAdverbFunction> monadicAdverbs;
       static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;

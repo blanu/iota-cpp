@@ -26,6 +26,7 @@
 #define INTERN_INT_AS(symbolName, field) field = Symbol::toInteger(Symbol::make(#symbolName))
 
 #define INTERN_VERB(space, type, name) space::name = type::make(Symbol::toInteger(Symbol::make(#name)))
+#define INTERN_EFFECT(space, type, name) space::name = type##icEffect::make(Symbol::toInteger(Symbol::make(#name)))
 
 class Symbol
 {

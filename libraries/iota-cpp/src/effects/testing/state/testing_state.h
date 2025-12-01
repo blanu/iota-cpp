@@ -7,11 +7,11 @@
 
 #include <types.h>
 
-#include "../../effects_provider.h"
-
 #include <storage/storage.h>
 
-class State
+#include "effects/effects_provider.h"
+
+class TestingState
 {
   public:
     static void initialize(EffectsProvider* effects_register);
@@ -21,12 +21,12 @@ class State
 
     // Monads
     static Storage put_impl(const Storage& i);
-    static Storage modify_impl(const Storage& i);
+    static Storage modify_impl(const Storage& f);
 
     static Storage getEffectState();
 
   private:
-    static maybe<Storage> state;
+    static Storage state;
 };
 
 #endif //TESTING_STATE_H

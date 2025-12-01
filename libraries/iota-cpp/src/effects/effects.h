@@ -12,71 +12,68 @@
 class NiladicEffect
 {
   public:
-    static Storage make(int f, int e);
+    static Storage make(int f);
 };
 
 class MonadicEffect
 {
   public:
-    static Storage make(int f, int e);
+    static Storage make(int f);
 };
 
 class DyadicEffect
 {
   public:
-    static Storage make(int f, int e);
+    static Storage make(int f);
+};
+
+class TriadicEffect
+{
+  public:
+    static Storage make(int f);
 };
 
 namespace iota // Effects
 {
   // Effect: Log
   // Effect: Log: Monads
-  inline Storage level = MonadicEffect::make(effects::families::log, effects::log::level);
-  inline Storage critical = MonadicEffect::make(effects::families::log, effects::log::critical);
-  inline Storage error = MonadicEffect::make(effects::families::log, effects::log::error);
-  inline Storage warning = MonadicEffect::make(effects::families::log, effects::log::warning);
-  inline Storage info = MonadicEffect::make(effects::families::log, effects::log::info);
-  inline Storage debug = MonadicEffect::make(effects::families::log, effects::log::debug);
-  inline Storage trace = MonadicEffect::make(effects::families::log, effects::log::trace);
-  inline Storage timestamp = NiladicEffect::make(effects::families::log, effects::log::timestamp);
+  inline Storage level = MonadicEffect::make(effects::log::level);
+  inline Storage critical = MonadicEffect::make(effects::log::critical);
+  inline Storage error = MonadicEffect::make(effects::log::error);
+  inline Storage warning = MonadicEffect::make(effects::log::warning);
+  inline Storage info = MonadicEffect::make(effects::log::info);
+  inline Storage debug = MonadicEffect::make(effects::log::debug);
+  inline Storage trace = MonadicEffect::make(effects::log::trace);
+  inline Storage timestamp = NiladicEffect::make(effects::log::timestamp);
 
   // Effect: Random
   // Effect: Random: Nilads
-  inline Storage random = NiladicEffect::make(effects::families::random, effects::random::random);
+  inline Storage random = NiladicEffect::make(effects::random::random);
 
   // Effect: Random: Monads
-  inline Storage roll = MonadicEffect::make(effects::families::random, effects::random::roll);
+  inline Storage roll = MonadicEffect::make(effects::random::roll);
 
   // Effect: Random: Dyads
-  inline Storage rolls = DyadicEffect::make(effects::families::random, effects::random::rolls);
-  inline Storage deal = DyadicEffect::make(effects::families::random, effects::random::deal);
+  inline Storage rolls = DyadicEffect::make(effects::random::rolls);
+  inline Storage deal = DyadicEffect::make(effects::random::deal);
 
   // Effect: Relations
   // Effect: Relations: Monads
-  inline Storage makeTable = MonadicEffect::make(effects::families::relation, effects::relation::makeTable);
-  inline Storage copyTable = MonadicEffect::make(effects::families::relation, effects::relation::copyTable);
-  inline Storage free = MonadicEffect::make(effects::families::relation, effects::relation::freeTable);
-  inline Storage flatten = MonadicEffect::make(effects::families::relation, effects::relation::flatten);
+  inline Storage makeTable = MonadicEffect::make(effects::relation::makeTable);
+  inline Storage copyTable = MonadicEffect::make(effects::relation::copyTable);
+  inline Storage free = MonadicEffect::make(effects::relation::freeTable);
+  inline Storage flatten = MonadicEffect::make(effects::relation::flatten);
 
   // Effect: Relations: Dyads
-  inline Storage insert = DyadicEffect::make(effects::families::relation, effects::relation::insert);
-  inline Storage remove = DyadicEffect::make(effects::families::relation, effects::relation::remove);
-  inline Storage iunion = DyadicEffect::make(effects::families::relation, effects::relation::iunion);
-  inline Storage project = DyadicEffect::make(effects::families::relation, effects::relation::project);
-  inline Storage difference = DyadicEffect::make(effects::families::relation, effects::relation::difference);
-  inline Storage rename = DyadicEffect::make(effects::families::relation, effects::relation::rename);
-  inline Storage crossProduct = DyadicEffect::make(effects::families::relation, effects::relation::crossProduct);
-  inline Storage restrict = DyadicEffect::make(effects::families::relation, effects::relation::restrict);
-  inline Storage intersection = DyadicEffect::make(effects::families::relation, effects::relation::intersection);
-
-  // Effect: State
-  // Effect: State: Nilads
-  inline Storage get =  NiladicEffect::make(effects::families::state, effects::state::get);
-
-  // Effect: State: Monads
-  inline Storage put = MonadicEffect::make(effects::families::state, effects::state::put);
-  inline Storage modify = MonadicEffect::make(effects::families::state, effects::state::modify);
-
+  inline Storage insert = DyadicEffect::make(effects::relation::insert);
+  inline Storage remove = DyadicEffect::make(effects::relation::remove);
+  inline Storage iunion = DyadicEffect::make(effects::relation::iunion);
+  inline Storage project = DyadicEffect::make(effects::relation::project);
+  inline Storage difference = DyadicEffect::make(effects::relation::difference);
+  inline Storage rename = DyadicEffect::make(effects::relation::rename);
+  inline Storage crossProduct = DyadicEffect::make(effects::relation::crossProduct);
+  inline Storage restrict = DyadicEffect::make(effects::relation::restrict);
+  inline Storage intersection = DyadicEffect::make(effects::relation::intersection);
 } // namespace iota
 
 #endif //EFFECTS_H

@@ -14,12 +14,13 @@
 #include <storage/mixed_array.h>
 #include <storage/word_array.h>
 #include "random/random.h"
-#include "state/state.h"
+#include "state/testing_state.h"
 
 TestingEffectsProvider::TestingEffectsProvider()
 {
   Log::initialize(this);
   Random::initialize(this);
+  TestingState::initialize(this);
 
   // Initialize system effects
   // Random
@@ -47,14 +48,6 @@ TestingEffectsProvider::TestingEffectsProvider()
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, (effects::families::random << 8) | effects::random::rolls, StorageType::WORD, NounType::INTEGER, Random::rolls_impl);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, (effects::families::random << 8) | effects::random::deal, StorageType::WORD, NounType::INTEGER, Random::deal_impl);
-
-  // State
-  // State: Nilads
-  Noun::registerNilad((effects::families::state << 8) | effects::state::get, State::get_impl);
-
-  // State: Monads
-  Noun::registerMonad(StorageType::ANY, NounType::ANY, (effects::families::state << 8) | effects::state::put, State::put_impl);
-  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, (effects::families::state << 8) | effects::state::modify, State::modify_impl);
 }
 
 Storage TestingEffectsProvider::getEffectState()
@@ -74,7 +67,7 @@ Storage TestingEffectsProvider::getEffectState()
   results.push_back(randomEffects);
 
   // Effects: State
-  Storage stateEffects = State::getEffectState();
+  Storage stateEffects = TestingState::getEffectState();
   results.push_back(stateEffects);
 
   return MixedArray::make(results);

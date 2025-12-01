@@ -187,8 +187,11 @@ bool evalBool(const cppValue& i)
   cppValue result = evalNoun(i);
   if(std::holds_alternative<int>(result))
   {
-
+    int integer = std::get<int>(result);
+    return integer == 1;
   }
+
+  return false;
 }
 
 cppValue evalNoun(const cppValue& i)

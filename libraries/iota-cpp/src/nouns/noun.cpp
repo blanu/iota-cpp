@@ -22,7 +22,7 @@
 std::map<Specialization1, NiladicSourceFunction> Noun::niladSources;
 std::map<Specialization3, MonadicSourceFunction> Noun::monadSources;
 std::map<Specialization5, DyadicSourceFunction> Noun::dyadSources;
-std::map<Specialization5, TriadicSourceFunction> Noun::triadSources;
+std::map<Specialization7, TriadicSourceFunction> Noun::triadSources;
 std::map<Specialization3, MonadicAdverbFunction> Noun::monadicAdverbs;
 std::map<Specialization5, DyadicAdverbFunction> Noun::dyadicAdverbs;
 std::map<Specialization1, ConjunctionFunction> Noun::conjunctions;
@@ -152,7 +152,7 @@ Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x
 
   int fi = std::get<int>(f.i);
 
-  Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
+  Specialization7 specialization = Specialization7(i.t, i.o, fi, x.t, x.o, y.t, y.o);
   if (triadSources.find(specialization) == triadSources.end()) {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
   }
@@ -217,19 +217,14 @@ Storage Noun::dispatchNiladicEffect(const Storage& f)
     return Word::make(BAD_OPERATION, NounType::ERROR);
   }
 
-  if (f.t != StorageType::WORD_ARRAY)
+  if (f.t != StorageType::WORD)
   {
     return Word::make(BAD_OPERATION, NounType::ERROR);
   }
 
-  ints fis = std::get<ints>(f.i);
+  int fi = std::get<int>(f.i);
 
-  if(fis.size() != 2)
-  {
-    return Word::make(BAD_OPERATION, NounType::ERROR);
-  }
-
-  Specialization1 specialization = Specialization1((fis[0] << 8) | fis[1]);
+  Specialization1 specialization = Specialization1(fi);
   if (niladSources.find(specialization) == niladSources.end())
   {
     return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
@@ -251,21 +246,14 @@ Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
     return Word::make(BAD_OPERATION, NounType::ERROR);
   }
 
-  if (f.t != StorageType::WORD_ARRAY)
+  if (f.t != StorageType::WORD)
   {
     return Word::make(BAD_OPERATION, NounType::ERROR);
   }
 
-  ints fis = std::get<ints>(f.i);
+  int fi = std::get<int>(f.i);
 
-  if(fis.size() != 2)
-  {
-    return Word::make(BAD_OPERATION, NounType::ERROR);
-  }
-
-  int fi = fis[0] << 8 | fis[1];
-
-  const std::vector<Specialization3> specializations = {
+  const std::vector specializations = {
     Specialization3(i.t, i.o, fi),
     Specialization3(i.t, NounType::ANY, fi),
     Specialization3(NounType::ANY, i.o, fi),
@@ -381,8 +369,8 @@ void Noun::registerDyad(Type it, Type io, Type f, Type xt, Type xo, Storage (*d)
   Noun::dyadSources[Specialization5(it, io, f, xt, xo)] = d;
 }
 
-void Noun::registerTriad(Type it, Type io, Type f, Type xt, Type xo, Storage (*t)(const Storage&, const Storage&, const Storage&)) {
-  Noun::triadSources[Specialization5(it, io, f, xt, xo)] = t;
+void Noun::registerTriad(Type it, Type io, Type f, Type xt, Type xo, Type yt, Type yo, Storage (*t)(const Storage&, const Storage&, const Storage&)) {
+  Noun::triadSources[Specialization7(it, io, f, xt, xo, yt, yo)] = t;
 }
 
 void Noun::registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&)) {

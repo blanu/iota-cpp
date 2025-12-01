@@ -10,6 +10,15 @@
 
 int getInteger(const Storage& i);
 
+class Nilad
+{
+  public:
+    static Storage make(int i);
+    static void print(const Storage &);
+
+    static void initialize();
+};
+
 class Monad
 {
   public:
@@ -19,6 +28,15 @@ class Monad
 };
 
 class Dyad
+{
+  public:
+    static Storage make(int i);
+    static void print(const Storage &);
+
+    static void initialize();
+};
+
+class Triad
 {
   public:
     static Storage make(int i);
@@ -84,6 +102,10 @@ namespace iota
   inline Storage split = WordArray::nil();
   inline Storage take = WordArray::nil();
   inline Storage times = WordArray::nil();
+
+  // Lens
+  inline Storage retrieve = WordArray::nil();
+  inline Storage mutate = WordArray::nil();
 }
 
 #endif //VERBS_H

@@ -20,11 +20,16 @@
 void Lens::initialize()
 {
   // Lens
-  // Monads
+
+  // Dyads
   Noun::registerDyad(StorageType::ANY, NounType::ANY, Dyads::retrieve, StorageType::WORD_ARRAY, NounType::LENS, retrieve_impl);
   Noun::registerDyad(StorageType::ANY, NounType::ANY, Dyads::retrieve, StorageType::MIXED_ARRAY, NounType::LENS, retrieve_impl);
 
-  Noun::registerDyad(StorageType::ANY, NounType::ANY, Dyads::mutate, StorageType::MIXED_ARRAY, NounType::LENS, mutate_impl);
+  // Triads
+  Noun::registerTriad(StorageType::ANY, NounType::ANY, Dyads::mutate, StorageType::WORD_ARRAY, NounType::LENS, StorageType::WORD, NounType::BUILTIN_MONAD, mutate_impl);
+  Noun::registerTriad(StorageType::ANY, NounType::ANY, Dyads::mutate, StorageType::WORD_ARRAY, NounType::LENS, StorageType::WORD, NounType::USER_MONAD, mutate_impl);
+  Noun::registerTriad(StorageType::ANY, NounType::ANY, Dyads::mutate, StorageType::MIXED_ARRAY, NounType::LENS, StorageType::WORD, NounType::BUILTIN_MONAD, mutate_impl);
+  Noun::registerTriad(StorageType::ANY, NounType::ANY, Dyads::mutate, StorageType::MIXED_ARRAY, NounType::LENS, StorageType::WORD, NounType::USER_MONAD, mutate_impl);
 }
 
 Storage Lens::make(int i)
@@ -321,7 +326,7 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
-Storage Lens::mutate_impl(const Storage& i, const Storage& x)
+Storage Lens::mutate_impl(const Storage& i, const Storage& x, const Storage& y)
 {
   // FIXME
   return WordArray::nil();

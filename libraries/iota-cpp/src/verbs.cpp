@@ -9,6 +9,31 @@
 #include "nouns/symbol.h"
 #include "storage/word.h"
 
+Storage Nilad::make(int i)
+{
+  return Word::make(i, NounType::BUILTIN_NILAD);
+}
+
+void Nilad::initialize()
+{
+}
+
+void Nilad::print(const Storage& i)
+{
+  if(i.o == NounType::BUILTIN_DYAD)
+  {
+    if(std::holds_alternative<int>(i.i))
+    {
+      int integer = std::get<int>(i.i);
+
+      ints integers = Symbol::integerToString[integer];
+      const Storage& is = IotaString::make(integers);
+      std::string s = IotaString::toString(is);
+      printf("%s", s.c_str());
+    }
+  }
+}
+
 Storage Monad::make(int i)
 {
   return Word::make(i, NounType::BUILTIN_MONAD);
@@ -78,9 +103,38 @@ void Dyad::initialize()
   INTERN_VERB(iota, Dyad, split);
   INTERN_VERB(iota, Dyad, take);
   INTERN_VERB(iota, Dyad, times);
+
+  // Lens
+  INTERN_VERB(iota, Dyad, retrieve);
+  INTERN_VERB(iota, Dyad, mutate);
 }
 
 void Dyad::print(const Storage& i)
+{
+  if(i.o == NounType::BUILTIN_DYAD)
+  {
+    if(std::holds_alternative<int>(i.i))
+    {
+      int integer = std::get<int>(i.i);
+
+      ints integers = Symbol::integerToString[integer];
+      const Storage& is = IotaString::make(integers);
+      std::string s = IotaString::toString(is);
+      printf("%s", s.c_str());
+    }
+  }
+}
+
+Storage Triad::make(int i)
+{
+  return Word::make(i, NounType::BUILTIN_TRIAD);
+}
+
+void Triad::initialize()
+{
+}
+
+void Triad::print(const Storage& i)
 {
   if(i.o == NounType::BUILTIN_DYAD)
   {

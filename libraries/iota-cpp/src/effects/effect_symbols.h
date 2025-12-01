@@ -8,7 +8,7 @@
 #include "log/log_symbols.h" // NOLINT
 #include "relation/relation_symbols.h" // NOLINT
 #include "random/random_symbols.h" // NOLINT
-#include "state/state_symbols.h" // NOLINT"
+#include "state/state.h" // NOLINT
 
 namespace effects::families
 {

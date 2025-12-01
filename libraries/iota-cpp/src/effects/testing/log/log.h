@@ -26,6 +26,15 @@ class Log
 
     };
 
+    static inline int timestamp;
+    static inline int level;
+    static inline int critical;
+    static inline int error;
+    static inline int warning;
+    static inline int info;
+    static inline int debug;
+    static inline int trace;
+
     static void initialize(EffectsProvider* effects_provider);
 
     // Nilad Sinks

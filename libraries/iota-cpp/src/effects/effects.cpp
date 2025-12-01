@@ -10,17 +10,22 @@
 #include <storage/word.h>
 #include <storage/word_array.h>
 
-Storage NiladicEffect::make(const int f, const int e)
+Storage NiladicEffect::make(const int f)
 {
-  return WordArray::make(ints{f, e}, NounType::NILADIC_EFFECT);
+  return Word::make(f, NounType::NILADIC_EFFECT);
 }
 
-Storage MonadicEffect::make(const int f, const int e)
+Storage MonadicEffect::make(const int f)
 {
-  return WordArray::make(ints{f, e}, NounType::MONADIC_EFFECT);
+  return Word::make(f, NounType::MONADIC_EFFECT);
 }
 
-Storage DyadicEffect::make(const int f, const int e)
+Storage DyadicEffect::make(const int f)
 {
-  return WordArray::make(ints{f, e}, NounType::DYADIC_EFFECT);
+  return Word::make(f, NounType::DYADIC_EFFECT);
+}
+
+Storage TriadicEffect::make(const int f)
+{
+  return Word::make(f, NounType::TRIADIC_EFFECT);
 }

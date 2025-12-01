@@ -14,6 +14,11 @@
 class Random
 {
   public:
+    inline static int random;
+    inline static int roll;
+    inline static int rolls;
+    inline static int deal;
+
     static void initialize(EffectsProvider* effects_register);
 
     // Nilads

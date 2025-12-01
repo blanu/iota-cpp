@@ -7,6 +7,7 @@
 #include "../../../api.h"
 #include "../../../nouns/error.h"
 #include "../../../verbs.h"
+#include "../../../symbols.h"
 
 #include "../../../nouns/noun.h" // Include noun.h before mixed_array.h for advanced serialization
 
@@ -25,6 +26,11 @@ void Random::initialize(EffectsProvider* effects_register)
   //generator = std::mt19937(rd());
 
   generator = std::mt19937(123456789); // NOLINT, Use a static seed for the testing version of the random number generator. Obviously, do not do this in the production random number generator.
+
+  INTERN_INT(random);
+  INTERN_INT(roll);
+  INTERN_INT(rolls);
+  INTERN_INT(deal);
 }
 
 Storage Random::random_impl()
