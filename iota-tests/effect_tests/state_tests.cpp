@@ -20,3 +20,11 @@ TEST_CASE("state put get", "[effect]")
 
   REQUIRE(evalExpression({1, put, then, get}) == 1);
 }
+
+TEST_CASE("state modify", "[effect]")
+{
+  using namespace iota;
+
+  auto result = evalExpression({1, put, then, negate, modify});
+  REQUIRE(result == -1);
+}

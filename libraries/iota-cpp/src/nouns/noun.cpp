@@ -75,13 +75,24 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
 
   int fi = std::get<int>(f.i);
 
-  Specialization3 specialization = Specialization3(i.t, i.o, fi);
-  if (monadSources.find(specialization) == monadSources.end()) {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  const std::vector specializations = {
+    Specialization3(i.t, i.o, fi),
+    Specialization3(NounType::ANY, i.o, fi),
+    Specialization3(i.t, NounType::ANY, fi),
+    Specialization3(NounType::ANY, NounType::ANY, fi),
+  };
+
+  auto source = monadSources;
+  for(auto specialization : specializations)
+  {
+    if (monadSources.find(specialization) != monadSources.end())
+    {
+      const MonadicSourceFunction verb = monadSources[specialization];
+      return verb(i);
+    }
   }
 
-  MonadicSourceFunction verb = monadSources[specialization];
-  return verb(i);
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
 Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x) {
