@@ -24,6 +24,7 @@ void EvalRegister::initialize()
   Monads::initialize();
   Dyads::initialize();
   Triads::initialize();
+
   MonadicAdverbs::initialize();
   DyadicAdverbs::initialize();
 

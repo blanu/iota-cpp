@@ -46,3 +46,22 @@ TEST_CASE("state push", "[effect]")
   auto result = evalExpression({{3, 4, 5}, put, then, 2, push, lens});
   REQUIRE(result == a{2, 4, 5});
 }
+
+TEST_CASE("state replace", "[effect]")
+{
+  using namespace iota;
+
+  auto lens = l({1});
+  auto result = evalExpression({{3, 4, 5}, put, then, lens, replace, negate});
+  REQUIRE(result == a{-3, 4, 5});
+}
+
+TEST_CASE("state transform", "[effect]")
+{
+  using namespace iota;
+
+  auto lensA = l({1});
+  auto lensB = l({2});
+  auto result = evalExpression({{3, 4, 5}, put, then, lensA, transform, negate, lensB});
+  REQUIRE(result == a{3, -3, 5});
+}

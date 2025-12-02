@@ -25,27 +25,29 @@ void State::initialize(EffectsProvider* effects_register)
   INTERN_INT(transform);
   INTERN_EFFECT(iota, Triad, transform);
 
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::LENS, State::pull, State::pull_impl);
-  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::LENS, State::pull, State::pull_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::LENS, pull, pull_impl);
+  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::LENS, pull, pull_impl);
 
-  Noun::registerDyad(StorageType::ANY, NounType::ANY, State::push, StorageType::WORD_ARRAY, NounType::LENS, State::push_impl);
-  Noun::registerDyad(StorageType::ANY, NounType::ANY, State::push, StorageType::MIXED_ARRAY, NounType::LENS, State::push_impl);
+  Noun::registerDyad(StorageType::ANY, NounType::ANY, push, StorageType::WORD_ARRAY, NounType::LENS, push_impl);
+  Noun::registerDyad(StorageType::ANY, NounType::ANY, push, StorageType::MIXED_ARRAY, NounType::LENS, push_impl);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::BUILTIN_MONAD, State::replace_impl);
-  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::BUILTIN_MONAD, State::replace_impl);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::USER_MONAD, State::replace_impl);
-  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::USER_MONAD, State::replace_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, replace, StorageType::WORD, NounType::BUILTIN_MONAD, replace_impl);
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, replace, StorageType::WORD, NounType::BUILTIN_MONAD, replace_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, replace, StorageType::WORD, NounType::USER_MONAD, replace_impl);
+  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, replace, StorageType::WORD, NounType::USER_MONAD, replace_impl);
 
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
+  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::WORD_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::WORD_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::USER_MONAD, StorageType::WORD_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::USER_MONAD, StorageType::WORD_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::USER_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, transform_impl);
+  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, transform, StorageType::WORD, NounType::USER_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, transform_impl);
 }
 
+// Get a value out of a the state structure with a lens
+// i: lens for getting
 Storage State::pull_impl(const Storage& i)
 {
   using namespace iota;
@@ -55,6 +57,9 @@ Storage State::pull_impl(const Storage& i)
   return evalExpressionCppToIota({get, retrieve, i});
 }
 
+// Put a value into a the state structure with a lens
+// i: new value
+// x: lens for putting
 Storage State::push_impl(const Storage& i, const Storage& x)
 {
   using namespace iota;
@@ -65,24 +70,27 @@ Storage State::push_impl(const Storage& i, const Storage& x)
   return evalExpressionCppToIota({get, store, i, x, put});
 }
 
+// Get a value out of the state structure with a lens, apply a function to it, and then put it back in with the same lens
+// i: lens for getting and putting
+// f: function to apply
 Storage State::replace_impl(const Storage& i, const Storage& f)
 {
   using namespace iota;
-  using iota::get;
-  using iota::put;
-  using iota::retrieve;
-  using iota::store;
+  using iota::pull;
+  using iota::push;
 
-  return evalExpressionCppToIota({get, store, i, {get, retrieve, i, f}, put});
+  return evalExpressionCppToIota({i, pull, f, push, i});
 }
 
+// Take a value out of a structure with a lens, apply a function to it, and put it back in with a different lens
+// i: lens for getting
+// f: function to apply
+// x: lens for putting
 Storage State::transform_impl(const Storage& i, const Storage& f, const Storage& x)
 {
   using namespace iota;
-  using iota::get;
-  using iota::put;
-  using iota::retrieve;
-  using iota::store;
+  using iota::pull;
+  using iota::push;
 
-  return evalExpressionCppToIota({get, store, x, {get, retrieve, i, f}, put});
+  return evalExpressionCppToIota({i, pull, f, push, x});
 }

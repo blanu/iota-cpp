@@ -744,6 +744,16 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         Storage x = items[2];
         rest = mixed(items.begin() + 3, items.end());
 
+        if(x.o == NounType::EXPRESSION)
+        {
+          x = evaluate_expression(x);
+        }
+
+        if(x.o == NounType::ERROR)
+        {
+          return x;
+        }
+
         Storage result = dispatchDyad(i, f, x);
         if (rest.empty())
         {
@@ -765,6 +775,26 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         Storage x = items[2];
         Storage y = items[3];
         rest = mixed(items.begin() + 4, items.end());
+
+        if(x.o == NounType::EXPRESSION)
+        {
+          x = evaluate_expression(x);
+        }
+
+        if(x.o == NounType::ERROR)
+        {
+          return x;
+        }
+
+        if(y.o == NounType::EXPRESSION)
+        {
+          y = evaluate_expression(y);
+        }
+
+        if(y.o == NounType::ERROR)
+        {
+          return y;
+        }
 
         Storage result = dispatchTriad(i, f, x, y);
         if(result.o == NounType::ERROR)
@@ -851,6 +881,16 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         Storage x = items[2];
         rest = mixed(items.begin() + 3, items.end());
 
+        if(x.o == NounType::EXPRESSION)
+        {
+          x = evaluate_expression(x);
+        }
+
+        if(x.o == NounType::ERROR)
+        {
+          return x;
+        }
+
         Storage result = dispatchDyadicEffect(i, f, x);
         if (rest.empty())
         {
@@ -869,9 +909,29 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 
       case NounType::TRIADIC_EFFECT:
       {
-        Storage x = items[3];
-        Storage y = items[4];
+        Storage x = items[2];
+        Storage y = items[3];
         rest = mixed(items.begin() + 4, items.end());
+
+        if(x.o == NounType::EXPRESSION)
+        {
+          x = evaluate_expression(x);
+        }
+
+        if(x.o == NounType::ERROR)
+        {
+          return x;
+        }
+
+        if(y.o == NounType::EXPRESSION)
+        {
+          y = evaluate_expression(y);
+        }
+
+        if(y.o == NounType::ERROR)
+        {
+          return y;
+        }
 
         Storage result = dispatchTriadicEffect(i, f, x, y);
         if (rest.empty())

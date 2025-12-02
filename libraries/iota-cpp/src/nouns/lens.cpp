@@ -345,6 +345,10 @@ Storage Lens::retrieve_impl(const Storage& i, const Storage& x) // NOLINT
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
+// store a value inside of a structure
+// i: target structure
+// x: new value
+// y: lens
 Storage Lens::store_impl(const Storage& i, const Storage& x, const Storage& y)
 {
   using namespace iota;
