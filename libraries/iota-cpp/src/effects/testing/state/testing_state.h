@@ -14,6 +14,10 @@
 class TestingState
 {
   public:
+    inline static int get;
+    inline static int put;
+    inline static int modify;
+
     static void initialize(EffectsProvider* effects_register);
 
     // Nilads

@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.31)
 project(iota-cpp-lib-tests)
-
 set(CMAKE_CXX_STANDARD 17)
 enable_testing()
-
 set(CTEST_PROJECT_NAME iota-cpp)
 set(CTEST_NIGHTLY_START_TIME 01:00:00 UTC)
 set(CTEST_SUBMIT_URL https://my.cdash.org/submit.php?project=iota-cpp)
@@ -15,7 +13,6 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/catchorg/Catch2.git
   GIT_TAG v3.8.0
 )
-
 FetchContent_MakeAvailable(Catch2)
 
 set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
@@ -26,7 +23,6 @@ set(TRANSMISSION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-cpp)
 set(TRANSMISSION_LIB_SOURCE_DIR ${TRANSMISSION_LIB_DIR}/src)
 set(BIGNUMBER_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/bignumber-cpp)
 set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER_LIB_DIR}/src)
-
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(iota-tests main.cpp
@@ -69,6 +65,7 @@ add_executable(iota-tests main.cpp
   dyad_tests/plus_tests.cpp
   dyad_tests/times_tests.cpp
 )
+
 target_include_directories(iota-tests PRIVATE
   ${IOTA_LIB_SOURCE_DIR}
   ${ION_LIB_SOURCE_DIR}
@@ -83,9 +80,25 @@ target_link_libraries(iota-tests PRIVATE
   Catch2::Catch2WithMain
 )
 
+# Add the test
+add_test(NAME iota-tests COMMAND iota-tests)
+
+# Create a target to clean coverage data
+add_custom_target(clean-gcda
+  COMMAND find ${CMAKE_BINARY_DIR} -name "*.gcda" -type f -delete
+  COMMENT "Cleaning stale .gcda coverage files"
+)
+
+# Clean coverage data before building tests
+add_custom_command(
+  TARGET iota-tests
+  PRE_BUILD
+  COMMAND find ${CMAKE_BINARY_DIR} -name "*.gcda" -type f -delete
+  COMMENT "Removing stale .gcda files before build"
+)
+
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   option(ENABLE_COVERAGE "Enable coverage reporting" ON)
-
   target_compile_options(iota-tests PRIVATE --coverage -O0 -g)
   target_link_options(iota-tests PRIVATE --coverage)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
@@ -97,13 +110,14 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(LCOV_PATH AND GCOV_PATH AND GENHTML_PATH)
     add_custom_target(iota-coverage
       COMMAND ${LCOV_PATH} --directory . --zerocounters
-      COMMAND tests
+      COMMAND $<TARGET_FILE:iota-tests>
       COMMAND ${LCOV_PATH} --directory . --capture --output-file coverage.info
       COMMAND ${LCOV_PATH} --extract coverage.info
       '${CMAKE_SOURCE_DIR}/libraries/iota-cpp/*'
       --output-file coverage.filtered.info
       COMMAND ${GENHTML_PATH} coverage.filtered.info --output-directory coverage_html
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      DEPENDS iota-tests
       COMMENT "Generating coverage report"
     )
   else()
@@ -111,9 +125,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_custom_target(iota-coverage
       COMMAND ${CMAKE_COMMAND} -E remove_directory coverage
       COMMAND ${CMAKE_COMMAND} -E make_directory coverage
-      COMMAND tests
+      COMMAND $<TARGET_FILE:iota-tests>
       COMMAND ${CMAKE_COMMAND} -E chdir coverage ${GCOV_PATH} -abcfu ${CMAKE_SOURCE_DIR}/src/*.cpp
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      DEPENDS iota-tests
       COMMENT "Running gcov"
     )
   endif()

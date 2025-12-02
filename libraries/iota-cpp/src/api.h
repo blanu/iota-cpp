@@ -171,6 +171,8 @@ Storage e(Args&&... values)
 
 Storage c();
 
+Storage l(cppValues values);
+
 Storage test_error();
 std::string error_to_string(const Storage &error);
 std::string code_to_string(int code);

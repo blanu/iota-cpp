@@ -148,13 +148,19 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
 
 Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)
 {
-  if (i.o == NounType::ERROR)
+  if(i.o == NounType::ERROR)
   {
     return i;
   }
 
-  if (x.o == NounType::ERROR) {
+  if(x.o == NounType::ERROR)
+  {
     return x;
+  }
+
+  if(y.o == NounType::ERROR)
+  {
+    return y;
   }
 
   if (f.t != StorageType::WORD) {
@@ -163,13 +169,119 @@ Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x
 
   int fi = std::get<int>(f.i);
 
-  Specialization7 specialization = Specialization7(i.t, i.o, fi, x.t, x.o, y.t, y.o);
-  if (triadSources.find(specialization) == triadSources.end()) {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  const std::vector specializations = {
+    Specialization7(i.t, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, NounType::ANY),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, NounType::ANY, NounType::ANY),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, NounType::ANY),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+  };
+
+  auto sources = triadSources;
+  for(auto specialization : specializations)
+  {
+    if (triadSources.find(specialization) != triadSources.end())
+    {
+      const TriadicSourceFunction verb = triadSources[specialization];
+      return verb(i, x, y);
+    }
   }
 
-  TriadicSourceFunction verb = triadSources[specialization];
-  return verb(i, x, y);
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
 Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g)
@@ -271,6 +383,7 @@ Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
     Specialization3(NounType::ANY, NounType::ANY, fi),
   };
 
+  auto sources = monadSources;
   for(auto specialization : specializations)
   {
     if (monadSources.find(specialization) != monadSources.end())
@@ -298,19 +411,7 @@ Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Sto
     return Word::make(BAD_OPERATION, NounType::ERROR);
   }
 
-  if (f.t != StorageType::WORD_ARRAY)
-  {
-    return Word::make(BAD_OPERATION, NounType::ERROR);
-  }
-
-  ints fis = std::get<ints>(f.i);
-
-  if(fis.size() != 2)
-  {
-    return Word::make(BAD_OPERATION, NounType::ERROR);
-  }
-
-  int fi = (fis[0] << 8) | fis[1];
+  int fi = std::get<int>(f.i);
 
   const std::vector<Specialization5> specializations = {
     Specialization5(i.t, i.o, fi, x.t, x.o),
@@ -340,6 +441,141 @@ Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Sto
     {
       const DyadicSourceFunction verb = dyadSources[specialization];
       return verb(i, x);
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+Storage Noun::dispatchTriadicEffect(const Storage& i, const Storage& f, const Storage& x, const Storage& y)
+{
+  if (i.o == NounType::ERROR) {
+    return i;
+  }
+
+  if (x.o == NounType::ERROR) {
+    return x;
+  }
+
+  if (y.o == NounType::ERROR) {
+    return y;
+  }
+
+  if(f.o != NounType::TRIADIC_EFFECT)
+  {
+    return Word::make(BAD_OPERATION, NounType::ERROR);
+  }
+
+  int fi = std::get<int>(f.i);
+
+  const std::vector<Specialization7> specializations = {
+    Specialization7(i.t, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, y.t, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, y.o),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, y.o),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, NounType::ANY, y.o),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, y.t, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+
+    Specialization7(i.t, i.o, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, i.o, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, NounType::ANY),
+
+    Specialization7(i.t, NounType::ANY, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(i.t, NounType::ANY, fi, NounType::ANY, NounType::ANY, NounType::ANY, NounType::ANY),
+
+    Specialization7(NounType::ANY, i.o, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, i.o, fi, NounType::ANY, NounType::ANY, NounType::ANY, NounType::ANY),
+
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, x.t, NounType::ANY, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, x.o, NounType::ANY, NounType::ANY),
+    Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
+  };
+
+  for(auto specialization : specializations)
+  {
+    if (triadSources.find(specialization) != triadSources.end())
+    {
+      const TriadicSourceFunction verb = triadSources[specialization];
+      return verb(i, x, y);
     }
   }
 
@@ -524,6 +760,31 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         }
       }
 
+      case NounType::BUILTIN_TRIAD:
+      {
+        Storage x = items[2];
+        Storage y = items[3];
+        rest = mixed(items.begin() + 4, items.end());
+
+        Storage result = dispatchTriad(i, f, x, y);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
+        if (rest.empty())
+        {
+          return result;
+        }
+
+        rest.insert(rest.begin(), result);
+
+        Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
+        result = evaluate_expression(next_e);
+
+        return result;
+      }
+
       case NounType::MONADIC_ADVERB:
       {
         Storage g = items[2];
@@ -567,8 +828,6 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         }
       }
 
-      // FIXME - add case for BUILTIN_TRIAD - this has not been implemented because we have no triads at the moment, but it's in Klong
-
       case NounType::MONADIC_EFFECT:
       {
         Storage result = dispatchMonadicEffect(i, f);
@@ -593,6 +852,28 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         rest = mixed(items.begin() + 3, items.end());
 
         Storage result = dispatchDyadicEffect(i, f, x);
+        if (rest.empty())
+        {
+          return result;
+        }
+        else
+        {
+          rest.insert(rest.begin(), result);
+
+          Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
+          result = evaluate_expression(next_e);
+
+          return result;
+        }
+      }
+
+      case NounType::TRIADIC_EFFECT:
+      {
+        Storage x = items[3];
+        Storage y = items[4];
+        rest = mixed(items.begin() + 4, items.end());
+
+        Storage result = dispatchTriadicEffect(i, f, x, y);
         if (rest.empty())
         {
           return result;

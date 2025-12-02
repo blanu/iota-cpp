@@ -76,12 +76,12 @@ void Dyads::initialize()
     INTERN_INT(then);
     INTERN_INT(bind);
     INTERN_INT(retrieve);
-    INTERN_INT(mutate);  
 }
 
 void Triads::initialize()
 {
   INTERN_INT(applyDyad);
+  INTERN_INT(store);
 }
 
 void MonadicAdverbs::initialize()

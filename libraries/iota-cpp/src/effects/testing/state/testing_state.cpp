@@ -11,6 +11,7 @@
 #include <storage/word_array.h>
 
 #include <nouns/noun.h>
+#include <nouns/symbol.h>
 
 #include <effects/state/state.h>
 
@@ -20,34 +21,21 @@ void TestingState::initialize(EffectsProvider* effects_register)
 {
   State::initialize(effects_register);
 
-  // Monolithic state
-  Noun::registerNilad(State::get, get_impl);
+  INTERN_INT(get);
+  INTERN_EFFECT(iota, Nilad, get);
 
-  Noun::registerMonad(StorageType::ANY, NounType::ANY, State::put, put_impl);
+  INTERN_INT(put);
+  INTERN_EFFECT(iota, Monad, put);
 
-  Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_MONAD, State::modify, modify_impl);
-  Noun::registerMonad(StorageType::WORD, NounType::USER_MONAD, State::modify, modify_impl);
+  INTERN_INT(modify);
+  INTERN_EFFECT(iota, Monad, modify);
 
-  // Lensed state
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::LENS, State::pull, State::pull_impl);
-  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::LENS, State::pull, State::pull_impl);
+  Noun::registerNilad(get, get_impl);
 
-  Noun::registerDyad(StorageType::ANY, NounType::ANY, State::push, StorageType::WORD_ARRAY, NounType::LENS, State::push_impl);
-  Noun::registerDyad(StorageType::ANY, NounType::ANY, State::push, StorageType::MIXED_ARRAY, NounType::LENS, State::push_impl);
+  Noun::registerMonad(StorageType::ANY, NounType::ANY, put, put_impl);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::BUILTIN_MONAD, State::replace_impl);
-  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::BUILTIN_MONAD, State::replace_impl);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::USER_MONAD, State::replace_impl);
-  Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, State::replace, StorageType::WORD, NounType::USER_MONAD, State::replace_impl);
-
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::WORD_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::BUILTIN_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::WORD_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
-  Noun::registerTriad(StorageType::MIXED_ARRAY, NounType::LENS, State::transform, StorageType::WORD, NounType::USER_MONAD, StorageType::MIXED_ARRAY, NounType::LENS, State::transform_impl);
+  Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_MONAD, modify, modify_impl);
+  Noun::registerMonad(StorageType::WORD, NounType::USER_MONAD, modify, modify_impl);
 }
 
 // Monads

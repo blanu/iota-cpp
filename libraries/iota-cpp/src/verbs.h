@@ -105,7 +105,9 @@ namespace iota
 
   // Lens
   inline Storage retrieve = WordArray::nil();
-  inline Storage mutate = WordArray::nil();
+
+  // Triads
+  inline Storage store = WordArray::nil();
 }
 
 #endif //VERBS_H

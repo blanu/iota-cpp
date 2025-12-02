@@ -86,7 +86,6 @@ class Dyads
     inline static int then;
     inline static int bind;
     inline static int retrieve;
-    inline static int mutate;
 };
 
 // Triads
@@ -96,6 +95,7 @@ class Triads
     static void initialize();
 
     inline static int applyDyad;
+    inline static int store;
 };
 
 // MonadicAdverbs

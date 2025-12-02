@@ -30,6 +30,7 @@ void EvalRegister::initialize()
   // Intern verbs
   Monad::initialize();
   Dyad::initialize();
+  Triad::initialize();
 
   // Intern adverbs
   MonadicAdverb::initialize();

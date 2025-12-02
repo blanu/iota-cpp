@@ -16,12 +16,13 @@ class Lens
     static Storage make(int i);
     static Storage make(const ints& i);
     static Storage make(const mixed& i);
+    static Storage make(const Storage& i);
 
     // Dyads
     static Storage retrieve_impl(const Storage& i, const Storage& x);
 
     // Triads
-    static Storage mutate_impl(const Storage& i, const Storage& x, const Storage& y);
+    static Storage store_impl(const Storage& i, const Storage& y, const Storage& x);
 };
 
 #endif //LENS_H

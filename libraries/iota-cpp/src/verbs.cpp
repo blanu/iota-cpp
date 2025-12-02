@@ -106,7 +106,6 @@ void Dyad::initialize()
 
   // Lens
   INTERN_VERB(iota, Dyad, retrieve);
-  INTERN_VERB(iota, Dyad, mutate);
 }
 
 void Dyad::print(const Storage& i)
@@ -125,13 +124,14 @@ void Dyad::print(const Storage& i)
   }
 }
 
+void Triad::initialize()
+{
+  INTERN_VERB(iota, Triad, store);
+}
+
 Storage Triad::make(int i)
 {
   return Word::make(i, NounType::BUILTIN_TRIAD);
-}
-
-void Triad::initialize()
-{
 }
 
 void Triad::print(const Storage& i)

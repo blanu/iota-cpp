@@ -54,6 +54,7 @@ class Noun
     static Storage dispatchNiladicEffect(const Storage& f);
     static Storage dispatchMonadicEffect(const Storage& i, const Storage& f);
     static Storage dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x);
+    static Storage dispatchTriadicEffect(const Storage& i, const Storage& f, const Storage& x, const Storage& y);
     static Storage dispatchConjunction(const Storage& i, const Storage& f, const Storage& x);
 
     static void registerNilad(Type f, Storage (*m)());

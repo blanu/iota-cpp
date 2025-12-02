@@ -46,6 +46,18 @@ bool CppValue::all_floats(const cppValues& values)
   return true;
 }
 
+Storage l(cppValues values)
+{
+  Storage list = Object::from_cpp(values);
+
+  if(list.o != NounType::LIST)
+  {
+    return list;
+  }
+
+  return Lens::make(list);
+}
+
 Storage test_error()
 {
   return Word::make(TEST_ERROR, NounType::ERROR);
@@ -239,7 +251,40 @@ Storage Object::from_cpp(const cppValue& i)
   }
   else if(std::holds_alternative<cppValues>(i))
   {
-    // ... rest of vector handling ...
+    auto values = std::get<cppValues>(i); // NOLINT
+    if(CppValue::all_ints(values))
+    {
+      ints results;
+      results.reserve(values.size());
+      for(const auto& value : values)
+      {
+        int result = std::get<int>(value);
+        results.push_back(result);
+      }
+      return WordArray::make(results);
+    }
+    else if(CppValue::all_floats(values))
+    {
+      floats results;
+      results.reserve(values.size());
+      for(const auto& value : values)
+      {
+        float result = std::get<float>(value);
+        results.push_back(result);
+      }
+      return FloatArray::make(results);
+    }
+    else
+    {
+      mixed results;
+      results.reserve(values.size());
+      for(const auto& value : values)
+      {
+        Storage result = Object::from_cpp(value);
+        results.push_back(result);
+      }
+      return MixedArray::make(results);
+    }
   }
   else if(std::holds_alternative<char>(i))
   {

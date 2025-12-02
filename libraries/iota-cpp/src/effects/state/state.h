@@ -26,10 +26,6 @@ namespace iota
 class State
 {
   public:
-    inline static int get;
-    inline static int put;
-    inline static int modify;
-
     static inline int pull;
     static inline int push;
     static inline int replace;
