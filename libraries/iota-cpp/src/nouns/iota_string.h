@@ -19,6 +19,7 @@ class IotaString
 
     static Storage make(ints i);
     static Storage makeString(std::string i);
+    static Storage makeCString(const char *cs);
     static Storage makeEmpty();
 
     static std::string toString(const Storage& i);
@@ -36,6 +37,8 @@ class IotaString
 
     // Dyads
     static Storage equal_impl(const Storage& i, const Storage& x);
+
+    static Storage drop_impl(const Storage& i, const Storage& x);
 
     static Storage find_character(const Storage& i, const Storage& x);
     static Storage find_string(const Storage& i, const Storage& x);
@@ -57,6 +60,8 @@ class IotaString
 
     static Storage split_integer(const Storage& i, const Storage& x);
     static Storage split_integers(const Storage& i, const Storage& x);
+    static Storage split_character(const Storage& i, const Storage& x);
+
     static Storage take_integer(const Storage& i, const Storage& x);
 
     // Monadic Adverbs

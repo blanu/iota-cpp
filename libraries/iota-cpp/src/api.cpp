@@ -70,19 +70,25 @@ std::string error_to_string(const Storage &error)
     return "Unknown error";
   }
 
-  if(error.t != StorageType::WORD)
-  {
-    return "Unknown error";
-  }
-
   if(std::holds_alternative<int>(error.i))
   {
     return code_to_string(std::get<int>(error.i));
   }
-  else
+  else if(std::holds_alternative<mixed>(error.i))
   {
-    return "Unknown error";
+    mixed ms = std::get<mixed>(error.i);
+    if(ms.size() == 4)
+    {
+      int type = Integer::toInt(ms[0]);
+      std::string file = IotaString::toString(ms[1]);
+      int line = Integer::toInt(ms[2]);
+      std::string func = IotaString::toString(ms[3]);
+
+      return "Error: " + file + " (" + func + ":" + std::to_string(line) + "): " + code_to_string(type);
+    }
   }
+
+  return "Unknown error";
 }
 
 std::string code_to_string(const int code)
@@ -152,7 +158,7 @@ Storage eval(const mixed& e)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 }
 
@@ -165,7 +171,7 @@ cppValue evalExpression(const cppValues& values)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 }
 
@@ -178,7 +184,7 @@ Storage evalExpressionCppToIota(const cppValues& values)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 }
 
@@ -190,7 +196,7 @@ Storage evalExpression(const Storage& values)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 }
 
@@ -309,7 +315,7 @@ Storage Object::from_cpp(const cppValue& i)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 
   return WordArray::nil();
@@ -395,7 +401,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
       }
       else
       {
-        return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+        return makeError(UNSUPPORTED_OBJECT);
       }
     }
 
@@ -407,7 +413,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
       }
       else
       {
-        return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+        return makeError(UNSUPPORTED_OBJECT);
       }
     }
 
@@ -432,7 +438,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
           }
           else
           {
-            return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+            return makeError(UNSUPPORTED_OBJECT);
           }
         }
 
@@ -453,7 +459,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
           }
           else
           {
-            return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+            return makeError(UNSUPPORTED_OBJECT);
           }
         }
 
@@ -475,12 +481,12 @@ cppValue Object::to_cpp(Storage i) // NOLINT
           }
           else
           {
-            return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+            return makeError(UNSUPPORTED_OBJECT);
           }
         }
 
         default:
-          return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+          return makeError(UNSUPPORTED_OBJECT);
       }
     }
 
@@ -495,7 +501,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
       }
       else
       {
-        return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+        return makeError(UNSUPPORTED_OBJECT);
       }
     }
 
@@ -516,7 +522,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
       }
       else
       {
-        return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+        return makeError(UNSUPPORTED_OBJECT);
       }
     }
 
@@ -528,7 +534,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
     //
     //     if(ms.size() != 2)
     //     {
-    //       return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    //       return makeError(UNSUPPORTED_OBJECT);
     //     }
     //
     //     Storage keys = ms[0];
@@ -546,7 +552,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
     //
     //         if(mkeys.size() != mvalues.size())
     //         {
-    //           return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    //           return makeError(UNSUPPORTED_OBJECT);
     //         }
     //
     //         for(int index = 0; index < mkeys.size(); index++)
@@ -562,7 +568,7 @@ cppValue Object::to_cpp(Storage i) // NOLINT
     //     }
     //   }
     //
-    //   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    //   return makeError(UNSUPPORTED_OBJECT);
     // }
 
     case NounType::BUILTIN_SYMBOL:
@@ -583,12 +589,12 @@ cppValue Object::to_cpp(Storage i) // NOLINT
             return ":undefined"s;
 
           default:
-            return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+            return makeError(UNSUPPORTED_OBJECT);
         }
       }
       else
       {
-        return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+        return makeError(UNSUPPORTED_OBJECT);
       }
     }
 
@@ -616,6 +622,6 @@ cppValue Object::to_cpp(Storage i) // NOLINT
     }
 
     default:
-      return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+      return makeError(UNSUPPORTED_OBJECT);
   }
 }

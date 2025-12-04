@@ -30,13 +30,13 @@ Storage DyadicAdverb::make(const int i)
 
 void DyadicAdverb::initialize()
 {
-  INTERN_VERB(iota, MonadicAdverb, each2);
-  INTERN_VERB(iota, MonadicAdverb, eachLeft);
-  INTERN_VERB(iota, MonadicAdverb, eachRight);
-  INTERN_VERB(iota, MonadicAdverb, overNeutral);
-  INTERN_VERB(iota, MonadicAdverb, iterate);
-  INTERN_VERB(iota, MonadicAdverb, scanIterating);
-  INTERN_VERB(iota, MonadicAdverb, scanOverNeutral);
-  INTERN_VERB(iota, MonadicAdverb, scanWhileOne);
-  INTERN_VERB(iota, MonadicAdverb, whileOne);
+  INTERN_VERB(iota, DyadicAdverb, each2);
+  INTERN_VERB(iota, DyadicAdverb, eachLeft);
+  INTERN_VERB(iota, DyadicAdverb, eachRight);
+  INTERN_VERB(iota, DyadicAdverb, overNeutral);
+  INTERN_VERB(iota, DyadicAdverb, iterate);
+  INTERN_VERB(iota, DyadicAdverb, scanIterating);
+  INTERN_VERB(iota, DyadicAdverb, scanOverNeutral);
+  INTERN_VERB(iota, DyadicAdverb, scanWhileOne);
+  INTERN_VERB(iota, DyadicAdverb, whileOne);
 }

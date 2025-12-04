@@ -62,7 +62,9 @@ class List
     static Storage divide_mixed(const Storage& i, const Storage& x);
 
     static Storage drop_impl(const Storage& i, const Storage& x);
+
     static Storage equal_impl(const Storage& i, const Storage& x);
+    static Storage equal_integer(const Storage& i, const Storage& x);
 
     static Storage find_integers_integer(const Storage& i, const Storage& x);
     static Storage find_integers_real(const Storage& i, const Storage& x);

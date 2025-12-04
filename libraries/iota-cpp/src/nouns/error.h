@@ -5,6 +5,8 @@
 
 #include <storage/storage.h>
 
+#define makeError(type) Error::make(type, __FILE__, __LINE__, __func__)
+
 #define BAD_INDEX_TYPE 0
 #define BAD_INITIALIZATION 1
 #define BAD_STORAGE 2
@@ -43,6 +45,7 @@ class Error
     static constexpr int maximum_iterations = MAXIMUM_ITERATIONS;
 
     static Storage make(int i);
+    static Storage make(int type, const char* file, int line, const char* func);
 
     int code;
 

@@ -71,6 +71,7 @@ void List::initialize() {
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::drop, StorageType::WORD, NounType::INTEGER, List::drop_impl);
 
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::WORD, NounType::INTEGER, List::equal_integer);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::WORD_ARRAY, NounType::LIST, List::equal_impl);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::FLOAT_ARRAY, NounType::LIST, List::equal_impl);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::equal, StorageType::MIXED_ARRAY, NounType::LIST, List::equal_impl);
@@ -225,6 +226,7 @@ void List::initialize() {
   Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::LIST, DyadicAdverbs::scanIterating, StorageType::WORD, NounType::INTEGER, Noun::scanIterating_integer);
 
   Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::LIST, DyadicAdverbs::scanOverNeutral, StorageType::WORD, NounType::INTEGER, Noun::scanOverNeutral_impl);
+  Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::LIST, DyadicAdverbs::scanOverNeutral, StorageType::MIXED_ARRAY, NounType::EXPRESSION, Noun::scanOverNeutral_impl);
   Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::LIST, DyadicAdverbs::scanOverNeutral, StorageType::FLOAT, NounType::REAL, Noun::scanOverNeutral_impl);
   Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::LIST, DyadicAdverbs::scanOverNeutral, StorageType::WORD_ARRAY, NounType::LIST, Noun::scanOverNeutral_impl);
   Noun::registerDyadicAdverb(StorageType::WORD_ARRAY, NounType::LIST, DyadicAdverbs::scanOverNeutral, StorageType::FLOAT_ARRAY, NounType::LIST, Noun::scanOverNeutral_impl);
@@ -3477,6 +3479,31 @@ Storage List::drop_impl(const Storage& i, const Storage& x)
         mixed results(iis.begin(), iis.end() - xi);
         return MixedArray::make(results, NounType::LIST);
       }
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+Storage List::equal_integer(const Storage& i, const Storage& x)
+{
+  using namespace iota;
+
+  if(std::holds_alternative<ints>(i.i))
+  {
+    ints iis = std::get<ints>(i.i);
+
+    if(std::holds_alternative<int>(x.i))
+    {
+      int xi = std::get<int>(x.i);
+
+      ints results = ints();
+      for(int y : iis)
+      {
+        results.push_back(y == xi ? 1 : 0);
+      }
+
+      return List::make(results);
     }
   }
 

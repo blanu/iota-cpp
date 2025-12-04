@@ -56,7 +56,7 @@ Storage Noun::dispatchNilad(const Storage& f)
 
   auto specialization = Specialization1(fi);
   if (niladSources.find(specialization) == niladSources.end()) {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 
   NiladicSourceFunction verb = niladSources[specialization];
@@ -67,6 +67,24 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
 {
   if (i.o == NounType::ERROR) {
     return i;
+  }
+
+  if(f.o == NounType::EXPRESSION)
+  {
+    if(std::holds_alternative<mixed>(f.i))
+    {
+      mixed ms = std::get<mixed>(f.i);
+      mixed next_e = mixed();
+      next_e.reserve(ms.size() + 1);
+
+      next_e.push_back(i);
+      for(auto& m : ms)
+      {
+        next_e.push_back(m);
+      }
+
+      return evaluate_expression(Expression::make(next_e));
+    }
   }
 
   if (f.t != StorageType::WORD) {
@@ -92,7 +110,7 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x) {
@@ -102,6 +120,55 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
 
   if (x.o == NounType::ERROR) {
     return x;
+  }
+
+  if(f.o == NounType::EXPRESSION)
+  {
+    if(std::holds_alternative<mixed>(f.i))
+    {
+      mixed ms = std::get<mixed>(f.i);
+      mixed next_e = mixed();
+      next_e.reserve(ms.size() + 1);
+
+      next_e.push_back(i);
+      for(auto& m : ms)
+      {
+        if(m.o == NounType::BUILTIN_SYMBOL)
+        {
+          if(std::holds_alternative<int>(m.i))
+          {
+            int mi = std::get<int>(m.i);
+            switch(mi)
+            {
+              case SymbolType::i:
+                next_e.push_back(i);
+                break;
+
+              case SymbolType::x:
+                next_e.push_back(x);
+                break;
+
+              case SymbolType::f:
+                next_e.push_back(f);
+                break;
+
+              default:
+                return makeError(UNSUPPORTED_OBJECT);
+            }
+          }
+          else
+          {
+            return makeError(UNSUPPORTED_OBJECT);
+          }
+        }
+        else
+        {
+          next_e.push_back(m);
+        }
+      }
+
+      return evaluate_expression(Expression::make(next_e));
+    }
   }
 
   if (f.t != StorageType::WORD) {
@@ -143,7 +210,7 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
   }
 
   Noun::printDyad(i, f, x);
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)
@@ -281,7 +348,7 @@ Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g)
@@ -301,7 +368,7 @@ Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const St
   Specialization3 specialization = Specialization3(i.t, i.o, fi);
   if (monadicAdverbs.find(specialization) == monadicAdverbs.end())
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 
   MonadicAdverbFunction adverb = monadicAdverbs[specialization];
@@ -326,7 +393,7 @@ Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Sto
 
   Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
   if (dyadicAdverbs.find(specialization) == dyadicAdverbs.end()) {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 
   DyadicAdverbFunction adverb = dyadicAdverbs[specialization];
@@ -350,7 +417,7 @@ Storage Noun::dispatchNiladicEffect(const Storage& f)
   Specialization1 specialization = Specialization1(fi);
   if (niladSources.find(specialization) == niladSources.end())
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 
   NiladicSourceFunction verb = niladSources[specialization];
@@ -393,7 +460,7 @@ Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x)
@@ -444,7 +511,7 @@ Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Sto
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::dispatchTriadicEffect(const Storage& i, const Storage& f, const Storage& x, const Storage& y)
@@ -579,7 +646,7 @@ Storage Noun::dispatchTriadicEffect(const Storage& i, const Storage& f, const St
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::dispatchConjunction(const Storage& i, const Storage& f, const Storage& x)
@@ -594,7 +661,7 @@ Storage Noun::dispatchConjunction(const Storage& i, const Storage& f, const Stor
   const auto specialization = Specialization1(fi);
   if (conjunctions.find(specialization) == conjunctions.end())
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);
   }
 
   const ConjunctionFunction verb = conjunctions[specialization];
@@ -960,11 +1027,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
       }
 
       default:
-        return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+        return makeError(UNSUPPORTED_OBJECT);
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::mix(const Storage& i)
@@ -1017,9 +1084,19 @@ Storage Noun::simplify(const Storage& i) // NOLINT
   {
     mixed iis = std::get<mixed>(i.i);
 
+    // You can't get any more simplified than an empty list.
     if(iis.empty())
     {
       return WordArray::nil();
+    }
+
+    // We can only simplify Lists of Integer, Real, or Character.
+    for(const Storage& y : iis)
+    {
+      if((y.o != NounType::INTEGER) && (y.o != NounType::REAL) && (y.o != NounType::CHARACTER))
+      {
+        return i;
+      }
     }
 
     int all_integers = 1;
@@ -1068,6 +1145,7 @@ Storage Noun::simplify(const Storage& i) // NOLINT
 
     if(all_integers)
     {
+      // A simplified all-integer List is a WordArray
       ints results = ints();
       for(Storage y : iis)
       {
@@ -1080,6 +1158,7 @@ Storage Noun::simplify(const Storage& i) // NOLINT
     }    
     else if(all_reals)
     {
+      // A simplified all-float List is a FloatArray
       floats results = floats();
       for(Storage y : iis)
       {
@@ -1092,6 +1171,7 @@ Storage Noun::simplify(const Storage& i) // NOLINT
     }
     else if(all_characters)
     {
+      // A simplified all-character List is a String
       ints results = ints();
       for(Storage y : iis)
       {
@@ -1104,6 +1184,7 @@ Storage Noun::simplify(const Storage& i) // NOLINT
     }    
     else
     {
+      // We can recursively simplify sub-lists.
       mixed results = mixed();
       for(const Storage& y : iis)
       {
@@ -1114,7 +1195,7 @@ Storage Noun::simplify(const Storage& i) // NOLINT
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 int getInteger(const Storage& i)
@@ -1481,7 +1562,7 @@ Storage Noun::iterate_integer(const Storage& i, const Storage& f, const Storage&
     return current;
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const Storage& x)
@@ -1514,7 +1595,7 @@ Storage Noun::scanIterating_integer(const Storage& i, const Storage& f, const St
     return Noun::simplify(MixedArray::make(results));
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Noun::scanOverNeutral_impl(const Storage& i, const Storage& f, const Storage& x)

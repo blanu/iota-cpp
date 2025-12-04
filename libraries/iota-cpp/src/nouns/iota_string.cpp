@@ -32,51 +32,53 @@ void IotaString::initialize() {
   auto d = Noun::dyadSources;
 
   // Monads
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::atom, IotaString::atom_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::atom, atom_impl);
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::enclose, Noun::enclose_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::first, IotaString::first_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::first, first_impl);
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::format, Noun::identity1);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::gradeDown, IotaString::gradeDown_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::gradeUp, IotaString::gradeUp_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::group, IotaString::group_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::inot, IotaString::not_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::reverse, IotaString::reverse_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::gradeDown, gradeDown_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::gradeUp, gradeUp_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::group, group_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::inot, not_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::reverse, reverse_impl);
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::shape, List::shape_impl);
-  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::size, IotaString::size_impl);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::size, size_impl);
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::undefined, Noun::false1);
 
   // Extension Monads
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::STRING, Monads::evaluate, Noun::identity1);
 
   // Dyads
-  // Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::amend, StorageType::MIXED_ARRAY, NounType::LIST, IotaString::amend_impl);
+  // Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::amend, StorageType::MIXED_ARRAY, NounType::LIST, amend_impl);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::equal, StorageType::WORD_ARRAY, NounType::STRING, IotaString::equal_impl);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::find, StorageType::WORD, NounType::CHARACTER, IotaString::find_character);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::find, StorageType::WORD_ARRAY, NounType::STRING, IotaString::find_string);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::drop, StorageType::WORD, NounType::INTEGER, drop_impl);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD, NounType::INTEGER, IotaString::form_integer);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::FLOAT, NounType::REAL, IotaString::form_real);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD_ARRAY, NounType::LIST, IotaString::form_list);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::FLOAT_ARRAY, NounType::LIST, IotaString::form_list);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::MIXED_ARRAY, NounType::LIST, IotaString::form_list);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD, NounType::CHARACTER, IotaString::form_character);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::equal, StorageType::WORD_ARRAY, NounType::STRING, equal_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::find, StorageType::WORD, NounType::CHARACTER, find_character);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::find, StorageType::WORD_ARRAY, NounType::STRING, find_string);
+
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD, NounType::INTEGER, form_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::FLOAT, NounType::REAL, form_real);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD_ARRAY, NounType::LIST, form_list);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::FLOAT_ARRAY, NounType::LIST, form_list);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::MIXED_ARRAY, NounType::LIST, form_list);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD, NounType::CHARACTER, form_character);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD_ARRAY, NounType::STRING, Noun::identity2);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD_ARRAY, NounType::QUOTED_SYMBOL, IotaString::form_quoted_symbol);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::form, StorageType::WORD_ARRAY, NounType::QUOTED_SYMBOL, form_quoted_symbol);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::format2, StorageType::WORD, NounType::INTEGER, Integer::format2_impl);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::format2, StorageType::FLOAT, NounType::REAL, Integer::format2_impl);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::index, StorageType::WORD, NounType::INTEGER, IotaString::index_impl);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::index, StorageType::WORD_ARRAY, NounType::LIST, IotaString::index_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::index, StorageType::WORD, NounType::INTEGER, index_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::index, StorageType::WORD_ARRAY, NounType::LIST, index_impl);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::WORD, NounType::INTEGER, Noun::join_scalar);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::FLOAT, NounType::REAL, Noun::join_scalar);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::WORD_ARRAY, NounType::LIST, Noun::join_mix_right);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::FLOAT_ARRAY, NounType::LIST, Noun::join_scalar);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::MIXED_ARRAY, NounType::LIST, Noun::join_scalar);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::WORD, NounType::CHARACTER, IotaString::append_character);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::WORD_ARRAY, NounType::STRING, IotaString::join_string);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::WORD, NounType::CHARACTER, append_character);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::join, StorageType::WORD_ARRAY, NounType::STRING, join_string);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::WORD, NounType::INTEGER, Noun::false2);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::FLOAT, NounType::REAL, Noun::false2);
@@ -84,19 +86,20 @@ void IotaString::initialize() {
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::FLOAT_ARRAY, NounType::LIST, Noun::false2);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::MIXED_ARRAY, NounType::LIST, Noun::false2);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::WORD, NounType::CHARACTER, Noun::false2);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::WORD_ARRAY, NounType::STRING, IotaString::match_impl);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::match, StorageType::WORD_ARRAY, NounType::STRING, match_impl);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::rotate, StorageType::WORD, NounType::INTEGER, IotaString::rotate_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::rotate, StorageType::WORD, NounType::INTEGER, rotate_integer);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD, NounType::INTEGER, IotaString::split_integer);
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD_ARRAY, NounType::LIST, IotaString::split_integers);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD, NounType::INTEGER, split_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD_ARRAY, NounType::LIST, split_integers);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD, NounType::CHARACTER, split_character);
 
-  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::take, StorageType::WORD, NounType::INTEGER, IotaString::take_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::take, StorageType::WORD, NounType::INTEGER, take_integer);
 
   // Monadic Adverbs
   Noun::registerMonadicAdverb(StorageType::WORD_ARRAY, NounType::STRING, MonadicAdverbs::converge, Noun::converge_impl);
 
-  Noun::registerMonadicAdverb(StorageType::WORD_ARRAY, NounType::STRING, MonadicAdverbs::each, IotaString::each_impl);
+  Noun::registerMonadicAdverb(StorageType::WORD_ARRAY, NounType::STRING, MonadicAdverbs::each, each_impl);
 
   Noun::registerMonadicAdverb(StorageType::WORD_ARRAY, NounType::STRING, MonadicAdverbs::scanConverging, Noun::scanConverging_impl);
 
@@ -177,6 +180,11 @@ Storage IotaString::makeString(std::string s)
   }
 
   return WordArray::make(codepoints, NounType::STRING);
+}
+
+Storage IotaString::makeCString(const char* s)
+{
+  return IotaString::makeString(std::string(s));
 }
 
 std::string IotaString::toString(const Storage& i)
@@ -481,6 +489,22 @@ Storage IotaString::group_impl(const Storage& i)
 }
 
 // Dyads
+Storage IotaString::drop_impl(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<ints>(i.i))
+  {
+    const Storage is = List::make(std::get<ints>(i.i));
+    const Storage ir = List::drop_impl(is, x);
+
+    if(std::holds_alternative<ints>(ir.i))
+    {
+      return IotaString::make(std::get<ints>(ir.i));
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
 Storage IotaString::equal_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
@@ -1028,6 +1052,52 @@ Storage IotaString::split_integers(const Storage& i, const Storage& x)
       if(count < static_cast<int>(iis.size()))
       {
         const ints result(iis.begin() + count, iis.end());
+        results.push_back(IotaString::make(result));
+      }
+
+      return MixedArray::make(results);
+    }
+  }
+
+  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+}
+
+Storage IotaString::split_character(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<ints>(i.i))
+  {
+    const ints iis = std::get<ints>(i.i);
+
+    if(iis.empty())
+    {
+      auto results = mixed();
+      results.push_back(i);
+
+      return MixedArray::make(results);
+    }
+
+    if(std::holds_alternative<int>(x.i))
+    {
+      const int xi = std::get<int>(x.i);
+
+      auto results = mixed();
+
+      auto result = ints();
+      for(int ii : iis)
+      {
+        if(ii == xi)
+        {
+          results.push_back(IotaString::make(result));
+          result = ints();
+        }
+        else
+        {
+          result.push_back(ii);
+        }
+      }
+
+      if(!result.empty())
+      {
         results.push_back(IotaString::make(result));
       }
 

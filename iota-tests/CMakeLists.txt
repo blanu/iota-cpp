@@ -59,11 +59,14 @@ add_executable(iota-tests main.cpp
   effect_tests/log_tests.cpp
   effect_tests/random_tests.cpp
   effect_tests/state_tests.cpp
+  effect_tests/coding_problems.cpp
   noun_tests/integer_tests.cpp
   noun_tests/list_tests.cpp
   noun_tests/data_tests.cpp
   dyad_tests/plus_tests.cpp
   dyad_tests/times_tests.cpp
+  dyad_tests/split_tests.cpp
+  dyad_tests/remainder_tests.cpp
 )
 
 target_include_directories(iota-tests PRIVATE
@@ -78,6 +81,11 @@ target_link_libraries(iota-tests PRIVATE
   transmission-cpp-lib
   bignumber-cpp-lib
   Catch2::Catch2WithMain
+)
+
+file(COPY ${CMAKE_SOURCE_DIR}/iota-tests/effect_tests/effect_tests_data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/iota-tests/effect_tests/effect_tests_data/)
+target_compile_definitions(iota-tests PRIVATE
+  TEST_DATA_DIR="${CMAKE_CURRENT_BINARY_DIR}/iota-tests/effect_tests/effect_tests_data"
 )
 
 # Add the test
