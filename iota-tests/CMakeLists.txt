@@ -15,13 +15,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
 set(IOTA_LIB_SOURCE_DIR ${IOTA_LIB_DIR}/src)
-set(ION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/ion-cpp)
 set(ION_LIB_SOURCE_DIR ${ION_LIB_DIR}/src)
-set(TRANSMISSION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-cpp)
 set(TRANSMISSION_LIB_SOURCE_DIR ${TRANSMISSION_LIB_DIR}/src)
-set(BIGNUMBER_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/bignumber-cpp)
 set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER_LIB_DIR}/src)
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 

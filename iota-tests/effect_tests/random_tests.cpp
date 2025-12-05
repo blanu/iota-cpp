@@ -7,8 +7,6 @@
 
 #include "api.h"
 
-#include "../../libraries/iota-cpp/src/effects/testing/testing_effects_provider.h"
-
 TEST_CASE("random", "[effect]")
 {
   using namespace iota;

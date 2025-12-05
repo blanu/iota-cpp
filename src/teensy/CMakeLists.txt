@@ -6,28 +6,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(TEENSY_CORE_PATH "$ENV{HOME}/Library/Arduino15/packages/teensy/hardware/avr/1.59.0")
 get_filename_component(PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
 
-set(IOTA_LIB_DIR ${PROJECT_ROOT}/libraries/iota-cpp)
-set(IOTA_LIB_SOURCE_DIR ${IOTA_LIB_DIR}/src)
-set(IOTA_ARDUINO_DIR ${PROJECT_ROOT}/libraries/iota-arduino)
-set(IOTA_ARDUINO_SOURCE_DIR ${IOTA_ARDUINO_DIR}/src)
-set(IOTA_TEENSY_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-teensy)
-set(ION_LIB_DIR ${PROJECT_ROOT}/libraries/ion-cpp)
-set(ION_LIB_SOURCE_DIR ${ION_LIB_DIR}/src)
-set(AUDIO_ARDUINO_DIR ${PROJECT_ROOT}/libraries/audio-arduino)
-set(AUDIO_ARDUINO_SOURCE_DIR ${AUDIO_ARDUINO_DIR}/src)
-set(AUDIO_TEENSY_DIR ${PROJECT_ROOT}/libraries/audio-teensy)
-set(AUDIO_TEENSY_SOURCE_DIR ${AUDIO_TEENSY_DIR}/src)
-set(TRANSMISSION_LIB_DIR ${PROJECT_ROOT}/libraries/transmission-cpp)
-set(TRANSMISSION_LIB_SOURCE_DIR ${TRANSMISSION_LIB_DIR}/src)
-set(TRANSMISSION_TEENSY_DIR ${PROJECT_ROOT}/libraries/transmission-teensy)
-set(TRANSMISSION_TEENSY_SOURCE_DIR ${TRANSMISSION_TEENSY_DIR}/src)
-set(BIGNUMBER_LIB_DIR ${PROJECT_ROOT}/libraries/bignumber-cpp)
-set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER_LIB_DIR}/src)
-set(BIGNUMBER_ARDUINO_DIR ${PROJECT_ROOT}/libraries/bignumber-arduino)
-set(BIGNUMBER_ARDUINO_SOURCE_DIR ${BIGNUMBER_ARDUINO_DIR}/src)
+set(IOTA_LIB_SOURCE_DIR ${IOTA}/src)
+set(IOTA_ARDUINO_SOURCE_DIR ${IOTA_ARDUINO}/src)
+set(ION_LIB_SOURCE_DIR ${ION}/src)
+set(AUDIO_ARDUINO_SOURCE_DIR ${AUDIO_ARDUINO}/src)
+set(AUDIO_TEENSY_SOURCE_DIR ${AUDIO_TEENSY}/src)
+set(TRANSMISSION_LIB_SOURCE_DIR ${TRANSMISSION}/src)
+set(TRANSMISSION_TEENSY_SOURCE_DIR ${TRANSMISSION_TEENSY}/src)
+set(BIGNUMBER_LIB_SOURCE_DIR ${BIGNUMBER}/src)
+set(BIGNUMBER_ARDUINO_SOURCE_DIR ${BIGNUMBER_ARDUINO}/src)
 
-set(IOTA_TEENSY_SOURCE_DIR ${IOTA_TEENSY_DIR}/src)
-set(IOTA_TEENSY_EXAMPLES_DIR ${IOTA_TEENSY_DIR}/examples)
+set(IOTA_TEENSY_EXAMPLES_DIR ${IOTA_TEENSY}/examples)
 set(IOTA_TEENSY_PROTOCOL_SERVER_DIR ${IOTA_TEENSY_EXAMPLES_DIR}/iota-teensy-protocol-server)
 set(LOOPBACK_DIR ${IOTA_TEENSY_EXAMPLES_DIR}/loopback)
 set(LOOPBACK_SKETCH_FILE ${LOOPBACK_DIR}/loopback.ino)
@@ -48,7 +37,7 @@ include_directories(
 
   ${IOTA_LIB_SOURCE_DIR}
   ${IOTA_ARDUINO_SOURCE_DIR}
-  ${IOTA_TEENSY_DIR}
+  ${IOTA_TEENSY_SOURCE_DIR}
 
   ${AUDIO_ARDUINO_SOURCE_DIR}
   ${AUDIO_TEENSY_SOURCE_DIR}
@@ -110,13 +99,13 @@ add_custom_target(build_loopback ALL
   --output-dir ${OUTPUT_DIR}
   --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE -Wno-psabi"
   --build-property "menu.usb=serialmidiaudio"
-  --library ${IOTA_LIB_DIR}
-  --library ${IOTA_ARDUINO_DIR}
-  --library ${IOTA_TEENSY_DIR}
-  --library ${TRANSMISSION_LIB_DIR}
-  --library ${TRANSMISSION_TEENSY_DIR}
-  --library ${BIGNUMBER_LIB_DIR}
-  --library ${BIGNUMBER_ARDUINO_DIR}
+  --library ${IOTA}
+  --library ${IOTA_ARDUINO}
+  --library ${IOTA_TEENSY}
+  --library ${TRANSMISSION}
+  --library ${TRANSMISSION_TEENSY}
+  --library ${BIGNUMBER}
+  --library ${BIGNUMBER_ARDUINO}
   #--verbose
   ${LOOPBACK_SKETCH_FILE}
   WORKING_DIRECTORY ${IOTA_TEENSY_SOURCE_DIR}

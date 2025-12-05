@@ -2,15 +2,9 @@ cmake_minimum_required(VERSION 3.31)
 project(iota-arduino)
 
 set(CMAKE_CXX_STANDARD 17)
-set(ION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/ion-cpp)
-set(IOTA_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp)
-set(TRANSMISSION_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-cpp)
-set(TRANSMISSION_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/transmission-arduino)
-set(AUDIO_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/audio-arduino)
-set(IOTA_LIB_SOURCE_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-cpp/src)
-set(IOTA_ARDUINO_DIR ${CMAKE_SOURCE_DIR}/libraries/iota-arduino)
-set(IOTA_ARDUINO_SOURCE_DIR ${IOTA_ARDUINO_DIR}/src)
-set(IOTA_ARDUINO_EXAMPLES_DIR ${IOTA_ARDUINO_DIR}/examples)
+set(IOTA_LIB_SOURCE_DIR ${IOTA}/src)
+set(IOTA_ARDUINO_SOURCE_DIR ${IOTA_ARDUINO}/src)
+set(IOTA_ARDUINO_EXAMPLES_DIR ${IOTA_ARDUINO}/examples)
 set(IOTA_ARDUINO_PROTOCOL_SERVER_DIR ${IOTA_ARDUINO_EXAMPLES_DIR}/iota-arduino-protocol-server)
 
 # Define your sketch file
@@ -39,12 +33,12 @@ add_custom_target(build_iota_arduino ALL
             --fqbn ${BOARD}
             --output-dir ${OUTPUT_DIR}
             --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE"
-            --library ${ION_LIB_DIR}
-            --library ${IOTA_LIB_DIR}
-            --library ${IOTA_ARDUINO_DIR}
-            --library ${TRANSMISSION_LIB_DIR}
-            --library ${TRANSMISSION_ARDUINO_DIR}
-            --library ${AUDIO_ARDUINO_DIR}
+            --library ${ION}
+            --library ${IOTA}
+            --library ${IOTA_ARDUINO}
+            --library ${TRANSMISSION}
+            --library ${TRANSMISSION_ARDUINO}
+            --library ${AUDIO_ARDUINO}
   ${SKETCH_FILE}
         WORKING_DIRECTORY ${IOTA_ARDUINO_SOURCE_DIR}
         COMMENT "Building iota-arduino with arduino-cli"
