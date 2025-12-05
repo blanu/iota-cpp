@@ -100,3 +100,47 @@ TEST_CASE("AoC_2025_1_1 full", "[AoC]")
     printf("%d\n", result_int);
   }
 }
+
+TEST_CASE("AoC_2025_1_2 simple", "[AoC]")
+{
+  using namespace iota;
+  using iota::split;
+  using iota::each;
+  using iota::first;
+  using iota::drop;
+  using iota::form;
+  using iota::equal;
+  using iota::scanOverNeutral;
+  using iota::times;
+  using iota::minus;
+  using iota::plus;
+  using iota::over;
+  using iota::remainder;
+  using iota::x;
+
+  std::string input = R"(L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82)";
+
+  auto lines = evalExpressionCppToIota({input, split, '\n'});
+  auto directions = evalExpressionCppToIota({lines, each, e(first, equal, 'R', times, 2, minus, 1)});
+  auto magnitudes = evalExpressionCppToIota({lines, each, e(drop, 1, form, 0)});
+  auto numbers = evalExpressionCppToIota({directions, times, magnitudes});
+  auto positions = evalExpressionCppToIota({numbers, scanOverNeutral, e(plus, x, remainder, 100, plus, 100, remainder, 100), 50, drop, 1});
+  auto zeros = evalExpressionCppToIota({positions, equal, 0});
+  auto result = evalExpression({zeros, over, plus});
+
+  if (std::holds_alternative<std::string>(result)) {
+    std::string result_str = std::get<std::string>(result);
+    printf("%s\n", result_str.c_str());
+  }
+
+  REQUIRE(result == 6);
+}
