@@ -117,6 +117,8 @@ TEST_CASE("AoC_2025_1_2 simple", "[AoC]")
   using iota::over;
   using iota::remainder;
   using iota::x;
+  using iota::expand;
+  using iota::join;
 
   std::string input = R"(L68
 L30
@@ -131,8 +133,8 @@ L82)";
 
   auto lines = evalExpressionCppToIota({input, split, '\n'});
   auto directions = evalExpressionCppToIota({lines, each, e(first, equal, 'R', times, 2, minus, 1)});
-  auto magnitudes = evalExpressionCppToIota({lines, each, e(drop, 1, form, 0)});
-  auto numbers = evalExpressionCppToIota({directions, times, magnitudes});
+  auto magnitudes = evalExpressionCppToIota({lines, each, e(drop, 1, form, 0, expand, plus, 1)});
+  auto numbers = evalExpressionCppToIota({directions, times, magnitudes, over, join});
   auto positions = evalExpressionCppToIota({numbers, scanOverNeutral, e(plus, x, remainder, 100, plus, 100, remainder, 100), 50, drop, 1});
   auto zeros = evalExpressionCppToIota({positions, equal, 0});
   auto result = evalExpression({zeros, over, plus});
@@ -143,4 +145,41 @@ L82)";
   }
 
   REQUIRE(result == 6);
+}
+
+TEST_CASE("AoC_2025_1_2 full", "[AoC]")
+{
+  using namespace iota;
+  using iota::split;
+  using iota::each;
+  using iota::first;
+  using iota::drop;
+  using iota::form;
+  using iota::equal;
+  using iota::scanOverNeutral;
+  using iota::times;
+  using iota::minus;
+  using iota::plus;
+  using iota::over;
+  using iota::remainder;
+
+  std::string input = read_file(TEST_DATA_DIR "/AoC_2025_1_1.txt"); // Same input as the last puzzle
+  auto lines = evalExpressionCppToIota({input, split, '\n'});
+  auto directions = evalExpressionCppToIota({lines, each, e(first, equal, 'R', times, 2, minus, 1)});
+  auto magnitudes = evalExpressionCppToIota({lines, each, e(drop, 1, form, 0, expand, plus, 1)});
+  auto numbers = evalExpressionCppToIota({directions, times, magnitudes, over, join});
+  auto positions = evalExpressionCppToIota({numbers, scanOverNeutral, e(plus, x, remainder, 100, plus, 100, remainder, 100), 50, drop, 1});
+  auto zeros = evalExpressionCppToIota({positions, equal, 0});
+  auto result = evalExpression({zeros, over, plus});
+
+  if (std::holds_alternative<std::string>(result))
+  {
+    std::string result_str = std::get<std::string>(result);
+    printf("%s\n", result_str.c_str());
+  }
+  else if(std::holds_alternative<int>(result))
+  {
+    int result_int = std::get<int>(result);
+    printf("%d\n", result_int);
+  }
 }

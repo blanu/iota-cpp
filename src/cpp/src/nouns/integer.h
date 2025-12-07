@@ -19,7 +19,7 @@ class Integer
 
     static Storage make(int i);
     static Storage make(uint64_t i);
-    static Storage make(unsigned long i);
+    static Storage makeULong(unsigned long i);
     static Storage makeHex(std::string i);
     static Storage makeDecimal(std::string i);
     static Storage make(const BigNumber& bn);

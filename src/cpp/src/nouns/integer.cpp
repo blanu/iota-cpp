@@ -292,7 +292,7 @@ Storage Integer::make(uint64_t i)
 }
 
 // In integer.cpp
-Storage Integer::make(unsigned long i)
+Storage Integer::makeULong(unsigned long i)
 {
   // Convert unsigned long to uint64_t and use existing logic
   return Integer::make(static_cast<uint64_t>(i));
