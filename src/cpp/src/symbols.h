@@ -64,6 +64,7 @@ class Dyads
     inline static int indexInDepth;
     inline static int integerDivide;
     inline static int join;
+    inline static int append;
     inline static int less;
     inline static int match;
     inline static int max;

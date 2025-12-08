@@ -88,6 +88,7 @@ namespace iota
   inline Storage index = WordArray::nil();
   inline Storage integerDivide = WordArray::nil();
   inline Storage join = WordArray::nil();
+  inline Storage append = WordArray::nil();
   inline Storage less = WordArray::nil();
   inline Storage match = WordArray::nil();
   inline Storage max = WordArray::nil();

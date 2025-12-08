@@ -89,6 +89,7 @@ void Dyad::initialize()
   INTERN_VERB(iota, Dyad, index);
   INTERN_VERB(iota, Dyad, integerDivide);
   INTERN_VERB(iota, Dyad, join);
+  INTERN_VERB(iota, Dyad, append);
   INTERN_VERB(iota, Dyad, less);
   INTERN_VERB(iota, Dyad, match);
   INTERN_VERB(iota, Dyad, max);

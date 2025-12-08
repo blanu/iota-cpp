@@ -79,9 +79,9 @@ target_link_libraries(iota-tests PRIVATE
   Catch2::Catch2WithMain
 )
 
-file(COPY ${CMAKE_SOURCE_DIR}/iota-tests/effect_tests/effect_tests_data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/iota-tests/effect_tests/effect_tests_data/)
+file(COPY ${CMAKE_SOURCE_DIR}/iota-tests/effect_tests/effect_tests_data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/effect_tests/effect_tests_data/)
 target_compile_definitions(iota-tests PRIVATE
-  TEST_DATA_DIR="${CMAKE_CURRENT_BINARY_DIR}/iota-tests/effect_tests/effect_tests_data"
+  TEST_DATA_DIR="${CMAKE_CURRENT_BINARY_DIR}/effect_tests/effect_tests_data"
 )
 
 # Add the test

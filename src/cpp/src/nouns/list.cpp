@@ -847,7 +847,7 @@ Storage List::expand_impl(const Storage& i)
 
       for(int y = 0; y < count; y++)
       {
-        results.push_back(index);
+        results.push_back(index + 1);
       }
     }
 
@@ -1822,6 +1822,7 @@ Storage List::size_impl(const Storage& i)
 Storage List::transpose_impl(const Storage& i)
 {
   using namespace iota;
+  using iota::append;
 
   if(std::holds_alternative<mixed>(i.i))
   {
@@ -1939,7 +1940,7 @@ Storage List::transpose_impl(const Storage& i)
       }
       else // mixed
       {
-        mixed results = mixed();
+        auto results = std::vector<mixed>();
 
         Storage first = ms.front();
 
@@ -1948,7 +1949,7 @@ Storage List::transpose_impl(const Storage& i)
 
         for(int rowOffset = 0; rowOffset < rowSize; ++rowOffset)
         {
-          results.push_back(MixedArray::make(mixed()));
+          results.push_back(mixed());
         }
 
         for(int columnOffset = 0; columnOffset < columnSize; ++columnOffset)
@@ -1957,11 +1958,17 @@ Storage List::transpose_impl(const Storage& i)
           for(int rowOffset = 0; rowOffset < rowSize; ++rowOffset)
           {
             Storage element = eval({column, iota::index, Integer::make(rowOffset + 1)});
-            results[rowOffset] = eval({results[rowOffset], join, element});
+            results[rowOffset].push_back(element);
           }
         }
 
-        return Noun::simplify(MixedArray::make(results, NounType::LIST));
+        mixed result = mixed();
+        for(const mixed& row : results)
+        {
+          result.push_back(Noun::simplify(MixedArray::make(row)));
+        }
+
+        return Noun::simplify(MixedArray::make(result));
       }
     }
   }
@@ -3701,7 +3708,8 @@ Storage List::find_mixed(const Storage& i, const Storage& x)
     for(int index = 0; index < static_cast<int>(iis.size()); index++)
     {
       const Storage& si = iis[index];
-        Storage matched = eval({si, match, x});
+      Storage matched = eval({si, match, x});
+
       if(matched.o == NounType::ERROR)
       {
         return matched;

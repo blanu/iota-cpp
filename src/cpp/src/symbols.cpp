@@ -54,6 +54,7 @@ void Dyads::initialize()
     INTERN_INT(indexInDepth);
     INTERN_INT(integerDivide);
     INTERN_INT(join);
+    INTERN_INT(append);
     INTERN_INT(less);
     INTERN_INT(match);
     INTERN_INT(max);
