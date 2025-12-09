@@ -38,8 +38,8 @@ if(EXISTS "${PROJECT_SOURCE_DIR}/lib")
   endif()
 endif()
 
-include(arduino-cli.cmake)
-include(teensy41.cmake)
+include(lib/cmake-helpers/arduino-cli.cmake)
+include(lib/cmake-helpers/teensy41.cmake)
 
 set(ONDA ${CMAKE_SOURCE_DIR}/lib/onda/src/cpp)
 set(ONDA_ARDUINO ${CMAKE_SOURCE_DIR}/lib/onda/src/arduino)

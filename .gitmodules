@@ -16,3 +16,6 @@
 [submodule "lib/onda"]
 	path = lib/onda
 	url = https://github.com/OperatorFoundation/onda.git
+[submodule "lib/cmake-helpers"]
+	path = lib/cmake-helpers
+	url = git@github.com:OperatorFoundation/cmake-helpers.git
