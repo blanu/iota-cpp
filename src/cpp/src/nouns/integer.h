@@ -91,6 +91,8 @@ class Integer
     static Storage times_real(const Storage& i, const Storage& x);
     static Storage times_list(const Storage& i, const Storage& x);
 
+    static Storage till_impl(const Storage& i, const Storage& x, const Storage& f);
+
     // Serialization
     static maybe<bytes> to_bytes(const Storage& i);
     static maybe<Storage> from_bytes(const bytes& bs, int t);

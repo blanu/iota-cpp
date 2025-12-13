@@ -59,6 +59,7 @@ class IotaString
     static Storage rotate_integer(const Storage& i, const Storage& x);
 
     static Storage split_integer(const Storage& i, const Storage& x);
+    static Storage split_real(const Storage& i, const Storage& x);
     static Storage split_integers(const Storage& i, const Storage& x);
     static Storage split_character(const Storage& i, const Storage& x);
 

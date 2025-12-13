@@ -25,11 +25,19 @@ void State::initialize(EffectsProvider* effects_register)
   INTERN_INT(transform);
   INTERN_EFFECT(iota, Triad, transform);
 
+  INTERN_INT(restore);
+  INTERN_EFFECT(iota, Monad, restore);
+
+  INTERN_INT(save);
+  INTERN_EFFECT(iota, Dyad, save);
+
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::LENS, pull, pull_impl);
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::LENS, pull, pull_impl);
+  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::USER_SYMBOL, restore, restore_impl);
 
   Noun::registerDyad(StorageType::ANY, NounType::ANY, push, StorageType::WORD_ARRAY, NounType::LENS, push_impl);
   Noun::registerDyad(StorageType::ANY, NounType::ANY, push, StorageType::MIXED_ARRAY, NounType::LENS, push_impl);
+  Noun::registerDyad(StorageType::ANY, NounType::ANY, save, StorageType::WORD_ARRAY, NounType::SYMBOL_DEFINITION, save_impl);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LENS, replace, StorageType::WORD, NounType::BUILTIN_MONAD, replace_impl);
   Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LENS, replace, StorageType::WORD, NounType::BUILTIN_MONAD, replace_impl);
@@ -93,4 +101,27 @@ Storage State::transform_impl(const Storage& i, const Storage& f, const Storage&
   using iota::push;
 
   return evalExpressionCppToIota({i, pull, f, push, x});
+}
+
+Storage State::save_impl(const Storage& i, const Storage& x)
+{
+  using namespace iota;
+  using iota::getBindings;
+  using iota::bind;
+  using iota::putBindings;
+
+  Storage oldBindings = evalExpressionCppToIota({getBindings});
+  Storage newBindings = evalExpressionCppToIota({oldBindings, bind, i, x});
+  evalExpressionCppToIota({newBindings, putBindings});
+
+  return i;
+}
+
+Storage State::restore_impl(const Storage& i)
+{
+  using namespace iota;
+  using iota::getBindings;
+  using iota::resolve;
+
+  return evalExpressionCppToIota({getBindings, resolve, i});
 }

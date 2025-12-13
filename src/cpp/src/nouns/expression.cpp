@@ -16,6 +16,7 @@
 void Expression::initialize()
 {
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, Monads::evaluate, Noun::evaluate_expression);
+  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::USER_MONAD, Monads::evaluate, Noun::evaluate_expression);
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::EXPRESSION, Monads::truth, Expression::truth);
 
   /* FIXME

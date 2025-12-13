@@ -43,6 +43,7 @@ class List
     static Storage size_impl(const Storage& i);
     static Storage transpose_impl(const Storage& i);
     static Storage unique_impl(const Storage& i);
+    static Storage range_impl(const Storage& i);
 
     // Dyads
     // static Storage amend_integers_integer(const Storage& i, const Storage& x);

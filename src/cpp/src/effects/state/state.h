@@ -21,6 +21,11 @@ namespace iota
   inline Storage push = WordArray::nil();
   inline Storage replace = WordArray::nil();
   inline Storage transform = WordArray::nil();
+
+  inline Storage getBindings = WordArray::nil();
+  inline Storage putBindings = WordArray::nil();
+  inline Storage save = WordArray::nil();
+  inline Storage restore = WordArray::nil();
 }
 
 class State
@@ -30,15 +35,19 @@ class State
     static inline int push;
     static inline int replace;
     static inline int transform;
+    static inline int save;
+    static inline int restore;
 
     static void initialize(EffectsProvider* effects_register);
 
     // Monads
     static Storage pull_impl(const Storage& i);
+    static Storage restore_impl(const Storage& i);
 
     // Dyads
     static Storage push_impl(const Storage& i, const Storage& x);
     static Storage replace_impl(const Storage& i, const Storage& f);
+    static Storage save_impl(const Storage& i, const Storage& x);
 
     // Triads
     static Storage transform_impl(const Storage& i, const Storage& f, const Storage& y);

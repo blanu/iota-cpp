@@ -16,6 +16,8 @@
 #include <storage/ion_float.h>
 
 #include "nouns/error.h"
+#include "nouns/symbol_definition.h"
+#include "nouns/user_symbol.h"
 #include <BigNumber.h>
 
 struct cppValue;
@@ -172,6 +174,10 @@ Storage e(Args&&... values)
 Storage c();
 
 Storage l(cppValues values);
+
+#define to(name) iota::save, SymbolDefinition::make(std::string(#name))
+
+#define from(name) UserSymbol::make(std::string(#name)), iota::restore
 
 Storage test_error();
 std::string error_to_string(const Storage &error);

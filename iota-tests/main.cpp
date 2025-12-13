@@ -9,14 +9,18 @@
 #include "effects/effects_provider.h"
 #include "effects/testing/testing_effects_provider.h"
 
-int main(int argc, char** argv)
+static TestingEffectsProvider *provider = nullptr;
+
+int main(const int argc, char** argv)
 {
   EvalRegister::initialize();
-  EffectsProvider provider = TestingEffectsProvider();
+  provider = new TestingEffectsProvider();
 
-  EvalRegister::registerEffectsProvider(provider);
+  EvalRegister::registerEffectsProvider(*provider);
 
   const int result = Catch::Session().run(argc, argv);
+
+  delete provider;
 
   return result;
 }

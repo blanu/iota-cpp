@@ -1,3 +1,6 @@
+profiling.trace/
+time_profile.xml
+time_samples.xml
 iota-tests/effect_tests/effect_tests_data/
 **/*.swp
 **/.DS_Store

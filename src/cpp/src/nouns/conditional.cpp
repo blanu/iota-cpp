@@ -19,7 +19,7 @@
 void Conditional::initialize()
 {
   // Monads
-  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::CONDITIONAL, Monads::evaluate, Noun::evaluate_expression);
+  //Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::CONDITIONAL, Monads::evaluate, Noun::evaluate_expression); // FIXME
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::CONDITIONAL, Monads::truth, Expression::truth);
 
   // Extension Monads

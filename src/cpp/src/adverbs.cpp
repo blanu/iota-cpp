@@ -22,7 +22,6 @@ void MonadicAdverb::initialize()
   INTERN_VERB(iota, MonadicAdverb, scanOver);
 }
 
-
 Storage DyadicAdverb::make(const int i)
 {
   return Word::make(i, NounType::DYADIC_ADVERB);
@@ -39,4 +38,14 @@ void DyadicAdverb::initialize()
   INTERN_VERB(iota, DyadicAdverb, scanOverNeutral);
   INTERN_VERB(iota, DyadicAdverb, scanWhileOne);
   INTERN_VERB(iota, DyadicAdverb, whileOne);
+}
+
+Storage TriadicAdverb::make(const int i)
+{
+  return Word::make(i, NounType::TRIADIC_ADVERB);
+}
+
+void TriadicAdverb::initialize()
+{
+  INTERN_VERB(iota, TriadicAdverb, till);
 }

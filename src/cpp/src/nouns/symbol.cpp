@@ -56,7 +56,7 @@ Storage Symbol::make(std::string s)
 {
   ints utf32 = IotaString::toIntegers(IotaString::makeString(s));
 
-  // Check if symbol already exists
+  // Check if the symbol already exists
   auto it = stringToInteger.find(utf32);
   if(it != stringToInteger.end())
   {
@@ -69,8 +69,8 @@ Storage Symbol::make(std::string s)
     }
   }
 
-  // Create new symbol
-  int nextId = integerToString.size();
+  // Create a new symbol
+  int nextId = static_cast<int>(integerToString.size());
   integerToString[nextId] = utf32;
   stringToInteger[utf32] = nextId;
   const Storage symbol = MixedArray::make({Integer::make(nextId), IotaString::make(utf32)});
@@ -78,17 +78,39 @@ Storage Symbol::make(std::string s)
   return symbol;
 }
 
+Storage Symbol::make(const Storage& i)
+{
+  if(std::holds_alternative<int>(i.i))
+  {
+    int ii = std::get<int>(i.i);
+    return make(ii);
+  }
+
+  return makeError(UNSUPPORTED_OBJECT);
+}
+
 int Symbol::toInteger(const Storage& s)
 {
   if(s.t == StorageType::WORD)
   {
+    // Symbol is a symbol reference
     if(std::holds_alternative<int>(s.i))
     {
       return std::get<int>(s.i);
     }
   }
+  else if(std::holds_alternative<ints>(s.i))
+  {
+    // Symbol is a symbol definition
+    ints integers = std::get<ints>(s.i);
+    Storage is = IotaString::make(integers);
+    std::string string = IotaString::toString(is);
+    Storage symbol = make(string);
+    return toInteger(symbol);
+  }
   else if(s.t == StorageType::MIXED_ARRAY)
   {
+    // Symbol is a symbol entry
     if(std::holds_alternative<mixed>(s.i))
     {
       mixed si = std::get<mixed>(s.i);
@@ -109,7 +131,18 @@ int Symbol::toInteger(const Storage& s)
 
 std::string Symbol::toString(const Storage& s)
 {
-  if(s.t == StorageType::MIXED_ARRAY)
+  if(s.t == StorageType::WORD)
+  {
+    int ii = std::get<int>(s.i);
+
+    auto it = integerToString.find(ii);
+    if(it != integerToString.end())
+    {
+      ints iis = integerToString[ii];
+      return IotaString::toString(IotaString::make(iis));
+    }
+  }
+  else if(s.t == StorageType::MIXED_ARRAY)
   {
     if(std::holds_alternative<mixed>(s.i))
     {
@@ -129,7 +162,6 @@ std::string Symbol::toString(const Storage& s)
 
   return "";
 }
-
 
 Storage Symbol::symbols_impl()
 {

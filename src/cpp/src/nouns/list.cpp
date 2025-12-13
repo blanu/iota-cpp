@@ -14,6 +14,7 @@
 #include "noun.h"
 #include "quoted_symbol.h"
 #include "real.h"
+#include "expression.h"
 
 #include "error.h"
 #include <squeeze.h>
@@ -27,6 +28,8 @@
 #include <storage/mixed_array.h>
 #include <storage/word.h>
 #include <storage/word_array.h>
+
+#include "range.h"
 
 Logger* List::logger;
 
@@ -55,6 +58,7 @@ void List::initialize() {
 
   // Extension Monads
   Noun::registerMonad(StorageType::WORD_ARRAY, NounType::LIST, Monads::evaluate, Noun::identity1);
+  Noun::registerMonad(StorageType::WORD_ARRAY, NounType::LIST, Monads::range, range_impl);
 
   // Dyads
   // Noun::registerDyad(StorageType::WORD_ARRAY, NounType::LIST, Dyads::amend, StorageType::WORD_ARRAY, NounType::LIST, List::amend_integers_integers);
@@ -450,6 +454,7 @@ void List::initialize() {
 
   // Extension Monads
   Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::LIST, Monads::evaluate, Noun::identity1);
+  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::LIST, Monads::range, range_impl);
 
   // Dyads
   // Noun::registerDyad(StorageType::MIXED_ARRAY, NounType::LIST, Dyads::amend, StorageType::MIXED_ARRAY, NounType::LIST, List::amend_floats);
@@ -2038,6 +2043,34 @@ Storage List::unique_impl(const Storage& i)
   }
 }
 
+Storage List::range_impl(const Storage& i)
+{
+  if(std::holds_alternative<ints>(i.i))
+  {
+    ints integers = std::get<ints>(i.i);
+    if(integers.size() == 2)
+    {
+      return Range::make(integers);
+    }
+  }
+  else if(std::holds_alternative<mixed>(i.i))
+  {
+    mixed ms = std::get<mixed>(i.i);
+    if(ms.size() == 2)
+    {
+      Storage ia = ms[0];
+      Storage ib = ms[1];
+
+      if(ia.o == NounType::INTEGER && ib.o == NounType::INTEGER)
+      {
+        return Range::make(ia, ib);
+      }
+    }
+  }
+
+  return makeError(UNSUPPORTED_OBJECT);
+}
+
 // List Dyads
 // Storage List::amend_integers_integer(const Storage& i, const Storage& x)
 // {
@@ -3037,7 +3070,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -3080,7 +3113,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -3123,7 +3156,7 @@ Storage List::divide_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -3162,7 +3195,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -3205,7 +3238,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -3248,7 +3281,7 @@ Storage List::divide_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -3287,7 +3320,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -3318,7 +3351,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -3349,7 +3382,7 @@ Storage List::divide_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -4265,7 +4298,7 @@ Storage List::less_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4293,7 +4326,7 @@ Storage List::less_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4323,7 +4356,7 @@ Storage List::less_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4373,7 +4406,7 @@ Storage List::less_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4403,7 +4436,7 @@ Storage List::less_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4431,7 +4464,7 @@ Storage List::less_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4481,7 +4514,7 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4518,7 +4551,7 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4555,7 +4588,7 @@ Storage List::less_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4766,7 +4799,7 @@ Storage List::more_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4794,7 +4827,7 @@ Storage List::more_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4824,7 +4857,7 @@ Storage List::more_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4874,7 +4907,7 @@ Storage List::more_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4904,7 +4937,7 @@ Storage List::more_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4932,7 +4965,7 @@ Storage List::more_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -4982,7 +5015,7 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -5019,7 +5052,7 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -5056,7 +5089,7 @@ Storage List::more_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -5517,7 +5550,7 @@ Storage List::max_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -5545,7 +5578,7 @@ Storage List::max_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -5575,7 +5608,7 @@ Storage List::max_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -5631,7 +5664,7 @@ Storage List::max_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -5661,7 +5694,7 @@ Storage List::max_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -5689,7 +5722,7 @@ Storage List::max_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -5745,7 +5778,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -5788,7 +5821,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -5831,7 +5864,7 @@ Storage List::max_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6046,7 +6079,7 @@ Storage List::min_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -6074,7 +6107,7 @@ Storage List::min_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6104,7 +6137,7 @@ Storage List::min_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6160,7 +6193,7 @@ Storage List::min_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6190,7 +6223,7 @@ Storage List::min_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -6218,7 +6251,7 @@ Storage List::min_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6274,7 +6307,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6317,7 +6350,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6360,7 +6393,7 @@ Storage List::min_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6534,7 +6567,7 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -6555,7 +6588,7 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -6578,7 +6611,7 @@ Storage List::minus_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6620,7 +6653,7 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -6643,7 +6676,7 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -6664,7 +6697,7 @@ Storage List::minus_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6706,7 +6739,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6735,7 +6768,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6764,7 +6797,7 @@ Storage List::minus_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -6923,7 +6956,7 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -6944,7 +6977,7 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -6967,7 +7000,7 @@ Storage List::plus_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7009,7 +7042,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -7032,7 +7065,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -7054,7 +7087,7 @@ Storage List::plus_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7096,7 +7129,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7125,7 +7158,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7154,7 +7187,7 @@ Storage List::plus_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7315,7 +7348,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -7339,7 +7372,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -7362,7 +7395,7 @@ Storage List::power_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7405,7 +7438,7 @@ Storage List::power_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -7428,7 +7461,7 @@ Storage List::power_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -7449,7 +7482,7 @@ Storage List::power_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7491,7 +7524,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7520,7 +7553,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7549,7 +7582,7 @@ Storage List::power_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7633,7 +7666,7 @@ Storage List::remainder_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -7654,7 +7687,7 @@ Storage List::remainder_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7694,7 +7727,7 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7723,7 +7756,7 @@ Storage List::remainder_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7887,7 +7920,7 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -7916,7 +7949,7 @@ Storage List::reshape_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -8555,7 +8588,7 @@ Storage List::times_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       ints results = ints();
@@ -8576,7 +8609,7 @@ Storage List::times_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -8599,7 +8632,7 @@ Storage List::times_integers(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -8641,7 +8674,7 @@ Storage List::times_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -8664,7 +8697,7 @@ Storage List::times_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       floats results = floats();
@@ -8685,7 +8718,7 @@ Storage List::times_reals(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -8727,7 +8760,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -8756,7 +8789,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -8785,7 +8818,7 @@ Storage List::times_mixed(const Storage& i, const Storage& x)
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
-        return Word::make(UNEQUAL_ARRAY_LENGTHS, NounType::ERROR);
+        return makeError(UNEQUAL_ARRAY_LENGTHS);;
       }
 
       mixed results = mixed();
@@ -8871,20 +8904,60 @@ Storage List::each_mixed(const Storage& i, const Storage& f)
     mixed results = mixed();
     for(const Storage& y : iis)
     {
-      Storage result = Noun::dispatchMonad(y, f);
-
-      if(result.o == NounType::ERROR)
+      if(f.o == NounType::BUILTIN_MONAD)
       {
-        return result;
-      }
+        Storage result = Noun::dispatchMonad(y, f);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
 
-      results.push_back(result);
+        results.push_back(result);
+      }
+      else if(f.o == NounType::USER_MONAD)
+      {
+        if(std::holds_alternative<mixed>(f.i))
+        {
+          auto next_e = std::get<mixed>(f.i);
+          next_e.insert(next_e.begin(), y);
+          Storage result = Noun::evaluate_expression(Expression::make(next_e));
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
+
+          results.push_back(result);
+        }
+        else
+        {
+          return makeError(UNSUPPORTED_OBJECT);
+        }
+      }
+      else if(f.o == NounType::EXPRESSION)
+      {
+        if(std::holds_alternative<mixed>(f.i))
+        {
+          auto next_e = std::get<mixed>(f.i);
+          next_e.insert(next_e.begin(), y);
+          Storage result = Noun::evaluate_expression(Expression::make(next_e));
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
+
+          results.push_back(result);
+        }
+        else
+        {
+          return makeError(UNSUPPORTED_OBJECT);
+        }
+      }
     }
 
     return Noun::simplify(MixedArray::make(results));
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage List::eachPair_integers(const Storage& i, const Storage& f)

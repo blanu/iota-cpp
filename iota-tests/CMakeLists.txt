@@ -63,6 +63,7 @@ add_executable(iota-tests main.cpp
   dyad_tests/times_tests.cpp
   dyad_tests/split_tests.cpp
   dyad_tests/remainder_tests.cpp
+  noun_tests/symbols_tests.cpp
 )
 
 target_include_directories(iota-tests PRIVATE

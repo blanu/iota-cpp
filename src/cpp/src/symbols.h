@@ -44,6 +44,7 @@ class Monads
     inline static int truth;
     inline static int lift;
     inline static int occurs;
+    inline static int range;
 };
 
 // Dyads
@@ -87,6 +88,7 @@ class Dyads
     inline static int then;
     inline static int bind;
     inline static int retrieve;
+    inline static int resolve;
 };
 
 // Triads
@@ -97,6 +99,7 @@ class Triads
 
     inline static int applyDyad;
     inline static int store;
+    inline static int bind;
 };
 
 // MonadicAdverbs
@@ -128,6 +131,15 @@ class DyadicAdverbs
     inline static int scanOverNeutral;
     inline static int scanWhileOne;
     inline static int scanIterating;
+};
+
+// Triadic Adverbs
+class TriadicAdverbs
+{
+  public:
+    static void initialize();
+
+    inline static int till;
 };
 
 #endif

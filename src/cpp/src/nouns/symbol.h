@@ -40,6 +40,7 @@ class Symbol
 
     static Storage make(int i);
     static Storage make(std::string s);
+    static Storage make(const Storage& i);
 
     static int toInteger(const Storage& s);
     static std::string toString(const Storage& s);

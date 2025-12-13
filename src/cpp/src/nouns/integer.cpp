@@ -157,9 +157,13 @@ void Integer::initialize()
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::plus, StorageType::WORD_ARRAY, NounType::INTEGER, Integer::plus_integer);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::plus, StorageType::WORD_ARRAY, NounType::INTEGER, Integer::plus_integer);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::plus, StorageType::FLOAT, NounType::REAL, Integer::plus_real);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::plus, StorageType::FLOAT, NounType::REAL, Integer::plus_real);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::plus, StorageType::WORD_ARRAY, NounType::LIST, Integer::plus_list);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::plus, StorageType::WORD_ARRAY, NounType::LIST, Integer::plus_list);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::plus, StorageType::FLOAT_ARRAY, NounType::LIST, Integer::plus_list);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::plus, StorageType::FLOAT_ARRAY, NounType::LIST, Integer::plus_list);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::plus, StorageType::MIXED_ARRAY, NounType::LIST, Integer::plus_list);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::INTEGER, Dyads::plus, StorageType::MIXED_ARRAY, NounType::LIST, Integer::plus_list);
 
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::power, StorageType::WORD, NounType::INTEGER, Integer::power_integer);
   Noun::registerDyad(StorageType::WORD, NounType::INTEGER, Dyads::power, StorageType::FLOAT, NounType::REAL, Integer::power_real);
@@ -871,7 +875,7 @@ Storage Integer::char_impl(const Storage& i) {
     int integer = std::get<int>(i.i);
     return Word::make(integer, NounType::CHARACTER);
   } else {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -880,7 +884,7 @@ Storage Integer::enclose_impl(const Storage& i) {
     int integer = std::get<int>(i.i);
     return WordArray::make(ints({ integer }), NounType::LIST);
   } else {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -893,7 +897,7 @@ Storage Integer::enumerate_impl(const Storage& i) {
 
     return WordArray::make(results, NounType::LIST);
   } else {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -913,7 +917,7 @@ Storage Integer::expand_impl(const Storage& i)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -921,37 +925,21 @@ Storage Integer::format_impl(const Storage& i)
 {
   using namespace iota;
 
-  int unicode_minus = static_cast<int>('-');
-  int unicode_zero = static_cast<int>('0'); // '0' is 48 (decimal) in Unicode, '1' is 49, etc.
-
-  const Storage zero = Integer::zero();
-  const Storage ten = Integer::make(10);
-  const Storage offset = Integer::make(unicode_zero);
-
-  if(eval({i, equal, zero}).truth())
+  if(std::holds_alternative<int>(i.i))
   {
-    return IotaString::make({unicode_zero});
+    int value = std::get<int>(i.i);
+
+    std::string s = std::to_string(value);
+    return IotaString::makeString(s);
+  }
+  else if(std::holds_alternative<ints>(i.i))
+  {
+    BigNumber bn = Integer::toBigNumber(i);
+    std::string s = bn.toString();
+    return IotaString::makeString(s);
   }
 
-  ints results = ints();
-  Storage working = i;
-
-  bool negative = eval({i, less, zero}).truth();
-  if(negative)
-  {
-    results.push_back(unicode_minus);
-    working = eval({i, negate});
-  }
-
-  while(eval({working, more, zero}).truth())
-  {
-    auto digit = eval({working, iota::remainder, ten});
-    auto numeral = eval({digit, plus, offset});
-    results.insert(results.begin(), Integer::toInt(numeral));
-    working = eval({working, integerDivide, ten});
-  }
-
-  return IotaString::make(results);
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 Storage Integer::negate_impl(const Storage& i) {
@@ -959,7 +947,7 @@ Storage Integer::negate_impl(const Storage& i) {
     int integer = std::get<int>(i.i);
     return Word::make(-integer, NounType::INTEGER);
   } else {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -980,7 +968,7 @@ Storage Integer::not_impl(const Storage& i)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -993,7 +981,7 @@ Storage Integer::reciprocal_impl(const Storage& i)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -1002,7 +990,7 @@ Storage Integer::size_impl(const Storage& i) {
     int integer = std::get<int>(i.i);
     return Word::make(abs(integer), NounType::INTEGER);
   } else {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 }
 
@@ -1048,7 +1036,7 @@ Storage Integer::cut_integers(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::cut_reals(const Storage& i, const Storage& x)
@@ -1092,7 +1080,7 @@ Storage Integer::cut_reals(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::cut_mixed(const Storage& i, const Storage& x)
@@ -1136,7 +1124,7 @@ Storage Integer::cut_mixed(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 // Floating-point division with two integer arguments
@@ -1162,7 +1150,7 @@ Storage Integer::divide_integer(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 // Floating-point division with an integer and a float
@@ -1186,7 +1174,7 @@ Storage Integer::divide_real(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::divide_integers(const Storage& i, const Storage& x)
@@ -1217,7 +1205,7 @@ Storage Integer::divide_integers(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::divide_reals(const Storage& i, const Storage& x)
@@ -1259,7 +1247,7 @@ Storage Integer::divide_reals(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::divide_mixed(const Storage& i, const Storage& x)
@@ -1298,7 +1286,7 @@ Storage Integer::divide_mixed(const Storage& i, const Storage& x)
         }
         else
         {
-          return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+          return makeError(UNSUPPORTED_OBJECT);;
         }
       }
 
@@ -1313,7 +1301,7 @@ Storage Integer::divide_mixed(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::equal_impl(const Storage& i, const Storage& x)
@@ -1351,7 +1339,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
   }
   else
   {
-    return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    return makeError(UNSUPPORTED_OBJECT);;
   }
 
   Storage formatted = eval({i, format});
@@ -1411,7 +1399,7 @@ Storage Integer::format2_impl(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::integerDivide_impl(const Storage& i, const Storage& x)
@@ -1494,7 +1482,7 @@ Storage Integer::join_integer(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::prepend_to_integers(const Storage& i, const Storage& x)
@@ -1514,7 +1502,7 @@ Storage Integer::prepend_to_integers(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::less_integer(const Storage& i, const Storage& x)
@@ -1646,7 +1634,7 @@ Storage Integer::less_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::match_impl(const Storage& i, const Storage& x)
@@ -1684,7 +1672,7 @@ Storage Integer::match_impl(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::max_integer(const Storage& i, const Storage& x)
@@ -1822,7 +1810,7 @@ Storage Integer::max_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::min_integer(const Storage& i, const Storage& x)
@@ -1960,7 +1948,7 @@ Storage Integer::min_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::minus_integer(const Storage& i, const Storage& x)
@@ -2073,7 +2061,7 @@ Storage Integer::minus_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::more_integer(const Storage& i, const Storage& x)
@@ -2205,7 +2193,7 @@ Storage Integer::more_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::plus_integer(const Storage& i, const Storage& x)
@@ -2318,8 +2306,40 @@ Storage Integer::plus_list(const Storage& i, const Storage& x)
       return MixedArray::make(results);
     }
   }
+  else if(std::holds_alternative<ints>(i.i))
+  {
+    BigNumber bi = toBigNumber(i);
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+    if(std::holds_alternative<ints>(x.i))
+    {
+      ints xis = std::get<ints>(x.i);
+
+      mixed results = mixed();
+
+      for(const auto xi : xis)
+      {
+        const auto bxi = BigNumber(xi);
+
+        const BigNumber result = bi + bxi;
+
+        results.push_back(make(result));
+      }
+
+      return MixedArray::make(results);
+    }
+    else if(std::holds_alternative<floats>(x.i))
+    {
+      // FIXME
+      return makeError(UNSUPPORTED_OBJECT);
+    }
+    else if(std::holds_alternative<mixed>(x.i))
+    {
+      // FIXME
+      return makeError(UNSUPPORTED_OBJECT);
+    }
+  }
+
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::power_integer(const Storage& i, const Storage& x)
@@ -2340,7 +2360,7 @@ Storage Integer::power_integer(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::power_real(const Storage& i, const Storage& x)
@@ -2423,7 +2443,7 @@ Storage Integer::power_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::remainder_integer(const Storage& i, const Storage& x)
@@ -2535,7 +2555,7 @@ Storage Integer::remainder_integers(const Storage& i, const Storage& x)
     return WordArray::make(results, NounType::LIST);
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::remainder_mixed(const Storage& i, const Storage& x)
@@ -2568,7 +2588,7 @@ Storage Integer::remainder_mixed(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::reshape_integer(const Storage& i, const Storage& x)
@@ -2607,7 +2627,7 @@ Storage Integer::reshape_integer(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::reshape_integers(const Storage& i, const Storage& x)
@@ -2670,7 +2690,7 @@ Storage Integer::reshape_integers(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::reshape_mixed(const Storage& i, const Storage& x)
@@ -2708,7 +2728,7 @@ Storage Integer::reshape_mixed(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
 }
 
 Storage Integer::times_integer(const Storage& i, const Storage& x)
@@ -2841,7 +2861,42 @@ Storage Integer::times_list(const Storage& i, const Storage& x)
     }
   }
 
-  return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
+  return makeError(UNSUPPORTED_OBJECT);;
+}
+
+// Triadic Adverbs
+Storage Integer::till_impl(const Storage& i, const Storage& x, const Storage& f)
+{
+  if(std::holds_alternative<int>(i.i) && std::holds_alternative<int>(x.i))
+  {
+    int ii = std::get<int>(i.i);
+    int xi = std::get<int>(x.i);
+
+    mixed results = mixed();
+    for(int index = ii; index <= xi; index++)
+    {
+      Storage y = Integer::make(index);
+
+      Storage result = Noun::dispatchMonad(y, f);
+      if(result.o == NounType::BUILTIN_SYMBOL)
+      {
+        if(std::holds_alternative<int>(result.i))
+        {
+          const int ri = std::get<int>(result.i);
+          if(ri == SymbolType::undefined)
+          {
+            continue;
+          }
+        }
+      }
+
+      results.push_back(result);
+    }
+
+    return Noun::simplify(MixedArray::make(results));
+  }
+
+  return makeError(UNSUPPORTED_OBJECT);
 }
 
 // Serialization

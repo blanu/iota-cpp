@@ -70,5 +70,8 @@ Storage TestingEffectsProvider::getEffectState()
   Storage stateEffects = TestingState::getEffectState();
   results.push_back(stateEffects);
 
+  Storage bindings = TestingState::getBindingsState();
+  results.push_back(bindings);
+
   return MixedArray::make(results);
 }

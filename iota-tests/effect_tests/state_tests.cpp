@@ -65,3 +65,39 @@ TEST_CASE("state transform", "[effect]")
   auto result = evalExpression({{3, 4, 5}, put, then, lensA, transform, negate, lensB});
   REQUIRE(result == a{3, -3, 5});
 }
+
+TEST_CASE("symbol to", "[effect symbol]")
+{
+  using namespace iota;
+
+  auto result = evalExpression({5, to(a)});
+
+  REQUIRE(result == 5);
+}
+
+TEST_CASE("symbol to from", "[effect symbol]")
+{
+  using namespace iota;
+
+  auto result = evalExpression({5, to(a), then, from(a)});
+
+  REQUIRE(result == 5);
+}
+
+TEST_CASE("symbol to ... from", "[effect symbol]")
+{
+  using namespace iota;
+
+  auto result = evalExpression({5, to(a), negate, then, from(a)});
+
+  REQUIRE(result == 5);
+}
+
+TEST_CASE("symbol to from plus from", "[effect symbol]")
+{
+  using namespace iota;
+
+  auto result = evalExpression({5, to(a), then, from(a), plus, e(from(a))});
+
+  REQUIRE(result == 10);
+}

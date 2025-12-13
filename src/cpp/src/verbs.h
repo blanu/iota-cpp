@@ -75,6 +75,7 @@ namespace iota
   inline Storage truth = WordArray::nil();
   inline Storage lift = WordArray::nil();
   inline Storage occurs = WordArray::nil();
+  inline Storage range = WordArray::nil();
 
   // Dyads
   inline Storage amend = WordArray::nil();
@@ -103,12 +104,14 @@ namespace iota
   inline Storage split = WordArray::nil();
   inline Storage take = WordArray::nil();
   inline Storage times = WordArray::nil();
+  inline Storage resolve = WordArray::nil();
 
   // Lens
   inline Storage retrieve = WordArray::nil();
 
   // Triads
   inline Storage store = WordArray::nil();
+  inline Storage bind = WordArray::nil();
 }
 
 #endif //VERBS_H

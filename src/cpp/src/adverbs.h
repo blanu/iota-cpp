@@ -25,6 +25,14 @@ class DyadicAdverb
     static void initialize();
 };
 
+class TriadicAdverb
+{
+  public:
+    static Storage make(int i);
+
+    static void initialize();
+};
+
 namespace iota
 {
   // Monadic Adverbs
@@ -45,6 +53,9 @@ namespace iota
   inline Storage scanOverNeutral = WordArray::nil();
   inline Storage scanWhileOne = WordArray::nil();
   inline Storage whileOne = WordArray::nil();
+
+  // Triadic Adverbs
+  inline Storage till = WordArray::nil();
 }
 
 #endif //ADVERBS_H

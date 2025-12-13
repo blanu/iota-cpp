@@ -9,6 +9,10 @@
 #include <fstream>
 #include <sstream>
 #include "api.h"
+#include "effects/testing/testing_effects_provider.h"
+#include "effects/testing/state/testing_state.h"
+
+extern TestingEffectsProvider provider;
 
 std::string read_file(const std::string& filepath) {
   std::ifstream file(filepath);
@@ -220,34 +224,46 @@ TEST_CASE("AoC_2025_2_1 simple", "[AoC]")
 TEST_CASE("AoC_2025_2_1 full", "[AoC]")
 {
   using namespace iota;
-  using iota::split;
   using iota::each;
+  using iota::format;
   using iota::form;
-  using iota::index;
-  using iota::enumerate;
-  using iota::reverse;
-  using iota::transpose;
-  using iota::over;
-  using iota::join;
+  using iota::i;
   using iota::match;
-  using iota::expand;
+  using iota::minus;
+  using iota::over;
+  using iota::plus;
+  using iota::size;
+  using iota::split;
+  using iota::take;
+  using iota::times;
 
   std::string input = read_file(TEST_DATA_DIR "/AoC_2025_2_1.txt"); // Same input as the last puzzle
 
-  auto textRanges = evalExpressionCppToIota({input, split, ','});
-  auto ranges = evalExpressionCppToIota({textRanges, each, e(split, '-', each, e(form, 0))});
-  auto offsets = evalExpressionCppToIota({ranges, each, first});
-  auto spans = evalExpressionCppToIota({ranges, each, e(reverse, over, minus)});
-  auto enumerations = evalExpressionCppToIota({spans, each, e(plus, 1, enumerate, minus, 1)});
-  auto numbers = evalExpressionCppToIota({{offsets, enumerations}, transpose, each, e(over, plus), over, join});
-  auto ids = evalExpressionCppToIota({numbers, each, format});
-  auto sizes = evalExpressionCppToIota({ids, each, e(size, integerDivide, 2)});
-  auto parts = evalExpressionCppToIota({{ids, sizes}, transpose, each, e(over, split)});
-  auto isBad = evalExpressionCppToIota({parts, each, e(over, match), expand});
-  auto badNumbers = evalExpressionCppToIota({numbers, index, isBad});
-  auto result = evalExpression({badNumbers, over, plus});
+  auto inputSize = evalExpressionCppToIota({input, size, minus, 1});
+  auto trimmed = evalExpressionCppToIota({input, take, inputSize});
+  auto ranges = evalExpressionCppToIota({trimmed, split, ',', each, e(split, '-', each, e(form, 0), range)});
+  auto sums = evalExpressionCppToIota({
+    ranges, each, e( // each range
+      each, e( // each number in the range
+      format, split, 0.5f, // split textual representation of the number in half
+      over, match, // are both halves the same?
+      times, i // if so, keep the number, otherwise set it to 0
+      ),
+      over, plus
+    )
+  });
+  auto result = evalExpression({sums, over, plus});
 
-  if (std::holds_alternative<std::string>(result))
+  if(std::holds_alternative<int>(result))
+  {
+    printf("%d\n", std::get<int>(result));
+  }
+  else if(std::holds_alternative<BigNumber>(result))
+  {
+    BigNumber result_bn = std::get<BigNumber>(result);
+    printf("%s\n", result_bn.toString());
+  }
+  else if (std::holds_alternative<std::string>(result))
   {
     std::string result_str = std::get<std::string>(result);
     printf("%s\n", result_str.c_str());

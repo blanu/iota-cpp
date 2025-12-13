@@ -77,14 +77,22 @@ std::string error_to_string(const Storage &error)
   else if(std::holds_alternative<mixed>(error.i))
   {
     mixed ms = std::get<mixed>(error.i);
-    if(ms.size() == 4)
+    if(ms.size() == 5)
     {
       int type = Integer::toInt(ms[0]);
       std::string file = IotaString::toString(ms[1]);
       int line = Integer::toInt(ms[2]);
       std::string func = IotaString::toString(ms[3]);
+      std::string message = IotaString::toString(ms[4]);
 
-      return "Error: " + file + " (" + func + ":" + std::to_string(line) + "): " + code_to_string(type);
+      if(message.empty())
+      {
+        return "Error: " + file + " (" + func + ":" + std::to_string(line) + "): " + code_to_string(type);
+      }
+      else
+      {
+        return "Error: " + file + " (" + func + ":" + std::to_string(line) + "): " + code_to_string(type) + ", " + message;
+      }
     }
   }
 
@@ -229,13 +237,71 @@ Storage Object::from_cpp_expression(const cppValues& i)
 {
   auto results = mixed();
 
+  bool has_i = false;
+  bool has_x = false;
+  bool has_y = false;
   for(const auto& y : i)
   {
-    Storage result = Object::from_cpp(y);
+    Storage result = from_cpp(y);
+
+    if(result.o == NounType::BUILTIN_SYMBOL)
+    {
+      if(std::holds_alternative<int>(result.i))
+      {
+        int ii = std::get<int>(result.i);
+
+        switch(ii)
+        {
+          case SymbolType::i:
+            has_i = true;
+            break;
+          case SymbolType::x:
+            has_x = true;
+            break;
+          case SymbolType::y:
+            has_y = true;
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+    else if(result.o == NounType::USER_MONAD)
+    {
+      has_i = true;
+    }
+    else if(result.o == NounType::USER_DYAD)
+    {
+      has_x = true;
+      has_y = true;
+    }
+    else if(result.o == NounType::USER_TRIAD)
+    {
+      has_i = true;
+      has_x = true;
+      has_y = true;
+    }
+
     results.push_back(result);
   }
 
-  return MixedArray::make(results, NounType::EXPRESSION);
+  if(has_y)
+  {
+    return MixedArray::make(results, NounType::USER_TRIAD);
+  }
+  else if(has_x)
+  {
+    return MixedArray::make(results, NounType::USER_DYAD);
+  }
+  else if(has_i)
+  {
+    return MixedArray::make(results, NounType::USER_MONAD);
+  }
+  else
+  {
+    return MixedArray::make(results, NounType::EXPRESSION);
+  }
 }
 
 Storage Object::from_cpp(const cppValue& i)

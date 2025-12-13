@@ -98,12 +98,12 @@ void EvalRegister::eval()
   if(r)
   {
     logs.emplace_back(i, *r);
-    printLog(i, *r);
+    //printLog(i, *r);
   }
   else
   {
     logs.emplace_back(i, WordArray::nil());
-    printLog(i, WordArray::nil());
+    //printLog(i, WordArray::nil());
   }
 }
 

@@ -51,6 +51,7 @@ class Noun
     static Storage dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y);
     static Storage dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g);
     static Storage dispatchDyadicAdverb(const Storage& i, const Storage& f, const Storage& g, const Storage& x);
+    //static Storage dispatchTriadicAdverb(const Storage& i, const Storage& x, const Storage& f);
     static Storage dispatchNiladicEffect(const Storage& f);
     static Storage dispatchMonadicEffect(const Storage& i, const Storage& f);
     static Storage dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x);
@@ -63,6 +64,7 @@ class Noun
     static void registerTriad(Type it, Type io, Type f, Type xt, Type xo, Type yt, Type yo, Storage (*t)(const Storage&, const Storage&, const Storage&));
     static void registerMonadicAdverb(Type it, Type io, Type f, Storage (*a)(const Storage&, const Storage&));
     static void registerDyadicAdverb(Type it, Type io, Type f, Type xt, Type xo, Storage (*a)(const Storage&, const Storage&, const Storage&));
+    //static void registerTriadicAdverb(Type it, Type io, Type xt, Type xo, Type ft, Type fo, Storage (*a)(const Storage&, const Storage&, const Storage&));
     static void registerConjunction(Type f, Storage (*c)(const Storage&, const Storage&));
 
     static void printDyad(const Storage &i, const Storage& f, const Storage& x);
@@ -136,6 +138,7 @@ class Noun
 
       static std::map<Specialization3, MonadicAdverbFunction> monadicAdverbs;
       static std::map<Specialization5, DyadicAdverbFunction> dyadicAdverbs;
+      static std::map<Specialization7, MonadicAdverbFunction> triadicAdverbs;
 
       static std::map<Specialization1, ConjunctionFunction> conjunctions;
 };

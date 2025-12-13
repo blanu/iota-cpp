@@ -37,7 +37,8 @@ void Monads::initialize()
   INTERN_INT(erase);
   INTERN_INT(truth);
   INTERN_INT(lift);
-  INTERN_INT(occurs);  
+  INTERN_INT(occurs);
+  INTERN_INT(range);
 }
 
 void Dyads::initialize()
@@ -77,12 +78,14 @@ void Dyads::initialize()
     INTERN_INT(then);
     INTERN_INT(bind);
     INTERN_INT(retrieve);
+    INTERN_INT(resolve);
 }
 
 void Triads::initialize()
 {
   INTERN_INT(applyDyad);
   INTERN_INT(store);
+  INTERN_INT(bind);
 }
 
 void MonadicAdverbs::initialize()
@@ -106,4 +109,9 @@ void DyadicAdverbs::initialize()
   INTERN_INT(scanOverNeutral);
   INTERN_INT(scanWhileOne);
   INTERN_INT(scanIterating);
+}
+
+void TriadicAdverbs::initialize()
+{
+  INTERN_INT(till);
 }

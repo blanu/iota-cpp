@@ -6,6 +6,7 @@
 #include <storage/storage.h>
 
 #define makeError(type) Error::make(type, __FILE__, __LINE__, __func__)
+#define makeUnknownSymbolError(type, symbol) Error::make(type, __FILE__, __LINE__, __func__, Symbol::toString(Symbol::make(symbol)).c_str())
 
 #define BAD_INDEX_TYPE 0
 #define BAD_INITIALIZATION 1
@@ -45,7 +46,9 @@ class Error
     static constexpr int maximum_iterations = MAXIMUM_ITERATIONS;
 
     static Storage make(int i);
-    static Storage make(int type, const char* file, int line, const char* func);
+    static Storage make(int type, const char* file, int line, const char* func, const char* details = nullptr);
+
+    static Storage makeUnknownSymbol(const Storage& i);
 
     int code;
 

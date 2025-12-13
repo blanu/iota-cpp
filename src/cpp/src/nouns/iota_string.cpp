@@ -91,6 +91,7 @@ void IotaString::initialize() {
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::rotate, StorageType::WORD, NounType::INTEGER, rotate_integer);
 
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD, NounType::INTEGER, split_integer);
+  Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::FLOAT, NounType::REAL, split_real);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD_ARRAY, NounType::LIST, split_integers);
   Noun::registerDyad(StorageType::WORD_ARRAY, NounType::STRING, Dyads::split, StorageType::WORD, NounType::CHARACTER, split_character);
 
@@ -254,7 +255,7 @@ Storage IotaString::atom_impl(const Storage& i)
 {
   if (std::holds_alternative<ints>(i.i))
   {
-    const ints chars = std::get<ints>(i.i);
+    const ints& chars = std::get<ints>(i.i);
 
     if (chars.empty())
     {
@@ -275,7 +276,7 @@ Storage IotaString::first_impl(const Storage& i)
 {
   if (std::holds_alternative<ints>(i.i))
   {
-    const ints chars = std::get<ints>(i.i);
+    const ints& chars = std::get<ints>(i.i);
 
     if (chars.empty())
     {
@@ -366,7 +367,7 @@ Storage IotaString::not_impl(const Storage& i)
 {
   if (std::holds_alternative<ints>(i.i))
   {
-    const ints integers = std::get<ints>(i.i);
+    const ints& integers = std::get<ints>(i.i);
 
     if (integers.empty())
     {
@@ -387,7 +388,7 @@ Storage IotaString::reverse_impl(const Storage& i)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints integers = std::get<ints>(i.i);
+    const ints& integers = std::get<ints>(i.i);
     if(integers.empty())
     {
       return i;
@@ -408,7 +409,7 @@ Storage IotaString::size_impl(const Storage& i)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints integers = std::get<ints>(i.i);
+    const ints& integers = std::get<ints>(i.i);
 
     const int result = static_cast<int>(integers.size());
 
@@ -424,7 +425,7 @@ Storage IotaString::group_impl(const Storage& i)
 {
   if (std::holds_alternative<ints>(i.i))
   {
-    const ints items = std::get<ints>(i.i);
+    const ints& items = std::get<ints>(i.i);
     if(items.empty())
     {
       return WordArray::nil();
@@ -476,7 +477,7 @@ Storage IotaString::group_impl(const Storage& i)
     auto results = mixed();
     for (auto &[fst, snd] : groups)
     {
-      const ints group = snd;
+      const ints& group = snd;
       results.push_back(WordArray::make(group));
     }
 
@@ -509,11 +510,11 @@ Storage IotaString::equal_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      const ints xis = std::get<ints>(x.i);
+      const ints& xis = std::get<ints>(x.i);
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
@@ -541,7 +542,7 @@ Storage IotaString::find_character(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     auto results = ints();
 
@@ -635,7 +636,7 @@ Storage IotaString::form_integer(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     // Empty string returns undefined symbol
     if(iis.empty())
@@ -692,7 +693,7 @@ Storage IotaString::form_real(const Storage& i, const Storage& x)
 
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     int first = 1;
     int negative = 0;
@@ -775,7 +776,7 @@ Storage IotaString::form_character(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(static_cast<int>(iis.size()) == 1)
     {
@@ -813,7 +814,7 @@ Storage IotaString::index_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
@@ -831,7 +832,7 @@ Storage IotaString::index_impl(const Storage& i, const Storage& x)
     }
     else if(std::holds_alternative<ints>(x.i))
     {
-      const ints xis = std::get<ints>(x.i);
+      const ints& xis = std::get<ints>(x.i);
 
       auto results = ints();
       for(const int xi : xis)
@@ -859,7 +860,7 @@ Storage IotaString::append_character(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(std::holds_alternative<int>(x.i))
     {
@@ -879,7 +880,7 @@ Storage IotaString::join_string(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
@@ -899,11 +900,11 @@ Storage IotaString::match_impl(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(std::holds_alternative<ints>(x.i))
     {
-      const ints xis = std::get<ints>(x.i);
+      const ints& xis = std::get<ints>(x.i);
 
       if(static_cast<int>(iis.size()) != static_cast<int>(xis.size()))
       {
@@ -977,7 +978,7 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(i.i))
     {
-      const ints iis = std::get<ints>(i.i);
+      const ints& iis = std::get<ints>(i.i);
 
       if(xi > 0)
       {
@@ -990,6 +991,7 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
         }
 
         auto results = mixed();
+        results.reserve((iis.size() + xi - 1) / xi);
 
         auto result = ints();
         for(int ii : iis)
@@ -1016,11 +1018,48 @@ Storage IotaString::split_integer(const Storage& i, const Storage& x)
   return Word::make(UNSUPPORTED_OBJECT, NounType::ERROR);
 }
 
+Storage IotaString::split_real(const Storage& i, const Storage& x)
+{
+  if(std::holds_alternative<ints>(i.i))
+  {
+    const ints& iis = std::get<ints>(i.i);
+
+    if(iis.empty())
+    {
+      return IotaString::makeEmpty();
+    }
+
+    if(std::holds_alternative<float>(x.i))
+    {
+      const float xf = std::get<float>(x.i);
+
+      if(std::abs(xf) < Float::tolerance)
+      {
+        return IotaString::makeEmpty();
+      }
+
+      int size = static_cast<int>(iis.size());
+      int first = static_cast<int>(size * xf);
+      int rest = size - first;
+
+      auto results = mixed();
+      results.reserve(2);
+
+      results.push_back(IotaString::make(ints(iis.begin(), iis.begin() + first)));
+      results.push_back(IotaString::make(ints(iis.begin() + first, iis.end())));
+
+      return MixedArray::make(results);
+    }
+  }
+
+  return makeError(UNSUPPORTED_OBJECT);
+}
+
 Storage IotaString::split_integers(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(x.i))
   {
-    const ints xis = std::get<ints>(x.i);
+    const ints& xis = std::get<ints>(x.i);
 
     if(std::holds_alternative<ints>(i.i))
     {
@@ -1066,7 +1105,7 @@ Storage IotaString::split_character(const Storage& i, const Storage& x)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     if(iis.empty())
     {
@@ -1081,6 +1120,7 @@ Storage IotaString::split_character(const Storage& i, const Storage& x)
       const int xi = std::get<int>(x.i);
 
       auto results = mixed();
+      results.reserve(static_cast<int>(iis.size()) / 10); // Just a guess
 
       auto result = ints();
       for(int ii : iis)
@@ -1116,7 +1156,7 @@ Storage IotaString::take_integer(const Storage& i, const Storage& x)
 
     if(std::holds_alternative<ints>(i.i))
     {
-      const ints iis = std::get<ints>(i.i);
+      const ints& iis = std::get<ints>(i.i);
 
       if(iis.empty())
       {
@@ -1163,7 +1203,7 @@ Storage IotaString::each_impl(const Storage& i, const Storage& f)
 {
   if(std::holds_alternative<ints>(i.i))
   {
-    const ints iis = std::get<ints>(i.i);
+    const ints& iis = std::get<ints>(i.i);
 
     auto results = mixed();
     for(const int y : iis)

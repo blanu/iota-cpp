@@ -68,6 +68,7 @@ void Monad::initialize()
   INTERN_VERB(iota, Monad, truth);
   INTERN_VERB(iota, Monad, lift);
   INTERN_VERB(iota, Monad, occurs);
+  INTERN_VERB(iota, Monad, range);
 }
 
 
@@ -104,6 +105,7 @@ void Dyad::initialize()
   INTERN_VERB(iota, Dyad, split);
   INTERN_VERB(iota, Dyad, take);
   INTERN_VERB(iota, Dyad, times);
+  INTERN_VERB(iota, Dyad, resolve);
 
   // Lens
   INTERN_VERB(iota, Dyad, retrieve);

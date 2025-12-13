@@ -43,6 +43,10 @@ void Noun::initialize()
   QuotedSymbol::initialize();
   Lens::initialize();
   Conjunctions::initialize();
+  Range::initialize();
+  Bindings::initialize();
+  SymbolDefinition::initialize();
+  UserSymbol::initialize();
 }
 
 // Dispatch
@@ -54,13 +58,14 @@ Storage Noun::dispatchNilad(const Storage& f)
 
   int fi = std::get<int>(f.i);
 
-  auto specialization = Specialization1(fi);
-  if (niladSources.find(specialization) == niladSources.end()) {
-    return makeError(UNSUPPORTED_OBJECT);
+  const auto& specialization = Specialization1(fi);
+  const auto verb = niladSources.find(specialization);
+  if(verb != niladSources.end())
+  {
+    return verb->second();
   }
 
-  NiladicSourceFunction verb = niladSources[specialization];
-  return verb();
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
@@ -83,7 +88,36 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
         next_e.push_back(m);
       }
 
-      return evaluate_expression(Expression::make(next_e));
+      Storage result = evaluate_expression(Expression::make(next_e));
+      if(result.o == NounType::ERROR)
+      {
+        return result;
+      }
+
+      return result;
+    }
+  }
+  else if(f.o == NounType::USER_MONAD)
+  {
+    if(std::holds_alternative<mixed>(f.i))
+    {
+      mixed ms = std::get<mixed>(f.i);
+      mixed next_e = mixed();
+      next_e.reserve(ms.size() + 1);
+
+      next_e.push_back(i);
+      for(auto& m : ms)
+      {
+        next_e.push_back(m);
+      }
+
+      Storage result = evaluate_expression(Expression::make(next_e));
+      if(result.o == NounType::ERROR)
+      {
+        return result;
+      }
+
+      return result;
     }
   }
 
@@ -100,17 +134,16 @@ Storage Noun::dispatchMonad(const Storage& i, const Storage& f)
     Specialization3(NounType::ANY, NounType::ANY, fi),
   };
 
-  auto source = monadSources;
-  for(auto specialization : specializations)
+  for(const auto& specialization : specializations)
   {
-    if (monadSources.find(specialization) != monadSources.end())
+    const auto verb = monadSources.find(specialization);
+    if(verb != monadSources.end())
     {
-      const MonadicSourceFunction verb = monadSources[specialization];
-      return verb(i);
+      return verb->second(i);
     }
   }
 
-  return makeError(UNSUPPORTED_OBJECT);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x) {
@@ -130,7 +163,39 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
       mixed next_e = mixed();
       next_e.reserve(ms.size() + 1);
 
-      next_e.push_back(i);
+      if(i.o == NounType::BUILTIN_SYMBOL)
+      {
+        if(std::holds_alternative<int>(i.i))
+        {
+          int mi = std::get<int>(i.i);
+          switch(mi)
+          {
+            case SymbolType::i:
+              next_e.push_back(i);
+              break;
+
+            case SymbolType::x:
+              next_e.push_back(x);
+              break;
+
+            case SymbolType::f:
+              next_e.push_back(f);
+              break;
+
+            default:
+              return makeError(UNSUPPORTED_OBJECT);
+          }
+        }
+        else
+        {
+          return makeError(UNSUPPORTED_OBJECT);
+        }
+      }
+      else
+      {
+        next_e.push_back(i);
+      }
+
       for(auto& m : ms)
       {
         if(m.o == NounType::BUILTIN_SYMBOL)
@@ -199,18 +264,18 @@ Storage Noun::dispatchDyad(const Storage& i, const Storage& f, const Storage& x)
     Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY)
   };
 
-  auto d = dyadSources;
-  for(auto specialization : specializations)
+  //auto sources = dyadSources;
+  for(const auto& specialization : specializations)
   {
-    if (dyadSources.find(specialization) != dyadSources.end())
+    auto verb = dyadSources.find(specialization);
+    if (verb != dyadSources.end())
     {
-      const DyadicSourceFunction verb = dyadSources[specialization];
-      return verb(i, x);
+      return verb->second(i, x);
     }
   }
 
-  Noun::printDyad(i, f, x);
-  return makeError(UNSUPPORTED_OBJECT);
+  //printDyad(i, f, x);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x, const Storage& y)
@@ -338,17 +403,17 @@ Storage Noun::dispatchTriad(const Storage& i, const Storage& f, const Storage& x
     Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
   };
 
-  auto sources = triadSources;
-  for(auto specialization : specializations)
+  //auto sources = triadSources;
+  for(const auto& specialization : specializations)
   {
-    if (triadSources.find(specialization) != triadSources.end())
+    auto verb = triadSources.find(specialization);
+    if(verb != triadSources.end())
     {
-      const TriadicSourceFunction verb = triadSources[specialization];
-      return verb(i, x, y);
+      return verb->second(i, x, y);
     }
   }
 
-  return makeError(UNSUPPORTED_OBJECT);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const Storage& g)
@@ -365,14 +430,14 @@ Storage Noun::dispatchMonadicAdverb(const Storage& i, const Storage& f, const St
 
   int fi = std::get<int>(f.i);
 
-  Specialization3 specialization = Specialization3(i.t, i.o, fi);
-  if (monadicAdverbs.find(specialization) == monadicAdverbs.end())
+  const auto specialization = Specialization3(i.t, i.o, fi);
+  const auto adverb = monadicAdverbs.find(specialization);
+  if(adverb != monadicAdverbs.end())
   {
-    return makeError(UNSUPPORTED_OBJECT);
+    return adverb->second(i, g);
   }
 
-  MonadicAdverbFunction adverb = monadicAdverbs[specialization];
-  return adverb(i, g);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Storage& g, const Storage& x)
@@ -391,13 +456,14 @@ Storage Noun::dispatchDyadicAdverb(const Storage& i, const Storage& f, const Sto
 
   int fi = std::get<int>(f.i);
 
-  Specialization5 specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
-  if (dyadicAdverbs.find(specialization) == dyadicAdverbs.end()) {
-    return makeError(UNSUPPORTED_OBJECT);
+  const auto specialization = Specialization5(i.t, i.o, fi, x.t, x.o);
+  const auto adverb = dyadicAdverbs.find(specialization);
+  if(adverb != dyadicAdverbs.end())
+  {
+    return adverb->second(i, g, x);
   }
 
-  DyadicAdverbFunction adverb = dyadicAdverbs[specialization];
-  return adverb(i, g, x);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, g);
 }
 
 Storage Noun::dispatchNiladicEffect(const Storage& f)
@@ -414,14 +480,14 @@ Storage Noun::dispatchNiladicEffect(const Storage& f)
 
   int fi = std::get<int>(f.i);
 
-  Specialization1 specialization = Specialization1(fi);
-  if (niladSources.find(specialization) == niladSources.end())
+  const auto specialization = Specialization1(fi);
+  const auto verb = niladSources.find(specialization);
+  if(verb != niladSources.end())
   {
-    return makeError(UNSUPPORTED_OBJECT);
+    return verb->second();
   }
 
-  NiladicSourceFunction verb = niladSources[specialization];
-  return verb();
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
@@ -450,17 +516,17 @@ Storage Noun::dispatchMonadicEffect(const Storage& i, const Storage& f)
     Specialization3(NounType::ANY, NounType::ANY, fi),
   };
 
-  auto sources = monadSources;
-  for(auto specialization : specializations)
+  //auto sources = monadSources;
+  for(const auto& specialization : specializations)
   {
-    if (monadSources.find(specialization) != monadSources.end())
+    const auto verb = monadSources.find(specialization);
+    if(verb != monadSources.end())
     {
-      const MonadicSourceFunction verb = monadSources[specialization];
-      return verb(i);
+      return verb->second(i);
     }
   }
 
-  return makeError(UNSUPPORTED_OBJECT);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Storage& x)
@@ -502,16 +568,16 @@ Storage Noun::dispatchDyadicEffect(const Storage& i, const Storage& f, const Sto
     Specialization5(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY)
   };
 
-  for(auto specialization : specializations)
+  for(const auto& specialization : specializations)
   {
-    if (dyadSources.find(specialization) != dyadSources.end())
+    const auto verb = dyadSources.find(specialization);
+    if(verb != dyadSources.end())
     {
-      const DyadicSourceFunction verb = dyadSources[specialization];
-      return verb(i, x);
+      return verb->second(i, x);
     }
   }
 
-  return makeError(UNSUPPORTED_OBJECT);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchTriadicEffect(const Storage& i, const Storage& f, const Storage& x, const Storage& y)
@@ -637,16 +703,16 @@ Storage Noun::dispatchTriadicEffect(const Storage& i, const Storage& f, const St
     Specialization7(NounType::ANY, NounType::ANY, fi, NounType::ANY, NounType::ANY, y.t, NounType::ANY),
   };
 
-  for(auto specialization : specializations)
+  for(const auto& specialization : specializations)
   {
-    if (triadSources.find(specialization) != triadSources.end())
+    const auto verb = triadSources.find(specialization);
+    if(verb != triadSources.end())
     {
-      const TriadicSourceFunction verb = triadSources[specialization];
-      return verb(i, x, y);
+      return verb->second(i, x, y);
     }
   }
 
-  return makeError(UNSUPPORTED_OBJECT);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 Storage Noun::dispatchConjunction(const Storage& i, const Storage& f, const Storage& x)
@@ -659,13 +725,13 @@ Storage Noun::dispatchConjunction(const Storage& i, const Storage& f, const Stor
   int fi = std::get<int>(f.i);
 
   const auto specialization = Specialization1(fi);
-  if (conjunctions.find(specialization) == conjunctions.end())
+  const auto verb = conjunctions.find(specialization);
+  if(verb != conjunctions.end())
   {
-    return makeError(UNSUPPORTED_OBJECT);
+    return verb->second(i, x);
   }
 
-  const ConjunctionFunction verb = conjunctions[specialization];
-  return verb(i, x);
+  return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
 }
 
 // Registration
@@ -744,6 +810,9 @@ Storage Noun::identity1(const Storage& i)
 // Extension Monads - Implementations
 Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 {
+  using namespace iota;
+  using iota::bind;
+
   if (std::holds_alternative<mixed>(e.i))
   {
     mixed items = std::get<mixed>(e.i);
@@ -754,6 +823,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
     }
 
     Storage i = items[0];
+
+    if(i.o == NounType::ERROR)
+    {
+      return i;
+    }
 
     // The first item might be a nilad effect
     if(i.o == NounType::NILADIC_EFFECT)
@@ -770,7 +844,13 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         rest.insert(rest.begin(), result);
 
         Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
-        return evaluate_expression(next_e);
+        Storage result = evaluate_expression(next_e);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
+        return result;
       }
     }
 
@@ -791,6 +871,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
       case NounType::BUILTIN_MONAD:
       {
         Storage result = dispatchMonad(i, f);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
         if (rest.empty())
         {
           return result;
@@ -802,6 +887,42 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
 
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
+
+          return result;
+        }
+      }
+
+      case NounType::USER_MONAD:
+      {
+        mixed ms = std::get<mixed>(f.i);
+        ms.insert(ms.begin(), i);
+
+        Storage result = evaluate_expression(MixedArray::make(ms, NounType::EXPRESSION));
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
+        if (rest.empty())
+        {
+          return result;
+        }
+        else
+        {
+          rest.insert(rest.begin(), result);
+
+          Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
+          result = evaluate_expression(next_e);
+
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
+
           return result;
         }
       }
@@ -809,6 +930,37 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
       case NounType::BUILTIN_DYAD:
       {
         Storage x = items[2];
+
+        if(x.o == NounType::ERROR)
+        {
+          return x;
+        }
+
+        if(x.o == NounType::BUILTIN_SYMBOL)
+        {
+          if(std::holds_alternative<int>(x.i))
+          {
+            int xi = std::get<int>(x.i);
+
+            switch(xi)
+            {
+              case SymbolType::i:
+                x = i;
+                break;
+
+              case SymbolType::x:
+                break;
+
+              case SymbolType::f:
+                x = f;
+                break;
+
+              default:
+                break;
+            }
+          }
+        }
+
         rest = mixed(items.begin() + 3, items.end());
 
         if(x.o == NounType::EXPRESSION)
@@ -822,6 +974,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         }
 
         Storage result = dispatchDyad(i, f, x);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
         if (rest.empty())
         {
           return result;
@@ -832,6 +989,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
+
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
 
           return result;
         }
@@ -879,6 +1041,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
         result = evaluate_expression(next_e);
 
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
         return result;
       }
 
@@ -888,6 +1055,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         rest = mixed(items.begin() + 3, items.end());
 
         Storage result = dispatchMonadicAdverb(i, f, g);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
         if(rest.empty())
         {
           return result;
@@ -898,6 +1070,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
+
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
 
           return result;
         }
@@ -921,6 +1098,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
 
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
+
           return result;
         }
       }
@@ -938,6 +1120,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
+
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
 
           return result;
         }
@@ -969,6 +1156,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
 
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
+
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
 
           return result;
         }
@@ -1012,6 +1204,11 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
           Storage next_e = MixedArray::make(rest, NounType::EXPRESSION);
           result = evaluate_expression(next_e);
 
+          if(result.o == NounType::ERROR)
+          {
+            return result;
+          }
+
           return result;
         }
       }
@@ -1022,12 +1219,18 @@ Storage Noun::evaluate_expression(const Storage& e) // NOLINT
         Storage x = MixedArray::make(rest, NounType::EXPRESSION);
 
         Storage next_e = dispatchConjunction(i, f, x);
+        auto result = evaluate_expression(next_e);
 
-        return evaluate_expression(next_e);
+        if(result.o == NounType::ERROR)
+        {
+          return result;
+        }
+
+        return result;
       }
 
       default:
-        return makeError(UNSUPPORTED_OBJECT);
+        return makeUnknownSymbolError(UNSUPPORTED_OBJECT, f);
     }
   }
 

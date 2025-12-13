@@ -12,10 +12,12 @@
 
 #include <nouns/noun.h>
 #include <nouns/symbol.h>
+#include <nouns/bindings.h>
 
 #include <effects/state/state.h>
 
 Storage TestingState::state = WordArray::nil();
+Storage TestingState::bindings = Bindings::empty();
 
 void TestingState::initialize(EffectsProvider* effects_register)
 {
@@ -30,9 +32,17 @@ void TestingState::initialize(EffectsProvider* effects_register)
   INTERN_INT(modify);
   INTERN_EFFECT(iota, Monad, modify);
 
+  INTERN_INT(getBindings);
+  INTERN_EFFECT(iota, Nilad, getBindings);
+
+  INTERN_INT(putBindings);
+  INTERN_EFFECT(iota, Monad, putBindings);
+
   Noun::registerNilad(get, get_impl);
+  Noun::registerNilad(getBindings, getBindings_impl);
 
   Noun::registerMonad(StorageType::ANY, NounType::ANY, put, put_impl);
+  Noun::registerMonad(StorageType::MIXED_ARRAY, NounType::BINDINGS, putBindings, putBindings_impl);
 
   Noun::registerMonad(StorageType::WORD, NounType::BUILTIN_MONAD, modify, modify_impl);
   Noun::registerMonad(StorageType::WORD, NounType::USER_MONAD, modify, modify_impl);
@@ -42,6 +52,11 @@ void TestingState::initialize(EffectsProvider* effects_register)
 Storage TestingState::get_impl()
 {
   return state;
+}
+
+Storage TestingState::getBindings_impl()
+{
+  return bindings;
 }
 
 // Dyads
@@ -59,7 +74,18 @@ Storage TestingState::modify_impl(const Storage& f)
   return result;
 }
 
+Storage TestingState::putBindings_impl(const Storage& i)
+{
+  bindings = i;
+  return i;
+}
+
 Storage TestingState::getEffectState()
 {
   return state;
+}
+
+Storage TestingState::getBindingsState()
+{
+  return bindings;
 }
